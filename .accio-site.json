@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "siteId": "wincomehair",
+  "name": "wincomehair",
+  "kind": "react-vite",
+  "devCommand": "vite",
+  "buildCommand": "vite build",
+  "outputDir": "dist",
+  "entry": "index.html",
+  "databaseUrl": "https://supabase.com/dashboard/project/bwozmphfjsorupvnucvk",
+  "createdBy": "accio-site-builder",
+  "createdAt": "2026-07-25T07:13:30.263Z",
+  "installedAt": "2026-07-25T07:30:06.954Z",
+  "updatedAt": "2026-07-25T14:24:03.521Z",
+  "integrations": {
+    "supabase": {
+      "projectUrl": "https://bwozmphfjsorupvnucvk.supabase.co",
+      "projectRef": "bwozmphfjsorupvnucvk",
+      "dashboardUrl": "https://supabase.com/dashboard/project/bwozmphfjsorupvnucvk",
+      "connectedAt": "2026-07-25T14:24:03.521Z",
+      "updatedAt": "2026-07-25T14:24:03.521Z"
+    }
+  }
+}

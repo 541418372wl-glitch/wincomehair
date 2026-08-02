@@ -1,0 +1,35 @@
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: ['./index.html', './src/**/*.{js,jsx,ts,tsx}'],
+  theme: {
+    extend: {
+      colors: {
+        cream: '#fdfbf7',
+        sand: '#e8e0d2',
+        bronze: '#433c35',
+        tan: '#c3af9f',
+        navy: '#1a2b3c',
+        gold: '#c5a059',
+        'navy-light': '#2a3d52',
+        'navy-dark': '#0f1a26',
+      },
+      fontFamily: {
+        display: ['Georgia', '"Times New Roman"', 'serif'],
+        body: ['"PingFang SC"', '"Hiragino Sans GB"', '"Microsoft YaHei"', 'system-ui', '-apple-system', '"Segoe UI"', 'Roboto', 'sans-serif'],
+      },
+      fontSize: {
+        'display-xl': ['80px', { lineHeight: '1.05', letterSpacing: '-0.02em' }],
+        'display-lg': ['60px', { lineHeight: '1.1', letterSpacing: '-0.015em' }],
+        'display-md': ['44px', { lineHeight: '1.15', letterSpacing: '-0.01em' }],
+        'display-sm': ['32px', { lineHeight: '1.2' }],
+      },
+      maxWidth: {
+        'site': '1440px',
+      },
+      borderRadius: {
+        'none': '0px',
+      },
+    },
+  },
+  plugins: [],
+};
