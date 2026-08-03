@@ -1,0 +1,66 @@
+import { Link, useLocation } from 'react-router-dom';
+
+const labels = {
+  '/': 'Home',
+  '/products': 'Products',
+  '/customization': 'OEM / ODM',
+  '/about': 'About',
+  '/cases': 'Case Studies',
+  '/quality': 'Quality Control',
+  '/faq': 'FAQ',
+  '/contact': 'Contact',
+};
+
+export default function Breadcrumb() {
+  const location = useLocation();
+  if (location.pathname === '/') return null;
+
+  const crumbs = [];
+  crumbs.push({ label: 'Home', path: '/' });
+
+  const segments = location.pathname.split('/').filter(Boolean);
+  let current = '';
+  for (const seg of segments) {
+    current += `/${seg}`;
+    crumbs.push({ label: labels[current] || seg, path: current !== location.pathname ? current : null });
+  }
+
+  return (
+    <nav aria-label="Breadcrumb" className="pt-28">
+      <div className="container-site">
+        <ol className="flex items-center gap-2 text-xs">
+          {crumbs
+            .filter((_, i, arr) => i === 0 || i === arr.length - 1)
+            .map((crumb, i) => {
+              const isLast = i === crumbs.length - 1;
+              return (
+                <li key={crumb.path || crumb.label} className="flex items-center gap-2">
+                  {i > 0 && <span className="text-tan/50 mx-1">/</span>}
+                  {isLast || !crumb.path ? (
+                    <span className="text-navy font-medium">{crumb.label}</span>
+                  ) : (
+                    <Link to={crumb.path} className="text-tan hover:text-navy transition-colors">
+                      {crumb.label}
+                    </Link>
+                  )}
+                </li>
+              );
+            })}
+        </ol>
+        {/* Structured data for search engines */}
+        <script type="application/ld+json" dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'BreadcrumbList',
+            itemListElement: crumbs.map((crumb, i) => ({
+              '@type': 'ListItem',
+              position: i + 1,
+              name: crumb.label,
+              item: crumb.path ? `https://wincomehair.com${crumb.path}` : undefined,
+            })),
+          }),
+        }} />
+      </div>
+    </nav>
+  );
+}

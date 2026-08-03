@@ -3,6 +3,7 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import WhatsAppButton from './components/WhatsAppButton';
 import SEO from './components/SEO';
+import Breadcrumb from './components/Breadcrumb';
 import Home from './pages/Home';
 import Products from './pages/Products';
 import ProductDetail from './pages/ProductDetail';
@@ -19,6 +20,7 @@ export default function App() {
       <div className="min-h-screen flex flex-col">
         <Navbar />
         <SEO />
+        <Breadcrumb />
         <main className="flex-1">
           <Routes>
             <Route path="/" element={<Home />} />

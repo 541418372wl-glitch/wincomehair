@@ -1,6 +1,10 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
+const SITE = 'https://wincomehair.com';
+const SITE_NAME = 'WINCOME Hair Accessories';
+const OG_IMAGE = `${SITE}/assets/images/hero-clips.jpg`;
+
 const pageMeta = {
   '/': {
     title: 'WINCOME Hair Accessories — Custom Hair Accessories Manufacturer & Supplier',
@@ -40,18 +44,49 @@ export default function SEO() {
   const location = useLocation();
   const meta = pageMeta[location.pathname];
 
-  useEffect(() => {
-    if (meta) {
-      document.title = meta.title;
-      let descTag = document.querySelector('meta[name="description"]');
-      if (!descTag) {
-        descTag = document.createElement('meta');
-        descTag.setAttribute('name', 'description');
-        document.head.appendChild(descTag);
-      }
-      descTag.setAttribute('content', meta.description);
+  function setMeta(name, content, isProperty = false) {
+    const attr = isProperty ? 'property' : 'name';
+    let tag = document.querySelector(`meta[${attr}="${name}"]`);
+    if (!tag) {
+      tag = document.createElement('meta');
+      tag.setAttribute(attr, name);
+      document.head.appendChild(tag);
     }
-  }, [meta]);
+    tag.setAttribute('content', content);
+  }
+
+  useEffect(() => {
+    if (!meta) return;
+
+    document.title = meta.title;
+    setMeta('description', meta.description);
+
+    const url = `${SITE}${location.pathname}`;
+    const image = meta.image || OG_IMAGE;
+
+    // Open Graph
+    setMeta('og:title', meta.title, true);
+    setMeta('og:description', meta.description, true);
+    setMeta('og:url', url, true);
+    setMeta('og:image', image, true);
+    setMeta('og:type', 'website', true);
+    setMeta('og:site_name', SITE_NAME, true);
+
+    // Twitter Card
+    setMeta('twitter:card', 'summary_large_image');
+    setMeta('twitter:title', meta.title);
+    setMeta('twitter:description', meta.description);
+    setMeta('twitter:image', image);
+
+    // Canonical
+    let canonical = document.querySelector('link[rel="canonical"]');
+    if (!canonical) {
+      canonical = document.createElement('link');
+      canonical.setAttribute('rel', 'canonical');
+      document.head.appendChild(canonical);
+    }
+    canonical.setAttribute('href', url);
+  }, [meta, location.pathname]);
 
   return null;
 }

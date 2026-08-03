@@ -54,8 +54,19 @@ const faqData = [
 export default function FAQ() {
   const [openIndex, setOpenIndex] = useState(null);
 
+  const faqSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqData.map(item => ({
+      '@type': 'Question',
+      name: item.q,
+      acceptedAnswer: { '@type': 'Answer', text: item.a },
+    })),
+  };
+
   return (
     <div className="pt-24">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <div className="container-site section-gap">
         <div className="max-w-3xl mx-auto">
           <p className="section-label text-center">Frequently Asked Questions</p>
