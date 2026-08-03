@@ -32,9 +32,8 @@ export default function Navbar() {
       scrolled ? 'bg-cream/95 backdrop-blur-sm shadow-[0_1px_0_rgba(67,60,53,0.06)]' : 'bg-transparent'
     }`}>
       <div className="container-site flex items-center justify-between h-16 md:h-20">
-        <Link to="/" className="flex flex-col leading-none">
-          <span className={`text-sm font-medium tracking-[0.15em] uppercase transition-colors duration-300 ${scrolled ? 'text-navy' : 'text-white'}`}>WINCOME</span>
-          <span className={`text-[10px] tracking-[0.2em] uppercase transition-colors duration-300 ${scrolled ? 'text-tan' : 'text-white/60'}`}>Hair Accessories</span>
+        <Link to="/" className="flex items-center gap-3">
+          <img src="/assets/images/logo.png" alt="WINCOME Hair Accessories" className="h-10 w-auto" />
         </Link>
 
         <div className="hidden md:flex items-center gap-8">
