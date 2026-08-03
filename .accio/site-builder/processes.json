@@ -1,0 +1,12 @@
+{
+  "vite": {
+    "pid": 22584,
+    "command": "bun run dev --host 127.0.0.1 --port 5174",
+    "cwd": "E:\\accio work\\wincomehair",
+    "logFile": "E:\\accio work\\wincomehair\\.accio\\site-builder\\logs\\vite.log",
+    "startedAt": "2026-07-25T07:28:12.651Z",
+    "url": "http://127.0.0.1:5174",
+    "port": 5174,
+    "mode": "vite"
+  }
+}

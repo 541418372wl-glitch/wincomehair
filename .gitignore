@@ -1,7 +1,5 @@
 node_modules
 dist
-.accio
-.env
 .env.local
-.env.*.local
-.DS_Store
+.env
+*.timestamp-*

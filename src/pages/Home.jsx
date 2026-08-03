@@ -45,18 +45,18 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-to-b from-navy/80 via-navy/60 to-navy" />
 
         <div className="container-site relative z-10 pt-32 pb-20">
-          <p className="section-label !text-gold">Custom Hair Accessories Manufacturer</p>
+          <p className="text-xs font-medium tracking-[0.15em] uppercase text-white/80 mb-4">Custom Hair Accessories Manufacturer</p>
           <h1 className="text-white text-display-xl md:text-[88px] max-w-3xl leading-[1.02] mb-8">
             Premium Hair Accessories.<br />
             <span className="text-gold">Factory-Direct.</span>
           </h1>
-          <p className="text-white/60 text-lg max-w-xl mb-12 leading-relaxed">
+          <p className="text-white/80 text-lg max-w-xl mb-12 leading-relaxed">
             OEM & ODM hair clips, claw clips, headbands, scrunchies, and hair bows for global brands, wholesalers, and retailers. Low MOQ, free design service, worldwide shipping.
           </p>
 
           <div className="flex flex-wrap gap-3 mb-12">
             {['MOQ: 100 pcs', 'Lead Time: 12 Days', 'Free Design Service', 'Global Shipping'].map(badge => (
-              <span key={badge} className="badge !border-white/15 !bg-white/8 !text-white/80">
+              <span key={badge} className="badge !border-white/20 !bg-white/12 !text-white/90">
                 <svg className="badge-icon !text-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 6L9 17l-5-5"/></svg>
                 {badge}
               </span>

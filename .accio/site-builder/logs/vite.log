@@ -1,0 +1,12 @@
+
+--- start 2026-07-25T07:28:12.630Z :: bun run dev --host 127.0.0.1 --port 5174 ---
+$ vite --host 127.0.0.1 --port 5174
+
+  [32m[1mVITE[22m v5.4.11[39m  [2mready in [0m[1m1292[22m[2m[0m ms[22m
+
+  [32m➜[39m  [1mLocal[22m:   [36mhttp://127.0.0.1:[1m5174[22m/[39m
+[2m22:06:33[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/components/WhatsAppButton.jsx, /src/styles.css[22m
+[2m22:24:05[22m [36m[1m[vite][22m[39m [32m.env.local changed, restarting server...[39m
+Re-optimizing dependencies because lockfile has changed
+[2m22:24:05[22m [36m[1m[vite][22m[39m server restarted.
+error: script "dev" exited with code 4
