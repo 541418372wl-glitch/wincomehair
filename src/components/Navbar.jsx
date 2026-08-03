@@ -33,8 +33,8 @@ export default function Navbar() {
     }`}>
       <div className="container-site flex items-center justify-between h-16 md:h-20">
         <Link to="/" className="flex flex-col leading-none">
-          <span className="text-sm font-medium tracking-[0.15em] uppercase text-navy">WINCOME</span>
-          <span className="text-[10px] tracking-[0.2em] uppercase text-tan">Hair Accessories</span>
+          <span className={`text-sm font-medium tracking-[0.15em] uppercase transition-colors duration-300 ${scrolled ? 'text-navy' : 'text-white'}`}>WINCOME</span>
+          <span className={`text-[10px] tracking-[0.2em] uppercase transition-colors duration-300 ${scrolled ? 'text-tan' : 'text-white/60'}`}>Hair Accessories</span>
         </Link>
 
         <div className="hidden md:flex items-center gap-8">
@@ -42,10 +42,12 @@ export default function Navbar() {
             <Link
               key={link.to}
               to={link.to}
-              className={`text-sm tracking-wide transition-colors duration-200 hover:text-navy ${
+              className={`text-sm tracking-wide transition-colors duration-200 ${
                 link.to === '/contact'
-                  ? 'bg-navy text-white px-6 py-2 hover:bg-navy-light hover:text-white'
-                  : location.pathname === link.to ? 'text-navy font-medium' : 'text-tan'
+                  ? 'bg-white text-navy px-6 py-2 hover:bg-white/90 hover:text-navy'
+                  : scrolled
+                    ? (location.pathname === link.to ? 'text-navy font-medium' : 'text-tan hover:text-navy')
+                    : (location.pathname === link.to ? 'text-gold font-medium' : 'text-white/70 hover:text-white')
               }`}
             >
               {link.label}
