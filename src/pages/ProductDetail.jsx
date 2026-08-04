@@ -2,7 +2,7 @@ import { useParams, Link } from 'react-router-dom';
 
 const products = {
   'claw-acetate': {
-    name: 'Acetate Hair Claw Clips', image: '/assets/images/product-claw-colorful.jpg', category: 'Hair Claws & Clips',
+    name: 'Acetate Hair Claw Clips', image: '/assets/images/product-claw-colorful.webp', category: 'Hair Claws & Clips',
     moq: '100 pcs', leadTime: '12-15 days', material: 'Cellulose Acetate', style: 'Classic / Modern / Luxury',
     sizes: 'Small (6cm) / Medium (8cm) / Large (11cm)', finish: 'Matte / Gloss / Tortoiseshell Pattern',
     logo: 'Laser engraving, gold foil stamping, metal plate', packaging: 'Individual polybag, custom card, gift box',
@@ -10,7 +10,7 @@ const products = {
     details: ['Spring-loaded claw mechanism', 'Teeth grip for secure hold', 'Lightweight & durable', 'Custom Pantone color matching', 'Eco-friendly cellulose acetate option'],
   },
   'headband-pearl': {
-    name: 'Pearl Embellished Headbands', image: '/assets/images/product-headband-pearl.jpg', category: 'Headbands',
+    name: 'Pearl Embellished Headbands', image: '/assets/images/product-headband-pearl.webp', category: 'Headbands',
     moq: '200 pcs', leadTime: '15-18 days', material: 'Metal Frame + Faux Pearl', style: 'Bridal / Evening / Casual Chic',
     sizes: 'Standard (38cm circumference)', finish: 'Gold / Silver / Rose Gold plating',
     logo: 'Engraved logo plate, custom packaging card', packaging: 'Velvet pouch, gift box, display card',
@@ -18,7 +18,7 @@ const products = {
     details: ['Flexible metal band', 'Hand-placed faux pearls', 'Comfort-fit design', 'Tarnish-resistant plating', 'Custom pearl size & spacing'],
   },
   'bow-satin': {
-    name: 'Satin Hair Bows', image: '/assets/images/product-bow-satin.jpg', category: 'Hair Bows & Ribbons',
+    name: 'Satin Hair Bows', image: '/assets/images/product-bow-satin.webp', category: 'Hair Bows & Ribbons',
     moq: '300 pcs', leadTime: '10-14 days', material: 'Premium Satin', style: 'Classic / Oversized / Mini',
     sizes: 'Small (8cm) / Medium (12cm) / Large (18cm)', finish: 'Matte satin / Shiny satin',
     logo: 'Custom printed ribbon, metal charm tag', packaging: 'Display card, polybag, gift box',
@@ -26,7 +26,7 @@ const products = {
     details: ['Double-layer construction', 'Reinforced stitching', 'Multiple backing options', 'Custom ribbon printing', 'Gift-ready packaging'],
   },
   'scrunchie-silk': {
-    name: 'Silk Scrunchies', image: '/assets/images/product-scrunchie-silk.jpg', category: 'Scrunchies & Hair Ties',
+    name: 'Silk Scrunchies', image: '/assets/images/product-scrunchie-silk.webp', category: 'Scrunchies & Hair Ties',
     moq: '200 pcs', leadTime: '10-12 days', material: 'Mulberry Silk', style: 'Classic / Slim / Extra Large',
     sizes: 'Standard (12cm diameter)', finish: 'Matte / Satin sheen',
     logo: 'Woven label, custom printed care tag', packaging: 'Individual card, set box, gift wrap',
@@ -57,7 +57,7 @@ export default function ProductDetail() {
 
         <div className="grid md:grid-cols-2 gap-16">
           <div className="aspect-square overflow-hidden border border-bronze/10">
-            <img src={product.image} alt={product.name} className="w-full h-full object-cover" />
+            <img src={product.image} alt={product.name} fetchPriority="high" className="w-full h-full object-cover" />
           </div>
 
           <div>

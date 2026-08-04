@@ -5,5 +5,14 @@ export default defineConfig({
   plugins: [react()],
   server: {
     host: '127.0.0.1'
-  }
+  },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom', 'react-router-dom'],
+        },
+      },
+    },
+  },
 });
