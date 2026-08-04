@@ -6,6 +6,7 @@ const navLinks = [
   { to: '/products', label: 'Products' },
   { to: '/customization', label: 'OEM / ODM' },
   { to: '/about', label: 'About' },
+  { to: '/blog', label: 'Blog' },
   { to: '/cases', label: 'Cases' },
   { to: '/quality', label: 'Quality' },
   { to: '/faq', label: 'FAQ' },

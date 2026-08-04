@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import { articles } from '../data/articles';
 
 const SITE = 'https://wincomehair.com';
 const SITE_NAME = 'WINCOME Hair Accessories';
@@ -38,11 +39,24 @@ const pageMeta = {
     title: 'Case Studies — WINCOME Hair Accessories Manufacturing Projects',
     description: 'Real client projects: custom acetate claw clips, private label scrunchies, bridal headbands, seasonal hair bow collections. See how WINCOME delivers for global brands.',
   },
+  '/blog': {
+    title: 'Hair Accessories Blog — Sourcing Guides & Industry Insights — WINCOME',
+    description: 'Expert guides on sourcing custom hair accessories from China, materials (acetate, silk, satin), claw clip sizing, and building your own hair accessories brand.',
+  },
 };
 
 export default function SEO() {
   const location = useLocation();
-  const meta = pageMeta[location.pathname];
+  let meta = pageMeta[location.pathname];
+
+  // Dynamic meta for blog article pages
+  if (!meta && location.pathname.startsWith('/blog/')) {
+    const slug = location.pathname.split('/')[2];
+    const article = articles.find(a => a.slug === slug);
+    if (article) {
+      meta = { title: `${article.title} — WINCOME Blog`, description: article.metaDescription };
+    }
+  }
 
   function setMeta(name, content, isProperty = false) {
     const attr = isProperty ? 'property' : 'name';

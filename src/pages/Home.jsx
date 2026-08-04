@@ -280,11 +280,11 @@ export default function Home() {
           <p className="text-tan text-lg max-w-xl mb-12">Expert guides on sourcing, customization, and trends in the hair accessories industry.</p>
           <div className="grid md:grid-cols-3 gap-6">
             {[
-              { title: '2026 Hair Accessories Trends: What Global Brands Are Buying', date: 'Jul 2026' },
-              { title: 'The Complete Guide to Custom Hair Claw Manufacturing', date: 'Jun 2026' },
-              { title: 'OEM vs ODM Hair Accessories: Which Is Right for Your Brand?', date: 'May 2026' },
+              { title: 'How to Source Custom Hair Accessories from China: A B2B Buyer\'s Checklist (2026)', date: 'Aug 2026', slug: 'how-to-source-hair-accessories-from-china' },
+              { title: 'Cellulose Acetate vs Plastic Claw Clips: Which Material Should Your Brand Choose?', date: 'Aug 2026', slug: 'acetate-vs-plastic-claw-clips' },
+              { title: 'Claw Clip Size Guide: How to Choose the Right Size for Fine, Thick & Long Hair', date: 'Aug 2026', slug: 'claw-clip-size-guide' },
             ].map(post => (
-              <Link to="/faq" key={post.title} className="group bg-white p-8 border border-bronze/10 hover:border-bronze/20 transition-all duration-300">
+              <Link to={`/blog/${post.slug}`} key={post.title} className="group bg-white p-8 border border-bronze/10 hover:border-bronze/20 transition-all duration-300">
                 <p className="text-[10px] tracking-wider uppercase text-tan mb-3">{post.date}</p>
                 <h3 className="text-base font-display text-navy group-hover:text-gold transition-colors leading-relaxed">{post.title}</h3>
                 <span className="text-xs font-medium tracking-wider uppercase text-navy mt-4 inline-flex items-center gap-1 group-hover:text-gold transition-colors">
