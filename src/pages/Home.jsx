@@ -1,17 +1,17 @@
 import { Link } from 'react-router-dom';
 
 const productCategories = [
-  { name: 'Hair Claws & Clips', image: '/assets/images/product-claw-colorful.jpg', desc: 'Acetate, metal & plastic options' },
-  { name: 'Headbands', image: '/assets/images/product-headband-pearl.jpg', desc: 'Padded, knotted & embellished' },
-  { name: 'Scrunchies & Hair Ties', image: '/assets/images/product-scrunchie-silk.jpg', desc: 'Silk, velvet & cotton blends' },
-  { name: 'Hair Bows & Ribbons', image: '/assets/images/product-bow-satin.jpg', desc: 'Satin, grosgrain & custom print' },
+  { name: 'Hair Claws & Clips', image: '/assets/images/product-claw-colorful.webp', desc: 'Acetate, metal & plastic options' },
+  { name: 'Headbands', image: '/assets/images/product-headband-pearl.webp', desc: 'Padded, knotted & embellished' },
+  { name: 'Scrunchies & Hair Ties', image: '/assets/images/product-scrunchie-silk.webp', desc: 'Silk, velvet & cotton blends' },
+  { name: 'Hair Bows & Ribbons', image: '/assets/images/product-bow-satin.webp', desc: 'Satin, grosgrain & custom print' },
 ];
 
 const featuredProducts = [
-  { id: 'claw-acetate', name: 'Acetate Hair Claw Clips', image: '/assets/images/product-claw-colorful.jpg', moq: '100 pcs', leadTime: '12-15 days', material: 'Cellulose Acetate' },
-  { id: 'headband-pearl', name: 'Pearl Embellished Headbands', image: '/assets/images/product-headband-pearl.jpg', moq: '200 pcs', leadTime: '15-18 days', material: 'Metal + Faux Pearl' },
-  { id: 'bow-satin', name: 'Satin Hair Bows', image: '/assets/images/product-bow-satin.jpg', moq: '300 pcs', leadTime: '10-14 days', material: 'Premium Satin' },
-  { id: 'scrunchie-silk', name: 'Silk Scrunchies', image: '/assets/images/product-scrunchie-silk.jpg', moq: '200 pcs', leadTime: '10-12 days', material: 'Mulberry Silk' },
+  { id: 'claw-acetate', name: 'Acetate Hair Claw Clips', image: '/assets/images/product-claw-colorful.webp', moq: '100 pcs', leadTime: '12-15 days', material: 'Cellulose Acetate' },
+  { id: 'headband-pearl', name: 'Pearl Embellished Headbands', image: '/assets/images/product-headband-pearl.webp', moq: '200 pcs', leadTime: '15-18 days', material: 'Metal + Faux Pearl' },
+  { id: 'bow-satin', name: 'Satin Hair Bows', image: '/assets/images/product-bow-satin.webp', moq: '300 pcs', leadTime: '10-14 days', material: 'Premium Satin' },
+  { id: 'scrunchie-silk', name: 'Silk Scrunchies', image: '/assets/images/product-scrunchie-silk.webp', moq: '200 pcs', leadTime: '10-12 days', material: 'Mulberry Silk' },
 ];
 
 const stats = [
@@ -40,7 +40,7 @@ export default function Home() {
       {/* Hero */}
       <section className="relative min-h-screen flex items-center bg-navy overflow-hidden">
         <div className="absolute inset-0 opacity-25">
-          <img src="/assets/images/hero-clips.jpg" alt="" className="w-full h-full object-cover" />
+          <img src="/assets/images/hero-clips.webp" alt="" fetchPriority="high" className="w-full h-full object-cover" />
         </div>
         <div className="absolute inset-0 bg-gradient-to-b from-navy/80 via-navy/60 to-navy" />
 
@@ -98,7 +98,7 @@ export default function Home() {
           <div className="grid md:grid-cols-2 gap-6">
             {productCategories.map(cat => (
               <Link to="/products" key={cat.name} className="group relative overflow-hidden h-72 md:h-80 block">
-                <img src={cat.image} alt={cat.name} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                <img src={cat.image} alt={cat.name} loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
                 <div className="absolute inset-0 bg-gradient-to-t from-navy/80 via-navy/20 to-transparent" />
                 <div className="absolute bottom-0 left-0 right-0 p-8">
                   <h3 className="text-white text-2xl font-display mb-1">{cat.name}</h3>
@@ -121,7 +121,7 @@ export default function Home() {
             {featuredProducts.map(product => (
               <Link to={`/products/${product.id}`} key={product.id} className="group bg-white overflow-hidden border border-bronze/10 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
                 <div className="aspect-square overflow-hidden">
-                  <img src={product.image} alt={product.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                  <img src={product.image} alt={product.name} loading="lazy" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
                 </div>
                 <div className="p-5">
                   <h3 className="text-sm font-medium text-navy mb-3 group-hover:text-gold transition-colors">{product.name}</h3>
