@@ -33,7 +33,7 @@ export default function Navbar() {
     }`}>
       <div className="container-site flex items-center justify-between h-16 md:h-20">
         <Link to="/" className="flex items-center gap-3">
-          <img src="/assets/images/logo.png" alt="WINCOME Hair Accessories" className="h-10 w-auto" />
+          <img src="/assets/images/logo.webp" alt="WINCOME Hair Accessories" className="h-10 w-auto" />
         </Link>
 
         <div className="hidden md:flex items-center gap-8">
