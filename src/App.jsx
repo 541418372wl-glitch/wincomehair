@@ -15,6 +15,8 @@ const Contact = lazy(() => import('./pages/Contact'));
 const FAQ = lazy(() => import('./pages/FAQ'));
 const Quality = lazy(() => import('./pages/Quality'));
 const Cases = lazy(() => import('./pages/Cases'));
+const Blog = lazy(() => import('./pages/Blog'));
+const BlogPost = lazy(() => import('./pages/BlogPost'));
 
 export default function App() {
   return (
@@ -35,6 +37,8 @@ export default function App() {
               <Route path="/faq" element={<FAQ />} />
               <Route path="/quality" element={<Quality />} />
               <Route path="/cases" element={<Cases />} />
+              <Route path="/blog" element={<Blog />} />
+              <Route path="/blog/:slug" element={<BlogPost />} />
             </Routes>
           </Suspense>
         </main>
