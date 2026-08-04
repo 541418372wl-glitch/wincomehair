@@ -9,6 +9,7 @@ const labels = {
   '/quality': 'Quality Control',
   '/faq': 'FAQ',
   '/contact': 'Contact',
+  '/blog': 'Blog',
 };
 
 export default function Breadcrumb() {
