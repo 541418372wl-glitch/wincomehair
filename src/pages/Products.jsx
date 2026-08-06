@@ -1,9 +1,10 @@
 import { Link } from 'react-router-dom';
 
 const allProducts = [
-  { id: 'claw-acetate', name: 'Acetate Hair Claw Clips', category: 'Claws & Clips', image: '/assets/images/product-claw-colorful.webp', moq: '100 pcs', leadTime: '12-15 days', material: 'Cellulose Acetate', colors: 'Custom Pantone' },
+  { id: 'claw-acetate', name: 'Acetate Hair Claw Clips', category: 'Claws & Clips', image: '/assets/images/product-claw-acetate.webp', moq: '100 pcs', leadTime: '12-15 days', material: 'Cellulose Acetate', colors: 'Custom Pantone' },
   { id: 'claw-metal', name: 'Metal Hair Claw Clips', category: 'Claws & Clips', image: '/assets/images/product-claw-colorful.webp', moq: '200 pcs', leadTime: '15-18 days', material: 'Zinc Alloy', colors: 'Gold / Silver / Rose Gold' },
   { id: 'claw-plastic', name: 'Plastic Hair Claws', category: 'Claws & Clips', image: '/assets/images/product-claw-colorful.webp', moq: '300 pcs', leadTime: '10-14 days', material: 'ABS Plastic', colors: 'Custom Colors' },
+  { id: 'claw-butterfly', name: 'Butterfly Hair Claw Clips', category: 'Claws & Clips', image: '/assets/images/product-claw-butterfly.webp', moq: '200 pcs', leadTime: '15-18 days', material: 'Metal Frame + Resin', colors: 'Amber / Pearl / Rose / Tortoise' },
   { id: 'headband-pearl', name: 'Pearl Embellished Headbands', category: 'Headbands', image: '/assets/images/product-headband-pearl.webp', moq: '200 pcs', leadTime: '15-18 days', material: 'Metal + Faux Pearl', colors: 'Gold / Silver' },
   { id: 'headband-knotted', name: 'Knotted Fabric Headbands', category: 'Headbands', image: '/assets/images/product-headband-pearl.webp', moq: '300 pcs', leadTime: '12-15 days', material: 'Cotton / Silk / Velvet', colors: 'Custom Colors' },
   { id: 'headband-padded', name: 'Padded Cushion Headbands', category: 'Headbands', image: '/assets/images/product-headband-pearl.webp', moq: '200 pcs', leadTime: '12-15 days', material: 'Fabric + Foam', colors: 'Custom Colors' },
