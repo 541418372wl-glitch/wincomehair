@@ -183,6 +183,48 @@ const products = {
     applications: ['Kids\' brands & baby lines', 'Boutique retail', 'Gift sets', 'Party & event styling', 'Everyday charm accessories'],
     customization: ['Fabric type & color', 'Clip size & style', 'Charm tags', 'Display card & gift box', 'Mixed styles'],
   },
+  'claw-rectangular': {
+    name: 'Rectangular Hair Claw Clips', image: '/assets/images/product-claw-rectangular.webp', category: 'Hair Claws & Clips',
+    moq: '200 pcs', leadTime: '12-15 days', material: 'Cellulose Acetate / Resin', style: 'Modern / Minimal / Office',
+    sizes: 'Medium (7cm) / Large (9cm)', finish: 'Gloss / Matte / Marble patterns',
+    logo: 'Laser engraving, foil stamping', packaging: 'Individual polybag, display card, gift box',
+    description: [
+      'Rectangular claw clips bring a modern, architectural silhouette to the category: an open-frame design with a clean central cutout, made from cellulose acetate or resin in tortoiseshell, pearl, mint and matte black. The angular shape reads instantly contemporary in product photography.',
+      'Under the minimal look is the same engineering as our curved clips: a stainless steel spring tested to 500+ cycles, polished edges, and interlocking teeth that hold fine and medium hair securely. This is a fast-growing shape in the trend-driven segment — office-chic and social media styling.',
+      'Available in 7cm and 9cm sizes with custom Pantone colors, marble and tortoiseshell patterns. MOQ from 200 pcs, production in 12-15 days.',
+    ],
+    details: ['Modern open-frame rectangular design', 'Cellulose acetate or resin body', 'Stainless steel spring, 500+ cycles tested', 'Polished, burr-free edges', 'Tortoiseshell, marble, pearl, mint & black', '2 sizes: 7cm / 9cm', 'Secure interlocking teeth', 'Custom Pantone colors', 'Laser engraving / foil stamping logos', 'Display card & gift box packaging'],
+    applications: ['Modern & minimalist brands', 'Office-chic styling', 'Social media-driven fashion', 'Boutique retail', 'Gift sets'],
+    customization: ['Custom colors & marble patterns', 'Laser engraving or foil stamping', 'Sizing mix (7cm/9cm)', 'Display card & gift box', 'Mixed color assortments'],
+  },
+  'headband-braided': {
+    name: 'Braided Velvet Headbands', image: '/assets/images/product-headband-braided.webp', category: 'Headbands',
+    moq: '300 pcs', leadTime: '12-15 days', material: 'Premium Velvet', style: 'Braided / Vintage / Boho',
+    sizes: 'Standard (38cm circumference)', finish: 'Braided velvet texture',
+    logo: 'Woven label, custom hang tag', packaging: 'Individual polybag, display card, gift box',
+    description: [
+      'Braided velvet headbands are woven from plush velvet strands into a dimensional three-strand braid — a vintage-inspired texture that catches light differently from every angle. The hand-made look positions them as a step above standard padded styles.',
+      'The braid construction adds grip without an extra lining, keeping the band in place while the velvet stays soft against the skin. Rich colors — chocolate, charcoal, burgundy, dusty rose, forest — make these a strong statement piece for fall and winter collections.',
+      'Standard 38cm circumference. MOQ from 300 pcs, production in 12-15 days.',
+    ],
+    details: ['Three-strand braided velvet construction', 'Dimensional texture, light-catching', 'Grip without a separate lining', 'Soft plush velvet, gentle on skin', 'Rich seasonal color palette', 'Standard 38cm circumference', 'Woven label branding', 'Vintage & boho styling', 'Display card / gift box options', 'Hand-made look, premium feel'],
+    applications: ['Vintage & boho brands', 'Fall/winter collections', 'Boutique retail', 'Gift sets', 'Editorial & styling work'],
+    customization: ['Velvet color matching', 'Braid width & tightness', 'Woven label & hang tag', 'Custom packaging', 'Multi-color assortments'],
+  },
+  'scrunchie-ruffled': {
+    name: 'Ruffled Satin Scrunchies', image: '/assets/images/product-scrunchie-ruffled.webp', category: 'Scrunchies & Hair Ties',
+    moq: '300 pcs', leadTime: '10-12 days', material: 'Premium Satin', style: 'Ruffled / Flower / Full',
+    sizes: 'Standard (12cm diameter)', finish: 'High-sheen satin',
+    logo: 'Woven label, custom hang tag', packaging: 'Individual card, set box, gift wrap',
+    description: [
+      'Ruffled satin scrunchies stack multiple gathered layers into a full, flower-like silhouette — the volume style that reads beautifully in product photos and on camera. High-sheen satin makes the ruffle layers catch and bounce light.',
+      'The layered construction is fully machine-sewn with reinforced seams, so the ruffles hold their shape through washing and repeated wear. The covered elastic stays hidden inside the casing, and the satin surface is gentle on hair.',
+      'Standard 12cm diameter in a soft palette of white, blush, champagne, lavender and sage. MOQ from 300 pcs, production in 10-12 days.',
+    ],
+    details: ['Multi-layer ruffled silhouette', 'High-sheen premium satin', 'Fully machine-sewn, reinforced seams', 'Wash-safe, holds shape', 'Covered elastic, no twisting', 'Standard 12cm diameter', 'Soft pastel & neutral palette', 'Gentle on hair', 'Flower-like volume', 'Gift-ready presentation'],
+    applications: ['Gift sets & boutique retail', 'Photo shoots & styling', 'Beauty & haircare brands', 'Bridal party favors', 'Subscription boxes'],
+    customization: ['Custom colors & dye matching', 'Ruffle density & fullness', 'Woven label & hang tag', 'Set boxes & multi-packs', 'Custom sizing'],
+  },
 };
 
 export default function ProductDetail() {
