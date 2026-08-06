@@ -18,25 +18,37 @@ export default function Contact() {
     setSubmitting(true);
     setSubmitError(null);
 
-    if (supabase) {
-      const { error } = await supabase.from('inquiries').insert({
-        name: form.name,
-        company: form.company || null,
-        email: form.email,
-        phone: form.phone || null,
-        product_type: form.productType || null,
-        quantity: form.quantity || null,
-        material: form.material || null,
-        logo_placement: form.logoPlacement || null,
-        dimensions: form.dimensions || null,
-        message: form.message || null,
-      });
+    const record = {
+      name: form.name,
+      company: form.company || null,
+      email: form.email,
+      phone: form.phone || null,
+      product_type: form.productType || null,
+      quantity: form.quantity || null,
+      material: form.material || null,
+      logo_placement: form.logoPlacement || null,
+      dimensions: form.dimensions || null,
+      message: form.message || null,
+    };
 
+    if (supabase) {
+      const { error } = await supabase.from('inquiries').insert(record);
       if (error) {
         setSubmitError('Failed to submit. Please try again or contact us via WhatsApp.');
         setSubmitting(false);
         return;
       }
+    }
+
+    // Send email notification directly (reliable fallback, no webhook dependency)
+    try {
+      await fetch('/api/notify-inquiry', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ record }),
+      });
+    } catch (_) {
+      // notification failure is non-fatal — inquiry already saved
     }
 
     setStep(4);
