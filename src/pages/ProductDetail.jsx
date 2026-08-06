@@ -2,12 +2,20 @@ import { useParams, Link } from 'react-router-dom';
 
 const products = {
   'claw-acetate': {
-    name: 'Acetate Hair Claw Clips', image: '/assets/images/product-claw-colorful.webp', category: 'Hair Claws & Clips',
+    name: 'Acetate Hair Claw Clips', image: '/assets/images/product-claw-acetate.webp', category: 'Hair Claws & Clips',
     moq: '100 pcs', leadTime: '12-15 days', material: 'Cellulose Acetate', style: 'Classic / Modern / Luxury',
     sizes: 'Small (6cm) / Medium (8cm) / Large (11cm)', finish: 'Matte / Gloss / Tortoiseshell Pattern',
     logo: 'Laser engraving, gold foil stamping, metal plate', packaging: 'Individual polybag, custom card, gift box',
     description: 'Premium cellulose acetate hair claw clips with spring-loaded mechanism. Available in 20+ custom colors and 3 sizes. Ideal for fashion brands, boutique retailers, and beauty subscription boxes.',
     details: ['Spring-loaded claw mechanism', 'Teeth grip for secure hold', 'Lightweight & durable', 'Custom Pantone color matching', 'Eco-friendly cellulose acetate option'],
+  },
+  'claw-butterfly': {
+    name: 'Butterfly Hair Claw Clips', image: '/assets/images/product-claw-butterfly.webp', category: 'Hair Claws & Clips',
+    moq: '200 pcs', leadTime: '15-18 days', material: 'Metal Frame + Resin', style: 'Elegant / Vintage / Bridal',
+    sizes: 'Standard (7cm width)', finish: 'Gloss resin wings / Gold-tone frame',
+    logo: 'Laser engraving, metal charm tag', packaging: 'Individual polybag, display card, gift box',
+    description: 'Decorative butterfly claw clips with gold-tone metal frames and translucent resin wings. Optional pearl, rhinestone, and gold-bead embellishments. A standout for bridal, gift, and boutique collections.',
+    details: ['Gold-tone metal frame & spring', 'Translucent resin wings', 'Pearl / rhinestone embellishment options', 'Secure claw grip', 'Custom colors & finishes'],
   },
   'headband-pearl': {
     name: 'Pearl Embellished Headbands', image: '/assets/images/product-headband-pearl.webp', category: 'Headbands',
