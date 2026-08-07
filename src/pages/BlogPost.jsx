@@ -177,8 +177,8 @@ export default function BlogPost() {
 
         {/* CTA */}
         <div className="mt-16 bg-navy text-white p-10 md:p-14 text-center">
-          <p className="section-label !text-gold">Start Your Project</p>
-          <h2 className="text-display-md mb-4">Ready to Talk to a <span className="text-gold">Factory Directly?</span></h2>
+          <p className="section-label !text-champagne">Start Your Project</p>
+          <h2 className="text-display-md mb-4">Ready to Talk to a <span className="text-champagne italic font-light">Factory Directly?</span></h2>
           <p className="text-white/60 text-lg max-w-2xl mx-auto mb-8 leading-relaxed">
             Free design mockup and factory-direct quote within 24 hours. MOQ from 100 pcs, samples in 5–7 days.
           </p>
