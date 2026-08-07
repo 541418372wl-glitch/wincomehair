@@ -13,6 +13,29 @@ const navLinks = [
   { to: '/contact', label: 'Request Quote' },
 ];
 
+function WincomeLogo({ scrolled }) {
+  const boxFill   = scrolled ? '#1a2b3c' : 'rgba(255,255,255,0.12)';
+  const boxStroke = scrolled ? 'none'    : 'rgba(255,255,255,0.5)';
+  const wColor    = '#c5a059';
+  const nameColor = scrolled ? '#1a2b3c' : '#ffffff';
+  const subColor  = '#c5a059';
+
+  return (
+    <svg width="186" height="40" viewBox="0 0 186 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="WINCOME Hair Accessories">
+      {/* Icon box */}
+      <rect x="0.5" y="0.5" width="37" height="37" fill={boxFill} stroke={boxStroke} strokeWidth="0.75" />
+      {/* W lettermark */}
+      <text x="19" y="27" textAnchor="middle" fontFamily="Georgia, 'Times New Roman', serif" fontSize="22" fontWeight="700" fill={wColor} letterSpacing="-0.5">W</text>
+      {/* Thin vertical divider */}
+      <line x1="46" y1="8" x2="46" y2="32" stroke={scrolled ? 'rgba(26,43,60,0.15)' : 'rgba(255,255,255,0.25)'} strokeWidth="0.75" />
+      {/* Brand name */}
+      <text x="54" y="21" fontFamily="'Helvetica Neue', Helvetica, Arial, sans-serif" fontSize="13.5" fontWeight="700" fill={nameColor} letterSpacing="2.5">WINCOME</text>
+      {/* Sub-label */}
+      <text x="54" y="34" fontFamily="'Helvetica Neue', Helvetica, Arial, sans-serif" fontSize="7.5" fontWeight="400" fill={subColor} letterSpacing="2">HAIR ACCESSORIES</text>
+    </svg>
+  );
+}
+
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -33,8 +56,8 @@ export default function Navbar() {
       scrolled ? 'bg-cream/95 backdrop-blur-sm shadow-[0_1px_0_rgba(67,60,53,0.06)]' : 'bg-transparent'
     }`}>
       <div className="container-site flex items-center justify-between h-16 md:h-20">
-        <Link to="/" className="flex items-center gap-3">
-          <img src="/assets/images/logo.webp" alt="WINCOME Hair Accessories" className="h-10 w-auto" />
+        <Link to="/" className="flex items-center">
+          <WincomeLogo scrolled={scrolled} />
         </Link>
 
         <div className="hidden md:flex items-center gap-8">
