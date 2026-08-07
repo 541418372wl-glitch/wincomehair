@@ -1,17 +1,17 @@
 import { Link } from 'react-router-dom';
 
 const productCategories = [
-  { name: 'Hair Claws & Clips', image: '/assets/images/product-claw-colorful.webp', desc: 'Acetate, metal & plastic options' },
-  { name: 'Headbands', image: '/assets/images/product-headband-pearl.webp', desc: 'Padded, knotted & embellished' },
-  { name: 'Scrunchies & Hair Ties', image: '/assets/images/product-scrunchie-silk.webp', desc: 'Silk, velvet & cotton blends' },
-  { name: 'Hair Bows & Ribbons', image: '/assets/images/product-bow-satin.webp', desc: 'Satin, grosgrain & custom print' },
+  { name: 'Hair Claws & Clips', image: '/assets/images/product-claw-butterfly.webp', desc: 'Acetate, metal, butterfly & more' },
+  { name: 'Headbands', image: '/assets/images/product-headband-braided.webp', desc: 'Padded, knotted, braided & embellished' },
+  { name: 'Scrunchies & Hair Ties', image: '/assets/images/product-scrunchie-velvet.webp', desc: 'Silk, velvet, satin & cotton' },
+  { name: 'Hair Bows & Ribbons', image: '/assets/images/product-bow-clip.webp', desc: 'Satin, grosgrain & custom print' },
 ];
 
 const featuredProducts = [
-  { id: 'claw-acetate', name: 'Acetate Hair Claw Clips', image: '/assets/images/product-claw-colorful.webp', moq: '100 pcs', leadTime: '12-15 days', material: 'Cellulose Acetate' },
-  { id: 'headband-pearl', name: 'Pearl Embellished Headbands', image: '/assets/images/product-headband-pearl.webp', moq: '200 pcs', leadTime: '15-18 days', material: 'Metal + Faux Pearl' },
-  { id: 'bow-satin', name: 'Satin Hair Bows', image: '/assets/images/product-bow-satin.webp', moq: '300 pcs', leadTime: '10-14 days', material: 'Premium Satin' },
-  { id: 'scrunchie-silk', name: 'Silk Scrunchies', image: '/assets/images/product-scrunchie-silk.webp', moq: '200 pcs', leadTime: '10-12 days', material: 'Mulberry Silk' },
+  { id: 'claw-butterfly', name: 'Butterfly Hair Claw Clips', image: '/assets/images/product-claw-butterfly.webp', moq: '200 pcs', leadTime: '15-18 days', material: 'Metal Frame + Resin' },
+  { id: 'headband-braided', name: 'Braided Velvet Headbands', image: '/assets/images/product-headband-braided.webp', moq: '300 pcs', leadTime: '12-15 days', material: 'Premium Velvet' },
+  { id: 'scrunchie-velvet', name: 'Velvet Scrunchies', image: '/assets/images/product-scrunchie-velvet.webp', moq: '300 pcs', leadTime: '10-12 days', material: 'Premium Velvet' },
+  { id: 'bow-clip', name: 'Bow Hair Clips', image: '/assets/images/product-bow-clip.webp', moq: '200 pcs', leadTime: '12-15 days', material: 'Fabric + Metal Clip' },
 ];
 
 const stats = [
@@ -280,9 +280,9 @@ export default function Home() {
           <p className="text-tan text-lg max-w-xl mb-12">Expert guides on sourcing, customization, and trends in the hair accessories industry.</p>
           <div className="grid md:grid-cols-3 gap-6">
             {[
-              { title: 'How to Source Custom Hair Accessories from China: A B2B Buyer\'s Checklist (2026)', date: 'Aug 2026', slug: 'how-to-source-hair-accessories-from-china' },
-              { title: 'Cellulose Acetate vs Plastic Claw Clips: Which Material Should Your Brand Choose?', date: 'Aug 2026', slug: 'acetate-vs-plastic-claw-clips' },
-              { title: 'Claw Clip Size Guide: How to Choose the Right Size for Fine, Thick & Long Hair', date: 'Aug 2026', slug: 'claw-clip-size-guide' },
+              { title: 'Metal Hair Clips Material Guide: Zinc Alloy vs Stainless Steel vs Aluminum', date: 'Aug 2026', slug: 'metal-hair-clip-material-guide' },
+              { title: 'Private Label Hair Accessories: A Step-by-Step Guide for Etsy & Amazon Sellers', date: 'Aug 2026', slug: 'private-label-hair-accessories-guide' },
+              { title: 'Silk vs Satin Scrunchies: Which Fabric Is Better for Hair — and for Your Business?', date: 'Aug 2026', slug: 'silk-vs-satin-scrunchies' },
             ].map(post => (
               <Link to={`/blog/${post.slug}`} key={post.title} className="group bg-white p-8 border border-bronze/10 hover:border-bronze/20 transition-all duration-300">
                 <p className="text-[10px] tracking-wider uppercase text-tan mb-3">{post.date}</p>
