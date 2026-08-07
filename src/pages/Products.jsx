@@ -14,9 +14,11 @@ const allProducts = [
   { id: 'scrunchie-velvet', name: 'Velvet Scrunchies', category: 'Scrunchies', image: '/assets/images/product-scrunchie-velvet.webp', moq: '300 pcs', leadTime: '10-12 days', material: 'Premium Velvet', colors: 'Custom Colors' },
   { id: 'scrunchie-cotton', name: 'Cotton Hair Ties', category: 'Scrunchies', image: '/assets/images/product-scrunchie-cotton.webp', moq: '500 pcs', leadTime: '8-10 days', material: 'Organic Cotton', colors: 'Custom Colors' },
   { id: 'scrunchie-ruffled', name: 'Ruffled Satin Scrunchies', category: 'Scrunchies', image: '/assets/images/product-scrunchie-ruffled.webp', moq: '300 pcs', leadTime: '10-12 days', material: 'Premium Satin', colors: 'Custom Colors' },
+  { id: 'scrunchie-bow', name: 'Satin Bow Scrunchies', category: 'Scrunchies', image: '/assets/images/product-scrunchie-bow.webp', moq: '300 pcs', leadTime: '10-12 days', material: 'Premium Satin', colors: 'Custom Colors' },
   { id: 'bow-satin', name: 'Satin Hair Bows', category: 'Bows & Ribbons', image: '/assets/images/product-bow-satin.webp', moq: '300 pcs', leadTime: '10-14 days', material: 'Premium Satin', colors: 'Custom Colors' },
   { id: 'bow-grosgrain', name: 'Grosgrain Ribbon Bows', category: 'Bows & Ribbons', image: '/assets/images/product-bow-grosgrain.webp', moq: '300 pcs', leadTime: '10-14 days', material: 'Grosgrain Ribbon', colors: 'Custom Colors' },
   { id: 'bow-clip', name: 'Bow Hair Clips', category: 'Bows & Ribbons', image: '/assets/images/product-bow-clip.webp', moq: '200 pcs', leadTime: '12-15 days', material: 'Fabric + Metal Clip', colors: 'Custom Colors' },
+  { id: 'bow-multilayer', name: 'Multi-Layer Satin Bow Clips', category: 'Bows & Ribbons', image: '/assets/images/product-bow-multilayer.webp', moq: '200 pcs', leadTime: '12-15 days', material: 'Premium Satin', colors: 'Custom Colors' },
 ];
 
 const categories = ['All', 'Claws & Clips', 'Headbands', 'Scrunchies', 'Bows & Ribbons'];
