@@ -45,10 +45,13 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-to-b from-navy/80 via-navy/60 to-navy" />
 
         <div className="container-site relative z-10 pt-32 pb-20">
-          <p className="text-xs font-medium tracking-[0.15em] uppercase text-white/80 mb-4">Custom Hair Accessories Manufacturer</p>
+          <div className="flex items-center gap-3 mb-4">
+            <span className="w-8 h-px bg-blush" />
+            <p className="text-xs font-medium tracking-[0.15em] uppercase text-champagne">Custom Hair Accessories Manufacturer</p>
+          </div>
           <h1 className="text-white text-display-xl md:text-[88px] max-w-3xl leading-[1.02] mb-8">
             Premium Hair Accessories.<br />
-            <span className="text-gold">Factory-Direct.</span>
+            <span className="text-champagne italic font-light">Factory-Direct.</span>
           </h1>
           <p className="text-white/80 text-lg max-w-xl mb-12 leading-relaxed">
             OEM & ODM hair clips, claw clips, headbands, scrunchies, and hair bows for global brands, wholesalers, and retailers. Low MOQ, free design service, worldwide shipping.
@@ -57,14 +60,14 @@ export default function Home() {
           <div className="flex flex-wrap gap-3 mb-12">
             {['MOQ: 100 pcs', 'Lead Time: 12 Days', 'Free Design Service', 'Global Shipping'].map(badge => (
               <span key={badge} className="badge !border-white/20 !bg-white/12 !text-white/90">
-                <svg className="badge-icon !text-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 6L9 17l-5-5"/></svg>
+                <svg className="badge-icon !text-champagne" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 6L9 17l-5-5"/></svg>
                 {badge}
               </span>
             ))}
           </div>
 
           <div className="flex flex-wrap gap-4">
-            <Link to="/contact" className="btn-gold text-base px-10 py-5">
+            <Link to="/contact" className="inline-flex items-center gap-2 border border-champagne bg-transparent text-champagne px-10 py-5 text-base font-medium tracking-wider uppercase transition-all duration-200 hover:bg-champagne hover:text-navy">
               Request a Quote <span className="ml-1">→</span>
             </Link>
             <Link to="/products" className="btn-outline !border-white/20 !text-white hover:!border-white/40 hover:!bg-white/5 text-base px-10 py-5">
@@ -151,8 +154,8 @@ export default function Home() {
         <div className="container-site">
           <div className="grid md:grid-cols-2 gap-16 items-center mb-24">
             <div>
-              <p className="text-xs font-medium tracking-[0.15em] uppercase text-gold mb-4">Why WINCOME</p>
-              <h2 className="text-display-lg mb-6">Factory-Direct.<br /><span className="text-gold">Zero Middlemen.</span></h2>
+              <p className="text-xs font-medium tracking-[0.15em] uppercase text-champagne mb-4">Why WINCOME</p>
+              <h2 className="text-display-lg mb-6">Factory-Direct.<br /><span className="text-champagne italic font-light">Zero Middlemen.</span></h2>
               <p className="text-white/60 text-lg leading-relaxed mb-8">
                 When you work with WINCOME, you work directly with the people making your products — no agents, no markups, no surprises.
               </p>
@@ -164,7 +167,7 @@ export default function Home() {
                   { title: 'Low MOQ, Fast Turnaround', desc: 'Start at 100 pcs with delivery in as fast as 10 days.' },
                 ].map(item => (
                   <li key={item.title} className="flex gap-4">
-                    <svg className="w-5 h-5 text-gold mt-0.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 6L9 17l-5-5"/></svg>
+                    <svg className="w-5 h-5 text-champagne mt-0.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 6L9 17l-5-5"/></svg>
                     <div>
                       <h4 className="text-sm font-medium mb-1">{item.title}</h4>
                       <p className="text-white/50 text-sm">{item.desc}</p>
@@ -204,13 +207,13 @@ export default function Home() {
 
           {/* Process Flow */}
           <div>
-            <p className="text-xs font-medium tracking-[0.15em] uppercase text-gold mb-4">How It Works</p>
-            <h2 className="text-display-lg mb-12">From Brief to <span className="text-gold">Doorstep</span></h2>
+            <p className="text-xs font-medium tracking-[0.15em] uppercase text-champagne mb-4">How It Works</p>
+            <h2 className="text-display-lg mb-12">From Brief to <span className="text-champagne italic font-light">Doorstep</span></h2>
             <div className="grid md:grid-cols-4 gap-8">
               {processSteps.map((step, i) => (
                 <div key={step.step} className="relative">
                   {i < 3 && <div className="hidden md:block absolute top-8 left-[60%] w-[calc(100%-2rem)] h-px bg-white/10" />}
-                  <div className="text-5xl font-display text-gold/30 mb-4">{step.step}</div>
+                  <div className="text-5xl font-display text-champagne/30 mb-4">{step.step}</div>
                   <h3 className="text-lg font-display text-white mb-2">{step.title}</h3>
                   <p className="text-white/50 text-sm leading-relaxed mb-4">{step.desc}</p>
                   <ul className="space-y-1">
