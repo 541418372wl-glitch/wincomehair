@@ -254,6 +254,62 @@ const products = {
     applications: ['Children\'s brands', 'Gift sets & boutique retail', 'Party & event styling', 'Photo shoots & props', 'Everyday charm accessories'],
     customization: ['Layer count & fullness', 'Fabric color', 'Backing type (barrette/clip)', 'Charm tags', 'Display card & gift box'],
   },
+  'clip-pearl': {
+    name: 'Pearl Hair Barrettes', image: '/assets/images/product-clip-pearl.webp', category: 'Hair Clips & Barrettes',
+    moq: '200 pcs', leadTime: '12-15 days', material: 'Metal + Faux Pearl', style: 'Classic / Bridal / Layered',
+    sizes: 'Small (6cm) / Medium (9cm) / Large (12cm)', finish: 'Gold / Silver metal base',
+    logo: 'Engraved charm tag, custom card', packaging: 'Individual polybag, velvet pouch, gift box',
+    description: [
+      'Pearl hair barrettes pair a gold or silver metal base with hand-placed faux pearls in single-row, graduated and cluster arrangements — the classic accessory that never goes out of season. The alligator clip mechanism holds securely without pulling, and the metal frame is tarnish-resistant.',
+      'For brands, pearl barrettes earn their retail price. They sit comfortably at $8–18, photograph beautifully for e-commerce, and move strongly in bridal, gifting and everyday elegance segments. Rhinestone accents and mixed-size pearl layouts are available for premium positioning.',
+      'Available in 6cm / 9cm / 12cm with gold or silver finish. MOQ from 200 pcs, production in 12-15 days.',
+    ],
+    details: ['Hand-placed faux pearls', 'Gold or silver metal frame', 'Alligator clip mechanism', 'Tarnish-resistant finish', 'Single-row, graduated & cluster styles', 'Sizes: 6cm / 9cm / 12cm', 'Rhinestone accent option', 'Secure spring clip', 'Velvet pouch packaging option', 'Bridal-grade quality'],
+    applications: ['Bridal & bridesmaid collections', 'Gift sets & boutique retail', 'Everyday elegance brands', 'Photo shoots & styling', 'Subscription boxes'],
+    customization: ['Pearl size, color & arrangement', 'Metal finish (gold/silver/rose gold)', 'Rhinestone accents', 'Custom engraved charm tag', 'Velvet pouch & gift box'],
+  },
+  'clip-acetate': {
+    name: 'Acetate Hair Barrettes', image: '/assets/images/product-clip-acetate.webp', category: 'Hair Clips & Barrettes',
+    moq: '100 pcs', leadTime: '12-15 days', material: 'Cellulose Acetate', style: 'Modern / Minimal / Sculptural',
+    sizes: 'Standard (7cm–10cm)', finish: 'Gloss / Marble / Tortoiseshell patterns',
+    logo: 'Laser engraving, foil stamping', packaging: 'Individual polybag, display card, gift box',
+    description: [
+      'Acetate hair barrettes bring sculptural shapes — oval cutouts, wide rectangles, tapered teardrops — in the same cellulose acetate used for premium eyewear. The marble, tortoiseshell and solid-color finishes have depth that photographs as genuine luxury.',
+      'This is the barrette format that drives the accessible-luxury hair accessories segment: priced at $10–22 retail, it sells on material story and design geometry rather than embellishment. The French barrette mechanism is easy to use and holds thick and fine hair equally well.',
+      'Standard sizes 7–10cm in any Pantone color or signature marble effect. MOQ from 100 pcs, production in 12-15 days.',
+    ],
+    details: ['Plant-based cellulose acetate', 'Sculptural shapes: oval / rectangle / teardrop', 'French barrette clip mechanism', 'Gloss polished finish', 'Marble, tortoiseshell & solid patterns', 'Standard 7–10cm sizes', 'Custom Pantone colors', 'Lightweight & durable', 'Laser engraving or foil stamping', 'Display card & gift box'],
+    applications: ['Modern & minimalist brands', 'Boutique retail', 'Accessible-luxury lines', 'Social media-driven fashion', 'Gift sets'],
+    customization: ['Custom colors & marble patterns', 'Shape selection', 'Laser engraving or foil stamping', 'Custom packaging', 'Mixed-style assortments'],
+  },
+  'clip-matte': {
+    name: 'Matte Snap Hair Clips', image: '/assets/images/product-clip-matte.webp', category: 'Hair Clips & Barrettes',
+    moq: '300 pcs', leadTime: '8-10 days', material: 'Coated Metal', style: 'Everyday / Minimalist / Multi-pack',
+    sizes: 'Small (5cm) / Medium (7cm) / Large (9cm)', finish: 'Matte powder coat / Morandi palette',
+    logo: 'Pad printing, custom hang tag', packaging: 'Bulk polybag, multi-pack display card',
+    description: [
+      'Matte snap clips are the everyday volume seller in hair accessories: a simple hinged metal clip with a soft powder-coat finish in a Morandi-inspired palette — dusty pink, sage green, powder blue, cream, grey, chocolate, taupe. The matte surface does not show fingerprints and feels considered rather than cheap.',
+      'The snap mechanism opens and closes one-handed with a satisfying click, holds fine to medium hair securely, and comes in three sizes to cover different styling needs. Multi-pack sets of 6–8 colors are a strong gift and subscription-box play at affordable retail price points.',
+      'Sizes 5cm / 7cm / 9cm in Morandi palette or any custom color. MOQ from 300 pcs, production in 8-10 days.',
+    ],
+    details: ['Hinged metal snap mechanism', 'Soft matte powder coat', 'Morandi color palette', 'No fingerprint surface', 'One-handed snap open & close', 'Sizes: 5cm / 7cm / 9cm', 'Multi-pack set option', 'Custom colors', 'Pad printing logo', 'Fast 8-10 day production'],
+    applications: ['Everyday essentials brands', 'Gift sets & multi-packs', 'Subscription boxes', 'Kids\' & teen brands', 'High-volume retail'],
+    customization: ['Custom Morandi colors', 'Size mix (5cm/7cm/9cm)', 'Multi-pack set design', 'Printed hang tag', 'Bulk packaging'],
+  },
+  'clip-crystal': {
+    name: 'Crystal Rhinestone Barrettes', image: '/assets/images/product-clip-crystal.webp', category: 'Hair Clips & Barrettes',
+    moq: '200 pcs', leadTime: '15-18 days', material: 'Metal + Crystal', style: 'Bridal / Evening / Luxury',
+    sizes: 'Medium (8cm) / Large (11cm)', finish: 'Gold-tone frame with crystal pave',
+    logo: 'Laser engraving, custom gift card', packaging: 'Velvet pouch, gift box, display card',
+    description: [
+      'Crystal rhinestone barrettes are designed for the bridal and eveningwear market: a gold-tone metal frame fully paved or bordered with AAA-grade cubic zirconia, marquise crystals or mixed-cut stones. The effect reads as fine jewelry at a fraction of the cost.',
+      'Available in full-pave rectangle, floral cluster, and mixed-stone linear formats. The French barrette mechanism is concealed beneath the crystal setting, keeping the front view completely clean. Champagne, clear and rose crystal options suit the full bridal color spectrum.',
+      'Sizes 8cm and 11cm with gold or silver frame. MOQ from 200 pcs, production in 15-18 days.',
+    ],
+    details: ['AAA cubic zirconia / mixed crystal stones', 'Gold or silver tone metal frame', 'Full-pave & floral cluster options', 'Concealed French barrette mechanism', 'Champagne, clear & rose crystal', 'Sizes: 8cm / 11cm', 'Secure spring mechanism', 'No-snag setting', 'Gift-box ready', 'Bridal & luxury event styling'],
+    applications: ['Bridal & wedding collections', 'Evening wear brands', 'Luxury accessory lines', 'Gift sets & boutique retail', 'Photo shoots & editorial'],
+    customization: ['Crystal color & cut selection', 'Frame finish (gold/silver)', 'Layout (pave/floral/linear)', 'Velvet pouch & gift box', 'Custom engraved detail'],
+  },
 };
 
 export default function ProductDetail() {
