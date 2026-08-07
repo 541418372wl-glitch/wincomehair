@@ -1,7 +1,9 @@
+import { waLink, WA_DEFAULT_TEXT } from '../lib/whatsapp';
+
 export default function WhatsAppButton() {
   return (
     <a
-      href="https://wa.me/8618989846141"
+      href={waLink(WA_DEFAULT_TEXT)}
       target="_blank"
       rel="noopener noreferrer"
       className="fixed bottom-6 right-6 z-40 bg-[#25D366] text-white w-14 h-14 flex items-center justify-center shadow-lg hover:scale-105 transition-transform duration-200"
