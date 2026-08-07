@@ -225,6 +225,34 @@ const products = {
     applications: ['Gift sets & boutique retail', 'Photo shoots & styling', 'Beauty & haircare brands', 'Bridal party favors', 'Subscription boxes'],
     customization: ['Custom colors & dye matching', 'Ruffle density & fullness', 'Woven label & hang tag', 'Set boxes & multi-packs', 'Custom sizing'],
   },
+  'scrunchie-bow': {
+    name: 'Satin Bow Scrunchies', image: '/assets/images/product-scrunchie-bow.webp', category: 'Scrunchies & Hair Ties',
+    moq: '300 pcs', leadTime: '10-12 days', material: 'Premium Satin', style: 'Bow-top / Classic / Gift-ready',
+    sizes: 'Standard (12cm diameter)', finish: 'High-sheen satin with matching bow',
+    logo: 'Woven label, custom hang tag', packaging: 'Individual card, set box, gift wrap',
+    description: [
+      'Satin bow scrunchies pair a full-volume scrunchie with a large matching satin bow — one piece, one fabric, maximum charm. The bow is sewn into the construction, so it keeps its shape and position instead of flopping or rotating.',
+      'High-sheen satin catches light beautifully in product photos, and the muted color palette (dusty rose, champagne, sage, lavender, black) makes these a strong gift-set and boutique item. Reinforced seams survive washing; the covered elastic never twists.',
+      'Standard 12cm diameter with custom color, bow size and packaging options. MOQ from 300 pcs, production in 10-12 days.',
+    ],
+    details: ['Integrated matching satin bow', 'High-sheen premium satin', 'Full-volume scrunchie body', 'Bow sewn in place — no rotation', 'Reinforced seams, wash-safe', 'Covered elastic, no twisting', 'Standard 12cm diameter', 'Muted, gift-friendly palette', 'Gentle on hair', 'Gift-ready presentation'],
+    applications: ['Gift sets & boutique retail', 'Children\'s brands', 'Party & event styling', 'Bridal party favors', 'Subscription boxes'],
+    customization: ['Custom colors & dye matching', 'Bow size & style', 'Woven label & hang tag', 'Set boxes & multi-packs', 'Custom sizing'],
+  },
+  'bow-multilayer': {
+    name: 'Multi-Layer Satin Bow Clips', image: '/assets/images/product-bow-multilayer.webp', category: 'Hair Bows & Ribbons',
+    moq: '200 pcs', leadTime: '12-15 days', material: 'Premium Satin', style: 'Puffy / Multi-layer / Classic',
+    sizes: 'Small (7cm) / Medium (11cm) / Large (15cm)', finish: 'Stacked satin layers',
+    logo: 'Custom printed ribbon, metal charm tag', packaging: 'Display card, polybag, gift box',
+    description: [
+      'Multi-layer satin bow clips stack several gathered satin layers into a full, puffy silhouette — the volume style that photographs like a wrapped gift. Each layer is sewn and finished separately, so the bow stays crisp and dimensional rather than collapsing flat.',
+      'Mounted on a secure metal barrette or alligator clip, in classic, oversized and mini sizes. The palette of cream, champagne, blush, sage, lavender and chocolate makes these a versatile, high-perceived-value item for kids\' lines, gift sets and party styling.',
+      'Sizes 7cm / 11cm / 15cm. MOQ from 200 pcs, production in 12-15 days.',
+    ],
+    details: ['Stacked multi-layer satin construction', 'Full, puffy silhouette', 'Each layer sewn & finished separately', 'Secure barrette or alligator clip back', 'Sizes: 7cm / 11cm / 15cm', 'Classic, oversized & mini', 'Cream, champagne, blush, sage & more', 'Reinforced stitching', 'Metal charm tag option', 'Gift-ready packaging'],
+    applications: ['Children\'s brands', 'Gift sets & boutique retail', 'Party & event styling', 'Photo shoots & props', 'Everyday charm accessories'],
+    customization: ['Layer count & fullness', 'Fabric color', 'Backing type (barrette/clip)', 'Charm tags', 'Display card & gift box'],
+  },
 };
 
 export default function ProductDetail() {
