@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { waLink } from '../lib/whatsapp';
 
 const footerLinks = {
   Products: [
