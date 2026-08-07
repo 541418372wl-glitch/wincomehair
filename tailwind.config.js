@@ -10,11 +10,13 @@ export default {
         tan: '#c3af9f',
         navy: '#1a2b3c',
         gold: '#c5a059',
+        champagne: '#d8bd8f',
+        blush: '#e8c4c4',
         'navy-light': '#2a3d52',
         'navy-dark': '#0f1a26',
       },
       fontFamily: {
-        display: ['Georgia', '"Times New Roman"', 'serif'],
+        display: ['"Playfair Display"', 'Georgia', '"Times New Roman"', 'serif'],
         body: ['"PingFang SC"', '"Hiragino Sans GB"', '"Microsoft YaHei"', 'system-ui', '-apple-system', '"Segoe UI"', 'Roboto', 'sans-serif'],
       },
       fontSize: {
