@@ -49,7 +49,7 @@ export default function Home() {
             <span className="w-8 h-px bg-blush" />
             <p className="text-xs font-medium tracking-[0.15em] uppercase text-champagne">Custom Hair Accessories Manufacturer</p>
           </div>
-          <h1 className="text-white text-display-xl md:text-[88px] max-w-3xl leading-[1.02] mb-8">
+          <h1 className="text-white text-[40px] sm:text-[56px] md:text-[88px] max-w-3xl leading-[1.05] mb-8">
             Premium Hair Accessories.<br />
             <span className="text-champagne italic font-light">Factory-Direct.</span>
           </h1>
