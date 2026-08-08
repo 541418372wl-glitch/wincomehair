@@ -184,7 +184,7 @@ export default function BlogPost() {
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
             <a
-              href={waLink(`Hello WINCOME, I just read your article "${article.title}" and would like to discuss my project. Can we chat?`)}
+              href={waLink(`Hello WINCOME, I just read your article "${post.title}" and would like to discuss my project. Can we chat?`)}
               target="_blank"
               rel="noopener noreferrer"
               className="btn-whatsapp"
