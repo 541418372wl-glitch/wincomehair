@@ -9,13 +9,15 @@ export default function Contact() {
   const [form, setForm] = useState({
     name: '', company: '', email: '', phone: '',
     productType: '', quantity: '', material: '', logoPlacement: '',
-    dimensions: '', message: '',
+    dimensions: '', message: '', website: '',
   });
 
   const update = (field, value) => setForm(prev => ({ ...prev, [field]: value }));
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    // Honeypot: silently drop bot submissions
+    if (form.website) return;
     setSubmitting(true);
     setSubmitError(null);
 
@@ -43,11 +45,14 @@ export default function Contact() {
 
     // Send email notification directly (reliable fallback, no webhook dependency)
     try {
-      await fetch('/api/notify-inquiry', {
+      const res = await fetch('/api/notify-inquiry', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ record }),
       });
+      if (!res.ok) {
+        console.warn('Inquiry saved but email notification failed:', res.status);
+      }
     } catch (_) {
       // notification failure is non-fatal — inquiry already saved
     }
@@ -122,8 +127,10 @@ export default function Contact() {
               {step === 1 && (
                 <div className="space-y-8">
                   <div>
-                    <label className="block text-xs tracking-wider uppercase text-tan mb-1">Product Type *</label>
+                    <label htmlFor="productType" className="block text-xs tracking-wider uppercase text-tan mb-1">Product Type *</label>
                     <select
+                      id="productType"
+                      name="productType"
                       required
                       value={form.productType}
                       onChange={e => update('productType', e.target.value)}
@@ -139,8 +146,10 @@ export default function Contact() {
                     </select>
                   </div>
                   <div>
-                    <label className="block text-xs tracking-wider uppercase text-tan mb-1">Estimated Quantity *</label>
+                    <label htmlFor="quantity" className="block text-xs tracking-wider uppercase text-tan mb-1">Estimated Quantity *</label>
                     <select
+                      id="quantity"
+                      name="quantity"
                       required
                       value={form.quantity}
                       onChange={e => update('quantity', e.target.value)}
@@ -169,8 +178,8 @@ export default function Contact() {
               {step === 2 && (
                 <div className="space-y-8">
                   <div>
-                    <label className="block text-xs tracking-wider uppercase text-tan mb-1">Material Preference</label>
-                    <select value={form.material} onChange={e => update('material', e.target.value)} className="input-field">
+                    <label htmlFor="material" className="block text-xs tracking-wider uppercase text-tan mb-1">Material Preference</label>
+                    <select id="material" name="material" value={form.material} onChange={e => update('material', e.target.value)} className="input-field">
                       <option value="">Select material...</option>
                       <option value="acetate">Cellulose Acetate</option>
                       <option value="metal">Zinc Alloy / Metal</option>
@@ -182,8 +191,8 @@ export default function Contact() {
                     </select>
                   </div>
                   <div>
-                    <label className="block text-xs tracking-wider uppercase text-tan mb-1">Logo Placement</label>
-                    <select value={form.logoPlacement} onChange={e => update('logoPlacement', e.target.value)} className="input-field">
+                    <label htmlFor="logoPlacement" className="block text-xs tracking-wider uppercase text-tan mb-1">Logo Placement</label>
+                    <select id="logoPlacement" name="logoPlacement" value={form.logoPlacement} onChange={e => update('logoPlacement', e.target.value)} className="input-field">
                       <option value="">Select placement...</option>
                       <option value="center">Product Center</option>
                       <option value="side">Side / Edge</option>
@@ -193,12 +202,12 @@ export default function Contact() {
                     </select>
                   </div>
                   <div>
-                    <label className="block text-xs tracking-wider uppercase text-tan mb-1">Approx. Dimensions (L×W×H cm)</label>
-                    <input type="text" value={form.dimensions} onChange={e => update('dimensions', e.target.value)} placeholder="e.g. 10×5×3 cm" className="input-field" />
+                    <label htmlFor="dimensions" className="block text-xs tracking-wider uppercase text-tan mb-1">Approx. Dimensions (L×W×H cm)</label>
+                    <input id="dimensions" name="dimensions" type="text" value={form.dimensions} onChange={e => update('dimensions', e.target.value)} placeholder="e.g. 10×5×3 cm" className="input-field" />
                   </div>
                   <div>
-                    <label className="block text-xs tracking-wider uppercase text-tan mb-1">Additional Message</label>
-                    <textarea rows="3" value={form.message} onChange={e => update('message', e.target.value)} placeholder="Tell us about your project, reference images, or specific requirements..." className="input-field" />
+                    <label htmlFor="message" className="block text-xs tracking-wider uppercase text-tan mb-1">Additional Message</label>
+                    <textarea id="message" name="message" rows="3" value={form.message} onChange={e => update('message', e.target.value)} placeholder="Tell us about your project, reference images, or specific requirements..." className="input-field" />
                   </div>
                   <div className="flex justify-between">
                     <button type="button" onClick={() => setStep(1)} className="btn-outline">← Back</button>
@@ -211,24 +220,32 @@ export default function Contact() {
                 <div className="space-y-8">
                   <div className="grid md:grid-cols-2 gap-6">
                     <div>
-                      <label className="block text-xs tracking-wider uppercase text-tan mb-1">Your Name *</label>
-                      <input required type="text" value={form.name} onChange={e => update('name', e.target.value)} placeholder="Full name" className="input-field" />
+                      <label htmlFor="name" className="block text-xs tracking-wider uppercase text-tan mb-1">Your Name *</label>
+                      <input id="name" name="name" required type="text" autoComplete="name" value={form.name} onChange={e => update('name', e.target.value)} placeholder="Full name" className="input-field" />
                     </div>
                     <div>
-                      <label className="block text-xs tracking-wider uppercase text-tan mb-1">Company Name</label>
-                      <input type="text" value={form.company} onChange={e => update('company', e.target.value)} placeholder="Your company" className="input-field" />
+                      <label htmlFor="company" className="block text-xs tracking-wider uppercase text-tan mb-1">Company Name</label>
+                      <input id="company" name="company" type="text" autoComplete="organization" value={form.company} onChange={e => update('company', e.target.value)} placeholder="Your company" className="input-field" />
                     </div>
                   </div>
                   <div className="grid md:grid-cols-2 gap-6">
                     <div>
-                      <label className="block text-xs tracking-wider uppercase text-tan mb-1">Email Address *</label>
-                      <input required type="email" value={form.email} onChange={e => update('email', e.target.value)} placeholder="you@company.com" className="input-field" />
+                      <label htmlFor="email" className="block text-xs tracking-wider uppercase text-tan mb-1">Email Address *</label>
+                      <input id="email" name="email" required type="email" autoComplete="email" value={form.email} onChange={e => update('email', e.target.value)} placeholder="you@company.com" className="input-field" />
                     </div>
                     <div>
-                      <label className="block text-xs tracking-wider uppercase text-tan mb-1">WhatsApp / Phone</label>
-                      <input type="text" value={form.phone} onChange={e => update('phone', e.target.value)} placeholder="+1 234 567 8900" className="input-field" />
+                      <label htmlFor="phone" className="block text-xs tracking-wider uppercase text-tan mb-1">WhatsApp / Phone</label>
+                      <input id="phone" name="phone" type="tel" autoComplete="tel" value={form.phone} onChange={e => update('phone', e.target.value)} placeholder="+1 234 567 8900" className="input-field" />
                     </div>
                   </div>
+                  {/* Honeypot — hidden from humans */}
+                  <div className="hidden" aria-hidden="true">
+                    <label htmlFor="website">Website</label>
+                    <input id="website" name="website" type="text" value={form.website} onChange={e => update('website', e.target.value)} tabIndex={-1} autoComplete="off" />
+                  </div>
+                  <p className="text-xs text-tan leading-relaxed">
+                    By submitting this form you agree to our <a href="/privacy" className="text-gold underline">Privacy Policy</a>. We use your details only to respond to your inquiry and never share them with third parties.
+                  </p>
                   <div className="flex justify-between pt-4">
                     <button type="button" onClick={() => setStep(2)} className="btn-outline">← Back</button>
                     {submitError && <p className="text-red-500 text-xs mb-4">{submitError}</p>}
