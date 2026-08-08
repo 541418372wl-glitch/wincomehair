@@ -341,7 +341,7 @@ export default function ProductDetail() {
             <p className="text-[10px] tracking-wider uppercase text-tan mb-2">{product.category}</p>
             <h1 className="text-display-md text-navy mb-6">{product.name}</h1>
             {product.description.map((p, i) => (
-              <p key={i} className="text-tan leading-relaxed mb-4">{p}</p>
+              <p key={i} className={(i === 0 ? 'text-bronze font-medium ' : 'text-tan ') + 'leading-relaxed mb-4'}>{p}</p>
             ))}
 
             <div className="flex flex-wrap gap-2 mb-10">
@@ -365,7 +365,7 @@ export default function ProductDetail() {
               </Link>
             </div>
 
-            <div className="grid grid-cols-2 gap-6 mt-12 pt-10 border-t border-bronze/10">
+            <div className="grid grid-cols-2 gap-6 mt-12 p-8 bg-sand/25">
               {[
                 ['Material', product.material],
                 ['Style', product.style],
@@ -385,7 +385,7 @@ export default function ProductDetail() {
 
         <div className="mt-20 pt-12 border-t border-bronze/10">
           <h2 className="text-display-sm text-navy mb-8">Product <span className="text-gold">Details</span></h2>
-          <div className="grid md:grid-cols-2 gap-4">
+          <div className="grid md:grid-cols-2 gap-x-10 gap-y-2 p-8 bg-sand/25">
             {product.details.map((d, i) => (
               <div key={i} className="flex items-center gap-3 py-2">
                 <svg className="w-4 h-4 text-gold shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 6L9 17l-5-5"/></svg>
@@ -397,7 +397,7 @@ export default function ProductDetail() {
 
         <div className="mt-20 pt-12 border-t border-bronze/10">
           <h2 className="text-display-sm text-navy mb-8">Perfect <span className="text-gold">For</span></h2>
-          <div className="grid md:grid-cols-2 gap-4">
+          <div className="grid md:grid-cols-2 gap-x-10 gap-y-2 p-8 bg-sand/25">
             {product.applications.map((d, i) => (
               <div key={i} className="flex items-center gap-3 py-2">
                 <svg className="w-4 h-4 text-gold shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 6L9 17l-5-5"/></svg>
@@ -409,7 +409,7 @@ export default function ProductDetail() {
 
         <div className="mt-20 pt-12 border-t border-bronze/10">
           <h2 className="text-display-sm text-navy mb-8">Customization <span className="text-gold">Options</span></h2>
-          <div className="grid md:grid-cols-2 gap-4">
+          <div className="grid md:grid-cols-2 gap-x-10 gap-y-2 p-8 bg-sand/25">
             {product.customization.map((d, i) => (
               <div key={i} className="flex items-center gap-3 py-2">
                 <svg className="w-4 h-4 text-gold shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 6L9 17l-5-5"/></svg>
