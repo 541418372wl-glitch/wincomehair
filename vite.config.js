@@ -8,9 +8,24 @@ import { articles } from './src/data/articles';
 
 // vite-plugin-prerender 1.0.8 ships a broken ESM entry (uses require inside).
 // Load it through its CJS entry instead.
-const require = createRequire(import.meta.url);
-const vitePrerender = require('vite-plugin-prerender');
-const Renderer = vitePrerender.PuppeteerRenderer;
+// SSG prerender only on local builds; Vercel builds skip it (no chromium download risk).
+const isVercelBuild = process.env.VERCEL === '1';
+const prerenderPlugin = isVercelBuild ? null : (() => {
+  const require = createRequire(import.meta.url);
+  const vitePrerender = require('vite-plugin-prerender');
+  const Renderer = vitePrerender.PuppeteerRenderer;
+  return vitePrerender({
+    staticDir: join(process.cwd(), 'dist'),
+    routes,
+    renderer: new Renderer({
+      headless: true,
+      args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage'],
+      maxConcurrentRoutes: 4,
+      renderAfterTime: 3500,
+    }),
+    server: { port: 8123 },
+  });
+})();
 
 // Inline the built CSS into index.html (post-build) to eliminate
 // render-blocking stylesheet requests, then remove the .css file.
@@ -44,17 +59,7 @@ export default defineConfig({
   plugins: [
     react(),
     inlineCss(),
-    vitePrerender({
-      staticDir: join(process.cwd(), 'dist'),
-      routes,
-      renderer: new Renderer({
-        headless: true,
-        args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage'],
-        maxConcurrentRoutes: 4,
-        renderAfterTime: 3500,
-      }),
-      server: { port: 8123 },
-    }),
+    ...(prerenderPlugin ? [prerenderPlugin] : []),
   ],
   resolve: {
     alias: {
