@@ -60,7 +60,9 @@ export default function Footer() {
           <p>&copy; {new Date().getFullYear()} WINCOME Hair Accessories. All rights reserved.</p>
           <div className="flex flex-wrap justify-center gap-6">
             <span>wincomehair.com</span>
-            <span>info@wincomehair.com</span>
+            <Link to="/privacy" className="text-white/60 hover:text-gold transition-colors duration-200">Privacy Policy</Link>
+            <Link to="/terms" className="text-white/60 hover:text-gold transition-colors duration-200">Terms</Link>
+            <a href="mailto:info@wincomehair.com" className="text-white/60 hover:text-gold transition-colors duration-200">info@wincomehair.com</a>
             <a
               href={waLink('Hello WINCOME, I would like to inquire about your custom hair accessories. Can we chat?')}
               target="_blank"
