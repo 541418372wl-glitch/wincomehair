@@ -23,6 +23,9 @@ const allProducts = [
   { id: 'clip-acetate', name: 'Acetate Hair Barrettes', category: 'Hair Clips & Barrettes', image: '/assets/images/product-clip-acetate.webp', moq: '100 pcs', leadTime: '12-15 days', material: 'Cellulose Acetate', colors: 'Custom Pantone' },
   { id: 'clip-matte', name: 'Matte Snap Hair Clips', category: 'Hair Clips & Barrettes', image: '/assets/images/product-clip-matte.webp', moq: '300 pcs', leadTime: '8-10 days', material: 'Coated Metal', colors: 'Morandi Custom Colors' },
   { id: 'clip-crystal', name: 'Crystal Rhinestone Barrettes', category: 'Hair Clips & Barrettes', image: '/assets/images/product-clip-crystal.webp', moq: '200 pcs', leadTime: '15-18 days', material: 'Metal + Crystal', colors: 'Gold / Silver' },
+  { id: 'clip-flower', name: 'Flower Hair Clips', category: 'Hair Clips & Barrettes', image: '/assets/images/product-clip-flower.webp', moq: '200 pcs', leadTime: '15-18 days', material: 'Metal + Crystal', colors: 'Gold / Silver' },
+  { id: 'headband-satin', name: 'Satin Headbands', category: 'Headbands', image: '/assets/images/product-headband-satin.webp', moq: '200 pcs', leadTime: '12-15 days', material: 'Premium Satin', colors: 'Custom Colors' },
+  { id: 'bow-oversized', name: 'Oversized Hair Bows', category: 'Bows & Ribbons', image: '/assets/images/product-bow-oversized.webp', moq: '200 pcs', leadTime: '12-15 days', material: 'Premium Satin', colors: 'Custom Colors' },
 ];
 
 const categories = ['All', 'Claws & Clips', 'Headbands', 'Scrunchies', 'Bows & Ribbons'];
