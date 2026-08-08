@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const allProducts = [
@@ -28,9 +29,12 @@ const allProducts = [
   { id: 'bow-oversized', name: 'Oversized Hair Bows', category: 'Bows & Ribbons', image: '/assets/images/product-bow-oversized.webp', moq: '200 pcs', leadTime: '12-15 days', material: 'Premium Satin', colors: 'Custom Colors' },
 ];
 
-const categories = ['All', 'Claws & Clips', 'Headbands', 'Scrunchies', 'Bows & Ribbons'];
+const categories = ['All', 'Claws & Clips', 'Headbands', 'Scrunchies', 'Bows & Ribbons', 'Hair Clips & Barrettes'];
 
 export default function Products() {
+  const [activeCat, setActiveCat] = useState('All');
+  const filtered = activeCat === 'All' ? allProducts : allProducts.filter(p => p.category === activeCat);
+
   return (
     <div className="pt-24">
       <div className="container-site section-gap">
@@ -40,18 +44,30 @@ export default function Products() {
           Every product is fully customizable — size, color, material, finish, logo, and packaging. Click any item to request a quote.
         </p>
 
-        {/* Category filters */}
-        <div className="flex flex-wrap gap-3 mb-12">
-          {categories.map(cat => (
-            <button key={cat} className="px-5 py-2 text-xs font-medium tracking-wider uppercase border border-bronze/20 text-tan hover:border-navy hover:text-navy transition-colors duration-200">
-              {cat}
-            </button>
-          ))}
+        {/* Category filters (sticky on mobile for long lists) */}
+        <div className="sticky top-16 md:top-20 z-30 bg-cream/95 backdrop-blur-sm -mx-4 px-4 py-3 mb-10 border-b border-bronze/10">
+          <div className="flex gap-2 overflow-x-auto pb-1 -mb-1">
+            {categories.map(cat => {
+              const count = cat === 'All' ? allProducts.length : allProducts.filter(p => p.category === cat).length;
+              const isActive = activeCat === cat;
+              return (
+                <button
+                  key={cat}
+                  onClick={() => setActiveCat(cat)}
+                  className={`shrink-0 px-4 py-2 text-xs font-medium tracking-wider uppercase border transition-colors duration-200 ${
+                    isActive ? 'border-navy bg-navy text-white' : 'border-bronze/20 text-tan hover:border-navy hover:text-navy'
+                  }`}
+                >
+                  {cat} <span className={isActive ? 'text-white/60' : 'text-tan/50'}>({count})</span>
+                </button>
+              );
+            })}
+          </div>
         </div>
 
         {/* Product Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {allProducts.map(product => (
+          {filtered.map(product => (
             <Link
               to={`/products/${product.id}`}
               key={product.id}

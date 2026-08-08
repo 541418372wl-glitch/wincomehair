@@ -52,6 +52,15 @@ export default function Navbar() {
     setMenuOpen(false);
   }, [location]);
 
+  useEffect(() => {
+    if (!menuOpen) return;
+    const onKey = (e) => {
+      if (e.key === 'Escape') setMenuOpen(false);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [menuOpen]);
+
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
       dark ? 'bg-cream/95 backdrop-blur-sm shadow-[0_1px_0_rgba(67,60,53,0.06)]' : 'bg-transparent'
@@ -83,6 +92,8 @@ export default function Navbar() {
           className="md:hidden flex flex-col gap-1.5 p-2"
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Toggle menu"
+          aria-expanded={menuOpen}
+          aria-controls="mobile-menu"
         >
           <span className={`block w-5 h-px bg-bronze transition-all ${menuOpen ? 'rotate-45 translate-y-[5px]' : ''}`} />
           <span className={`block w-5 h-px bg-bronze transition-all ${menuOpen ? 'opacity-0' : ''}`} />
@@ -91,7 +102,7 @@ export default function Navbar() {
       </div>
 
       {menuOpen && (
-        <div className="md:hidden bg-cream border-t border-bronze/10">
+        <div id="mobile-menu" className="md:hidden bg-cream border-t border-bronze/10">
           <div className="container-site py-6 flex flex-col gap-4">
             {navLinks.map(link => (
               <Link

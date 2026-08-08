@@ -145,7 +145,7 @@ export default function BlogPost() {
         <div className="max-w-3xl">
           <div className="flex items-center gap-3 mb-4">
             <span className="text-[10px] tracking-wider uppercase bg-gold/10 text-bronze px-2 py-1">{post.category}</span>
-            <span className="text-[10px] tracking-wider uppercase text-tan">{post.date} · {post.readTime}</span>
+            <span className="text-[10px] tracking-wider uppercase text-tan">{post.date} · {post.readTime} · By WINCOME Team</span>
           </div>
           <h1 className="text-display-lg text-navy leading-tight mb-8">{post.title}</h1>
         </div>

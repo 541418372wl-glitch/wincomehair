@@ -25,10 +25,18 @@ export default function App() {
   return (
     <BrowserRouter>
       <div className="min-h-screen flex flex-col">
-        <Navbar />
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[100] focus:bg-navy focus:text-white focus:px-4 focus:py-2 focus:text-sm"
+        >
+          Skip to main content
+        </a>
+        <header>
+          <Navbar />
+        </header>
         <SEO />
         <Breadcrumb />
-        <main className="flex-1">
+        <main id="main-content" className="flex-1">
           <Suspense fallback={<div className="min-h-[60vh]" />}>
             <Routes>
               <Route path="/" element={<Home />} />

@@ -260,7 +260,7 @@ export default function Home() {
       <section className="section-gap bg-white">
         <div className="container-site text-center max-w-3xl">
           <p className="section-label">Start Your Project</p>
-          <h2 className="text-display-lg text-navy mb-4">Ready to Discuss <span className="text-gold">Your Requirements?</span></h2>
+                <h2 className="text-[34px] leading-[1.15] sm:text-display-lg text-navy mb-4">Ready to Discuss <span className="text-gold">Your Requirements?</span></h2>
           <p className="text-tan text-lg mb-10 leading-relaxed">
             Free design mockup and factory-direct quote in 24 hours. No commitment, no spam — just a conversation with our product specialist.
           </p>
@@ -283,9 +283,9 @@ export default function Home() {
           <p className="text-tan text-lg max-w-xl mb-12">Expert guides on sourcing, customization, and trends in the hair accessories industry.</p>
           <div className="grid md:grid-cols-3 gap-6">
             {[
+              { title: 'Hair Accessories MOQ Guide: Minimum Order Quantities Explained for Importers', date: 'Aug 2026', slug: 'hair-accessories-moq-guide' },
+              { title: 'Headband Materials Compared: Velvet vs Cotton vs Silk — Which Is Right for Your Brand?', date: 'Aug 2026', slug: 'velvet-vs-cotton-headbands' },
               { title: 'Metal Hair Clips Material Guide: Zinc Alloy vs Stainless Steel vs Aluminum', date: 'Aug 2026', slug: 'metal-hair-clip-material-guide' },
-              { title: 'Private Label Hair Accessories: A Step-by-Step Guide for Etsy & Amazon Sellers', date: 'Aug 2026', slug: 'private-label-hair-accessories-guide' },
-              { title: 'Silk vs Satin Scrunchies: Which Fabric Is Better for Hair — and for Your Business?', date: 'Aug 2026', slug: 'silk-vs-satin-scrunchies' },
             ].map(post => (
               <Link to={`/blog/${post.slug}`} key={post.title} className="group bg-white p-8 border border-bronze/10 hover:border-bronze/20 transition-all duration-300">
                 <p className="text-[10px] tracking-wider uppercase text-tan mb-3">{post.date}</p>

@@ -57,8 +57,10 @@ const pageMeta = {
 function truncate(text, max) {
   if (text.length <= max) return text;
   const cut = text.slice(0, max);
-  const lastSpace = cut.lastIndexOf(' ');
-  return (lastSpace > 40 ? cut.slice(0, lastSpace) : cut) + '…';
+  // Prefer breaking at a sentence boundary; fall back to word boundary.
+  const sentenceEnd = Math.max(cut.lastIndexOf('. '), cut.lastIndexOf('; '), cut.lastIndexOf('! '), cut.lastIndexOf(': '));
+  const breakAt = sentenceEnd > 40 ? sentenceEnd + 1 : cut.lastIndexOf(' ');
+  return cut.slice(0, breakAt > 40 ? breakAt : cut.length) + '…';
 }
 
 function categoryFor(id) {
@@ -160,7 +162,7 @@ export default function SEO() {
         '@type': 'Organization',
         name: SITE_NAME,
         url: SITE,
-        logo: `${SITE}/assets/images/favicon.png`,
+        logo: `${SITE}/logo-192.png`,
         contactPoint: {
           '@type': 'ContactPoint',
           telephone: '+86-189-8984-6141',

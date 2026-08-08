@@ -9,7 +9,7 @@ export default function Contact() {
   const [form, setForm] = useState({
     name: '', company: '', email: '', phone: '',
     productType: '', quantity: '', material: '', logoPlacement: '',
-    dimensions: '', message: '', website: '',
+    dimensions: '', message: '', targetMarket: '', timeline: '', website: '',
   });
 
   const update = (field, value) => setForm(prev => ({ ...prev, [field]: value }));
@@ -30,6 +30,8 @@ export default function Contact() {
       quantity: form.quantity || null,
       material: form.material || null,
       logo_placement: form.logoPlacement || null,
+      target_market: form.targetMarket || null,
+      timeline: form.timeline || null,
       dimensions: form.dimensions || null,
       message: form.message || null,
     };
@@ -66,7 +68,7 @@ export default function Contact() {
       <div className="container-site section-gap">
         <div className="max-w-3xl mx-auto">
           <p className="section-label text-center">Get a Quote</p>
-          <h1 className="text-display-lg text-navy text-center mb-4">
+                <h1 className="text-[38px] leading-[1.1] sm:text-display-lg text-navy text-center mb-4">
             Request Your <span className="text-gold">Free Quote</span>
           </h1>
           <p className="text-tan text-lg text-center mb-16 max-w-xl mx-auto leading-relaxed">
@@ -199,6 +201,29 @@ export default function Contact() {
                       <option value="all-over">All-Over Print</option>
                       <option value="packaging-only">Packaging Only</option>
                       <option value="no-logo">No Logo</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label htmlFor="targetMarket" className="block text-xs tracking-wider uppercase text-tan mb-1">Target Market</label>
+                    <select id="targetMarket" name="targetMarket" value={form.targetMarket} onChange={e => update('targetMarket', e.target.value)} className="input-field">
+                      <option value="">Select market...</option>
+                      <option>North America</option>
+                      <option>Europe / UK</option>
+                      <option>Australia / NZ</option>
+                      <option>Middle East</option>
+                      <option>Southeast Asia</option>
+                      <option>Latin America</option>
+                      <option>Other / Global</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label htmlFor="timeline" className="block text-xs tracking-wider uppercase text-tan mb-1">Expected Lead Time</label>
+                    <select id="timeline" name="timeline" value={form.timeline} onChange={e => update('timeline', e.target.value)} className="input-field">
+                      <option value="">Select timeline...</option>
+                      <option>ASAP (within 2 weeks)</option>
+                      <option>1 month</option>
+                      <option>2-3 months</option>
+                      <option>Just planning / researching</option>
                     </select>
                   </div>
                   <div>
