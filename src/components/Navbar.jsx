@@ -40,6 +40,7 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
+  const dark = scrolled || location.pathname !== '/';
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -53,11 +54,11 @@ export default function Navbar() {
 
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      scrolled ? 'bg-cream/95 backdrop-blur-sm shadow-[0_1px_0_rgba(67,60,53,0.06)]' : 'bg-transparent'
+      dark ? 'bg-cream/95 backdrop-blur-sm shadow-[0_1px_0_rgba(67,60,53,0.06)]' : 'bg-transparent'
     }`}>
       <div className="container-site flex items-center justify-between h-16 md:h-20">
         <Link to="/" className="flex items-center">
-          <WincomeLogo scrolled={scrolled} />
+          <WincomeLogo scrolled={dark} />
         </Link>
 
         <div className="hidden md:flex items-center gap-8">
@@ -68,7 +69,7 @@ export default function Navbar() {
               className={`text-sm tracking-wide transition-colors duration-200 ${
                 link.to === '/contact'
                   ? 'bg-white text-navy px-6 py-2 hover:bg-white/90 hover:text-navy'
-                  : scrolled
+                  : dark
                     ? (location.pathname === link.to ? 'text-navy font-medium' : 'text-tan hover:text-navy')
                     : (location.pathname === link.to ? 'text-gold font-medium' : 'text-white/70 hover:text-white')
               }`}
