@@ -1,7 +1,7 @@
 import { useParams, Link } from 'react-router-dom';
 import { waLink } from '../lib/whatsapp';
 
-const products = {
+export const products = {
   'claw-acetate': {
     name: 'Acetate Hair Claw Clips', image: '/assets/images/product-claw-acetate.webp', category: 'Hair Claws & Clips',
     moq: '100 pcs', leadTime: '12-15 days', material: 'Cellulose Acetate', style: 'Classic / Modern / Luxury',
@@ -309,6 +309,48 @@ const products = {
     details: ['AAA cubic zirconia / mixed crystal stones', 'Gold or silver tone metal frame', 'Full-pave & floral cluster options', 'Concealed French barrette mechanism', 'Champagne, clear & rose crystal', 'Sizes: 8cm / 11cm', 'Secure spring mechanism', 'No-snag setting', 'Gift-box ready', 'Bridal & luxury event styling'],
     applications: ['Bridal & wedding collections', 'Evening wear brands', 'Luxury accessory lines', 'Gift sets & boutique retail', 'Photo shoots & editorial'],
     customization: ['Crystal color & cut selection', 'Frame finish (gold/silver)', 'Layout (pave/floral/linear)', 'Velvet pouch & gift box', 'Custom engraved detail'],
+  },
+  'clip-flower': {
+    name: 'Flower Hair Clips', image: '/assets/images/product-clip-flower.webp', category: 'Hair Clips & Barrettes',
+    moq: '200 pcs', leadTime: '15-18 days', material: 'Metal + Crystal', style: 'Floral / Bridal / Everyday',
+    sizes: 'Small (5cm) / Medium (7cm) / Large (9cm)', finish: 'Gold-tone frame with crystal petals',
+    logo: 'Laser engraving, custom gift card', packaging: 'Individual polybag, velvet pouch, gift box',
+    description: [
+      'Flower hair clips shape a gold-tone metal frame into open floral petals, each petal outlined or filled with clear crystal. The silhouette reads delicate and feminine — a bestselling bridal and everyday accent that photographs beautifully.',
+      'Unlike flat barrettes, the flower form sits on top of the hair like a small piece of jewelry, catching light from every angle. The spring-loaded clip base holds fine to medium hair securely, and the setting is snag-free against strands.',
+      'Available in 5cm / 7cm / 9cm flower sizes with gold or silver frames and custom crystal colors. MOQ from 200 pcs, production in 15-18 days.',
+    ],
+    details: ['Open floral petal design', 'Gold or silver tone metal frame', 'Crystal-outlined petals', 'Spring-loaded clip base', 'Sits on top of hair like jewelry', 'Snag-free setting', 'Sizes: 5cm / 7cm / 9cm', 'Clear, champagne & rose crystal', 'Gift-box ready', 'Bridal & everyday styling'],
+    applications: ['Bridal & wedding collections', 'Everyday feminine styling', 'Gift sets & boutique retail', 'Photo shoots & editorial', 'Seasonal floral themes'],
+    customization: ['Flower size & petal layout', 'Crystal color & cut', 'Frame finish (gold/silver)', 'Velvet pouch & gift box', 'Custom engraved detail'],
+  },
+  'headband-satin': {
+    name: 'Satin Headbands', image: '/assets/images/product-headband-satin.webp', category: 'Headbands',
+    moq: '200 pcs', leadTime: '12-15 days', material: 'Premium Satin', style: 'Classic / Padded / Slim',
+    sizes: 'Standard (38cm circumference)', finish: 'High-sheen satin cover',
+    logo: 'Woven label, custom hang tag', packaging: 'Individual polybag, display card, gift box',
+    description: [
+      'Satin headbands wrap a soft core in high-sheen premium satin — the smooth, glossy alternative to velvet that photographs with a clean, light-catching finish. The satin surface slides over hair without friction, making these a hair-friendlier choice for daily wear.',
+      'Available in classic slim and padded cushion silhouettes, with a soft grip lining inside to keep the band in place. The satin finish works year-round, from summer styling to holiday party looks, in a palette of blush, champagne, ivory, sage and black.',
+      'Standard 38cm circumference. MOQ from 200 pcs, production in 12-15 days.',
+    ],
+    details: ['High-sheen premium satin cover', 'Soft padded or slim core', 'Smooth surface, friction-free', 'Anti-slip grip lining', 'Classic & padded silhouettes', 'Standard 38cm circumference', 'Blush, champagne, ivory, sage & black', 'Woven label branding', 'Year-round styling', 'Gift-ready packaging'],
+    applications: ['Everyday wear brands', 'Bridal & party styling', 'Boutique retail', 'Gift sets', 'Seasonal collections'],
+    customization: ['Satin color matching', 'Padded or slim silhouette', 'Woven label & hang tag', 'Custom packaging', 'Multi-color assortments'],
+  },
+  'bow-oversized': {
+    name: 'Oversized Hair Bows', image: '/assets/images/product-bow-oversized.webp', category: 'Bows & Ribbons',
+    moq: '200 pcs', leadTime: '12-15 days', material: 'Premium Satin', style: 'Oversized / Statement / Classic',
+    sizes: 'Medium (14cm) / Large (18cm) / XL (22cm)', finish: 'High-sheen satin',
+    logo: 'Custom printed ribbon, metal charm tag', packaging: 'Display card, polybag, gift box',
+    description: [
+      'Oversized hair bows are the statement piece of the hair accessories trend cycle: wide, high-sheen satin loops in 14cm, 18cm and 22cm widths that read as a bold style choice — the silhouette driving social media styling and runway-adjacent fashion.',
+      'Each bow is constructed with double-layer loops and reinforced stitching so the wide shape holds its form in storage and transit. Mounted on a sturdy alligator clip or elastic band, it stays put on thick hair and fine hair alike.',
+      'Sizes 14cm / 18cm / 22cm in custom colors. MOQ from 200 pcs, production in 12-15 days.',
+    ],
+    details: ['Wide high-sheen satin loops', '14cm / 18cm / 22cm statement sizes', 'Double-layer construction', 'Reinforced stitching, shape-holding', 'Alligator clip or elastic back', 'Holds on thick & fine hair', 'Custom color matching', 'Custom printed ribbon', 'Metal charm tag option', 'Social media-ready styling'],
+    applications: ['Trend-driven fashion brands', 'Social media styling', 'Gift sets & boutique retail', 'Photo shoots & editorial', 'Party & event lines'],
+    customization: ['Satin color matching', 'Size (14cm/18cm/22cm)', 'Backing type (clip/elastic)', 'Printed ribbon & charm tags', 'Display card & gift box'],
   },
 };
 
