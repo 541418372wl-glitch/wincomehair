@@ -1,7 +1,16 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import { createRequire } from 'module';
 import { readFileSync, writeFileSync, readdirSync, unlinkSync, existsSync } from 'fs';
 import { join } from 'path';
+import { productMeta } from './src/data/productMeta';
+import { articles } from './src/data/articles';
+
+// vite-plugin-prerender 1.0.8 ships a broken ESM entry (uses require inside).
+// Load it through its CJS entry instead.
+const require = createRequire(import.meta.url);
+const vitePrerender = require('vite-plugin-prerender');
+const Renderer = vitePrerender.PuppeteerRenderer;
 
 // Inline the built CSS into index.html (post-build) to eliminate
 // render-blocking stylesheet requests, then remove the .css file.
@@ -24,8 +33,29 @@ function inlineCss() {
   };
 }
 
+// Static routes + all product detail pages + all blog articles
+const routes = [
+  '/', '/products', '/customization', '/about', '/contact', '/faq', '/quality', '/cases', '/blog', '/privacy', '/terms',
+  ...Object.keys(productMeta).map((id) => `/products/${id}`),
+  ...articles.map((a) => `/blog/${a.slug}`),
+];
+
 export default defineConfig({
-  plugins: [react(), inlineCss()],
+  plugins: [
+    react(),
+    inlineCss(),
+    vitePrerender({
+      staticDir: join(process.cwd(), 'dist'),
+      routes,
+      renderer: new Renderer({
+        headless: true,
+        args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage'],
+        maxConcurrentRoutes: 4,
+        renderAfterTime: 3500,
+      }),
+      server: { port: 8123 },
+    }),
+  ],
   resolve: {
     alias: {
       react: 'preact/compat',
@@ -38,6 +68,7 @@ export default defineConfig({
     host: '127.0.0.1'
   },
   build: {
+    target: 'es2017',
     rollupOptions: {
       output: {
         manualChunks: {
