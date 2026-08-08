@@ -1,7 +1,7 @@
 import { useParams, Link } from 'react-router-dom';
 import { waLink } from '../lib/whatsapp';
 
-export const products = {
+const products = {
   'claw-acetate': {
     name: 'Acetate Hair Claw Clips', image: '/assets/images/product-claw-acetate.webp', category: 'Hair Claws & Clips',
     moq: '100 pcs', leadTime: '12-15 days', material: 'Cellulose Acetate', style: 'Classic / Modern / Luxury',
