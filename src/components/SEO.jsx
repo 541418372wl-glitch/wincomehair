@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { articles } from '../data/articles';
-import { products } from '../pages/ProductDetail';
+import { productMeta } from '../data/productMeta';
 
 const SITE = 'https://wincomehair.com';
 const SITE_NAME = 'WINCOME Hair Accessories';
@@ -62,12 +62,11 @@ export default function SEO() {
   // Dynamic meta for product detail pages — unique title/description per product
   if (!meta && location.pathname.startsWith('/products/')) {
     const id = location.pathname.split('/')[2];
-    const product = products[id];
-    if (product) {
+    const pm = productMeta[id];
+    if (pm) {
       meta = {
-        title: `${product.name} — Wholesale & Custom OEM — WINCOME Hair Accessories`,
-        description: `${product.description[0].slice(0, 150)} MOQ ${product.moq}, lead time ${product.leadTime}.`,
-        image: `${SITE}${product.image}`,
+        title: `${pm.name} — Wholesale & Custom OEM — WINCOME Hair Accessories`,
+        description: `${pm.description.slice(0, 155)} MOQ ${pm.moq}, lead time ${pm.leadTime}.`,
       };
     }
   }
