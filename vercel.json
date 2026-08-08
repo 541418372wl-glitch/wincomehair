@@ -1,8 +1,6 @@
 {
-  "routes": [
-    { "handle": "filesystem" },
-    { "src": "/((?!favicon\\.ico|manifest\\.json|sitemap_index\\.xml|robots\\.txt|sitemap\\.xml|llms\\.txt).*)", "dest": "/index.html" },
-    { "handle": "error" }
+  "rewrites": [
+    { "source": "/((?!favicon\\.ico|manifest\\.json|sitemap_index\\.xml|robots\\.txt|sitemap\\.xml|llms\\.txt|assets/).*)", "destination": "/index.html" }
   ],
   "headers": [
     {
