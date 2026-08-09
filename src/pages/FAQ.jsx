@@ -70,7 +70,7 @@ export default function FAQ() {
       <div className="container-site section-gap">
         <div className="max-w-3xl mx-auto">
           <p className="section-label text-center">Frequently Asked Questions</p>
-          <h1 className="text-display-lg text-navy text-center mb-4">
+          <h1 className="text-[34px] leading-[1.1] sm:text-display-lg text-navy text-center mb-4">
             Everything You <span className="text-gold">Need to Know</span>
           </h1>
           <p className="text-tan text-lg text-center mb-16 max-w-xl mx-auto leading-relaxed">

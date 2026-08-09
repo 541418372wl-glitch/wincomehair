@@ -36,7 +36,7 @@ export default function Quality() {
     <div className="pt-24">
       <div className="container-site section-gap">
         <p className="section-label">Quality Assurance</p>
-        <h1 className="text-display-lg text-navy mb-4">How We <span className="text-gold">Control Quality</span></h1>
+        <h1 className="text-[34px] leading-[1.1] sm:text-display-lg text-navy mb-4">How We <span className="text-gold">Control Quality</span></h1>
         <p className="text-tan text-lg max-w-2xl mb-16 leading-relaxed">
           Every product shipped from our factory passes through a three-stage quality control system. From raw materials to final packaging — nothing leaves without inspection.
         </p>
@@ -85,8 +85,8 @@ export default function Quality() {
 
         {/* Certifications */}
         <div className="bg-navy text-white p-12 md:p-20 mb-24">
-          <p className="text-xs font-medium tracking-[0.15em] uppercase text-gold mb-4">Certifications</p>
-          <h2 className="text-display-sm mb-8">Built to <span className="text-gold">Global Standards</span></h2>
+          <p className="text-xs font-medium tracking-[0.15em] uppercase text-champagne mb-4">Certifications</p>
+          <h2 className="text-display-sm mb-8">Built to <span className="text-champagne italic font-light">Global Standards</span></h2>
           <div className="grid md:grid-cols-4 gap-6">
             {[
               { name: 'BSCI', desc: 'Social compliance audited — ethical manufacturing' },
@@ -95,7 +95,7 @@ export default function Quality() {
               { name: 'REACH / RoHS', desc: 'EU chemical safety compliance' },
             ].map(cert => (
               <div key={cert.name} className="border border-white/10 p-6 text-center">
-                <svg className="w-10 h-10 text-gold mx-auto mb-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                <svg className="w-10 h-10 text-champagne mx-auto mb-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                 <h3 className="text-sm font-medium text-white mb-2">{cert.name}</h3>
                 <p className="text-xs text-white/50">{cert.desc}</p>
               </div>

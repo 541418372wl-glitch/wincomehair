@@ -1,17 +1,17 @@
 import { Link } from 'react-router-dom';
 
 const productCategories = [
-  { name: 'Hair Claws & Clips', image: '/assets/images/product-claw-colorful.webp', desc: 'Acetate, metal & plastic options' },
-  { name: 'Headbands', image: '/assets/images/product-headband-pearl.webp', desc: 'Padded, knotted & embellished' },
-  { name: 'Scrunchies & Hair Ties', image: '/assets/images/product-scrunchie-silk.webp', desc: 'Silk, velvet & cotton blends' },
-  { name: 'Hair Bows & Ribbons', image: '/assets/images/product-bow-satin.webp', desc: 'Satin, grosgrain & custom print' },
+  { name: 'Hair Claws & Clips', image: '/assets/images/product-claw-butterfly.webp', desc: 'Acetate, metal, butterfly & more' },
+  { name: 'Headbands', image: '/assets/images/product-headband-braided.webp', desc: 'Padded, knotted, braided & embellished' },
+  { name: 'Scrunchies & Hair Ties', image: '/assets/images/product-scrunchie-velvet.webp', desc: 'Silk, velvet, satin & cotton' },
+  { name: 'Hair Bows & Ribbons', image: '/assets/images/product-bow-clip.webp', desc: 'Satin, grosgrain & custom print' },
 ];
 
 const featuredProducts = [
-  { id: 'claw-acetate', name: 'Acetate Hair Claw Clips', image: '/assets/images/product-claw-colorful.webp', moq: '100 pcs', leadTime: '12-15 days', material: 'Cellulose Acetate' },
-  { id: 'headband-pearl', name: 'Pearl Embellished Headbands', image: '/assets/images/product-headband-pearl.webp', moq: '200 pcs', leadTime: '15-18 days', material: 'Metal + Faux Pearl' },
-  { id: 'bow-satin', name: 'Satin Hair Bows', image: '/assets/images/product-bow-satin.webp', moq: '300 pcs', leadTime: '10-14 days', material: 'Premium Satin' },
-  { id: 'scrunchie-silk', name: 'Silk Scrunchies', image: '/assets/images/product-scrunchie-silk.webp', moq: '200 pcs', leadTime: '10-12 days', material: 'Mulberry Silk' },
+  { id: 'claw-butterfly', name: 'Butterfly Hair Claw Clips', image: '/assets/images/product-claw-butterfly.webp', moq: '200 pcs', leadTime: '15-18 days', material: 'Metal Frame + Resin' },
+  { id: 'headband-braided', name: 'Braided Velvet Headbands', image: '/assets/images/product-headband-braided.webp', moq: '300 pcs', leadTime: '12-15 days', material: 'Premium Velvet' },
+  { id: 'scrunchie-velvet', name: 'Velvet Scrunchies', image: '/assets/images/product-scrunchie-velvet.webp', moq: '300 pcs', leadTime: '10-12 days', material: 'Premium Velvet' },
+  { id: 'bow-clip', name: 'Bow Hair Clips', image: '/assets/images/product-bow-clip.webp', moq: '200 pcs', leadTime: '12-15 days', material: 'Fabric + Metal Clip' },
 ];
 
 const stats = [
@@ -45,10 +45,13 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-to-b from-navy/80 via-navy/60 to-navy" />
 
         <div className="container-site relative z-10 pt-32 pb-20">
-          <p className="text-xs font-medium tracking-[0.15em] uppercase text-white/80 mb-4">Custom Hair Accessories Manufacturer</p>
-          <h1 className="text-white text-display-xl md:text-[88px] max-w-3xl leading-[1.02] mb-8">
+          <div className="flex items-center gap-3 mb-4">
+            <span className="w-8 h-px bg-blush" />
+            <p className="text-xs font-medium tracking-[0.15em] uppercase text-champagne">Custom Hair Accessories Manufacturer</p>
+          </div>
+          <h1 className="text-white text-[40px] sm:text-[56px] md:text-[88px] max-w-3xl leading-[1.05] mb-8">
             Premium Hair Accessories.<br />
-            <span className="text-gold">Factory-Direct.</span>
+            <span className="text-champagne italic font-light">Factory-Direct.</span>
           </h1>
           <p className="text-white/80 text-lg max-w-xl mb-12 leading-relaxed">
             OEM & ODM hair clips, claw clips, headbands, scrunchies, and hair bows for global brands, wholesalers, and retailers. Low MOQ, free design service, worldwide shipping.
@@ -57,14 +60,14 @@ export default function Home() {
           <div className="flex flex-wrap gap-3 mb-12">
             {['MOQ: 100 pcs', 'Lead Time: 12 Days', 'Free Design Service', 'Global Shipping'].map(badge => (
               <span key={badge} className="badge !border-white/20 !bg-white/12 !text-white/90">
-                <svg className="badge-icon !text-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 6L9 17l-5-5"/></svg>
+                <svg className="badge-icon !text-champagne" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 6L9 17l-5-5"/></svg>
                 {badge}
               </span>
             ))}
           </div>
 
           <div className="flex flex-wrap gap-4">
-            <Link to="/contact" className="btn-gold text-base px-10 py-5">
+            <Link to="/contact" className="inline-flex items-center gap-2 border border-champagne bg-transparent text-champagne px-10 py-5 text-base font-medium tracking-wider uppercase transition-all duration-200 hover:bg-champagne hover:text-navy">
               Request a Quote <span className="ml-1">→</span>
             </Link>
             <Link to="/products" className="btn-outline !border-white/20 !text-white hover:!border-white/40 hover:!bg-white/5 text-base px-10 py-5">
@@ -92,7 +95,7 @@ export default function Home() {
       <section className="section-gap">
         <div className="container-site">
           <p className="section-label">Product Categories</p>
-          <h2 className="text-display-lg text-navy mb-4">What We <span className="text-gold">Manufacture</span></h2>
+          <h2 className="text-[34px] leading-[1.1] sm:text-display-lg text-navy mb-4">What We <span className="text-gold">Manufacture</span></h2>
           <p className="text-tan text-lg max-w-xl mb-12">Full-category hair accessories manufacturing with complete customization — from material to finish, logo to packaging.</p>
 
           <div className="grid md:grid-cols-2 gap-6">
@@ -151,8 +154,8 @@ export default function Home() {
         <div className="container-site">
           <div className="grid md:grid-cols-2 gap-16 items-center mb-24">
             <div>
-              <p className="text-xs font-medium tracking-[0.15em] uppercase text-gold mb-4">Why WINCOME</p>
-              <h2 className="text-display-lg mb-6">Factory-Direct.<br /><span className="text-gold">Zero Middlemen.</span></h2>
+              <p className="text-xs font-medium tracking-[0.15em] uppercase text-champagne mb-4">Why WINCOME</p>
+              <h2 className="text-display-lg mb-6">Factory-Direct.<br /><span className="text-champagne italic font-light">Zero Middlemen.</span></h2>
               <p className="text-white/60 text-lg leading-relaxed mb-8">
                 When you work with WINCOME, you work directly with the people making your products — no agents, no markups, no surprises.
               </p>
@@ -164,7 +167,7 @@ export default function Home() {
                   { title: 'Low MOQ, Fast Turnaround', desc: 'Start at 100 pcs with delivery in as fast as 10 days.' },
                 ].map(item => (
                   <li key={item.title} className="flex gap-4">
-                    <svg className="w-5 h-5 text-gold mt-0.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 6L9 17l-5-5"/></svg>
+                    <svg className="w-5 h-5 text-champagne mt-0.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 6L9 17l-5-5"/></svg>
                     <div>
                       <h4 className="text-sm font-medium mb-1">{item.title}</h4>
                       <p className="text-white/50 text-sm">{item.desc}</p>
@@ -204,13 +207,13 @@ export default function Home() {
 
           {/* Process Flow */}
           <div>
-            <p className="text-xs font-medium tracking-[0.15em] uppercase text-gold mb-4">How It Works</p>
-            <h2 className="text-display-lg mb-12">From Brief to <span className="text-gold">Doorstep</span></h2>
+            <p className="text-xs font-medium tracking-[0.15em] uppercase text-champagne mb-4">How It Works</p>
+            <h2 className="text-display-lg mb-12">From Brief to <span className="text-champagne italic font-light">Doorstep</span></h2>
             <div className="grid md:grid-cols-4 gap-8">
               {processSteps.map((step, i) => (
                 <div key={step.step} className="relative">
                   {i < 3 && <div className="hidden md:block absolute top-8 left-[60%] w-[calc(100%-2rem)] h-px bg-white/10" />}
-                  <div className="text-5xl font-display text-gold/30 mb-4">{step.step}</div>
+                  <div className="text-5xl font-display text-champagne/30 mb-4">{step.step}</div>
                   <h3 className="text-lg font-display text-white mb-2">{step.title}</h3>
                   <p className="text-white/50 text-sm leading-relaxed mb-4">{step.desc}</p>
                   <ul className="space-y-1">
@@ -257,7 +260,7 @@ export default function Home() {
       <section className="section-gap bg-white">
         <div className="container-site text-center max-w-3xl">
           <p className="section-label">Start Your Project</p>
-          <h2 className="text-display-lg text-navy mb-4">Ready to Discuss <span className="text-gold">Your Requirements?</span></h2>
+                <h2 className="text-[34px] leading-[1.15] sm:text-display-lg text-navy mb-4">Ready to Discuss <span className="text-gold">Your Requirements?</span></h2>
           <p className="text-tan text-lg mb-10 leading-relaxed">
             Free design mockup and factory-direct quote in 24 hours. No commitment, no spam — just a conversation with our product specialist.
           </p>
@@ -280,9 +283,9 @@ export default function Home() {
           <p className="text-tan text-lg max-w-xl mb-12">Expert guides on sourcing, customization, and trends in the hair accessories industry.</p>
           <div className="grid md:grid-cols-3 gap-6">
             {[
-              { title: 'How to Source Custom Hair Accessories from China: A B2B Buyer\'s Checklist (2026)', date: 'Aug 2026', slug: 'how-to-source-hair-accessories-from-china' },
-              { title: 'Cellulose Acetate vs Plastic Claw Clips: Which Material Should Your Brand Choose?', date: 'Aug 2026', slug: 'acetate-vs-plastic-claw-clips' },
-              { title: 'Claw Clip Size Guide: How to Choose the Right Size for Fine, Thick & Long Hair', date: 'Aug 2026', slug: 'claw-clip-size-guide' },
+              { title: 'Hair Accessories MOQ Guide: Minimum Order Quantities Explained for Importers', date: 'Aug 2026', slug: 'hair-accessories-moq-guide' },
+              { title: 'Headband Materials Compared: Velvet vs Cotton vs Silk — Which Is Right for Your Brand?', date: 'Aug 2026', slug: 'velvet-vs-cotton-headbands' },
+              { title: 'Metal Hair Clips Material Guide: Zinc Alloy vs Stainless Steel vs Aluminum', date: 'Aug 2026', slug: 'metal-hair-clip-material-guide' },
             ].map(post => (
               <Link to={`/blog/${post.slug}`} key={post.title} className="group bg-white p-8 border border-bronze/10 hover:border-bronze/20 transition-all duration-300">
                 <p className="text-[10px] tracking-wider uppercase text-tan mb-3">{post.date}</p>
