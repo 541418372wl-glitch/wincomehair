@@ -1,6 +1,6 @@
 import { PassThrough } from 'node:stream';
 import { renderToPipeableStream } from 'react-dom/server';
-import { StaticRouter } from 'react-router-dom/server.mjs';
+import { StaticRouter } from 'react-router';
 import { AppContent } from './App';
 import { getSeoMeta, OG_IMAGE, SITE, SITE_NAME } from './components/SEO';
 
