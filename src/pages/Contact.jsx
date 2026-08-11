@@ -35,7 +35,7 @@ export default function Contact() {
       timeline: form.timeline || null,
       dimensions: form.dimensions || null,
       message: form.message || null,
-      form_started_at: formStartedAt,
+      form_fill_time_ms: Date.now() - formStartedAt,
     };
 
     try {

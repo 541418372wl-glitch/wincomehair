@@ -360,8 +360,13 @@ export default async function handler(req, res) {
   // Honeypot and implausibly fast submissions receive a neutral response and
   // create no database row or email, so automated clients get no useful signal.
   const honeypot = clean(raw.website, 200);
-  const formStartedAt = Number(raw.form_started_at || raw.formStartedAt);
-  const fillDurationMs = Number.isFinite(formStartedAt) ? Date.now() - formStartedAt : null;
+  const submittedFillDuration = Number(raw.form_fill_time_ms || raw.formFillTimeMs);
+  const legacyFormStartedAt = Number(raw.form_started_at || raw.formStartedAt);
+  const fillDurationMs = Number.isFinite(submittedFillDuration) && submittedFillDuration > 0
+    ? submittedFillDuration
+    : Number.isFinite(legacyFormStartedAt) && legacyFormStartedAt > 0
+      ? Date.now() - legacyFormStartedAt
+      : null;
   const tooFast = fillDurationMs !== null && (fillDurationMs < MIN_FORM_FILL_MS || fillDurationMs > 24 * 60 * 60 * 1000);
   if (honeypot || tooFast) {
     writeLog('warn', 'inquiry.antispam.filtered', {

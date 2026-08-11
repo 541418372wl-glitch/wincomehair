@@ -26,7 +26,7 @@ function validPayload(overrides = {}) {
     target_market: 'Europe / UK',
     message: 'Please quote our private-label accessory project.',
     website: '',
-    form_started_at: Date.now() - 10_000,
+    form_fill_time_ms: 10_000,
     ...overrides,
   };
 }
@@ -137,7 +137,7 @@ try {
   const stored = JSON.parse(calls[1].options.body);
   assert.equal(stored.name, 'QA Buyer');
   assert.equal(Object.hasOwn(stored, 'website'), false, 'honeypot must never be written to inquiries');
-  assert.equal(Object.hasOwn(stored, 'form_started_at'), false, 'timing signal must never be stored');
+  assert.equal(Object.hasOwn(stored, 'form_fill_time_ms'), false, 'timing signal must never be stored');
   assert.equal(calls[1].options.headers.apikey, 'service-role-test');
   assert.equal(JSON.parse(calls[2].options.body).html.includes(success.body.requestId), true);
 
@@ -186,7 +186,7 @@ try {
 
   configure();
   let fastCalls = 0;
-  const tooFast = await run(validPayload({ form_started_at: Date.now() - 100 }), async () => {
+  const tooFast = await run(validPayload({ form_fill_time_ms: 100 }), async () => {
     fastCalls += 1;
     return new Response('', { status: 200 });
   });
