@@ -1,22 +1,32 @@
-CREATE TABLE IF NOT EXISTS public.inquiries (
-  id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-  name TEXT NOT NULL,
-  company TEXT,
-  email TEXT NOT NULL,
-  phone TEXT,
-  product_type TEXT,
-  quantity TEXT,
-  material TEXT,
-  logo_placement TEXT,
-  dimensions TEXT,
-  message TEXT,
-  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+-- WINCOME inquiry storage baseline.
+--
+-- Browser clients must never access this table directly. The only write path is
+-- /api/notify-inquiry, which authenticates to Supabase with a server-side
+-- service-role key after validation and anti-spam checks.
+
+create table if not exists public.inquiries (
+  id bigint generated always as identity primary key,
+  name text not null,
+  company text,
+  email text not null,
+  phone text,
+  product_type text,
+  quantity text,
+  material text,
+  logo_placement text,
+  dimensions text,
+  message text,
+  created_at timestamptz not null default now(),
+  target_market text,
+  timeline text
 );
 
-ALTER TABLE public.inquiries ENABLE ROW LEVEL SECURITY;
+alter table public.inquiries enable row level security;
 
-CREATE POLICY "Enable insert for all" ON public.inquiries
-  FOR INSERT WITH CHECK (true);
+-- RLS intentionally has no public policies. The service_role bypasses RLS,
+-- while anon and authenticated receive no table or sequence privileges.
+revoke all on table public.inquiries from public, anon, authenticated;
+grant all on table public.inquiries to service_role;
 
-CREATE POLICY "Enable select for authenticated users only" ON public.inquiries
-  FOR SELECT USING (auth.role() = 'authenticated');
+revoke all on sequence public.inquiries_id_seq from public, anon, authenticated;
+grant usage, select, update on sequence public.inquiries_id_seq to service_role;
