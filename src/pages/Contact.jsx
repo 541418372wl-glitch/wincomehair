@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { supabase } from '../lib/supabase';
 import { waLink } from '../lib/whatsapp';
 
 export default function Contact() {
@@ -36,31 +35,27 @@ export default function Contact() {
       message: form.message || null,
     };
 
-    if (supabase) {
-      const { error } = await supabase.from('inquiries').insert(record);
-      if (error) {
-        setSubmitError('Failed to submit. Please try again or contact us via WhatsApp.');
-        setSubmitting(false);
-        return;
-      }
-    }
-
-    // Send email notification directly (reliable fallback, no webhook dependency)
     try {
       const res = await fetch('/api/notify-inquiry', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ record }),
       });
-      if (!res.ok) {
-        console.warn('Inquiry saved but email notification failed:', res.status);
+      const result = await res.json().catch(() => ({}));
+      if (!res.ok || result.saved !== true) {
+        throw new Error(result.error || 'Failed to save inquiry');
       }
-    } catch (_) {
-      // notification failure is non-fatal — inquiry already saved
-    }
 
-    setStep(4);
-    setSubmitting(false);
+      if (result.notified === false) {
+        console.warn('Inquiry saved, but email notification was not sent.');
+      }
+      setStep(4);
+    } catch (error) {
+      console.error('Inquiry submission failed:', error);
+      setSubmitError('Failed to submit. Please try again or contact us via WhatsApp.');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
