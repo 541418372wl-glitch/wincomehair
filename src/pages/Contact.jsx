@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { supabase } from '../lib/supabase';
 import { waLink } from '../lib/whatsapp';
 
 export default function Contact() {
@@ -15,41 +16,47 @@ export default function Contact() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (form.website) return; // Honeypot
+    // Honeypot: silently drop bot submissions
+    if (form.website) return;
     setSubmitting(true);
     setSubmitError(null);
 
-    // Single write path: API handles both DB insert and email notification.
+    const record = {
+      name: form.name,
+      company: form.company || null,
+      email: form.email,
+      phone: form.phone || null,
+      product_type: form.productType || null,
+      quantity: form.quantity || null,
+      material: form.material || null,
+      logo_placement: form.logoPlacement || null,
+      target_market: form.targetMarket || null,
+      timeline: form.timeline || null,
+      dimensions: form.dimensions || null,
+      message: form.message || null,
+    };
+
+    if (supabase) {
+      const { error } = await supabase.from('inquiries').insert(record);
+      if (error) {
+        setSubmitError('Failed to submit. Please try again or contact us via WhatsApp.');
+        setSubmitting(false);
+        return;
+      }
+    }
+
+    // Send email notification directly (reliable fallback, no webhook dependency)
     try {
       const res = await fetch('/api/notify-inquiry', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: form.name,
-          company: form.company || null,
-          email: form.email,
-          phone: form.phone || null,
-          productType: form.productType || null,
-          quantity: form.quantity || null,
-          material: form.material || null,
-          logoPlacement: form.logoPlacement || null,
-          target_market: form.targetMarket || null,
-          timeline: form.timeline || null,
-          dimensions: form.dimensions || null,
-          message: form.message || null,
-          website: form.website || null,
-        }),
+        body: JSON.stringify({ record }),
       });
       if (!res.ok) {
-        const data = await res.json().catch(() => ({}));
-        setSubmitError(data.error || 'Failed to submit. Please try again or contact us via WhatsApp.');
-        setSubmitting(false);
-        return;
+        console.warn('Inquiry saved but email notification failed:', res.status);
       }
     } catch (_) {
-      setSubmitError('Network error. Please check your connection or contact us via WhatsApp.');
-      setSubmitting(false);
-      return;
+      // notification failure is non-fatal — inquiry already saved
     }
 
     setStep(4);

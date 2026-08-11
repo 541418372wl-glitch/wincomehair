@@ -36,7 +36,7 @@ export default function Quality() {
     <div className="pt-24">
       <div className="container-site section-gap">
         <p className="section-label">Quality Assurance</p>
-        <h1 className="text-[34px] leading-[1.1] sm:text-display-lg text-navy mb-4">How We <span className="text-gold">Control Quality</span></h1>
+        <h1 className="text-display-lg text-navy mb-4">How We <span className="text-gold">Control Quality</span></h1>
         <p className="text-tan text-lg max-w-2xl mb-16 leading-relaxed">
           Every product shipped from our factory passes through a three-stage quality control system. From raw materials to final packaging — nothing leaves without inspection.
         </p>

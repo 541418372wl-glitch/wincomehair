@@ -1,23 +1,40 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const allProducts = [
-  { id: 'claw-acetate', name: 'Acetate Hair Claw Clips', category: 'Claws & Clips', image: '/assets/images/product-claw-colorful.webp', moq: '100 pcs', leadTime: '12-15 days', material: 'Cellulose Acetate', colors: 'Custom Pantone' },
-  { id: 'claw-metal', name: 'Metal Hair Claw Clips', category: 'Claws & Clips', image: '/assets/images/product-claw-colorful.webp', moq: '200 pcs', leadTime: '15-18 days', material: 'Zinc Alloy', colors: 'Gold / Silver / Rose Gold' },
-  { id: 'claw-plastic', name: 'Plastic Hair Claws', category: 'Claws & Clips', image: '/assets/images/product-claw-colorful.webp', moq: '300 pcs', leadTime: '10-14 days', material: 'ABS Plastic', colors: 'Custom Colors' },
+  { id: 'claw-acetate', name: 'Acetate Hair Claw Clips', category: 'Claws & Clips', image: '/assets/images/product-claw-acetate.webp', moq: '100 pcs', leadTime: '12-15 days', material: 'Cellulose Acetate', colors: 'Custom Pantone' },
+  { id: 'claw-metal', name: 'Metal Hair Claw Clips', category: 'Claws & Clips', image: '/assets/images/product-claw-metal.webp', moq: '200 pcs', leadTime: '15-18 days', material: 'Zinc Alloy', colors: 'Gold / Silver / Rose Gold' },
+  { id: 'claw-plastic', name: 'Plastic Hair Claws', category: 'Claws & Clips', image: '/assets/images/product-claw-plastic.webp', moq: '300 pcs', leadTime: '10-14 days', material: 'ABS Plastic', colors: 'Custom Colors' },
+  { id: 'claw-butterfly', name: 'Butterfly Hair Claw Clips', category: 'Claws & Clips', image: '/assets/images/product-claw-butterfly.webp', moq: '200 pcs', leadTime: '15-18 days', material: 'Metal Frame + Resin', colors: 'Amber / Pearl / Rose / Tortoise' },
+  { id: 'claw-rectangular', name: 'Rectangular Hair Claw Clips', category: 'Claws & Clips', image: '/assets/images/product-claw-rectangular.webp', moq: '200 pcs', leadTime: '12-15 days', material: 'Cellulose Acetate / Resin', colors: 'Custom Pantone' },
   { id: 'headband-pearl', name: 'Pearl Embellished Headbands', category: 'Headbands', image: '/assets/images/product-headband-pearl.webp', moq: '200 pcs', leadTime: '15-18 days', material: 'Metal + Faux Pearl', colors: 'Gold / Silver' },
-  { id: 'headband-knotted', name: 'Knotted Fabric Headbands', category: 'Headbands', image: '/assets/images/product-headband-pearl.webp', moq: '300 pcs', leadTime: '12-15 days', material: 'Cotton / Silk / Velvet', colors: 'Custom Colors' },
-  { id: 'headband-padded', name: 'Padded Cushion Headbands', category: 'Headbands', image: '/assets/images/product-headband-pearl.webp', moq: '200 pcs', leadTime: '12-15 days', material: 'Fabric + Foam', colors: 'Custom Colors' },
+  { id: 'headband-knotted', name: 'Knotted Fabric Headbands', category: 'Headbands', image: '/assets/images/product-headband-knotted.webp', moq: '300 pcs', leadTime: '12-15 days', material: 'Cotton / Silk / Velvet', colors: 'Custom Colors' },
+  { id: 'headband-padded', name: 'Padded Cushion Headbands', category: 'Headbands', image: '/assets/images/product-headband-padded.webp', moq: '200 pcs', leadTime: '12-15 days', material: 'Fabric + Foam', colors: 'Custom Colors' },
+  { id: 'headband-braided', name: 'Braided Velvet Headbands', category: 'Headbands', image: '/assets/images/product-headband-braided.webp', moq: '300 pcs', leadTime: '12-15 days', material: 'Premium Velvet', colors: 'Custom Colors' },
   { id: 'scrunchie-silk', name: 'Silk Scrunchies', category: 'Scrunchies', image: '/assets/images/product-scrunchie-silk.webp', moq: '200 pcs', leadTime: '10-12 days', material: 'Mulberry Silk', colors: 'Custom Colors' },
-  { id: 'scrunchie-velvet', name: 'Velvet Scrunchies', category: 'Scrunchies', image: '/assets/images/product-scrunchie-silk.webp', moq: '300 pcs', leadTime: '10-12 days', material: 'Premium Velvet', colors: 'Custom Colors' },
-  { id: 'scrunchie-cotton', name: 'Cotton Hair Ties', category: 'Scrunchies', image: '/assets/images/product-scrunchie-silk.webp', moq: '500 pcs', leadTime: '8-10 days', material: 'Organic Cotton', colors: 'Custom Colors' },
+  { id: 'scrunchie-velvet', name: 'Velvet Scrunchies', category: 'Scrunchies', image: '/assets/images/product-scrunchie-velvet.webp', moq: '300 pcs', leadTime: '10-12 days', material: 'Premium Velvet', colors: 'Custom Colors' },
+  { id: 'scrunchie-cotton', name: 'Cotton Hair Ties', category: 'Scrunchies', image: '/assets/images/product-scrunchie-cotton.webp', moq: '500 pcs', leadTime: '8-10 days', material: 'Organic Cotton', colors: 'Custom Colors' },
+  { id: 'scrunchie-ruffled', name: 'Ruffled Satin Scrunchies', category: 'Scrunchies', image: '/assets/images/product-scrunchie-ruffled.webp', moq: '300 pcs', leadTime: '10-12 days', material: 'Premium Satin', colors: 'Custom Colors' },
+  { id: 'scrunchie-bow', name: 'Satin Bow Scrunchies', category: 'Scrunchies', image: '/assets/images/product-scrunchie-bow.webp', moq: '300 pcs', leadTime: '10-12 days', material: 'Premium Satin', colors: 'Custom Colors' },
   { id: 'bow-satin', name: 'Satin Hair Bows', category: 'Bows & Ribbons', image: '/assets/images/product-bow-satin.webp', moq: '300 pcs', leadTime: '10-14 days', material: 'Premium Satin', colors: 'Custom Colors' },
-  { id: 'bow-grosgrain', name: 'Grosgrain Ribbon Bows', category: 'Bows & Ribbons', image: '/assets/images/product-bow-satin.webp', moq: '300 pcs', leadTime: '10-14 days', material: 'Grosgrain Ribbon', colors: 'Custom Colors' },
-  { id: 'bow-clip', name: 'Bow Hair Clips', category: 'Bows & Ribbons', image: '/assets/images/product-bow-satin.webp', moq: '200 pcs', leadTime: '12-15 days', material: 'Fabric + Metal Clip', colors: 'Custom Colors' },
+  { id: 'bow-grosgrain', name: 'Grosgrain Ribbon Bows', category: 'Bows & Ribbons', image: '/assets/images/product-bow-grosgrain.webp', moq: '300 pcs', leadTime: '10-14 days', material: 'Grosgrain Ribbon', colors: 'Custom Colors' },
+  { id: 'bow-clip', name: 'Bow Hair Clips', category: 'Bows & Ribbons', image: '/assets/images/product-bow-clip.webp', moq: '200 pcs', leadTime: '12-15 days', material: 'Fabric + Metal Clip', colors: 'Custom Colors' },
+  { id: 'bow-multilayer', name: 'Multi-Layer Satin Bow Clips', category: 'Bows & Ribbons', image: '/assets/images/product-bow-multilayer.webp', moq: '200 pcs', leadTime: '12-15 days', material: 'Premium Satin', colors: 'Custom Colors' },
+  { id: 'clip-pearl', name: 'Pearl Hair Barrettes', category: 'Hair Clips & Barrettes', image: '/assets/images/product-clip-pearl.webp', moq: '200 pcs', leadTime: '12-15 days', material: 'Metal + Faux Pearl', colors: 'Gold / Silver' },
+  { id: 'clip-acetate', name: 'Acetate Hair Barrettes', category: 'Hair Clips & Barrettes', image: '/assets/images/product-clip-acetate.webp', moq: '100 pcs', leadTime: '12-15 days', material: 'Cellulose Acetate', colors: 'Custom Pantone' },
+  { id: 'clip-matte', name: 'Matte Snap Hair Clips', category: 'Hair Clips & Barrettes', image: '/assets/images/product-clip-matte.webp', moq: '300 pcs', leadTime: '8-10 days', material: 'Coated Metal', colors: 'Morandi Custom Colors' },
+  { id: 'clip-crystal', name: 'Crystal Rhinestone Barrettes', category: 'Hair Clips & Barrettes', image: '/assets/images/product-clip-crystal.webp', moq: '200 pcs', leadTime: '15-18 days', material: 'Metal + Crystal', colors: 'Gold / Silver' },
+  { id: 'clip-flower', name: 'Flower Hair Clips', category: 'Hair Clips & Barrettes', image: '/assets/images/product-clip-flower.webp', moq: '200 pcs', leadTime: '15-18 days', material: 'Metal + Crystal', colors: 'Gold / Silver' },
+  { id: 'headband-satin', name: 'Satin Headbands', category: 'Headbands', image: '/assets/images/product-headband-satin.webp', moq: '200 pcs', leadTime: '12-15 days', material: 'Premium Satin', colors: 'Custom Colors' },
+  { id: 'bow-oversized', name: 'Oversized Hair Bows', category: 'Bows & Ribbons', image: '/assets/images/product-bow-oversized.webp', moq: '200 pcs', leadTime: '12-15 days', material: 'Premium Satin', colors: 'Custom Colors' },
 ];
 
-const categories = ['All', 'Claws & Clips', 'Headbands', 'Scrunchies', 'Bows & Ribbons'];
+const categories = ['All', 'Claws & Clips', 'Headbands', 'Scrunchies', 'Bows & Ribbons', 'Hair Clips & Barrettes'];
 
 export default function Products() {
+  const [activeCat, setActiveCat] = useState('All');
+  const filtered = activeCat === 'All' ? allProducts : allProducts.filter(p => p.category === activeCat);
+
   return (
     <div className="pt-24">
       <div className="container-site section-gap">
@@ -27,18 +44,30 @@ export default function Products() {
           Every product is fully customizable — size, color, material, finish, logo, and packaging. Click any item to request a quote.
         </p>
 
-        {/* Category filters */}
-        <div className="flex flex-wrap gap-3 mb-12">
-          {categories.map(cat => (
-            <button key={cat} className="px-5 py-2 text-xs font-medium tracking-wider uppercase border border-bronze/20 text-tan hover:border-navy hover:text-navy transition-colors duration-200">
-              {cat}
-            </button>
-          ))}
+        {/* Category filters (sticky on mobile for long lists) */}
+        <div className="sticky top-16 md:top-20 z-30 bg-cream/95 backdrop-blur-sm -mx-4 px-4 py-3 mb-10 border-b border-bronze/10">
+          <div className="flex gap-2 overflow-x-auto pb-1 -mb-1">
+            {categories.map(cat => {
+              const count = cat === 'All' ? allProducts.length : allProducts.filter(p => p.category === cat).length;
+              const isActive = activeCat === cat;
+              return (
+                <button
+                  key={cat}
+                  onClick={() => setActiveCat(cat)}
+                  className={`shrink-0 px-4 py-2 text-xs font-medium tracking-wider uppercase border transition-colors duration-200 ${
+                    isActive ? 'border-navy bg-navy text-white' : 'border-bronze/20 text-tan hover:border-navy hover:text-navy'
+                  }`}
+                >
+                  {cat} <span className={isActive ? 'text-white/60' : 'text-tan/50'}>({count})</span>
+                </button>
+              );
+            })}
+          </div>
         </div>
 
         {/* Product Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {allProducts.map(product => (
+          {filtered.map(product => (
             <Link
               to={`/products/${product.id}`}
               key={product.id}

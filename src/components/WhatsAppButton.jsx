@@ -4,11 +4,7 @@ import { waLink, WA_DEFAULT_TEXT } from '../lib/whatsapp';
 export default function WhatsAppButton() {
   const location = useLocation();
   // Hide floating button on pages that already have prominent WhatsApp CTAs
-  if (
-    location.pathname === '/contact' ||
-    location.pathname === '/about' ||
-    location.pathname.startsWith('/products/')
-  ) return null;
+  if (location.pathname === '/contact' || location.pathname === '/about') return null;
 
   return (
     <a

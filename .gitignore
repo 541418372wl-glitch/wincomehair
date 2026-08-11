@@ -1,5 +1,9 @@
 node_modules
 dist
-.env.local
+dist-ssr
+.vercel
+.accio
 .env
-*.timestamp-*
+.env.local
+.env.*.local
+.DS_Store

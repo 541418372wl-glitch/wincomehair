@@ -40,7 +40,7 @@ export default function Home() {
       {/* Hero */}
       <section className="relative min-h-screen flex items-center bg-navy overflow-hidden">
         <div className="absolute inset-0 opacity-25">
-          <img src="/assets/images/hero-clips-mobile.webp" srcSet="/assets/images/hero-clips-mobile.webp 1024w, /assets/images/hero-clips.webp 1536w" sizes="100vw" alt="" fetchPriority="high" className="w-full h-full object-cover" />
+          <img src="/assets/images/hero-clips-mobile.webp" srcSet="/assets/images/hero-clips-mobile.webp 1024w, /assets/images/hero-clips.webp 1536w" sizes="100vw" alt="" fetchpriority="high" className="w-full h-full object-cover" />
         </div>
         <div className="absolute inset-0 bg-gradient-to-b from-navy/80 via-navy/60 to-navy" />
 
@@ -95,7 +95,7 @@ export default function Home() {
       <section className="section-gap">
         <div className="container-site">
           <p className="section-label">Product Categories</p>
-          <h2 className="text-[34px] leading-[1.1] sm:text-display-lg text-navy mb-4">What We <span className="text-gold">Manufacture</span></h2>
+          <h2 className="text-display-lg text-navy mb-4">What We <span className="text-gold">Manufacture</span></h2>
           <p className="text-tan text-lg max-w-xl mb-12">Full-category hair accessories manufacturing with complete customization — from material to finish, logo to packaging.</p>
 
           <div className="grid md:grid-cols-2 gap-6">
