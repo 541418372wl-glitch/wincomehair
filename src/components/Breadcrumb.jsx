@@ -1,4 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
+import { productMeta } from '../data/productMeta';
+import { articles } from '../data/articles';
 
 const labels = {
   '/': 'Home',
@@ -23,7 +25,17 @@ export default function Breadcrumb() {
   let current = '';
   for (const seg of segments) {
     current += `/${seg}`;
-    crumbs.push({ label: labels[current] || seg, path: current !== location.pathname ? current : null });
+    let label = labels[current] || seg;
+    // Use real product names / article titles instead of URL slugs
+    if (location.pathname.startsWith('/products/') && segments.length > 1) {
+      const pm = productMeta[seg];
+      if (pm) label = pm.name;
+    }
+    if (location.pathname.startsWith('/blog/') && segments.length > 1) {
+      const article = articles.find(a => a.slug === seg);
+      if (article) label = article.title;
+    }
+    crumbs.push({ label, path: current !== location.pathname ? current : null });
   }
 
   return (

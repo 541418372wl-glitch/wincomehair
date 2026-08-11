@@ -5,7 +5,7 @@ export default function Privacy() {
     <div className="pt-24">
       <div className="container-site section-gap max-w-3xl">
         <p className="section-label">Legal</p>
-        <h1 className="text-[34px] leading-[1.1] sm:text-display-lg text-navy mb-10">Privacy <span className="text-gold">Policy</span></h1>
+        <h1 className="text-display-lg text-navy mb-10">Privacy <span className="text-gold">Policy</span></h1>
         <div className="space-y-8 text-tan leading-relaxed text-base">
           <section>
             <h2 className="text-display-sm text-navy mb-3">1. What We Collect</h2>
@@ -17,7 +17,7 @@ export default function Privacy() {
           </section>
           <section>
             <h2 className="text-display-sm text-navy mb-3">3. Analytics & Cookies</h2>
-            <p>We use Google Analytics 4 (GA4) to understand how visitors use our site. GA4 collects aggregated and pseudonymous usage data (pages visited, approximate location, device type, referrer) through cookies such as <em>_ga</em> and <em>_ga_*</em>. This data helps us improve the site and is retained by Google for up to 14 months. Google may process this data on servers outside your country (including the United States) under Google's data processing terms. You can opt out by blocking analytics cookies in your browser settings or by installing the official <a href="https://tools.google.com/dlpage/gaoptout" className="text-gold underline">Google Analytics Opt-out add-on</a>.</p>
+            <p>We use Google Analytics 4 (GA4) to understand how visitors use our site. GA4 collects anonymous usage data (pages visited, approximate location, device type, referrer) through cookies such as <em>_ga</em> and <em>_ga_*</em>. This data helps us improve the site and is retained by Google for up to 14 months. Google may process this data on servers outside your country (including the United States) under Google's data processing terms. You can opt out by blocking analytics cookies in your browser settings or by installing the official <a href="https://tools.google.com/dlpage/gaoptout" className="text-gold underline">Google Analytics Opt-out add-on</a>.</p>
           </section>
           <section>
             <h2 className="text-display-sm text-navy mb-3">4. Storage & Processors</h2>

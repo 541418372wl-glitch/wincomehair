@@ -36,7 +36,7 @@ export default function Cases() {
     <div className="pt-24">
       <div className="container-site section-gap">
         <p className="section-label">Case Studies</p>
-        <h1 className="text-[34px] leading-[1.1] sm:text-display-lg text-navy mb-4">Projects We&apos;ve <span className="text-gold">Delivered</span></h1>
+        <h1 className="text-display-lg text-navy mb-4">Projects We&apos;ve <span className="text-gold">Delivered</span></h1>
         <p className="text-tan text-lg max-w-2xl mb-16 leading-relaxed">
           Real projects, real clients, real results. Here&apos;s how we&apos;ve helped brands bring their hair accessories to market — from concept to delivery.
         </p>

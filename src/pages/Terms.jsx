@@ -5,7 +5,7 @@ export default function Terms() {
     <div className="pt-24">
       <div className="container-site section-gap max-w-3xl">
         <p className="section-label">Legal</p>
-        <h1 className="text-[34px] leading-[1.1] sm:text-display-lg text-navy mb-10">Terms of <span className="text-gold">Service</span></h1>
+        <h1 className="text-display-lg text-navy mb-10">Terms of <span className="text-gold">Service</span></h1>
         <div className="space-y-8 text-tan leading-relaxed text-base">
           <section>
             <h2 className="text-display-sm text-navy mb-3">1. Quotes & Orders</h2>

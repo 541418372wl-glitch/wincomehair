@@ -15,45 +15,47 @@ export default function Contact() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (form.website) return; // Honeypot
+    // Honeypot: silently drop bot submissions
+    if (form.website) return;
     setSubmitting(true);
     setSubmitError(null);
 
-    // Single write path: API handles both DB insert and email notification.
+    const record = {
+      name: form.name,
+      company: form.company || null,
+      email: form.email,
+      phone: form.phone || null,
+      product_type: form.productType || null,
+      quantity: form.quantity || null,
+      material: form.material || null,
+      logo_placement: form.logoPlacement || null,
+      target_market: form.targetMarket || null,
+      timeline: form.timeline || null,
+      dimensions: form.dimensions || null,
+      message: form.message || null,
+    };
+
     try {
       const res = await fetch('/api/notify-inquiry', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: form.name,
-          company: form.company || null,
-          email: form.email,
-          phone: form.phone || null,
-          productType: form.productType || null,
-          quantity: form.quantity || null,
-          material: form.material || null,
-          logoPlacement: form.logoPlacement || null,
-          target_market: form.targetMarket || null,
-          timeline: form.timeline || null,
-          dimensions: form.dimensions || null,
-          message: form.message || null,
-          website: form.website || null,
-        }),
+        body: JSON.stringify({ record }),
       });
-      if (!res.ok) {
-        const data = await res.json().catch(() => ({}));
-        setSubmitError(data.error || 'Failed to submit. Please try again or contact us via WhatsApp.');
-        setSubmitting(false);
-        return;
+      const result = await res.json().catch(() => ({}));
+      if (!res.ok || result.saved !== true) {
+        throw new Error(result.error || 'Failed to save inquiry');
       }
-    } catch (_) {
-      setSubmitError('Network error. Please check your connection or contact us via WhatsApp.');
-      setSubmitting(false);
-      return;
-    }
 
-    setStep(4);
-    setSubmitting(false);
+      if (result.notified === false) {
+        console.warn('Inquiry saved, but email notification was not sent.');
+      }
+      setStep(4);
+    } catch (error) {
+      console.error('Inquiry submission failed:', error);
+      setSubmitError('Failed to submit. Please try again or contact us via WhatsApp.');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (

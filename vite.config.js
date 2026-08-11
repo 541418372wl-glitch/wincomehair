@@ -24,26 +24,34 @@ function inlineCss() {
   };
 }
 
-export default defineConfig({
-  plugins: [react(), inlineCss()],
+export default defineConfig(({ ssrBuild, isSsrBuild }) => {
+  const buildingSsr = Boolean(ssrBuild || isSsrBuild);
+  return {
+  plugins: [react(), ...(buildingSsr ? [] : [inlineCss()])],
   resolve: {
-    alias: {
-      react: 'preact/compat',
-      'react-dom': 'preact/compat',
-      'react-dom/client': 'preact/compat/client',
-      'react/jsx-runtime': 'preact/compat/jsx-runtime',
-    },
+    alias: buildingSsr
+      ? {}
+      : {
+        react: 'preact/compat',
+        'react-dom': 'preact/compat',
+        'react-dom/client': 'preact/compat/client',
+        'react/jsx-runtime': 'preact/compat/jsx-runtime',
+      },
   },
   server: {
     host: '127.0.0.1'
   },
   build: {
-    rollupOptions: {
-      output: {
-        manualChunks: {
-          vendor: ['react', 'react-dom', 'react-router-dom'],
+    target: 'es2017',
+    rollupOptions: buildingSsr
+      ? {}
+      : {
+        output: {
+          manualChunks: {
+            vendor: ['react', 'react-dom', 'react-router-dom'],
+          },
         },
       },
-    },
   },
+  };
 });

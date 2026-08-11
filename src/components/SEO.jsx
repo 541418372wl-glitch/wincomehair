@@ -3,9 +3,9 @@ import { useLocation } from 'react-router-dom';
 import { articles } from '../data/articles';
 import { productMeta } from '../data/productMeta';
 
-const SITE = 'https://wincomehair.com';
-const SITE_NAME = 'WINCOME Hair Accessories';
-const OG_IMAGE = `${SITE}/og-image.png`;
+export const SITE = 'https://wincomehair.com';
+export const SITE_NAME = 'WINCOME Hair Accessories';
+export const OG_IMAGE = `${SITE}/og-image.png`;
 
 const pageMeta = {
   '/': {
@@ -30,7 +30,7 @@ const pageMeta = {
   },
   '/faq': {
     title: 'FAQ — Custom Hair Accessories Manufacturing — WINCOME',
-    description: 'Questions about MOQ, lead time, OEM/ODM, customization, materials, shipping, payment terms, and quality control for hair accessories manufacturing.',
+    description: 'Frequently asked questions about MOQ, lead time, OEM/ODM, customization, materials, shipping, payment terms, and quality control for hair accessories manufacturing.',
   },
   '/quality': {
     title: 'Quality Control — WINCOME Hair Accessories Manufacturer',
@@ -38,7 +38,7 @@ const pageMeta = {
   },
   '/cases': {
     title: 'Case Studies — WINCOME Hair Accessories',
-    description: 'Real client projects: custom acetate claw clips, private label scrunchies, bridal headbands, and hair bow collections. How WINCOME delivers for global brands.',
+    description: 'Real client projects: custom acetate claw clips, private label scrunchies, bridal headbands, seasonal hair bow collections. See how WINCOME delivers for global brands.',
   },
   '/blog': {
     title: 'Hair Accessories Blog — Sourcing Guides — WINCOME',
@@ -63,21 +63,12 @@ function truncate(text, max) {
   return cut.slice(0, breakAt > 40 ? breakAt : cut.length) + '…';
 }
 
-function categoryFor(id) {
-  if (id.startsWith('claw-')) return 'Hair Claw Clips';
-  if (id.startsWith('headband-')) return 'Headbands';
-  if (id.startsWith('scrunchie-')) return 'Scrunchies & Hair Ties';
-  if (id.startsWith('bow-')) return 'Hair Bows';
-  return 'Hair Clips & Barrettes';
-}
-
-export default function SEO() {
-  const location = useLocation();
-  let meta = pageMeta[location.pathname];
+export function getSeoMeta(pathname) {
+  let meta = pageMeta[pathname];
 
   // Dynamic meta for blog article pages
-  if (!meta && location.pathname.startsWith('/blog/')) {
-    const slug = location.pathname.split('/')[2];
+  if (!meta && pathname.startsWith('/blog/')) {
+    const slug = pathname.split('/')[2];
     const article = articles.find(a => a.slug === slug);
     if (article) {
       meta = { title: article.title, description: truncate(article.metaDescription, 160) };
@@ -85,8 +76,8 @@ export default function SEO() {
   }
 
   // Dynamic meta for product detail pages — unique title/description per product
-  if (!meta && location.pathname.startsWith('/products/')) {
-    const id = location.pathname.split('/')[2];
+  if (!meta && pathname.startsWith('/products/')) {
+    const id = pathname.split('/')[2];
     const pm = productMeta[id];
     if (pm) {
       meta = {
@@ -95,6 +86,13 @@ export default function SEO() {
       };
     }
   }
+
+  return meta;
+}
+
+export default function SEO() {
+  const location = useLocation();
+  const meta = getSeoMeta(location.pathname);
 
   function setMeta(name, content, isProperty = false) {
     const attr = isProperty ? 'property' : 'name';
@@ -181,29 +179,10 @@ export default function SEO() {
       clearScript('website-jsonld');
     }
 
-    if (location.pathname.startsWith('/products/')) {
-      const id = location.pathname.split('/')[2];
-      const pm = productMeta[id];
-      if (pm) {
-        upsertScript('product-jsonld', {
-          '@context': 'https://schema.org',
-          '@type': 'Product',
-          name: pm.name,
-          image: `${SITE}/assets/images/product-${id}.webp`,
-          description: truncate(pm.description, 200),
-          brand: { '@type': 'Brand', name: 'WINCOME' },
-          manufacturer: { '@type': 'Organization', name: SITE_NAME },
-          category: categoryFor(id),
-          additionalProperty: [
-            { '@type': 'PropertyValue', name: 'Material', value: pm.material },
-            { '@type': 'PropertyValue', name: 'MOQ', value: pm.moq },
-            { '@type': 'PropertyValue', name: 'Lead Time', value: pm.leadTime },
-          ],
-        });
-      }
-    } else {
-      clearScript('product-jsonld');
-    }
+    // Quote-only B2B products have no public price or verified reviews.
+    // Do not emit Product rich-result JSON-LD until one of those is visible
+    // on the page; an Offer without a numeric price is invalid for Google.
+    clearScript('product-jsonld');
   }, [meta, location.pathname]);
 
   return null;

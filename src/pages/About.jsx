@@ -15,7 +15,7 @@ export default function About() {
         <div className="grid md:grid-cols-2 gap-16 items-center mb-24">
           <div>
             <p className="section-label">About WINCOME</p>
-            <h1 className="text-display-lg text-navy mb-4">The Partner Behind <span className="text-gold">Elegant Hair Accessories</span></h1>
+            <h1 className="text-[36px] leading-[1.1] sm:text-display-lg text-navy mb-4">The Partner Behind <span className="text-gold">Elegant Hair Accessories</span></h1>
             <p className="text-tan text-lg leading-relaxed mb-6">
               WINCOME Hair Accessories is the dedicated hair accessories division of WINCOME — a trusted name in global apparel manufacturing. We bring the same commitment to quality, reliability, and partnership to every hair accessory we produce.
             </p>

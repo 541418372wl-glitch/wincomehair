@@ -1,86 +1,51 @@
-// SSG prerender: render every route with headless Chrome and save static HTML.
-// Runs after `vite build`. Each route gets dist/<route>/index.html containing
-// the full rendered DOM (body + H1 + meta + JSON-LD) for crawlers and AI bots.
+// Build-time SSG for every public route. This imports the Vite SSR bundle,
+// renders the React route in Node, and injects the result into the client HTML.
+// It does not require Chrome/Puppeteer, so the same command runs locally and
+// in a clean Vercel Git build.
 
-// Vercel cloud builds lack Chromium/libnss3 — skip prerender and let the
-// pre-built dist (uploaded via `vercel deploy --prebuilt`) serve static HTML.
-if (process.env.VERCEL === '1') {
-  console.log('[prerender] Vercel cloud env detected — skipping puppeteer prerender. Use CLI deploy for SSG.');
-  process.exit(0);
-}
-
-import { createRequire } from 'module';
-import http from 'http';
-import fs from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import { productMeta } from '../src/data/productMeta.js';
 import { articles } from '../src/data/articles.js';
 
-const require = createRequire(import.meta.url);
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const dist = path.join(__dirname, '..', 'dist');
-const PORT = 8129;
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const dist = path.join(root, 'dist');
+const serverEntry = path.join(root, 'dist-ssr', 'entry-server.js');
 
 const routes = [
   '/', '/products', '/customization', '/about', '/contact', '/faq', '/quality', '/cases', '/blog', '/privacy', '/terms',
   ...Object.keys(productMeta).map((id) => `/products/${id}`),
-  ...articles.map((a) => `/blog/${a.slug}`),
+  ...articles.map((article) => `/blog/${article.slug}`),
 ];
 
-const MIME = {
-  '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css',
-  '.webp': 'image/webp', '.png': 'image/png', '.svg': 'image/svg+xml',
-  '.ico': 'image/x-icon', '.json': 'application/json', '.xml': 'application/xml', '.txt': 'text/plain', '.jpg': 'image/jpeg',
-};
+function inject(template, appHtml, headHtml) {
+  const withoutDefaultHead = template
+    .replace(/\s*<title>[\s\S]*?<\/title>/i, '')
+    .replace(/\s*<meta\s+name=["']description["'][^>]*>/i, '');
 
-const server = http.createServer((req, res) => {
-  let urlPath = decodeURIComponent(req.url.split('?')[0]);
-  if (urlPath.endsWith('/')) urlPath += 'index.html';
-  let filePath = path.join(dist, urlPath);
-  if (!filePath.startsWith(dist)) { res.writeHead(403); res.end(); return; }
-  if (!fs.existsSync(filePath) || fs.statSync(filePath).isDirectory()) {
-    filePath = path.join(dist, 'index.html');
-  }
-  res.writeHead(200, { 'Content-Type': MIME[path.extname(filePath)] || 'application/octet-stream' });
-  fs.createReadStream(filePath).pipe(res);
-});
+  return withoutDefaultHead
+    .replace('</head>', `    ${headHtml}\n  </head>`)
+    .replace('<div id="root"></div>', `<div id="root">${appHtml}</div>`);
+}
 
-server.listen(PORT, '127.0.0.1', async () => {
-  console.log(`[prerender] server on ${PORT}, routes: ${routes.length}`);
-  try {
-    const puppeteer = require('puppeteer');
-    const browser = await puppeteer.launch({
-      args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage'],
-    });
-    const failed = [];
-    for (const route of routes) {
-      const page = await browser.newPage();
-      let pageError = null;
-      page.on('pageerror', (e) => { pageError = String(e).slice(0, 150); });
-      try {
-        await page.goto(`http://127.0.0.1:${PORT}${route}`, { waitUntil: 'networkidle2', timeout: 30000 });
-        await new Promise((r) => setTimeout(r, 2500));
-        const html = await page.evaluate(() => document.documentElement.outerHTML);
-        const outPath = path.join(dist, route.slice(1), 'index.html');
-        fs.mkdirSync(path.dirname(outPath), { recursive: true });
-        fs.writeFileSync(outPath, '<!doctype html>\n' + html);
-        const ok = html.includes('<h1') || html.includes('root');
-        console.log(`  ${ok ? 'OK  ' : 'WARN'} ${route} (${(html.length / 1024).toFixed(0)}KB)${pageError ? ' js:' + pageError : ''}`);
-        if (!ok || pageError) failed.push(`${route} :: ${pageError || 'empty html'}`);
-      } catch (e) {
-        console.log(`  FAIL ${route} -> ${String(e).slice(0, 120)}`);
-        failed.push(`${route} :: ${String(e).slice(0, 120)}`);
-      }
-      await page.close();
-    }
-    await browser.close();
-    console.log(failed.length ? `[prerender] ${failed.length} failed:\n${failed.join('\n')}` : `[prerender] all ${routes.length} routes rendered OK`);
-    server.close();
-    process.exit(failed.length ? 1 : 0);
-  } catch (e) {
-    console.error('[prerender] FATAL:', e.message);
-    server.close();
-    process.exit(1);
+const template = await fs.readFile(path.join(dist, 'index.html'), 'utf8');
+const { render } = await import(pathToFileURL(serverEntry).href);
+
+for (const route of routes) {
+  const { appHtml, headHtml } = await render(route);
+  if (!appHtml.includes('<h1')) {
+    throw new Error(`Rendered route has no H1: ${route}`);
   }
-});
+
+  const output = inject(template, appHtml, headHtml);
+  const outputPath = route === '/'
+    ? path.join(dist, 'index.html')
+    : path.join(dist, route.slice(1), 'index.html');
+
+  await fs.mkdir(path.dirname(outputPath), { recursive: true });
+  await fs.writeFile(outputPath, `<!doctype html>\n${output.replace(/^<!doctype html>\s*/i, '')}`);
+  console.log(`[prerender] ${route} -> ${path.relative(root, outputPath)}`);
+}
+
+console.log(`[prerender] all ${routes.length} routes rendered successfully`);

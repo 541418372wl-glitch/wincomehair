@@ -30,7 +30,7 @@ export default function Customization() {
     <div className="pt-24">
       <div className="container-site section-gap">
         <p className="section-label">OEM / ODM Capabilities</p>
-        <h1 className="text-display-lg text-navy mb-4">Custom <span className="text-gold">Manufacturing</span></h1>
+        <h1 className="text-[38px] leading-[1.1] sm:text-display-lg text-navy mb-4">Custom <span className="text-gold">Manufacturing</span></h1>
         <p className="text-tan text-lg max-w-2xl mb-16 leading-relaxed">
           Full-spectrum customization for global brands. From initial concept to final delivery — your product, your specifications, our manufacturing expertise.
         </p>
@@ -64,13 +64,13 @@ export default function Customization() {
 
         {/* Custom Process */}
         <div className="bg-navy text-white p-12 md:p-20 mb-24">
-          <p className="text-xs font-medium tracking-[0.15em] uppercase text-gold mb-4">Custom Project Process</p>
-          <h2 className="text-display-sm mb-12">From Concept to <span className="text-gold">Completion</span></h2>
+          <p className="text-xs font-medium tracking-[0.15em] uppercase text-champagne mb-4">Custom Project Process</p>
+          <h2 className="text-display-sm mb-12">From Concept to <span className="text-champagne italic font-light">Completion</span></h2>
           <div className="grid md:grid-cols-4 gap-8">
             {customSteps.map((s, i) => (
               <div key={s.step} className="relative">
                 {i < 3 && <div className="hidden md:block absolute top-8 left-[60%] w-[calc(100%-2rem)] h-px bg-white/10" />}
-                <div className="text-5xl font-display text-gold/30 mb-4">{s.step}</div>
+                <div className="text-5xl font-display text-champagne/30 mb-4">{s.step}</div>
                 <h3 className="text-lg font-display text-white mb-2">{s.title}</h3>
                 <p className="text-white/50 text-sm leading-relaxed">{s.desc}</p>
               </div>
