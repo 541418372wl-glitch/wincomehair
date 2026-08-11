@@ -1,8 +1,6 @@
 -- WINCOME inquiry storage baseline.
---
--- Browser clients must never access this table directly. The only write path is
--- /api/notify-inquiry, which authenticates to Supabase with a server-side
--- service-role key after validation and anti-spam checks.
+-- Browser clients have no direct table access. The only write path is the
+-- server-side /api/notify-inquiry function using the service_role key.
 
 create table if not exists public.inquiries (
   id bigint generated always as identity primary key,
@@ -23,8 +21,6 @@ create table if not exists public.inquiries (
 
 alter table public.inquiries enable row level security;
 
--- RLS intentionally has no public policies. The service_role bypasses RLS,
--- while anon and authenticated receive no table or sequence privileges.
 revoke all on table public.inquiries from public, anon, authenticated;
 grant all on table public.inquiries to service_role;
 
