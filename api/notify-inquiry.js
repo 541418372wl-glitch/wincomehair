@@ -1,11 +1,7 @@
-// Vercel Serverless Function: inquiry intake
-// Receives the raw form payload from the client, validates it, writes to
-// Supabase via the service-role key (bypassing RLS), and sends a formatted
-// email via Resend. This is the single write path — the client never touches
-// Supabase directly.
+// Vercel Serverless Function (CommonJS) — inquiry intake
+// Receives form payload, writes to Supabase via service-role key, sends email via Resend.
 
 const RESEND_URL = 'https://api.resend.com/emails';
-const SUPABASE_REST = (url) => `${url}/rest/v1/inquiries`;
 const MAX_BODY = 64 * 1024;
 
 const PRODUCT_TYPES = {
@@ -48,7 +44,6 @@ const TIMELINES = {
   'Just planning / researching': 'Just planning / researching',
 };
 
-// --- In-memory rate limiter (best-effort; Vercel may run multiple instances) ---
 const rateLimitStore = new Map();
 const RATE_WINDOW_MS = 5 * 60 * 1000;
 const RATE_MAX = 5;
@@ -75,7 +70,6 @@ function escHtml(s) {
     .replace(/>/g, '&gt;');
 }
 
-// Attribute-safe escaping for href="mailto:..." values (quotes are the risk).
 function escAttr(s) {
   return escHtml(s).replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 }
@@ -93,12 +87,32 @@ function clean(str, max) {
   return String(str ?? '').trim().slice(0, max);
 }
 
+function getBody(req) {
+  return new Promise((resolve, reject) => {
+    // If Vercel helpers already parsed the body, use it directly.
+    if (req.body !== undefined && req.body !== null) {
+      return resolve(req.body);
+    }
+    // Otherwise read raw stream.
+    const chunks = [];
+    req.on('data', (chunk) => chunks.push(chunk));
+    req.on('end', () => {
+      try {
+        const text = Buffer.concat(chunks).toString('utf8');
+        resolve(text ? JSON.parse(text) : {});
+      } catch {
+        reject(new Error('Invalid JSON'));
+      }
+    });
+    req.on('error', reject);
+  });
+}
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  // --- Rate limit by client IP ---
   const ip = (req.headers['x-forwarded-for'] || '').split(',')[0].trim() || 'unknown';
   if (rateLimited(ip)) {
     return res.status(429).json({ error: 'Too many requests, please try again later.' });
@@ -115,20 +129,19 @@ export default async function handler(req, res) {
 
   let payload = {};
   try {
-    payload = req.body || {};
+    payload = await getBody(req);
+    if (typeof payload !== 'object' || payload === null) payload = {};
   } catch {
     return res.status(400).json({ error: 'Invalid payload' });
   }
 
-  // Accept both legacy `{record:{...}}` shape and flat `{name, email, ...}` shape.
   const raw = payload.record || payload;
 
-  // --- Honeypot: silently drop bots ---
+  // Honeypot
   if (clean(raw.website, 200)) {
     return res.status(200).json({ ok: true });
   }
 
-  // --- Field validation ---
   const name = clean(raw.name, 120);
   const email = clean(raw.email, 254);
   const company = clean(raw.company, 150);
@@ -153,10 +166,12 @@ export default async function handler(req, res) {
   const leadTime = TIMELINES[timeline] || timeline || '—';
   const createdAt = new Date().toISOString();
 
-  // --- Write to Supabase via service-role key (bypasses RLS, no anon INSERT needed) ---
+  // Write to Supabase (non-fatal if it fails)
   const supabaseUrl = process.env.VITE_SUPABASE_URL;
   const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
-  if (supabaseUrl && serviceKey) {
+  const anonKey = process.env.VITE_SUPABASE_ANON_KEY;
+  const dbKey = serviceKey || anonKey;
+  if (supabaseUrl && dbKey) {
     try {
       const dbRecord = {
         name, email,
@@ -172,34 +187,29 @@ export default async function handler(req, res) {
         message: message || null,
         website: clean(raw.website || '', 200) || null,
       };
-      const dbResp = await fetch(SUPABASE_REST(supabaseUrl), {
+      const dbResp = await fetch(`${supabaseUrl}/rest/v1/inquiries`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'apikey': serviceKey,
-          'Authorization': `Bearer ${serviceKey}`,
+          'apikey': dbKey,
+          'Authorization': `Bearer ${dbKey}`,
           'Prefer': 'return=minimal',
         },
         body: JSON.stringify(dbRecord),
       });
       if (!dbResp.ok) {
         const dbErr = await dbResp.text();
-        console.error('Supabase insert error', dbResp.status, dbErr.slice(0, 300));
-        return res.status(502).json({ error: 'Failed to save inquiry. Please try again.' });
+        console.error('Supabase insert error', dbResp.status, dbErr.slice(0, 200));
       }
     } catch (dbEx) {
-      console.error('Supabase insert exception', dbEx);
-      return res.status(500).json({ error: 'Internal error saving inquiry.' });
+      console.error('Supabase insert exception', dbEx.message);
     }
   }
 
-  // Use the verified Resend sender domain when available; fall back to the
-  // Resend shared domain until wincomehair.com is verified in Resend.
   const from = process.env.NOTIFY_FROM || 'WINCOME Inquiries <onboarding@resend.dev>';
-  // NOTIFY_EMAIL must be set in Vercel env vars; no hardcoded fallback.
   const to = process.env.NOTIFY_EMAIL;
   if (!to) {
-    console.warn('NOTIFY_EMAIL env var not set — skipping email notification');
+    console.warn('NOTIFY_EMAIL not set');
     return res.status(200).json({ ok: true });
   }
 
@@ -225,8 +235,8 @@ export default async function handler(req, res) {
         ${fieldRow('Message', message)}
       </table>
       <p style="font-size:12px;color:#999;margin-top:16px">
-        Reply to this customer directly at <a href="mailto:${escAttr(email)}">${escHtml(email)}</a>.
-        <br/>Recommendation: respond within 24 hours for the highest conversion rate.
+        Reply directly at <a href="mailto:${escAttr(email)}">${escHtml(email)}</a>.
+        Respond within 24 hours for highest conversion.
       </p>
     </div>
   `;
@@ -238,13 +248,7 @@ export default async function handler(req, res) {
         'Authorization': `Bearer ${apiKey}`,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        from,
-        to,
-        reply_to: email,
-        subject,
-        html,
-      }),
+      body: JSON.stringify({ from, to, reply_to: email, subject, html }),
     });
 
     if (!resp.ok) {
@@ -253,10 +257,9 @@ export default async function handler(req, res) {
       return res.status(502).json({ error: 'Email send failed' });
     }
 
-    // Never leak the internal recipient address to the browser.
     return res.status(200).json({ ok: true });
   } catch (err) {
-    console.error('Notify function error', err);
+    console.error('Notify error', err.message);
     return res.status(500).json({ error: 'Internal error' });
   }
-}
+};
