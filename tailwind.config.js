@@ -20,10 +20,10 @@ export default {
         body: ['"PingFang SC"', '"Hiragino Sans GB"', '"Microsoft YaHei"', 'system-ui', '-apple-system', '"Segoe UI"', 'Roboto', 'sans-serif'],
       },
       fontSize: {
-        'display-xl': ['80px', { lineHeight: '1.05', letterSpacing: '-0.02em' }],
-        'display-lg': ['60px', { lineHeight: '1.1', letterSpacing: '-0.015em' }],
-        'display-md': ['44px', { lineHeight: '1.15', letterSpacing: '-0.01em' }],
-        'display-sm': ['32px', { lineHeight: '1.2' }],
+        'display-xl': ['clamp(3rem, 8vw, 5rem)', { lineHeight: '1.05', letterSpacing: '-0.02em' }],
+        'display-lg': ['clamp(2.25rem, 6vw, 3.75rem)', { lineHeight: '1.1', letterSpacing: '-0.015em' }],
+        'display-md': ['clamp(1.875rem, 4.5vw, 2.75rem)', { lineHeight: '1.15', letterSpacing: '-0.01em' }],
+        'display-sm': ['clamp(1.5rem, 3.5vw, 2rem)', { lineHeight: '1.2' }],
       },
       maxWidth: {
         'site': '1440px',

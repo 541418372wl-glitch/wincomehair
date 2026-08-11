@@ -1,5 +1,27 @@
 import { Link } from 'react-router-dom';
 
+function OptimizedProductImage({ image, alt, sizes, className, pictureClassName = '' }) {
+  const base = image.replace(/\.webp$/, '');
+  return (
+    <picture className={pictureClassName}>
+      <source media="(max-width: 767px)" type="image/avif" srcSet={`${base}-640.avif`} />
+      <source type="image/avif" srcSet={`${base}.avif`} />
+      <source media="(max-width: 767px)" type="image/webp" srcSet={`${base}-640.webp`} />
+      <source type="image/webp" srcSet={image} />
+      <img
+        src={image}
+        alt={alt}
+        sizes={sizes}
+        loading="lazy"
+        decoding="async"
+        width="1024"
+        height="1024"
+        className={className}
+      />
+    </picture>
+  );
+}
+
 const productCategories = [
   { name: 'Hair Claws & Clips', image: '/assets/images/product-claw-butterfly.webp', desc: 'Acetate, metal, butterfly & more' },
   { name: 'Headbands', image: '/assets/images/product-headband-braided.webp', desc: 'Padded, knotted, braided & embellished' },
@@ -36,28 +58,32 @@ const testimonials = [
 
 export default function Home() {
   return (
-    <div>
+    <div className="home-page">
       {/* Hero */}
-      <section className="relative min-h-screen flex items-center bg-navy overflow-hidden">
+      <section className="relative min-h-[780px] md:min-h-screen flex items-center bg-navy overflow-hidden">
         <div className="absolute inset-0 opacity-25">
-          <img src="/assets/images/hero-clips-mobile.webp" srcSet="/assets/images/hero-clips-mobile.webp 1024w, /assets/images/hero-clips.webp 1536w" sizes="100vw" alt="" fetchpriority="high" className="w-full h-full object-cover" />
+          <picture className="block w-full h-full">
+            <source type="image/avif" srcSet="/assets/images/hero-clips-mobile.avif 1024w, /assets/images/hero-clips.avif 1536w" sizes="100vw" />
+            <source type="image/webp" srcSet="/assets/images/hero-clips-mobile.webp 1024w, /assets/images/hero-clips.webp 1536w" sizes="100vw" />
+            <img src="/assets/images/hero-clips-mobile.webp" alt="" width="1536" height="1024" fetchpriority="high" decoding="async" className="w-full h-full object-cover" />
+          </picture>
         </div>
         <div className="absolute inset-0 bg-gradient-to-b from-navy/80 via-navy/60 to-navy" />
 
-        <div className="container-site relative z-10 pt-32 pb-20">
+        <div className="container-site relative z-10 pt-28 pb-14 md:pt-32 md:pb-20">
           <div className="flex items-center gap-3 mb-4">
             <span className="w-8 h-px bg-blush" />
             <p className="text-xs font-medium tracking-[0.15em] uppercase text-champagne">Custom Hair Accessories Manufacturer</p>
           </div>
-          <h1 className="text-white text-[40px] sm:text-[56px] md:text-[88px] max-w-3xl leading-[1.05] mb-8">
+          <h1 className="text-white text-[38px] sm:text-[56px] md:text-[88px] max-w-3xl leading-[1.05] mb-6 md:mb-8">
             Premium Hair Accessories.<br />
             <span className="text-champagne italic font-light">Factory-Direct.</span>
           </h1>
-          <p className="text-white/80 text-lg max-w-xl mb-12 leading-relaxed">
+          <p className="text-white/80 text-lg max-w-xl mb-8 md:mb-12 leading-relaxed">
             OEM & ODM hair clips, claw clips, headbands, scrunchies, and hair bows for global brands, wholesalers, and retailers. Low MOQ, free design service, worldwide shipping.
           </p>
 
-          <div className="flex flex-wrap gap-3 mb-12">
+          <div className="flex flex-wrap gap-3 mb-8 md:mb-12">
             {['MOQ: 100 pcs', 'Lead Time: 12 Days', 'Free Design Service', 'Global Shipping'].map(badge => (
               <span key={badge} className="badge !border-white/20 !bg-white/12 !text-white/90">
                 <svg className="badge-icon !text-champagne" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 6L9 17l-5-5"/></svg>
@@ -67,10 +93,10 @@ export default function Home() {
           </div>
 
           <div className="flex flex-wrap gap-4">
-            <Link to="/contact" className="inline-flex items-center gap-2 border border-champagne bg-transparent text-champagne px-10 py-5 text-base font-medium tracking-wider uppercase transition-all duration-200 hover:bg-champagne hover:text-navy">
+            <Link to="/contact" className="inline-flex w-full sm:w-auto justify-center items-center gap-2 border border-champagne bg-transparent text-champagne px-8 md:px-10 py-4 md:py-5 text-base font-medium tracking-wider uppercase transition-all duration-200 hover:bg-champagne hover:text-navy">
               Request a Quote <span className="ml-1">→</span>
             </Link>
-            <Link to="/products" className="btn-outline !border-white/20 !text-white hover:!border-white/40 hover:!bg-white/5 text-base px-10 py-5">
+            <Link to="/products" className="btn-outline w-full sm:w-auto justify-center !border-white/20 !text-white hover:!border-white/40 hover:!bg-white/5 text-base px-8 md:px-10 py-4 md:py-5">
               View Products
             </Link>
           </div>
@@ -79,8 +105,8 @@ export default function Home() {
 
       {/* Stats Bar */}
       <section className="bg-white border-y border-bronze/10">
-        <div className="container-site py-12">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+        <div className="container-site py-8 md:py-12">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-5 md:gap-8 text-center">
             {stats.map(stat => (
               <div key={stat.label}>
                 <div className="text-display-sm text-navy font-display mb-1">{stat.value}</div>
@@ -96,15 +122,15 @@ export default function Home() {
         <div className="container-site">
           <p className="section-label">Product Categories</p>
           <h2 className="text-display-lg text-navy mb-4">What We <span className="text-gold">Manufacture</span></h2>
-          <p className="text-tan text-lg max-w-xl mb-12">Full-category hair accessories manufacturing with complete customization — from material to finish, logo to packaging.</p>
+          <p className="text-tan text-lg max-w-xl mb-10 md:mb-12">Full-category hair accessories manufacturing with complete customization — from material to finish, logo to packaging.</p>
 
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-2 gap-4 md:gap-6">
             {productCategories.map(cat => (
-              <Link to="/products" key={cat.name} className="group relative overflow-hidden h-72 md:h-80 block">
-                <img src={cat.image} alt={cat.name} loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+              <Link to="/products" key={cat.name} className="group relative overflow-hidden h-56 sm:h-64 md:h-80 block">
+                <OptimizedProductImage image={cat.image} alt={cat.name} sizes="(max-width: 767px) 46vw, 50vw" pictureClassName="absolute inset-0 block w-full h-full" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
                 <div className="absolute inset-0 bg-gradient-to-t from-navy/80 via-navy/20 to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-8">
-                  <h3 className="text-white text-2xl font-display mb-1">{cat.name}</h3>
+                <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 md:p-8">
+                  <h3 className="text-white text-xl md:text-2xl font-display mb-1">{cat.name}</h3>
                   <p className="text-white/60 text-sm">{cat.desc}</p>
                 </div>
               </Link>
@@ -118,22 +144,22 @@ export default function Home() {
         <div className="container-site">
           <p className="section-label">Featured Products</p>
           <h2 className="text-display-lg text-navy mb-4">Best-Selling <span className="text-gold">Collections</span></h2>
-          <p className="text-tan text-lg max-w-xl mb-12">Proven designs trusted by brands worldwide. Every product is fully customizable — size, color, material, finish, logo, and packaging.</p>
+          <p className="text-tan text-lg max-w-xl mb-10 md:mb-12">Proven designs trusted by brands worldwide. Every product is fully customizable — size, color, material, finish, logo, and packaging.</p>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
             {featuredProducts.map(product => (
               <Link to={`/products/${product.id}`} key={product.id} className="group bg-white overflow-hidden border border-bronze/10 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
                 <div className="aspect-square overflow-hidden">
-                  <img src={product.image} alt={product.name} loading="lazy" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                  <OptimizedProductImage image={product.image} alt={product.name} sizes="(max-width: 767px) 46vw, (max-width: 1023px) 50vw, 25vw" pictureClassName="block w-full h-full" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
                 </div>
-                <div className="p-5">
-                  <h3 className="text-sm font-medium text-navy mb-3 group-hover:text-gold transition-colors">{product.name}</h3>
+                <div className="p-4 md:p-5">
+                  <h3 className="text-base font-medium text-navy mb-3 group-hover:text-gold transition-colors">{product.name}</h3>
                   <div className="flex flex-wrap gap-2 mb-4">
-                    <span className="text-[10px] tracking-wider uppercase bg-sand/60 text-tan px-2 py-1">MOQ: {product.moq}</span>
-                    <span className="text-[10px] tracking-wider uppercase bg-sand/60 text-tan px-2 py-1">{product.leadTime}</span>
-                    <span className="text-[10px] tracking-wider uppercase bg-sand/60 text-tan px-2 py-1">{product.material}</span>
+                    <span className="text-[11px] tracking-wider uppercase bg-sand/60 text-tan px-2 py-1">MOQ: {product.moq}</span>
+                    <span className="text-[11px] tracking-wider uppercase bg-sand/60 text-tan px-2 py-1">{product.leadTime}</span>
+                    <span className="hidden sm:inline text-[11px] tracking-wider uppercase bg-sand/60 text-tan px-2 py-1">{product.material}</span>
                   </div>
-                  <span className="text-xs font-medium tracking-wider uppercase text-navy group-hover:text-gold transition-colors inline-flex items-center gap-1">
+                  <span className="text-[11px] sm:text-xs font-medium tracking-wider uppercase text-navy group-hover:text-gold transition-colors inline-flex items-center gap-1">
                     Quote This Product <span className="group-hover:translate-x-1 transition-transform">→</span>
                   </span>
                 </div>
@@ -141,7 +167,7 @@ export default function Home() {
             ))}
           </div>
 
-          <div className="text-center mt-12">
+          <div className="text-center mt-10 md:mt-12">
             <Link to="/products" className="btn-outline">
               View Full Catalog <span className="ml-1">→</span>
             </Link>
@@ -152,14 +178,14 @@ export default function Home() {
       {/* Manufacturing Excellence */}
       <section className="section-gap bg-navy text-white">
         <div className="container-site">
-          <div className="grid md:grid-cols-2 gap-16 items-center mb-24">
+          <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-center mb-16 md:mb-24">
             <div>
               <p className="text-xs font-medium tracking-[0.15em] uppercase text-champagne mb-4">Why WINCOME</p>
               <h2 className="text-display-lg mb-6">Factory-Direct.<br /><span className="text-champagne italic font-light">Zero Middlemen.</span></h2>
               <p className="text-white/60 text-lg leading-relaxed mb-8">
                 When you work with WINCOME, you work directly with the people making your products — no agents, no markups, no surprises.
               </p>
-              <ul className="space-y-6">
+              <ul className="space-y-4 md:space-y-6">
                 {[
                   { title: 'In-House Design Service', desc: 'Professional design team creates specs and artwork at no charge.' },
                   { title: 'Certified Manufacturing', desc: 'BSCI, ISO 9001 compliant. EU & US safety standards.' },
@@ -169,15 +195,15 @@ export default function Home() {
                   <li key={item.title} className="flex gap-4">
                     <svg className="w-5 h-5 text-champagne mt-0.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 6L9 17l-5-5"/></svg>
                     <div>
-                      <h4 className="text-sm font-medium mb-1">{item.title}</h4>
-                      <p className="text-white/50 text-sm">{item.desc}</p>
+                      <h4 className="text-base md:text-sm font-medium mb-1">{item.title}</h4>
+                      <p className="text-white/50 text-base md:text-sm">{item.desc}</p>
                     </div>
                   </li>
                 ))}
               </ul>
             </div>
-            <div className="bg-white/5 p-8">
-              <h3 className="text-lg font-display mb-8 text-white">WINCOME vs. Generic Platforms</h3>
+            <div className="bg-white/5 p-6 md:p-8">
+              <h3 className="text-lg font-display mb-6 md:mb-8 text-white">WINCOME vs. Generic Platforms</h3>
               <div className="space-y-4">
                 {[
                   { win: 'Wholesale Factory Pricing', lose: '30-50% platform markup' },
@@ -208,15 +234,15 @@ export default function Home() {
           {/* Process Flow */}
           <div>
             <p className="text-xs font-medium tracking-[0.15em] uppercase text-champagne mb-4">How It Works</p>
-            <h2 className="text-display-lg mb-12">From Brief to <span className="text-champagne italic font-light">Doorstep</span></h2>
-            <div className="grid md:grid-cols-4 gap-8">
+            <h2 className="text-display-lg mb-8 md:mb-12">From Brief to <span className="text-champagne italic font-light">Doorstep</span></h2>
+            <div className="grid md:grid-cols-4 gap-6 md:gap-8">
               {processSteps.map((step, i) => (
                 <div key={step.step} className="relative">
                   {i < 3 && <div className="hidden md:block absolute top-8 left-[60%] w-[calc(100%-2rem)] h-px bg-white/10" />}
                   <div className="text-5xl font-display text-champagne/30 mb-4">{step.step}</div>
                   <h3 className="text-lg font-display text-white mb-2">{step.title}</h3>
-                  <p className="text-white/50 text-sm leading-relaxed mb-4">{step.desc}</p>
-                  <ul className="space-y-1">
+                  <p className="text-white/50 text-base md:text-sm leading-relaxed mb-4">{step.desc}</p>
+                  <ul className="hidden sm:block space-y-1">
                     {step.details.map(d => (
                       <li key={d} className="text-xs text-white/40 flex items-center gap-2">
                         <span className="w-1 h-1 bg-gold/50" />{d}
@@ -235,17 +261,17 @@ export default function Home() {
         <div className="container-site">
           <p className="section-label">Client Reviews</p>
           <h2 className="text-display-lg text-navy mb-4">What Our <span className="text-gold">Clients Say</span></h2>
-          <p className="text-tan text-lg max-w-xl mb-12">Real feedback from brands who trust WINCOME for their hair accessories manufacturing.</p>
+          <p className="text-tan text-lg max-w-xl mb-10 md:mb-12">Real feedback from brands who trust WINCOME for their hair accessories manufacturing.</p>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="mobile-card-strip md:grid-cols-3 md:gap-8" aria-label="Client reviews">
             {testimonials.map((t, i) => (
-              <div key={i} className="bg-white p-8 border border-bronze/10">
+              <div key={i} className="bg-white p-6 md:p-8 border border-bronze/10">
                 <div className="flex gap-1 mb-4">
                   {[...Array(5)].map((_, j) => (
                     <svg key={j} className="w-4 h-4 text-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
                   ))}
                 </div>
-                <p className="text-sm text-bronze/70 leading-relaxed mb-6 italic">&ldquo;{t.quote}&rdquo;</p>
+                <p className="text-base md:text-sm text-bronze/70 leading-relaxed mb-6 italic">&ldquo;{t.quote}&rdquo;</p>
                 <div className="border-t border-bronze/10 pt-4">
                   <p className="text-sm font-medium text-navy">{t.author}</p>
                   <p className="text-xs text-tan">{t.role} <span className="ml-1">({t.country})</span></p>
@@ -265,10 +291,10 @@ export default function Home() {
             Free design mockup and factory-direct quote in 24 hours. No commitment, no spam — just a conversation with our product specialist.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
-            <Link to="/contact" className="btn-primary text-base px-12 py-5">
+            <Link to="/contact" className="btn-primary w-full sm:w-auto justify-center text-base px-8 sm:px-12 py-5">
               Request a Free Quote <span className="ml-1">→</span>
             </Link>
-            <Link to="/customization" className="btn-outline text-base px-12 py-5">
+            <Link to="/customization" className="btn-outline w-full sm:w-auto justify-center text-base px-8 sm:px-12 py-5">
               Explore OEM / ODM
             </Link>
           </div>
@@ -280,14 +306,14 @@ export default function Home() {
         <div className="container-site">
           <p className="section-label">Insights</p>
           <h2 className="text-display-lg text-navy mb-4">Hair Accessories <span className="text-gold">Resources</span></h2>
-          <p className="text-tan text-lg max-w-xl mb-12">Expert guides on sourcing, customization, and trends in the hair accessories industry.</p>
-          <div className="grid md:grid-cols-3 gap-6">
+          <p className="text-tan text-lg max-w-xl mb-10 md:mb-12">Expert guides on sourcing, customization, and trends in the hair accessories industry.</p>
+          <div className="mobile-card-strip md:grid-cols-3 md:gap-6" aria-label="Featured hair accessories guides">
             {[
               { title: 'Hair Accessories MOQ Guide: Minimum Order Quantities Explained for Importers', date: 'Aug 2026', slug: 'hair-accessories-moq-guide' },
               { title: 'Headband Materials Compared: Velvet vs Cotton vs Silk — Which Is Right for Your Brand?', date: 'Aug 2026', slug: 'velvet-vs-cotton-headbands' },
               { title: 'Metal Hair Clips Material Guide: Zinc Alloy vs Stainless Steel vs Aluminum', date: 'Aug 2026', slug: 'metal-hair-clip-material-guide' },
             ].map(post => (
-              <Link to={`/blog/${post.slug}`} key={post.title} className="group bg-white p-8 border border-bronze/10 hover:border-bronze/20 transition-all duration-300">
+              <Link to={`/blog/${post.slug}`} key={post.title} className="group bg-white p-6 md:p-8 border border-bronze/10 hover:border-bronze/20 transition-all duration-300">
                 <p className="text-[10px] tracking-wider uppercase text-tan mb-3">{post.date}</p>
                 <h3 className="text-base font-display text-navy group-hover:text-gold transition-colors leading-relaxed">{post.title}</h3>
                 <span className="text-xs font-medium tracking-wider uppercase text-navy mt-4 inline-flex items-center gap-1 group-hover:text-gold transition-colors">
