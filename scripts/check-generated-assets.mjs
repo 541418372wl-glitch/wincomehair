@@ -1,6 +1,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { createHash } from 'node:crypto';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const dist = path.join(root, 'dist');
@@ -68,8 +69,19 @@ for (const [pattern, budgetKB] of imageBudgets) {
   }
 }
 
+const homeHtml = await fs.readFile(path.join(dist, 'index.html'), 'utf8');
+const inlineStyle = homeHtml.match(/<style>([\s\S]*?)<\/style>/i)?.[1];
+if (!inlineStyle) throw new Error('Built home page has no inline style block');
+const styleHash = `sha256-${createHash('sha256').update(inlineStyle).digest('base64')}`;
+const vercelConfig = JSON.parse(await fs.readFile(path.join(root, 'vercel.json'), 'utf8'));
+const globalHeaders = vercelConfig.headers.find(({ source }) => source === '/(.*)')?.headers || [];
+const csp = globalHeaders.find(({ key }) => key.toLowerCase() === 'content-security-policy-report-only')?.value || '';
+if (!csp.includes(`'${styleHash}'`)) {
+  throw new Error(`CSP Report-Only is missing current inline style hash: ${styleHash}`);
+}
+
 const lengths = descriptions.map(({ description }) => description.length);
 console.log(
   `[generated-assets] ${descriptions.length} unique descriptions; `
-  + `length ${Math.min(...lengths)}-${Math.max(...lengths)}; responsive AVIF/WebP budgets passed`,
+  + `length ${Math.min(...lengths)}-${Math.max(...lengths)}; responsive AVIF/WebP and CSP hash budgets passed`,
 );
