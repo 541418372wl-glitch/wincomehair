@@ -11,6 +11,7 @@ export default function WhatsAppButton() {
       href={waLink(WA_DEFAULT_TEXT)}
       target="_blank"
       rel="noopener noreferrer"
+      data-analytics-location="floating_button"
       className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-40 bg-[#128C7E] text-white w-11 h-11 sm:w-14 sm:h-14 flex items-center justify-center shadow-lg hover:scale-105 transition-transform duration-200"
       aria-label="Chat on WhatsApp"
     >

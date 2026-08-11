@@ -7,6 +7,9 @@
     "dev": "vite",
     "build": "vite build && vite build --ssr src/entry-server.jsx --outDir dist-ssr && node scripts/prerender.mjs",
     "test:inquiry": "node scripts/test-inquiry.mjs",
+    "test:csp": "node scripts/test-csp-report.mjs",
+    "test:analytics": "node scripts/test-privacy-analytics.mjs",
+    "test": "node scripts/test-inquiry.mjs && node scripts/test-csp-report.mjs && node scripts/test-privacy-analytics.mjs",
     "preview": "vite preview"
   },
   "dependencies": {
