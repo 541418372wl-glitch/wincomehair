@@ -377,7 +377,14 @@ export default function ProductDetail() {
 
         <div className="grid md:grid-cols-2 gap-16">
           <div className="aspect-square overflow-hidden border border-bronze/10">
-            <img src={product.image} alt={product.name} fetchpriority="high" className="w-full h-full object-cover" />
+            <img
+              src={product.image}
+              alt={product.name}
+              width="1024"
+              height="1024"
+              fetchpriority="high"
+              className="w-full h-full object-cover"
+            />
           </div>
 
           <div>
@@ -465,6 +472,31 @@ export default function ProductDetail() {
                 <span className="text-sm text-bronze/80">{d}</span>
               </div>
             ))}
+          </div>
+        </div>
+
+        <div className="mt-20 pt-12 border-t border-bronze/10">
+          <p className="section-label">Buyer Information</p>
+          <h2 className="text-display-sm text-navy mb-8">Product Sourcing <span className="text-gold">FAQ</span></h2>
+          <div className="grid md:grid-cols-3 gap-4 md:gap-6">
+            <article className="bg-sand/25 p-6 md:p-8">
+              <h3 className="text-lg font-display text-navy mb-3">What is the MOQ and lead time?</h3>
+              <p className="text-sm text-bronze/80 leading-relaxed">
+                MOQ for {product.name} starts at {product.moq}. Standard production takes {product.leadTime} after sample approval and deposit. The final schedule depends on order quantity, customization and packaging.
+              </p>
+            </article>
+            <article className="bg-sand/25 p-6 md:p-8">
+              <h3 className="text-lg font-display text-navy mb-3">Which specifications can be customized?</h3>
+              <p className="text-sm text-bronze/80 leading-relaxed">
+                Choose {product.sizes.toLowerCase()}, {product.finish.toLowerCase()}, branding through {product.logo.toLowerCase()}, and packaging such as {product.packaging.toLowerCase()}. We confirm feasibility before sampling.
+              </p>
+            </article>
+            <article className="bg-sand/25 p-6 md:p-8">
+              <h3 className="text-lg font-display text-navy mb-3">What should I provide for a quote?</h3>
+              <p className="text-sm text-bronze/80 leading-relaxed">
+                Share your target quantity, destination market, preferred {product.material.toLowerCase()}, size and finish, logo artwork, packaging requirements, compliance needs and target delivery date for an accurate factory quote.
+              </p>
+            </article>
           </div>
         </div>
 
