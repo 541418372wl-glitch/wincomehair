@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { articles } from '../data/articles';
 
 function OptimizedProductImage({ image, alt, sizes, className, pictureClassName = '' }) {
   const base = image.replace(/\.webp$/, '');
@@ -307,13 +308,9 @@ export default function Home() {
           <h2 className="text-display-lg text-navy mb-4">Hair Accessories <span className="text-gold">Resources</span></h2>
           <p className="text-tan text-lg max-w-xl mb-10 md:mb-12">Expert guides on sourcing, customization, and trends in the hair accessories industry.</p>
           <div className="mobile-card-strip md:grid-cols-3 md:gap-6" role="region" aria-label="Featured hair accessories guides" tabIndex="0">
-            {[
-              { title: 'Hair Accessories MOQ Guide: Minimum Order Quantities Explained for Importers', date: 'Aug 2026', slug: 'hair-accessories-moq-guide' },
-              { title: 'Headband Materials Compared: Velvet vs Cotton vs Silk — Which Is Right for Your Brand?', date: 'Aug 2026', slug: 'velvet-vs-cotton-headbands' },
-              { title: 'Metal Hair Clips Material Guide: Zinc Alloy vs Stainless Steel vs Aluminum', date: 'Aug 2026', slug: 'metal-hair-clip-material-guide' },
-            ].map(post => (
+            {articles.slice(0, 3).map(post => (
               <Link to={`/blog/${post.slug}`} key={post.title} className="group bg-white p-6 md:p-8 border border-bronze/10 hover:border-bronze/20 transition-all duration-300">
-                <p className="text-[10px] tracking-wider uppercase text-tan mb-3">{post.date}</p>
+                <p className="text-[10px] tracking-wider uppercase text-tan mb-3">Aug 2026</p>
                 <h3 className="text-base font-display text-navy group-hover:text-gold transition-colors leading-relaxed">{post.title}</h3>
                 <span className="text-xs font-medium tracking-wider uppercase text-navy mt-4 inline-flex items-center gap-1 group-hover:text-gold transition-colors">
                   Read Article <span className="group-hover:translate-x-1 transition-transform">→</span>

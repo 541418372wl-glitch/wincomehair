@@ -25,7 +25,7 @@ export default function ConsentBanner() {
 
   return (
     <aside
-      className="fixed inset-x-4 bottom-4 z-[100] mx-auto max-w-3xl border border-bronze/20 bg-white p-5 shadow-2xl sm:p-6"
+      className="fixed inset-x-3 bottom-3 z-[100] mx-auto max-w-[calc(100vw-1.5rem)] border border-bronze/20 bg-white p-4 shadow-2xl sm:inset-x-4 sm:bottom-4 sm:max-w-3xl sm:p-6"
       aria-labelledby="analytics-consent-title"
       aria-describedby="analytics-consent-description"
     >
@@ -37,11 +37,11 @@ export default function ConsentBanner() {
             <Link to="/privacy" className="text-gold underline">Privacy details</Link>
           </p>
         </div>
-        <div className="flex shrink-0 flex-wrap gap-3">
-          <button type="button" onClick={() => choose('denied')} className="btn-outline px-5 py-3 text-sm">
+        <div className="grid w-full shrink-0 grid-cols-1 gap-2 sm:flex sm:w-auto sm:flex-wrap sm:gap-3">
+          <button type="button" onClick={() => choose('denied')} className="btn-outline justify-center px-3 py-3 text-xs sm:px-5 sm:text-sm">
             Reject analytics
           </button>
-          <button type="button" onClick={() => choose('granted')} className="btn-primary px-5 py-3 text-sm">
+          <button type="button" onClick={() => choose('granted')} className="btn-primary justify-center px-3 py-3 text-xs sm:px-5 sm:text-sm">
             Accept analytics
           </button>
         </div>
