@@ -26,8 +26,6 @@ export default function ConsentBanner() {
   return (
     <aside
       className="fixed inset-x-4 bottom-4 z-[100] mx-auto max-w-3xl border border-bronze/20 bg-white p-5 shadow-2xl sm:p-6"
-      role="dialog"
-      aria-modal="false"
       aria-labelledby="analytics-consent-title"
       aria-describedby="analytics-consent-description"
     >

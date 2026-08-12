@@ -4,12 +4,11 @@ function OptimizedProductImage({ image, alt, sizes, className, pictureClassName 
   const base = image.replace(/\.webp$/, '');
   return (
     <picture className={pictureClassName}>
-      <source media="(max-width: 767px)" type="image/avif" srcSet={`${base}-640.avif`} />
-      <source type="image/avif" srcSet={`${base}.avif`} />
-      <source media="(max-width: 767px)" type="image/webp" srcSet={`${base}-640.webp`} />
-      <source type="image/webp" srcSet={image} />
+      <source type="image/avif" srcSet={`${base}-320.avif 320w, ${base}-640.avif 640w, ${base}.avif 1024w`} sizes={sizes} />
+      <source type="image/webp" srcSet={`${base}-320.webp 320w, ${base}-640.webp 640w, ${image} 1024w`} sizes={sizes} />
       <img
         src={image}
+        srcSet={`${base}-320.webp 320w, ${base}-640.webp 640w, ${image} 1024w`}
         alt={alt}
         sizes={sizes}
         loading="lazy"
@@ -195,7 +194,7 @@ export default function Home() {
                   <li key={item.title} className="flex gap-4">
                     <svg className="w-5 h-5 text-champagne mt-0.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 6L9 17l-5-5"/></svg>
                     <div>
-                      <h4 className="text-base md:text-sm font-medium mb-1">{item.title}</h4>
+                      <h3 className="text-base md:text-sm font-medium mb-1">{item.title}</h3>
                       <p className="text-white/50 text-base md:text-sm">{item.desc}</p>
                     </div>
                   </li>
@@ -222,7 +221,7 @@ export default function Home() {
                     <div className="flex-1">
                       <div className="flex items-center gap-2 mb-1">
                         <svg className="w-4 h-4 text-white/20 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
-                        <span className="text-sm text-white/40">{row.lose}</span>
+                        <span className="text-sm text-white/60">{row.lose}</span>
                       </div>
                     </div>
                   </div>
@@ -239,12 +238,12 @@ export default function Home() {
               {processSteps.map((step, i) => (
                 <div key={step.step} className="relative">
                   {i < 3 && <div className="hidden md:block absolute top-8 left-[60%] w-[calc(100%-2rem)] h-px bg-white/10" />}
-                  <div className="text-5xl font-display text-champagne/30 mb-4">{step.step}</div>
+                  <div className="text-5xl font-display text-champagne/60 mb-4">{step.step}</div>
                   <h3 className="text-lg font-display text-white mb-2">{step.title}</h3>
                   <p className="text-white/50 text-base md:text-sm leading-relaxed mb-4">{step.desc}</p>
                   <ul className="hidden sm:block space-y-1">
                     {step.details.map(d => (
-                      <li key={d} className="text-xs text-white/40 flex items-center gap-2">
+                      <li key={d} className="text-xs text-white/60 flex items-center gap-2">
                         <span className="w-1 h-1 bg-gold/50" />{d}
                       </li>
                     ))}
@@ -263,7 +262,7 @@ export default function Home() {
           <h2 className="text-display-lg text-navy mb-4">What Our <span className="text-gold">Clients Say</span></h2>
           <p className="text-tan text-lg max-w-xl mb-10 md:mb-12">Real feedback from brands who trust WINCOME for their hair accessories manufacturing.</p>
 
-          <div className="mobile-card-strip md:grid-cols-3 md:gap-8" aria-label="Client reviews">
+          <div className="mobile-card-strip md:grid-cols-3 md:gap-8" role="region" aria-label="Client reviews" tabIndex="0">
             {testimonials.map((t, i) => (
               <div key={i} className="bg-white p-6 md:p-8 border border-bronze/10">
                 <div className="flex gap-1 mb-4">
@@ -271,7 +270,7 @@ export default function Home() {
                     <svg key={j} className="w-4 h-4 text-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
                   ))}
                 </div>
-                <p className="text-base md:text-sm text-bronze/70 leading-relaxed mb-6 italic">&ldquo;{t.quote}&rdquo;</p>
+                <p className="text-base md:text-sm text-bronze/80 leading-relaxed mb-6 italic">&ldquo;{t.quote}&rdquo;</p>
                 <div className="border-t border-bronze/10 pt-4">
                   <p className="text-sm font-medium text-navy">{t.author}</p>
                   <p className="text-xs text-tan">{t.role} <span className="ml-1">({t.country})</span></p>
@@ -307,7 +306,7 @@ export default function Home() {
           <p className="section-label">Insights</p>
           <h2 className="text-display-lg text-navy mb-4">Hair Accessories <span className="text-gold">Resources</span></h2>
           <p className="text-tan text-lg max-w-xl mb-10 md:mb-12">Expert guides on sourcing, customization, and trends in the hair accessories industry.</p>
-          <div className="mobile-card-strip md:grid-cols-3 md:gap-6" aria-label="Featured hair accessories guides">
+          <div className="mobile-card-strip md:grid-cols-3 md:gap-6" role="region" aria-label="Featured hair accessories guides" tabIndex="0">
             {[
               { title: 'Hair Accessories MOQ Guide: Minimum Order Quantities Explained for Importers', date: 'Aug 2026', slug: 'hair-accessories-moq-guide' },
               { title: 'Headband Materials Compared: Velvet vs Cotton vs Silk — Which Is Right for Your Brand?', date: 'Aug 2026', slug: 'velvet-vs-cotton-headbands' },

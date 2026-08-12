@@ -57,7 +57,7 @@ export default function Footer() {
 
         <div className="divider !bg-white/10 my-12" />
 
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-white/40">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-white/60">
           <p>&copy; {new Date().getFullYear()} WINCOME Hair Accessories. All rights reserved.</p>
           <div className="flex flex-wrap justify-center gap-6">
             <span>wincomehair.com</span>

@@ -59,7 +59,9 @@ export function AppContent() {
         </Suspense>
       </main>
       <Footer />
-      <WhatsAppButton />
+      <aside aria-label="WhatsApp support">
+        <WhatsAppButton />
+      </aside>
       <ConsentBanner />
     </div>
   );

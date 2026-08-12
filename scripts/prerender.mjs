@@ -19,8 +19,12 @@ const routes = [
   ...articles.map((article) => `/blog/${article.slug}`),
 ];
 
-function inject(template, appHtml, headHtml) {
-  const withoutDefaultHead = template
+function inject(template, appHtml, headHtml, route) {
+  const routeTemplate = route === '/'
+    ? template
+    : template.replace(/\s*<link\s+rel=["']preload["']\s+as=["']image["'][^>]*>/gi, '');
+
+  const withoutDefaultHead = routeTemplate
     .replace(/\s*<title>[\s\S]*?<\/title>/i, '')
     .replace(/\s*<meta\s+name=["']description["'][^>]*>/i, '');
 
@@ -38,7 +42,7 @@ for (const route of routes) {
     throw new Error(`Rendered route has no H1: ${route}`);
   }
 
-  const output = inject(template, appHtml, headHtml);
+  const output = inject(template, appHtml, headHtml, route);
   const outputPath = route === '/'
     ? path.join(dist, 'index.html')
     : path.join(dist, route.slice(1), 'index.html');
