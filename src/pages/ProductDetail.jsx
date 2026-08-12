@@ -1,6 +1,7 @@
 import { useParams, Link } from 'react-router-dom';
 import { waLink } from '../lib/whatsapp';
 import { trackProductInquiry } from '../lib/analytics';
+import { products as catalogProducts, categoryMap } from '../data/productCatalog';
 
 const products = {
   'claw-acetate': {
@@ -368,11 +369,14 @@ export default function ProductDetail() {
     );
   }
 
+  const catalogProduct = catalogProducts.find(item => item.id === id);
+  const categoryPage = catalogProduct ? categoryMap[catalogProduct.category] : null;
+
   return (
     <div className="pt-24">
       <div className="container-site section-gap">
-        <Link to="/products" className="text-xs tracking-wider uppercase text-tan hover:text-navy transition-colors inline-flex items-center gap-2 mb-8">
-          ← Back to Products
+        <Link to={categoryPage ? `/products/category/${catalogProduct.category}` : '/products'} className="text-xs tracking-wider uppercase text-tan hover:text-navy transition-colors inline-flex items-center gap-2 mb-8">
+          ← Back to {categoryPage ? categoryPage.shortName : 'Products'}
         </Link>
 
         <div className="grid md:grid-cols-2 gap-16">

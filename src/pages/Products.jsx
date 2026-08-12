@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { productCategories } from '../data/productCatalog';
 
 const allProducts = [
   { id: 'claw-acetate', name: 'Acetate Hair Claw Clips', category: 'Claws & Clips', image: '/assets/images/product-claw-acetate.webp', moq: '100 pcs', leadTime: '12-15 days', material: 'Cellulose Acetate', colors: 'Custom Pantone' },
@@ -43,6 +44,18 @@ export default function Products() {
         <p className="text-tan text-lg max-w-2xl mb-12 leading-relaxed">
           Every product is fully customizable — size, color, material, finish, logo, and packaging. Click any item to request a quote.
         </p>
+
+        <nav aria-label="Product category pages" className="mb-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+          {productCategories.map(category => (
+            <Link
+              key={category.slug}
+              to={`/products/category/${category.slug}`}
+              className="border border-bronze/10 bg-white p-4 text-sm font-medium text-navy transition-colors hover:border-gold hover:text-gold"
+            >
+              {category.shortName} <span aria-hidden="true">→</span>
+            </Link>
+          ))}
+        </nav>
 
         {/* Category filters (sticky on mobile for long lists) */}
         <div className="sticky top-16 md:top-20 z-30 bg-cream/95 backdrop-blur-sm -mx-4 px-4 py-3 mb-10 border-b border-bronze/10">
