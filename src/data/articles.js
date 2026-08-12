@@ -1,8 +1,11 @@
 // WINCOME Hair Accessories — Blog articles (structured content for /blog pages)
+import { redditArticles } from './redditArticles.js';
+
 // Each article follows GEO best practices: answer capsule in first paragraph,
 // structured tables/steps, FAQ block, internal links, and a CTA to inquiry.
 
 export const articles = [
+  ...redditArticles,
   {
     slug: 'how-to-source-hair-accessories-from-china',
     title: 'How to Source Custom Hair Accessories from China: A B2B Buyer\'s Checklist (2026)',

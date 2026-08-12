@@ -44,7 +44,7 @@ const pageMeta = {
   },
   '/blog': {
     title: 'Hair Accessories Blog — Sourcing Guides — WINCOME',
-    description: 'Expert guides on sourcing custom hair accessories, comparing materials, choosing product sizes and building a private-label accessories brand.',
+    description: 'Expert hair accessories guides covering fit, materials, product selection, sourcing and private-label development for buyers, brands and consumers.',
   },
   '/privacy': {
     title: 'Privacy Policy — WINCOME Hair Accessories',
@@ -89,7 +89,15 @@ export function getSeoMeta(pathname) {
     const slug = pathname.split('/')[2];
     const article = articles.find(a => a.slug === slug);
     if (article) {
-      meta = { title: article.title, description: buildArticleDescription(article) };
+      meta = {
+        title: article.seoTitle || article.title,
+        description: buildArticleDescription(article),
+        image: `${SITE}${article.image}`,
+        type: 'article',
+        publishedTime: article.date,
+        modifiedTime: article.updatedDate || article.date,
+        section: article.category,
+      };
     }
   }
 
@@ -153,8 +161,18 @@ export default function SEO() {
     setMeta('og:description', meta.description, true);
     setMeta('og:url', url, true);
     setMeta('og:image', image, true);
-    setMeta('og:type', 'website', true);
+    setMeta('og:type', meta.type || 'website', true);
     setMeta('og:site_name', SITE_NAME, true);
+
+    if (meta.type === 'article') {
+      setMeta('article:published_time', meta.publishedTime, true);
+      setMeta('article:modified_time', meta.modifiedTime, true);
+      setMeta('article:section', meta.section, true);
+    } else {
+      ['article:published_time', 'article:modified_time', 'article:section'].forEach(name => {
+        document.querySelector(`meta[property="${name}"]`)?.remove();
+      });
+    }
 
     // Twitter Card
     setMeta('twitter:card', 'summary_large_image');

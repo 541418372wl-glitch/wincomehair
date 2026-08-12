@@ -13,7 +13,7 @@ function parseLinks(text) {
     parts.push(
       internal
         ? <Link key={m.index} to={m[2]} className="text-gold hover:underline">{m[1]}</Link>
-        : <a key={m.index} href={m[2]} className="text-gold hover:underline">{m[1]}</a>
+        : <a key={m.index} href={m[2]} target="_blank" rel="noopener noreferrer" className="text-gold hover:underline">{m[1]}</a>
     );
     last = m.index + m[0].length;
   }
@@ -55,6 +55,14 @@ function renderSection(s, i) {
             </li>
           ))}
         </ul>
+      );
+    case 'ol':
+      return (
+        <ol key={i} className="space-y-3 mb-6 list-decimal pl-6">
+          {s.items.map((item, j) => (
+            <li key={j} className="text-bronze/80 leading-relaxed pl-2">{parseLinks(item)}</li>
+          ))}
+        </ol>
       );
     case 'table':
       return (
@@ -119,6 +127,7 @@ export default function BlogPost() {
         author: { '@type': 'Organization', name: 'WINCOME Hair Accessories', url: 'https://wincomehair.com' },
         publisher: { '@type': 'Organization', name: 'WINCOME Hair Accessories', url: 'https://wincomehair.com' },
         mainEntityOfPage: url,
+        ...(post.sources?.length ? { citation: post.sources.map(source => source.url) } : {}),
       },
       ...(faqItems.length ? [{
         '@type': 'FAQPage',
@@ -134,7 +143,7 @@ export default function BlogPost() {
   const related = articles.filter(a => a.slug !== post.slug).slice(0, 3);
 
   return (
-    <div className="pt-24">
+    <div>
       <div className="container-site section-gap">
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
@@ -156,6 +165,23 @@ export default function BlogPost() {
 
         <div className="max-w-3xl">
           {post.sections.map((s, i) => renderSection(s, i))}
+          {post.sources?.length > 0 && (
+            <aside className="mt-12 border border-bronze/10 bg-sand/40 p-6">
+              <h2 className="text-lg font-display text-navy mb-3">Community Research Sources</h2>
+              <p className="text-sm text-tan leading-relaxed mb-4">
+                These public discussions were used to identify recurring buyer questions. They are not controlled product tests or medical evidence.
+              </p>
+              <ul className="space-y-2">
+                {post.sources.map(source => (
+                  <li key={source.url}>
+                    <a href={source.url} target="_blank" rel="noopener noreferrer" className="text-sm text-gold hover:underline">
+                      {source.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </aside>
+          )}
         </div>
 
         {/* Related articles */}

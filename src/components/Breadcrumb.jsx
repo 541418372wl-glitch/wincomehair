@@ -41,16 +41,16 @@ export default function Breadcrumb() {
   return (
     <nav aria-label="Breadcrumb" className="pt-28">
       <div className="container-site">
-        <ol className="flex items-center gap-2 text-xs">
+        <ol className="flex min-w-0 items-center gap-2 text-xs">
           {crumbs
             .filter((_, i, arr) => i === 0 || i === arr.length - 1)
             .map((crumb, i) => {
               const isLast = i === crumbs.length - 1;
               return (
-                <li key={crumb.path || crumb.label} className="flex items-center gap-2">
+                <li key={crumb.path || crumb.label} className={`flex min-w-0 items-center gap-2 ${isLast ? 'flex-1' : 'shrink-0'}`}>
                   {i > 0 && <span className="text-tan/50 mx-1">/</span>}
                   {isLast || !crumb.path ? (
-                    <span className="text-navy font-medium">{crumb.label}</span>
+                    <span className="block truncate text-navy font-medium">{crumb.label}</span>
                   ) : (
                     <Link to={crumb.path} className="text-tan hover:text-navy transition-colors">
                       {crumb.label}

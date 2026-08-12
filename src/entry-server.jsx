@@ -30,13 +30,21 @@ function buildHead(pathname) {
     `<meta property="og:description" content="${escapeHtml(meta.description)}">`,
     `<meta property="og:url" content="${escapeHtml(url)}">`,
     `<meta property="og:image" content="${escapeHtml(image)}">`,
-    '<meta property="og:type" content="website">',
+    `<meta property="og:type" content="${escapeHtml(meta.type || 'website')}">`,
     `<meta property="og:site_name" content="${escapeHtml(SITE_NAME)}">`,
     '<meta name="twitter:card" content="summary_large_image">',
     `<meta name="twitter:title" content="${escapeHtml(meta.title)}">`,
     `<meta name="twitter:description" content="${escapeHtml(meta.description)}">`,
     `<meta name="twitter:image" content="${escapeHtml(image)}">`,
   ];
+
+  if (meta.type === 'article') {
+    tags.push(
+      `<meta property="article:published_time" content="${escapeHtml(meta.publishedTime)}">`,
+      `<meta property="article:modified_time" content="${escapeHtml(meta.modifiedTime)}">`,
+      `<meta property="article:section" content="${escapeHtml(meta.section)}">`,
+    );
+  }
 
   if (pathname === '/') {
     tags.push(
