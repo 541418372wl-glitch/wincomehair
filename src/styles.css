@@ -38,7 +38,17 @@
   }
 
   .section-gap {
-    @apply py-20 md:py-28;
+    @apply py-16 md:py-28;
+  }
+
+  .mobile-card-strip {
+    @apply flex gap-5 overflow-x-auto pb-3 snap-x snap-mandatory md:grid md:overflow-visible md:pb-0;
+    scrollbar-width: thin;
+    scrollbar-color: rgb(67 60 53 / 0.25) transparent;
+  }
+
+  .mobile-card-strip > * {
+    @apply w-[82%] shrink-0 snap-start md:w-auto;
   }
 
   .btn-primary {

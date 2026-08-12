@@ -2,6 +2,10 @@ import React from 'react';
 import { createRoot, hydrateRoot } from 'react-dom/client';
 import App from './App';
 import './styles.css';
+import { initializeAnalyticsFromStoredConsent, initializeConsentDefaults } from './lib/analytics';
+
+initializeConsentDefaults();
+initializeAnalyticsFromStoredConsent();
 
 const root = document.getElementById('root');
 const app = (

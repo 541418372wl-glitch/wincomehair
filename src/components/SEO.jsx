@@ -6,6 +6,8 @@ import { productMeta } from '../data/productMeta';
 export const SITE = 'https://wincomehair.com';
 export const SITE_NAME = 'WINCOME Hair Accessories';
 export const OG_IMAGE = `${SITE}/og-image.png`;
+export const SEO_DESCRIPTION_MIN = 105;
+export const SEO_DESCRIPTION_MAX = 155;
 
 const pageMeta = {
   '/': {
@@ -30,7 +32,7 @@ const pageMeta = {
   },
   '/faq': {
     title: 'FAQ — Custom Hair Accessories Manufacturing — WINCOME',
-    description: 'Frequently asked questions about MOQ, lead time, OEM/ODM, customization, materials, shipping, payment terms, and quality control for hair accessories manufacturing.',
+    description: 'Answers on custom hair accessories MOQ, lead times, OEM/ODM, materials, shipping, payment, sampling and factory quality control at WINCOME.',
   },
   '/quality': {
     title: 'Quality Control — WINCOME Hair Accessories Manufacturer',
@@ -38,29 +40,45 @@ const pageMeta = {
   },
   '/cases': {
     title: 'Case Studies — WINCOME Hair Accessories',
-    description: 'Real client projects: custom acetate claw clips, private label scrunchies, bridal headbands, seasonal hair bow collections. See how WINCOME delivers for global brands.',
+    description: 'Explore real custom hair accessory projects, from acetate claw clips and scrunchies to bridal headbands, with timelines, challenges and results.',
   },
   '/blog': {
     title: 'Hair Accessories Blog — Sourcing Guides — WINCOME',
-    description: 'Expert guides on sourcing custom hair accessories from China, materials (acetate, silk, satin), claw clip sizing, and building your own hair accessories brand.',
+    description: 'Expert guides on sourcing custom hair accessories, comparing materials, choosing product sizes and building a private-label accessories brand.',
   },
   '/privacy': {
     title: 'Privacy Policy — WINCOME Hair Accessories',
-    description: 'How WINCOME collects, uses and protects your personal data when you request quotes or contact us.',
+    description: 'Learn how WINCOME collects, uses, stores and protects personal data from quote requests, website analytics, cookies and direct contact.',
   },
   '/terms': {
     title: 'Terms of Service — WINCOME Hair Accessories',
-    description: 'Terms and conditions governing quotes, orders and use of the WINCOME Hair Accessories website.',
+    description: 'Review WINCOME terms for website use, custom product quotes, samples, tooling, orders, intellectual property, quality claims and liability.',
   },
 };
 
-function truncate(text, max) {
-  if (text.length <= max) return text;
-  const cut = text.slice(0, max);
+function truncate(text, max = SEO_DESCRIPTION_MAX) {
+  const normalized = text.replace(/\s+/g, ' ').trim();
+  if (normalized.length <= max) return normalized;
+  const cut = normalized.slice(0, max - 1);
   // Prefer breaking at a sentence boundary; fall back to word boundary.
   const sentenceEnd = Math.max(cut.lastIndexOf('. '), cut.lastIndexOf('; '), cut.lastIndexOf('! '), cut.lastIndexOf(': '));
-  const breakAt = sentenceEnd > 40 ? sentenceEnd + 1 : cut.lastIndexOf(' ');
+  const usefulSentenceEnd = Math.min(SEO_DESCRIPTION_MIN, Math.floor(max * 0.75));
+  const breakAt = sentenceEnd >= usefulSentenceEnd ? sentenceEnd + 1 : cut.lastIndexOf(' ');
   return cut.slice(0, breakAt > 40 ? breakAt : cut.length) + '…';
+}
+
+function buildArticleDescription(article) {
+  const summary = article.metaDescription.replace(/\s+/g, ' ').trim();
+  const enriched = summary.length < SEO_DESCRIPTION_MIN
+    ? `${summary} Practical sourcing guidance for hair accessories brands, importers and private-label buyers.`
+    : summary;
+  return truncate(enriched);
+}
+
+function buildProductDescription(product) {
+  const facts = `MOQ ${product.moq}; lead time ${product.leadTime}. Custom colors, logo and packaging available.`;
+  const introMax = SEO_DESCRIPTION_MAX - facts.length - 1;
+  return `${truncate(product.description, introMax)} ${facts}`;
 }
 
 export function getSeoMeta(pathname) {
@@ -71,7 +89,7 @@ export function getSeoMeta(pathname) {
     const slug = pathname.split('/')[2];
     const article = articles.find(a => a.slug === slug);
     if (article) {
-      meta = { title: article.title, description: truncate(article.metaDescription, 160) };
+      meta = { title: article.title, description: buildArticleDescription(article) };
     }
   }
 
@@ -82,7 +100,7 @@ export function getSeoMeta(pathname) {
     if (pm) {
       meta = {
         title: `${pm.name} — WINCOME`,
-        description: `${truncate(pm.description, 130)} MOQ ${pm.moq}, lead time ${pm.leadTime}.`,
+        description: buildProductDescription(pm),
       };
     }
   }

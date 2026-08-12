@@ -5,6 +5,8 @@ import Footer from './components/Footer';
 import WhatsAppButton from './components/WhatsAppButton';
 import SEO from './components/SEO';
 import Breadcrumb from './components/Breadcrumb';
+import AnalyticsTracker from './components/AnalyticsTracker';
+import ConsentBanner from './components/ConsentBanner';
 import Home from './pages/Home';
 
 const Products = lazy(() => import('./pages/Products'));
@@ -35,6 +37,7 @@ export function AppContent() {
       </header>
       <SEO />
       <Breadcrumb />
+      <AnalyticsTracker />
       <main id="main-content" className="flex-1">
         <Suspense fallback={<div className="min-h-[60vh]" />}>
           <Routes>
@@ -57,6 +60,7 @@ export function AppContent() {
       </main>
       <Footer />
       <WhatsAppButton />
+      <ConsentBanner />
     </div>
   );
 }
