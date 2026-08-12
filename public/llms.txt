@@ -1,41 +1,46 @@
 # WINCOME Hair Accessories
-> Custom Hair Accessories Manufacturer & Supplier — OEM/ODM, Low MOQ, Global Shipping.
 
-## About
-WINCOME Hair Accessories is a custom hair accessories manufacturer established in 2010, specializing in hair claws, clips, headbands, scrunchies, hair bows, and decorative accessories for global brands, wholesalers, and retailers. BSCI, ISO 9001, and OEKO-TEX certified. 3,000m² factory with 200+ staff serving 500+ brands across 50 countries.
+> WINCOME is a custom hair accessories manufacturer and OEM/ODM supplier for brands, wholesalers, retailers, and importers. The company produces hair clips, claw clips, headbands, scrunchies, hair bows, and private-label collections with low minimum order quantities and worldwide shipping.
 
-## Core Pages
-- Home: https://wincomehair.com/ — Overview, capabilities, featured products, client testimonials.
-- Products: https://wincomehair.com/products — Full catalog of custom hair accessories with MOQ/lead time per product.
-- OEM / ODM: https://wincomehair.com/customization — Customization capabilities, material library, process flow.
-- About: https://wincomehair.com/about — Company story, factory info, certifications, WINCOME family brands.
-- Case Studies: https://wincomehair.com/cases — Real client projects: US fashion brand, European boutique chain, Australian wedding brand, UK subscription box.
-- Quality Control: https://wincomehair.com/quality — Three-stage QC: raw material, in-process, AQL 2.5 final inspection. Testing standards by product category.
-- FAQ: https://wincomehair.com/faq — MOQ, lead time, OEM, customization, materials, shipping, payment terms, quality control.
-- Contact: https://wincomehair.com/contact — Multi-step inquiry form with Supabase-backed submission.
-- Blog: https://wincomehair.com/blog — Sourcing guides, material comparisons, and market insights.
+WINCOME was established in 2010. Its 3,000 square metre factory has more than 200 staff and serves over 500 brands in 50 countries. Manufacturing and quality systems include BSCI, ISO 9001, and OEKO-TEX related capabilities. Buyers can request material, colour, size, finish, logo, packaging, and shipping customisation.
 
-## Blog Articles
-- How to Source Custom Hair Accessories from China: A B2B Buyer's Checklist (2026): https://wincomehair.com/blog/how-to-source-hair-accessories-from-china
-- Cellulose Acetate vs Plastic Claw Clips: Which Material Should Your Brand Choose?: https://wincomehair.com/blog/acetate-vs-plastic-claw-clips
-- Claw Clip Size Guide: How to Choose the Right Size for Fine, Thick & Long Hair: https://wincomehair.com/blog/claw-clip-size-guide
-- Do Claw Clips Damage Hair? Dents, Breakage & How to Wear Them Safely: https://wincomehair.com/blog/do-claw-clips-damage-hair
-- Silk vs Satin Scrunchies: Which Fabric Is Better for Hair — and for Your Business?: https://wincomehair.com/blog/silk-vs-satin-scrunchies
-- Private Label Hair Accessories: A Step-by-Step Guide for Etsy & Amazon Sellers: https://wincomehair.com/blog/private-label-hair-accessories-guide
+## Primary pages
 
-## Key Offerings
-- OEM & ODM hair accessories manufacturing
-- MOQ from 100 pcs per design
-- Lead time: 10–18 days after sample approval
-- Free design service with 24-hour mockup delivery
-- Materials: cellulose acetate, zinc alloy, mulberry silk, premium satin, organic cotton, velvet
-- Custom logo: laser engraving, foil stamping, metal plates, woven labels
-- Custom packaging: individual cards to luxury gift boxes
-- Global shipping: sea freight and air express (DHL/FedEx/UPS)
-- Amazon FBA direct shipment supported
-- Payment: T/T, PayPal, Trade Assurance via Alibaba
+- [Homepage](https://wincomehair.com/): Company overview, manufacturing capabilities, featured products, and inquiry entry points.
+- [Product catalogue](https://wincomehair.com/products): Hair accessory categories and product specifications.
+- [OEM and ODM customisation](https://wincomehair.com/customization): Design, sampling, materials, logo, packaging, and production process.
+- [About WINCOME](https://wincomehair.com/about): Factory, team, certifications, and company background.
+- [Quality control](https://wincomehair.com/quality): Incoming material, in-process, and final inspection procedures.
+- [Case studies](https://wincomehair.com/cases): Examples of completed private-label projects.
+- [Frequently asked questions](https://wincomehair.com/faq): MOQ, lead time, samples, payments, shipping, and quality answers.
+- [Contact and quotation request](https://wincomehair.com/contact): Direct inquiry form and contact methods.
+- [Buyer resources](https://wincomehair.com/blog): Sourcing, materials, product selection, and private-label guides.
+
+## Product categories
+
+- [Cellulose acetate hair claw clips](https://wincomehair.com/products/claw-acetate): Custom acetate claw clips for private-label collections.
+- [Butterfly hair claw clips](https://wincomehair.com/products/claw-butterfly): Decorative butterfly claw clips with custom colours and finishes.
+- [Velvet scrunchies](https://wincomehair.com/products/scrunchie-velvet): Custom velvet scrunchies with logo and packaging options.
+- [Silk scrunchies](https://wincomehair.com/products/scrunchie-silk): Private-label silk scrunchies in custom sizes and colours.
+- [Braided velvet headbands](https://wincomehair.com/products/headband-braided): Padded and braided headbands for wholesale orders.
+- [Bow hair clips](https://wincomehair.com/products/bow-clip): Custom fabric bow clips for retail and fashion brands.
+
+## Buyer guides
+
+- [How to source custom hair accessories from China](https://wincomehair.com/blog/how-to-source-hair-accessories-from-china)
+- [Cellulose acetate versus plastic claw clips](https://wincomehair.com/blog/acetate-vs-plastic-claw-clips)
+- [Claw clip size guide](https://wincomehair.com/blog/claw-clip-size-guide)
+- [Private-label hair accessories guide](https://wincomehair.com/blog/private-label-hair-accessories-guide)
+
+## Commercial facts
+
+- Minimum order quantity starts from 100 pieces per design for selected products.
+- Standard production lead time is generally 10 to 18 days after sample approval, depending on the product and order.
+- Custom services include product design, material selection, colour matching, logos, labels, cards, and gift boxes.
+- International shipping options include sea freight and express air services. Amazon FBA direct shipping is supported.
 
 ## Contact
-- Website: https://wincomehair.com
-- WhatsApp: +86 18989846141
+
+- [Request a quotation](https://wincomehair.com/contact)
 - Email: info@wincomehair.com
+- WhatsApp: +86 18989846141
