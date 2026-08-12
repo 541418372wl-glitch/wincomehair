@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { articles } from '../data/articles';
 import { productMeta } from '../data/productMeta';
+import { productCategoryMeta } from '../data/productCategoryMeta';
 
 export const SITE = 'https://wincomehair.com';
 export const SITE_NAME = 'WINCOME Hair Accessories';
@@ -103,7 +104,13 @@ export function getSeoMeta(pathname) {
 
   // Dynamic meta for product detail pages — unique title/description per product
   if (!meta && pathname.startsWith('/products/')) {
-    const id = pathname.split('/')[2];
+    const [, , segment, categorySlug] = pathname.split('/');
+    if (segment === 'category') {
+      const category = productCategoryMeta[categorySlug];
+      if (category) meta = { title: category.seoTitle, description: category.description };
+      return meta;
+    }
+    const id = segment;
     const pm = productMeta[id];
     if (pm) {
       meta = {

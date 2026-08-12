@@ -4,11 +4,11 @@ import { openConsentPreferences } from '../lib/analytics';
 
 const footerLinks = {
   Products: [
-    { to: '/products', label: 'Hair Claws & Clips' },
-    { to: '/products', label: 'Headbands' },
-    { to: '/products', label: 'Scrunchies & Hair Ties' },
-    { to: '/products', label: 'Hair Bows & Ribbons' },
-    { to: '/products', label: 'Hair Pins & Barrettes' },
+    { to: '/products/category/hair-claw-clips', label: 'Hair Claw Clips' },
+    { to: '/products/category/headbands', label: 'Headbands' },
+    { to: '/products/category/scrunchies', label: 'Scrunchies & Hair Ties' },
+    { to: '/products/category/hair-bows', label: 'Hair Bows & Ribbons' },
+    { to: '/products/category/hair-clips-barrettes', label: 'Hair Clips & Barrettes' },
   ],
   Services: [
     { to: '/customization', label: 'OEM / ODM' },

@@ -1,0 +1,123 @@
+export const products = [
+  { id: 'claw-acetate', name: 'Acetate Hair Claw Clips', category: 'hair-claw-clips', image: '/assets/images/product-claw-acetate.webp', moq: '100 pcs', leadTime: '12-15 days', material: 'Cellulose Acetate' },
+  { id: 'claw-metal', name: 'Metal Hair Claw Clips', category: 'hair-claw-clips', image: '/assets/images/product-claw-metal.webp', moq: '200 pcs', leadTime: '15-18 days', material: 'Zinc Alloy' },
+  { id: 'claw-plastic', name: 'Plastic Hair Claws', category: 'hair-claw-clips', image: '/assets/images/product-claw-plastic.webp', moq: '300 pcs', leadTime: '10-14 days', material: 'ABS Plastic' },
+  { id: 'claw-butterfly', name: 'Butterfly Hair Claw Clips', category: 'hair-claw-clips', image: '/assets/images/product-claw-butterfly.webp', moq: '200 pcs', leadTime: '15-18 days', material: 'Metal Frame + Resin' },
+  { id: 'claw-rectangular', name: 'Rectangular Hair Claw Clips', category: 'hair-claw-clips', image: '/assets/images/product-claw-rectangular.webp', moq: '200 pcs', leadTime: '12-15 days', material: 'Cellulose Acetate / Resin' },
+  { id: 'headband-pearl', name: 'Pearl Embellished Headbands', category: 'headbands', image: '/assets/images/product-headband-pearl.webp', moq: '200 pcs', leadTime: '15-18 days', material: 'Metal + Faux Pearl' },
+  { id: 'headband-knotted', name: 'Knotted Fabric Headbands', category: 'headbands', image: '/assets/images/product-headband-knotted.webp', moq: '300 pcs', leadTime: '12-15 days', material: 'Cotton / Silk / Velvet' },
+  { id: 'headband-padded', name: 'Padded Cushion Headbands', category: 'headbands', image: '/assets/images/product-headband-padded.webp', moq: '200 pcs', leadTime: '12-15 days', material: 'Fabric + Foam' },
+  { id: 'headband-braided', name: 'Braided Velvet Headbands', category: 'headbands', image: '/assets/images/product-headband-braided.webp', moq: '300 pcs', leadTime: '12-15 days', material: 'Premium Velvet' },
+  { id: 'headband-satin', name: 'Satin Headbands', category: 'headbands', image: '/assets/images/product-headband-satin.webp', moq: '200 pcs', leadTime: '12-15 days', material: 'Premium Satin' },
+  { id: 'scrunchie-silk', name: 'Silk Scrunchies', category: 'scrunchies', image: '/assets/images/product-scrunchie-silk.webp', moq: '200 pcs', leadTime: '10-12 days', material: 'Mulberry Silk' },
+  { id: 'scrunchie-velvet', name: 'Velvet Scrunchies', category: 'scrunchies', image: '/assets/images/product-scrunchie-velvet.webp', moq: '300 pcs', leadTime: '10-12 days', material: 'Premium Velvet' },
+  { id: 'scrunchie-cotton', name: 'Cotton Hair Ties', category: 'scrunchies', image: '/assets/images/product-scrunchie-cotton.webp', moq: '500 pcs', leadTime: '8-10 days', material: 'Organic Cotton' },
+  { id: 'scrunchie-ruffled', name: 'Ruffled Satin Scrunchies', category: 'scrunchies', image: '/assets/images/product-scrunchie-ruffled.webp', moq: '300 pcs', leadTime: '10-12 days', material: 'Premium Satin' },
+  { id: 'scrunchie-bow', name: 'Satin Bow Scrunchies', category: 'scrunchies', image: '/assets/images/product-scrunchie-bow.webp', moq: '300 pcs', leadTime: '10-12 days', material: 'Premium Satin' },
+  { id: 'bow-satin', name: 'Satin Hair Bows', category: 'hair-bows', image: '/assets/images/product-bow-satin.webp', moq: '300 pcs', leadTime: '10-14 days', material: 'Premium Satin' },
+  { id: 'bow-grosgrain', name: 'Grosgrain Ribbon Bows', category: 'hair-bows', image: '/assets/images/product-bow-grosgrain.webp', moq: '300 pcs', leadTime: '10-14 days', material: 'Grosgrain Ribbon' },
+  { id: 'bow-clip', name: 'Bow Hair Clips', category: 'hair-bows', image: '/assets/images/product-bow-clip.webp', moq: '200 pcs', leadTime: '12-15 days', material: 'Fabric + Metal Clip' },
+  { id: 'bow-multilayer', name: 'Multi-Layer Satin Bow Clips', category: 'hair-bows', image: '/assets/images/product-bow-multilayer.webp', moq: '200 pcs', leadTime: '12-15 days', material: 'Premium Satin' },
+  { id: 'bow-oversized', name: 'Oversized Hair Bows', category: 'hair-bows', image: '/assets/images/product-bow-oversized.webp', moq: '200 pcs', leadTime: '12-15 days', material: 'Premium Satin' },
+  { id: 'clip-pearl', name: 'Pearl Hair Barrettes', category: 'hair-clips-barrettes', image: '/assets/images/product-clip-pearl.webp', moq: '200 pcs', leadTime: '12-15 days', material: 'Metal + Faux Pearl' },
+  { id: 'clip-acetate', name: 'Acetate Hair Barrettes', category: 'hair-clips-barrettes', image: '/assets/images/product-clip-acetate.webp', moq: '100 pcs', leadTime: '12-15 days', material: 'Cellulose Acetate' },
+  { id: 'clip-matte', name: 'Matte Snap Hair Clips', category: 'hair-clips-barrettes', image: '/assets/images/product-clip-matte.webp', moq: '300 pcs', leadTime: '8-10 days', material: 'Coated Metal' },
+  { id: 'clip-crystal', name: 'Crystal Rhinestone Barrettes', category: 'hair-clips-barrettes', image: '/assets/images/product-clip-crystal.webp', moq: '200 pcs', leadTime: '15-18 days', material: 'Metal + Crystal' },
+  { id: 'clip-flower', name: 'Flower Hair Clips', category: 'hair-clips-barrettes', image: '/assets/images/product-clip-flower.webp', moq: '200 pcs', leadTime: '15-18 days', material: 'Metal + Crystal' },
+];
+
+export const productCategories = [
+  {
+    slug: 'hair-claw-clips',
+    shortName: 'Hair Claw Clips',
+    title: 'Custom Hair Claw Clips Manufacturer',
+    seoTitle: 'Custom Hair Claw Clips Manufacturer | WINCOME',
+    description: 'Custom hair claw clips in acetate, metal and plastic with private-label colors, sizes, logos and packaging. MOQ from 100 pieces for brands.',
+    intro: 'WINCOME manufactures custom hair claw clips for fashion, beauty and private-label brands. Choose cellulose acetate, zinc alloy, ABS or resin constructions; refine size, tooth geometry and spring performance; then add custom colors, logos and retail-ready packaging.',
+    buyerNotes: [
+      'Cellulose acetate for premium patterns, polished edges and lower-MOQ collections.',
+      'Engineered plastic for lightweight, color-rich and price-sensitive ranges.',
+      'Metal and resin statement clips for jewelry-inspired or social-first launches.',
+    ],
+    faq: [
+      { q: 'What is the MOQ for custom hair claw clips?', a: 'MOQ starts from 100 pieces for selected acetate designs. Metal, resin and injection-molded plastic styles generally start from 200 to 300 pieces per design.' },
+      { q: 'Can claw clip size and teeth be customized?', a: 'Yes. Overall length, jaw opening, tooth depth, spacing, spring, color, finish and logo can be developed through sampling.' },
+      { q: 'Which claw clip material is best for a premium brand?', a: 'Cellulose acetate is a common premium choice for depth of color and polished finishing. The final choice should also consider weight, target hairstyle, price point and durability tests.' },
+    ],
+  },
+  {
+    slug: 'headbands',
+    shortName: 'Headbands',
+    title: 'Custom Headbands Manufacturer',
+    seoTitle: 'Custom Headbands Manufacturer & Supplier | WINCOME',
+    description: 'Custom padded, satin, velvet, knotted and pearl headbands for private-label brands. Choose cores, fabrics, logos and packaging. MOQ from 200 pieces.',
+    intro: 'WINCOME produces custom headbands across padded, knotted, braided, satin and embellished constructions. Each program can specify the core curve, width, padding, fabric, underside grip, decoration and packaging so the finished range matches its intended fit and price point.',
+    buyerNotes: [
+      'Padded and knotted silhouettes for fashion-led seasonal collections.',
+      'Satin and velvet wraps with custom colors, prints and branded labels.',
+      'Pearl, braid and decorative applications assembled for event or gift ranges.',
+    ],
+    faq: [
+      { q: 'What headband styles can be private labeled?', a: 'Padded, knotted, braided, satin, velvet and pearl-embellished headbands can be customized with fabrics, colors, trims, labels and packaging.' },
+      { q: 'Can headband fit and pressure be adjusted?', a: 'Core width, curvature, end treatment, padding and underside grip can be refined during sampling. Fit should be approved across several target users.' },
+      { q: 'What is the MOQ for custom headbands?', a: 'Most headband styles start from 200 to 300 pieces per design, depending on fabric, decoration and construction.' },
+    ],
+  },
+  {
+    slug: 'scrunchies',
+    shortName: 'Scrunchies',
+    title: 'Custom Scrunchies Manufacturer',
+    seoTitle: 'Custom Scrunchies Manufacturer & Supplier | WINCOME',
+    description: 'Custom silk, satin, velvet and cotton scrunchies for brands and wholesalers. Private-label sizes, colors, logos and packaging. MOQ from 200 pieces.',
+    intro: 'WINCOME manufactures private-label scrunchies in mulberry silk, satin, velvet and cotton. Brands can customize fabric weight, finished diameter, elastic tension, fullness, stitching, labels and packaging for everyday, premium, gift and seasonal collections.',
+    buyerNotes: [
+      'Mulberry silk and satin for smooth premium or sleep-focused positioning.',
+      'Velvet and layered constructions for fuller seasonal statement products.',
+      'Cotton options for everyday, kids and natural-material assortments.',
+    ],
+    faq: [
+      { q: 'Can scrunchie size and fullness be customized?', a: 'Yes. Fabric strip dimensions, finished diameter, elastic length, ruffle ratio and bow details are adjustable during sampling.' },
+      { q: 'What is the MOQ for custom scrunchies?', a: 'MOQ starts from 200 pieces for selected silk designs and usually ranges from 300 to 500 pieces for other materials and constructions.' },
+      { q: 'Can logos and gift packaging be added?', a: 'Brands can add woven labels, printed tags, logo cards, pouches, boxes and multi-piece gift set packaging.' },
+    ],
+  },
+  {
+    slug: 'hair-bows',
+    shortName: 'Hair Bows',
+    title: 'Custom Hair Bows Manufacturer',
+    seoTitle: 'Custom Hair Bows Manufacturer & Supplier | WINCOME',
+    description: 'Custom satin, grosgrain, oversized and multi-layer hair bows for brands. Private-label colors, clips, logos and packaging. MOQ from 200 pieces.',
+    intro: 'WINCOME manufactures custom hair bows for fashion, kids, school, event and gift collections. Choose satin or grosgrain ribbon, bow dimensions, loop structure, tail length, clip hardware, edge finishing, branded labels and display packaging.',
+    buyerNotes: [
+      'Satin bows for soft shine, events and premium gifting.',
+      'Grosgrain constructions for crisp shape and everyday durability.',
+      'Oversized and multi-layer formats for statement and social-first collections.',
+    ],
+    faq: [
+      { q: 'What types of hair bow can be customized?', a: 'Satin, grosgrain, oversized, multi-layer and clip-mounted bows can be developed in custom dimensions, colors and constructions.' },
+      { q: 'Which clip hardware can be used?', a: 'Alligator clips, barrettes and other suitable metal bases can be selected according to bow size, target age group and holding requirement.' },
+      { q: 'What is the MOQ for private-label hair bows?', a: 'Most custom hair bow styles start from 200 to 300 pieces per design.' },
+    ],
+  },
+  {
+    slug: 'hair-clips-barrettes',
+    shortName: 'Hair Clips & Barrettes',
+    title: 'Custom Hair Clips & Barrettes Manufacturer',
+    seoTitle: 'Custom Hair Clips & Barrettes Manufacturer | WINCOME',
+    description: 'Custom acetate, pearl, matte, crystal and flower hair clips and barrettes. Private-label materials, plating, logos and packaging. MOQ from 100 pieces.',
+    intro: 'WINCOME produces custom hair clips and barrettes in acetate, coated metal, pearl, crystal and decorative flower constructions. Buyers can specify base hardware, dimensions, plating or coating, surface decoration, branding and retail packaging.',
+    buyerNotes: [
+      'Acetate barrettes for premium color patterns and sculptural silhouettes.',
+      'Snap clips and coated metal for accessible everyday collections.',
+      'Pearl, crystal and flower designs for bridal, evening and gift assortments.',
+    ],
+    faq: [
+      { q: 'Which barrette and hair clip materials are available?', a: 'Options include cellulose acetate, coated metal, plated alloy, faux pearl, crystal and mixed decorative constructions.' },
+      { q: 'Can the base clip and decoration be customized?', a: 'Yes. Base length, closure, plating, coating, acetate shape, stone or pearl layout, logo and packaging can be sampled to specification.' },
+      { q: 'What is the MOQ for custom hair clips and barrettes?', a: 'Selected acetate barrettes start from 100 pieces. Most decorated metal clips start from 200 to 300 pieces per design.' },
+    ],
+  },
+];
+
+export const categoryMap = Object.fromEntries(productCategories.map(category => [category.slug, category]));
+export const categoryProducts = slug => products.filter(product => product.category === slug);

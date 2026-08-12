@@ -1,6 +1,7 @@
 import { Link, useLocation } from 'react-router-dom';
 import { productMeta } from '../data/productMeta';
 import { articles } from '../data/articles';
+import { productCategoryMeta } from '../data/productCategoryMeta';
 
 const labels = {
   '/': 'Home',
@@ -22,8 +23,14 @@ export default function Breadcrumb() {
   crumbs.push({ label: 'Home', path: '/' });
 
   const segments = location.pathname.split('/').filter(Boolean);
+  if (segments[0] === 'products' && segments[1] === 'category') {
+    const category = productCategoryMeta[segments[2]];
+    crumbs.push({ label: 'Products', path: '/products' });
+    crumbs.push({ label: category?.shortName || segments[2], path: null });
+  }
+
   let current = '';
-  for (const seg of segments) {
+  for (const seg of segments[1] === 'category' ? [] : segments) {
     current += `/${seg}`;
     let label = labels[current] || seg;
     // Use real product names / article titles instead of URL slugs

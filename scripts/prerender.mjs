@@ -8,6 +8,7 @@ import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { productMeta } from '../src/data/productMeta.js';
 import { articles } from '../src/data/articles.js';
+import { productCategories } from '../src/data/productCatalog.js';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const dist = path.join(root, 'dist');
@@ -16,6 +17,7 @@ const serverEntry = path.join(root, 'dist-ssr', 'entry-server.js');
 const routes = [
   '/', '/products', '/customization', '/about', '/contact', '/faq', '/quality', '/cases', '/blog', '/privacy', '/terms',
   ...Object.keys(productMeta).map((id) => `/products/${id}`),
+  ...productCategories.map((category) => `/products/category/${category.slug}`),
   ...articles.map((article) => `/blog/${article.slug}`),
 ];
 
