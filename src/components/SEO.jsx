@@ -99,7 +99,7 @@ export function getSeoMeta(pathname) {
     const pm = productMeta[id];
     if (pm) {
       meta = {
-        title: `${pm.name} — WINCOME`,
+        title: `Custom ${pm.name} Manufacturer | WINCOME`,
         description: buildProductDescription(pm),
       };
     }
