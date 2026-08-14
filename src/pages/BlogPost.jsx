@@ -122,7 +122,7 @@ export default function BlogPost() {
         headline: post.title,
         description: post.metaDescription,
         datePublished: post.date,
-        dateModified: post.date,
+        dateModified: post.updatedDate || post.date,
         image: `https://wincomehair.com${post.image}`,
         author: { '@type': 'Organization', name: 'WINCOME Hair Accessories', url: 'https://wincomehair.com' },
         publisher: { '@type': 'Organization', name: 'WINCOME Hair Accessories', url: 'https://wincomehair.com' },
@@ -154,22 +154,22 @@ export default function BlogPost() {
         <div className="max-w-3xl">
           <div className="flex items-center gap-3 mb-4">
             <span className="text-[10px] tracking-wider uppercase bg-gold/10 text-bronze px-2 py-1">{post.category}</span>
-            <span className="text-[10px] tracking-wider uppercase text-tan">{post.date} · {post.readTime} · By WINCOME Team</span>
+            <span className="text-[10px] tracking-wider uppercase text-tan">{post.updatedDate ? `Updated ${post.updatedDate}` : post.date} · {post.readTime} · By WINCOME Team</span>
           </div>
           <h1 className="text-display-lg text-navy leading-tight mb-8">{post.title}</h1>
         </div>
 
         <div className="aspect-[16/6] overflow-hidden mb-12 bg-sand">
-          <img src={post.image} alt={post.title} fetchpriority="high" className="w-full h-full object-cover" />
+          <img src={post.image} alt={post.title} width="1535" height="864" fetchpriority="high" decoding="async" className="w-full h-full object-cover" />
         </div>
 
         <div className="max-w-3xl">
           {post.sections.map((s, i) => renderSection(s, i))}
           {post.sources?.length > 0 && (
             <aside className="mt-12 border border-bronze/10 bg-sand/40 p-6">
-              <h2 className="text-lg font-display text-navy mb-3">Community Research Sources</h2>
+              <h2 className="text-lg font-display text-navy mb-3">Research Sources</h2>
               <p className="text-sm text-tan leading-relaxed mb-4">
-                These public discussions were used to identify recurring buyer questions. They are not controlled product tests or medical evidence.
+                Community discussions identify recurring buyer questions; medical and safety statements rely on the cited authoritative sources. Community reports are not controlled product tests.
               </p>
               <ul className="space-y-2">
                 {post.sources.map(source => (
