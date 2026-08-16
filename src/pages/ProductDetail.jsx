@@ -354,6 +354,62 @@ const products = {
     applications: ['Trend-driven fashion brands', 'Social media styling', 'Gift sets & boutique retail', 'Photo shoots & editorial', 'Party & event lines'],
     customization: ['Satin color matching', 'Size (14cm/18cm/22cm)', 'Backing type (clip/elastic)', 'Printed ribbon & charm tags', 'Display card & gift box'],
   },
+  'clip-pearl-barrette': {
+    name: 'Pearl Cluster Barrettes', image: '/assets/images/product-clip-pearl-barrette.webp', category: 'Hair Clips & Barrettes',
+    moq: '200 pcs', leadTime: '12-15 days', material: 'Metal + Faux Pearl', style: 'Bridal / Occasion / Everyday',
+    sizes: 'Small (5cm) / Medium (8cm) / Large (10cm)', finish: 'Gold-tone / Silver-tone frame',
+    logo: 'Metal charm tag, laser engraving on clip body', packaging: 'Individual polybag, display card, velvet pouch',
+    description: [
+      'Pearl cluster barrettes combine micro-pearl paving with larger statement pearls across gold- or silver-tone metal frames. The assortment can include compact snap clips, elongated curved barrettes and open-center shapes for bridal, occasion and everyday collections.',
+      'Buyers can specify the base mechanism, pearl size, layout, frame tone and finished dimensions during sampling. Material, coating adhesion, edge finish and holding force should be approved against the intended hairstyle and target market before bulk production.',
+      'Available in 5cm, 8cm and 10cm formats with multiple pearl layouts. MOQ starts from 200 pcs, with a typical production lead time of 12-15 days after sample approval.',
+    ],
+    details: ['Faux pearl decoration on a metal clip base', 'Micro-pave, graduated and cluster layout options', 'Gold-tone or silver-tone frame options', 'Snap, curved barrette and open-center formats', 'Pearl size and spacing confirmed during sampling', 'Sizes: 5cm / 8cm / 10cm', 'Edge finish and clip tension checked during approval', 'Display-card and pouch packaging options'],
+    applications: ['Bridal and wedding collections', 'Boutique retail and gift sets', 'Occasion and formal-wear lines', 'Beauty subscription boxes', 'Premium fashion accessory brands'],
+    customization: ['Gold- or silver-tone frame', 'Pearl size, colour and layout', 'Clip mechanism and dimensions', 'Charm tag or logo engraving', 'Display card, pouch or gift packaging'],
+  },
+  'clip-acetate-snap': {
+    name: 'Acetate Snap Hair Clips', image: '/assets/images/product-clip-acetate-snap.webp', category: 'Hair Clips & Barrettes',
+    moq: '150 pcs', leadTime: '12-15 days', material: 'Cellulose Acetate', style: 'Everyday / Minimal / Modern',
+    sizes: 'Small (5cm) / Medium (7cm) / Long (9cm)', finish: 'Marble / Tortoiseshell / Pearl-effect / Solid',
+    logo: 'Laser engraving, foil stamping', packaging: 'Individual polybag, display card',
+    description: [
+      'Acetate snap clips and barrettes use patterned cellulose acetate to create marble, tortoiseshell, pearl-effect and solid colourways. Oval, tapered, rectangular and open-center profiles give private-label buyers several silhouettes within one coordinated range.',
+      'Colour, pattern placement, sheet thickness, metal hardware and clip tension can be reviewed during sampling. Finished edges should be checked for smoothness, and the mechanism should be matched to the target hair type and product size.',
+      'Available in 5cm, 7cm and 9cm lengths. MOQ starts from 150 pcs, with a typical production lead time of 12-15 days after sample approval.',
+    ],
+    details: ['Cellulose acetate decorative top', 'Marble, tortoiseshell, pearl-effect and solid finishes', 'Oval, tapered, rectangular and open-center shapes', 'Metal snap or barrette mechanism options', 'Sheet thickness and clip tension confirmed during sampling', 'Sizes: 5cm / 7cm / 9cm', 'Custom colour development available', 'Smooth edge finishing specified for production'],
+    applications: ['Everyday fashion and lifestyle brands', 'Boutique retail and multipack sets', 'Travel and convenience retail', 'Salon accessory lines', 'Private-label seasonal collections'],
+    customization: ['Custom colour and pattern development', 'Shape and clip mechanism', 'Size and acetate thickness', 'Laser engraving or foil-stamp logo', 'Mixed-shape and mixed-colour assortments'],
+  },
+  'bow-satin-barrette': {
+    name: 'Satin Ribbon Bow Barrettes', image: '/assets/images/product-bow-satin-barrette.webp', category: 'Hair Bows & Ribbons',
+    moq: '200 pcs', leadTime: '10-12 days', material: 'Premium Satin', style: 'Romantic / Feminine / Classic',
+    sizes: 'Bow (10cm wide) / Ribbon tail (15-20cm)', finish: 'High-sheen satin',
+    logo: 'Printed ribbon, woven label, charm tag', packaging: 'Display card, polybag, gift box',
+    description: [
+      'Satin ribbon bow barrettes pair structured double-loop bows with metal clip hardware. Compact-tail and long-tail formats can be developed in coordinated colours for fashion, bridal, occasion and gift collections.',
+      'Buyers can select the satin colour, ribbon width, bow dimensions, tail length, stitching and backing mechanism. Shape retention, colour matching and clip hold should be approved on a pre-production sample before bulk production.',
+      'A common specification uses a 10cm bow with 15-20cm ribbon tails. MOQ starts from 200 pcs, with a typical production lead time of 10-12 days after sample approval.',
+    ],
+    details: ['Double-loop satin bow construction', 'Compact-tail and long-tail formats', 'Metal alligator clip or barrette backing', 'Bow width and tail length confirmed during sampling', 'Standard palette plus custom colour matching', 'Woven label, printed ribbon or charm branding', 'Stitching and shape retention checked during approval', 'Display-card and gift-box packaging options'],
+    applications: ['Bridal and occasion collections', 'Boutique retail and gift sets', 'Fashion and lifestyle brands', 'Seasonal accessory ranges', 'Premium packaging programmes'],
+    customization: ['Custom satin colour', 'Ribbon width, bow size and tail length', 'Printed ribbon, woven label or charm branding', 'Alligator clip or barrette backing', 'Display card, polybag or gift box'],
+  },
+  'claw-butterfly-resin': {
+    name: 'Resin Butterfly Claw Clips', image: '/assets/images/product-claw-butterfly-resin.webp', category: 'Hair Claws & Clips',
+    moq: '200 pcs', leadTime: '15-18 days', material: 'Resin + Metal Frame', style: 'Statement / Feminine / Boho',
+    sizes: 'Medium (7cm) / Large (9cm)', finish: 'Translucent resin / Gold-tone or rose-gold-tone frame',
+    logo: 'Metal charm tag, laser engraving', packaging: 'Individual polybag, display card, gift box',
+    description: [
+      'Resin butterfly claw clips combine translucent wing panels with a metal frame and spring mechanism. Amber, cream, blush and champagne colourways can be developed with clean, pearl-accented or rhinestone-accented finishes.',
+      'Buyers can specify the wing colour, resin effect, frame tone, decoration and finished size. Spring tension, tooth alignment, edge finish and decoration adhesion should be confirmed during sampling for the intended hair type and market.',
+      'Available in medium 7cm and large 9cm sizes. MOQ starts from 200 pcs, with a typical production lead time of 15-18 days after sample approval.',
+    ],
+    details: ['Translucent resin butterfly wing panels', 'Metal frame and spring mechanism', 'Clean, pearl-accented and rhinestone-accented options', 'Amber, cream, blush and champagne colourways', 'Medium (7cm) and large (9cm) sizes', 'Spring tension and tooth alignment checked during sampling', 'Gold-tone and rose-gold-tone frame options', 'Display-card and gift-box packaging options'],
+    applications: ['Statement accessory and fashion brands', 'Bridal and bridesmaid collections', 'Social-first styling ranges', 'Boutique gift sets and retail', 'Boho and romantic fashion labels'],
+    customization: ['Wing colour and resin effect', 'Pearl, rhinestone or undecorated finish', 'Size (7cm / 9cm)', 'Frame tone and clip tension', 'Charm tag or laser-engraved logo'],
+  },
 };
 
 export default function ProductDetail() {

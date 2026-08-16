@@ -24,6 +24,10 @@ export const products = [
   { id: 'clip-matte', name: 'Matte Snap Hair Clips', category: 'hair-clips-barrettes', image: '/assets/images/product-clip-matte.webp', moq: '300 pcs', leadTime: '8-10 days', material: 'Coated Metal' },
   { id: 'clip-crystal', name: 'Crystal Rhinestone Barrettes', category: 'hair-clips-barrettes', image: '/assets/images/product-clip-crystal.webp', moq: '200 pcs', leadTime: '15-18 days', material: 'Metal + Crystal' },
   { id: 'clip-flower', name: 'Flower Hair Clips', category: 'hair-clips-barrettes', image: '/assets/images/product-clip-flower.webp', moq: '200 pcs', leadTime: '15-18 days', material: 'Metal + Crystal' },
+  { id: 'clip-pearl-barrette', name: 'Pearl Cluster Barrettes', category: 'hair-clips-barrettes', image: '/assets/images/product-clip-pearl-barrette.webp', moq: '200 pcs', leadTime: '12-15 days', material: 'Metal + Faux Pearl' },
+  { id: 'clip-acetate-snap', name: 'Acetate Snap Hair Clips', category: 'hair-clips-barrettes', image: '/assets/images/product-clip-acetate-snap.webp', moq: '150 pcs', leadTime: '12-15 days', material: 'Cellulose Acetate' },
+  { id: 'bow-satin-barrette', name: 'Satin Ribbon Bow Barrettes', category: 'hair-bows', image: '/assets/images/product-bow-satin-barrette.webp', moq: '200 pcs', leadTime: '10-12 days', material: 'Premium Satin' },
+  { id: 'claw-butterfly-resin', name: 'Resin Butterfly Claw Clips', category: 'hair-claw-clips', image: '/assets/images/product-claw-butterfly-resin.webp', moq: '200 pcs', leadTime: '15-18 days', material: 'Resin + Metal Frame' },
 ];
 
 export const productCategories = [
