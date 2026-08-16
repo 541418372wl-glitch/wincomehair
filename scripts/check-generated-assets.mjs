@@ -29,6 +29,7 @@ async function findIndexFiles(directory) {
 
 const files = await findIndexFiles(dist);
 const descriptions = [];
+const referencedAssets = new Map();
 
 for (const file of files) {
   const html = await fs.readFile(file, 'utf8');
@@ -41,6 +42,33 @@ for (const file of files) {
     throw new Error(`Meta description length ${description.length} outside ${minDescription}-${maxDescription}: ${route}`);
   }
   descriptions.push({ route, description });
+
+  for (const match of html.matchAll(/\b(src|srcset)="([^"]+)"/gi)) {
+    const [, attribute, value] = match;
+    const candidates = attribute.toLowerCase() === 'srcset'
+      ? value.split(',').map((candidate) => candidate.trim().split(/\s+/)[0])
+      : [value];
+
+    for (const candidate of candidates) {
+      if (!candidate.startsWith('/')) continue;
+      const assetPath = decodeURIComponent(candidate.split(/[?#]/)[0]);
+      const routes = referencedAssets.get(assetPath) || new Set();
+      routes.add(route);
+      referencedAssets.set(assetPath, routes);
+    }
+  }
+}
+
+const missingAssets = [];
+for (const [assetPath, routes] of referencedAssets) {
+  try {
+    await fs.access(path.join(dist, assetPath.slice(1)));
+  } catch {
+    missingAssets.push(`${assetPath} (${[...routes].join(', ')})`);
+  }
+}
+if (missingAssets.length) {
+  throw new Error(`Missing built assets referenced by src/srcset: ${missingAssets.join('; ')}`);
 }
 
 const duplicates = descriptions.filter((item, index, items) => (
@@ -83,5 +111,6 @@ if (!csp.includes(`'${styleHash}'`)) {
 const lengths = descriptions.map(({ description }) => description.length);
 console.log(
   `[generated-assets] ${descriptions.length} unique descriptions; `
-  + `length ${Math.min(...lengths)}-${Math.max(...lengths)}; responsive AVIF/WebP and CSP hash budgets passed`,
+  + `length ${Math.min(...lengths)}-${Math.max(...lengths)}; ${referencedAssets.size} local src/srcset assets present; `
+  + 'responsive AVIF/WebP and CSP hash budgets passed',
 );
