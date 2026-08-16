@@ -1,5 +1,6 @@
 import { Link, useParams } from 'react-router-dom';
 import { categoryMap, categoryProducts, productCategories } from '../data/productCatalog';
+import { productCategoryContent } from '../data/productCategoryContent';
 
 function ProductCard({ product }) {
   return (
@@ -47,6 +48,7 @@ export default function ProductCategory() {
   }
 
   const items = categoryProducts(category);
+  const content = productCategoryContent[category];
   const url = `https://wincomehair.com/products/category/${category}`;
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -85,9 +87,25 @@ export default function ProductCategory() {
         <p className="section-label">Factory-Direct Product Category</p>
         <h1 className="max-w-4xl text-display-lg leading-tight text-navy">{data.title}</h1>
         <p className="mt-6 max-w-3xl text-lg leading-relaxed text-tan">{data.intro}</p>
+        <p className="mt-4 max-w-3xl leading-relaxed text-bronze/80">{content.positioning}</p>
         <div className="mt-8 flex flex-col gap-3 sm:flex-row">
           <Link to="/contact" className="btn-primary justify-center">Request a Category Quote</Link>
           <Link to="/customization" className="btn-outline justify-center">Explore OEM / ODM</Link>
+        </div>
+      </section>
+
+      <section className="container-site pb-14 md:pb-20" aria-label={`${data.shortName} order facts`}>
+        <div className="grid grid-cols-2 border border-bronze/10 bg-white md:grid-cols-4">
+          {content.facts.map((fact, index) => (
+            <div
+              key={fact.label}
+              className={`p-5 md:p-6 ${index % 2 === 0 ? 'border-r border-bronze/10' : ''} ${index < 2 ? 'border-b border-bronze/10 md:border-b-0' : ''} ${index > 0 ? 'md:border-l md:border-bronze/10' : ''}`}
+            >
+              <p className="text-[10px] font-medium uppercase tracking-[0.14em] text-tan">{fact.label}</p>
+              <p className="mt-2 font-display text-xl text-navy">{fact.value}</p>
+              <p className="mt-1 text-xs leading-relaxed text-tan">{fact.note}</p>
+            </div>
+          ))}
         </div>
       </section>
 
@@ -121,6 +139,45 @@ export default function ProductCategory() {
         </div>
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {items.map(product => <ProductCard key={product.id} product={product} />)}
+        </div>
+      </section>
+
+      <section className="border-y border-bronze/10 bg-white">
+        <div className="container-site section-gap">
+          <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
+            <div>
+              <p className="section-label">OEM / ODM Specification</p>
+              <h2 className="text-display-md text-navy">What Buyers Can Customize</h2>
+              <p className="mt-5 max-w-xl leading-relaxed text-tan">
+                A useful quotation starts with the product construction, target customer and retail positioning. These are the main variables we confirm before sampling {data.shortName.toLowerCase()}.
+              </p>
+              <div className="mt-7 flex flex-col gap-3 sm:flex-row lg:flex-col lg:items-start">
+                <Link to="/customization" className="btn-outline justify-center">View OEM / ODM Capabilities</Link>
+                <Link to="/sourcing" className="text-sm font-medium text-navy underline underline-offset-4 hover:text-gold">Review MOQ, samples and production</Link>
+              </div>
+            </div>
+            <div className="border border-bronze/10">
+              {content.customization.map((item, index) => (
+                <div key={item.area} className={`grid gap-2 p-5 sm:grid-cols-[0.32fr_0.68fr] sm:gap-6 ${index < content.customization.length - 1 ? 'border-b border-bronze/10' : ''}`}>
+                  <h3 className="text-sm font-medium text-navy">{item.area}</h3>
+                  <p className="text-sm leading-relaxed text-tan">{item.options}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="container-site section-gap">
+        <p className="section-label">Wholesale & Private Label</p>
+        <h2 className="max-w-3xl text-display-md text-navy">Programs This Category Supports</h2>
+        <div className="mt-8 grid gap-5 md:grid-cols-3">
+          {content.buyers.map((buyer) => (
+            <article key={buyer.title} className="border border-bronze/10 bg-sand/30 p-6">
+              <h3 className="font-display text-lg text-navy">{buyer.title}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-tan">{buyer.text}</p>
+            </article>
+          ))}
         </div>
       </section>
 
@@ -159,6 +216,27 @@ export default function ProductCategory() {
               <p className="px-6 pb-6 text-sm leading-relaxed text-tan">{item.a}</p>
             </details>
           ))}
+        </div>
+      </section>
+
+      <section className="border-t border-bronze/10 bg-sand/35">
+        <div className="container-site section-gap">
+          <div className="flex flex-col justify-between gap-4 md:flex-row md:items-end">
+            <div>
+              <p className="section-label">Buyer Resources</p>
+              <h2 className="text-display-md text-navy">Research Before You Sample</h2>
+            </div>
+            <Link to="/blog" className="text-sm font-medium text-navy underline underline-offset-4 hover:text-gold">Browse all sourcing guides</Link>
+          </div>
+          <div className="mt-8 grid gap-5 md:grid-cols-3">
+            {content.relatedGuides.map((guide) => (
+              <Link key={guide.slug} to={`/blog/${guide.slug}`} className="group border border-bronze/10 bg-white p-6 transition-colors hover:border-gold">
+                <h3 className="font-display text-lg text-navy transition-colors group-hover:text-gold">{guide.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-tan">{guide.text}</p>
+                <span className="mt-5 inline-flex text-xs font-medium uppercase tracking-wider text-navy group-hover:text-gold">Read guide <span aria-hidden="true" className="ml-1">→</span></span>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
     </div>

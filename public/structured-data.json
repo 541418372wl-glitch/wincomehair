@@ -5,6 +5,10 @@
   "url": "https://wincomehair.com",
   "description": "Custom hair accessories manufacturer specializing in hair clips, claw clips, headbands, scrunchies, and private-label collections for global brands. OEM/ODM, low MOQ from 100 pcs.",
   "foundingDate": "2010",
+  "numberOfEmployees": {
+    "@type": "QuantitativeValue",
+    "minValue": 200
+  },
   "address": {
     "@type": "PostalAddress",
     "addressCountry": "CN"
@@ -13,7 +17,8 @@
     "@type": "ContactPoint",
     "contactType": "sales",
     "telephone": "+86-18989846141",
-    "email": "info@wincomehair.com"
+    "email": "info@wincomehair.com",
+    "availableLanguage": ["English", "Chinese"]
   },
   "sameAs": []
 }

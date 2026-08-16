@@ -24,11 +24,25 @@ export default function Products() {
   return (
     <div className="pt-24">
       <div className="container-site section-gap">
-        <p className="section-label">Product Catalog</p>
-        <h1 className="text-display-lg text-navy mb-4">Full <span className="text-gold">Collection</span></h1>
-        <p className="text-tan text-lg max-w-2xl mb-12 leading-relaxed">
-          Every product is fully customizable — size, color, material, finish, logo, and packaging. Click any item to request a quote.
+        <p className="section-label">Wholesale Product Catalog</p>
+        <h1 className="max-w-4xl text-display-lg text-navy mb-4">Wholesale Hair Accessories for <span className="text-gold">Brands & Retailers</span></h1>
+        <p className="text-tan text-lg max-w-3xl mb-10 leading-relaxed">
+          Explore {allProducts.length} customizable hair clips, claw clips, headbands, scrunchies and bows. Choose an existing production direction, then specify the size, color, material, finish, logo and retail packaging for your market.
         </p>
+
+        <div className="mb-12 grid grid-cols-2 border border-bronze/10 bg-white md:grid-cols-4" aria-label="Wholesale program facts">
+          {[
+            ['From 100 pcs', 'Starting MOQ'],
+            ['5–7 days', 'Physical sampling'],
+            ['8–18 days', 'Typical production'],
+            ['50+ countries', 'Export experience'],
+          ].map(([value, label], index) => (
+            <div key={label} className={`p-5 md:p-6 ${index < 3 ? 'md:border-r md:border-bronze/10' : ''} ${index < 2 ? 'border-b border-bronze/10 md:border-b-0' : ''} ${index % 2 === 0 ? 'border-r border-bronze/10 md:border-r' : ''}`}>
+              <p className="font-display text-xl text-navy">{value}</p>
+              <p className="mt-1 text-xs uppercase tracking-wider text-tan">{label}</p>
+            </div>
+          ))}
+        </div>
 
         <nav aria-label="Product category pages" className="mb-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
           {productCategories.map(category => (
@@ -88,6 +102,20 @@ export default function Products() {
             </Link>
           ))}
         </div>
+
+        <section className="mt-20 border border-bronze/10 bg-sand/35 p-8 md:p-12">
+          <div className="grid gap-8 md:grid-cols-[1fr_auto] md:items-center">
+            <div>
+              <p className="section-label">Planning a First Order?</p>
+              <h2 className="text-display-sm text-navy">Compare MOQ, Samples and Production Before Requesting a Quote</h2>
+              <p className="mt-4 max-w-3xl leading-relaxed text-tan">Our buyer guide explains minimum quantities by product type, the 5–7 day sampling process, bulk-production milestones, payment terms and international shipping options.</p>
+            </div>
+            <div className="flex flex-col gap-3 sm:flex-row md:flex-col">
+              <Link to="/sourcing" className="btn-primary justify-center">View Order Process</Link>
+              <Link to="/customization" className="btn-outline justify-center">Explore OEM / ODM</Link>
+            </div>
+          </div>
+        </section>
       </div>
     </div>
   );
