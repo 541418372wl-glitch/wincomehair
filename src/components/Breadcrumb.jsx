@@ -7,6 +7,7 @@ const labels = {
   '/': 'Home',
   '/products': 'Products',
   '/customization': 'OEM / ODM',
+  '/sourcing': 'MOQ & Order Process',
   '/about': 'About',
   '/cases': 'Case Studies',
   '/quality': 'Quality Control',

@@ -2,7 +2,7 @@ import { PassThrough } from 'node:stream';
 import { renderToPipeableStream } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom';
 import { AppContent } from './App';
-import { getSeoMeta, OG_IMAGE, SITE, SITE_NAME } from './components/SEO';
+import { getSeoMeta, OG_IMAGE, ORGANIZATION_SCHEMA, SITE, SITE_NAME } from './components/SEO';
 
 function escapeHtml(value) {
   return String(value ?? '')
@@ -49,17 +49,7 @@ function buildHead(pathname) {
   if (pathname === '/') {
     tags.push(
       `<script type="application/ld+json" id="org-jsonld">${jsonLd({
-        '@context': 'https://schema.org',
-        '@type': 'Organization',
-        name: SITE_NAME,
-        url: SITE,
-        logo: `${SITE}/logo-192.png`,
-        contactPoint: {
-          '@type': 'ContactPoint',
-          telephone: '+86-189-8984-6141',
-          contactType: 'sales',
-          availableLanguage: ['English', 'Chinese'],
-        },
+        ...ORGANIZATION_SCHEMA,
       })}</script>`,
       `<script type="application/ld+json" id="website-jsonld">${jsonLd({
         '@context': 'https://schema.org',

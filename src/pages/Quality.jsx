@@ -36,9 +36,9 @@ export default function Quality() {
     <div className="pt-24">
       <div className="container-site section-gap">
         <p className="section-label">Quality Assurance</p>
-        <h1 className="text-display-lg text-navy mb-4">How We <span className="text-gold">Control Quality</span></h1>
-        <p className="text-tan text-lg max-w-2xl mb-16 leading-relaxed">
-          Every product shipped from our factory passes through a three-stage quality control system. From raw materials to final packaging — nothing leaves without inspection.
+        <h1 className="text-display-lg text-navy mb-4">Hair Accessories <span className="text-gold">Quality Control & Compliance</span></h1>
+        <p className="text-tan text-lg max-w-3xl mb-16 leading-relaxed">
+          Every order moves through incoming-material inspection, in-process checks, AQL 2.5 final random inspection and pre-shipment documentation. Product-specific tests and destination-market requirements are agreed before sampling so the approved sample becomes the production reference.
         </p>
 
         {/* QC Stages */}
@@ -110,6 +110,7 @@ export default function Quality() {
           <Link to="/contact" className="btn-primary text-base px-12 py-5">
             Request Sample <span className="ml-1">→</span>
           </Link>
+          <p className="mt-5 text-sm text-tan">Planning a first order? <Link to="/sourcing" className="font-medium text-navy underline underline-offset-4 hover:text-gold">Review MOQ, sampling and shipping terms</Link>.</p>
         </div>
       </div>
     </div>

@@ -9,6 +9,30 @@ export const SITE_NAME = 'WINCOME Hair Accessories';
 export const OG_IMAGE = `${SITE}/og-image.png`;
 export const SEO_DESCRIPTION_MIN = 105;
 export const SEO_DESCRIPTION_MAX = 155;
+export const ORGANIZATION_SCHEMA = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: SITE_NAME,
+  url: SITE,
+  logo: `${SITE}/logo-192.png`,
+  description: 'Custom hair accessories manufacturer and OEM/ODM supplier for brands, wholesalers, retailers and importers.',
+  foundingDate: '2010',
+  address: {
+    '@type': 'PostalAddress',
+    addressCountry: 'CN',
+  },
+  numberOfEmployees: {
+    '@type': 'QuantitativeValue',
+    minValue: 200,
+  },
+  contactPoint: {
+    '@type': 'ContactPoint',
+    telephone: '+86-189-8984-6141',
+    email: 'info@wincomehair.com',
+    contactType: 'sales',
+    availableLanguage: ['English', 'Chinese'],
+  },
+};
 
 const pageMeta = {
   '/': {
@@ -16,12 +40,16 @@ const pageMeta = {
     description: 'Custom hair clips, claw clips, headbands, scrunchies & hair bows manufacturer. OEM/ODM, MOQ from 100 pcs, free design service, global shipping.',
   },
   '/products': {
-    title: 'Hair Accessories Product Catalog — WINCOME',
-    description: 'Browse our full catalog of custom hair accessories: hair claws, headbands, scrunchies, bows, and hair pins. OEM/ODM manufacturing for global brands.',
+    title: 'Wholesale Hair Accessories Catalog | WINCOME',
+    description: 'Browse 29 wholesale hair accessories with MOQ from 100 pieces. Custom materials, colors, logos and packaging for brands, retailers and importers.',
   },
   '/customization': {
-    title: 'OEM & ODM Hair Accessories Customization — WINCOME',
-    description: 'Full customization for hair accessories: custom logo, Pantone colors, material selection, packaging design. Low MOQ, free design mockup in 24h.',
+    title: 'Custom Hair Accessories OEM & Private Label | WINCOME',
+    description: 'Custom hair accessories OEM/ODM with Pantone colors, materials, logos, labels and retail packaging. MOQ from 100 pieces and samples in 5–7 days.',
+  },
+  '/sourcing': {
+    title: 'Hair Accessories MOQ, Samples & Production | WINCOME',
+    description: 'Plan a custom hair accessories order with clear MOQ, 5–7 day sampling, 8–18 day production, payment terms, quality checks and worldwide shipping.',
   },
   '/about': {
     title: 'About WINCOME Hair Accessories — Factory & Certifications',
@@ -37,7 +65,7 @@ const pageMeta = {
   },
   '/quality': {
     title: 'Quality Control — WINCOME Hair Accessories Manufacturer',
-    description: 'Three-stage quality control system: raw material inspection, in-process QC, and AQL 2.5 final random inspection. BSCI, ISO 9001, OEKO-TEX certified.',
+    description: 'Review WINCOME hair accessories quality control: material checks, in-process QC, AQL 2.5 inspection, testing and compliance documentation.',
   },
   '/cases': {
     title: 'Case Studies — WINCOME Hair Accessories',
@@ -198,19 +226,7 @@ export default function SEO() {
 
     // Structured data
     if (location.pathname === '/') {
-      upsertScript('org-jsonld', {
-        '@context': 'https://schema.org',
-        '@type': 'Organization',
-        name: SITE_NAME,
-        url: SITE,
-        logo: `${SITE}/logo-192.png`,
-        contactPoint: {
-          '@type': 'ContactPoint',
-          telephone: '+86-189-8984-6141',
-          contactType: 'sales',
-          availableLanguage: ['English', 'Chinese'],
-        },
-      });
+      upsertScript('org-jsonld', ORGANIZATION_SCHEMA);
       upsertScript('website-jsonld', {
         '@context': 'https://schema.org',
         '@type': 'WebSite',

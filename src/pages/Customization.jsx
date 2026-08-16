@@ -25,15 +25,46 @@ const customSteps = [
   { step: '04', title: 'Quality & Shipping', desc: 'Final QC inspection, professional packaging, and global shipping via your preferred logistics method.' },
 ];
 
+const serviceFacts = [
+  { value: 'From 100 pcs', label: 'Starting MOQ' },
+  { value: 'Within 24h', label: 'Initial response' },
+  { value: '5–7 days', label: 'Physical sample' },
+  { value: '8–18 days', label: 'Typical production' },
+];
+
+const privateLabelRows = [
+  ['Product development', 'Existing catalog styles, modified constructions or new shapes with custom dimensions and performance requirements'],
+  ['Color & finish', 'Pantone-matched materials, custom prints, metal plating, surface coating and coordinated seasonal color sets'],
+  ['Product branding', 'Laser engraving, foil stamping, metal logo plates, woven labels and printed ribbon'],
+  ['Retail packaging', 'Logo cards, hang tags, pouches, gift boxes, inserts, barcodes and display-ready packaging'],
+  ['Compliance support', 'Material documentation, agreed testing, destination labels and pre-shipment inspection records'],
+];
+
+const quoteFactors = [
+  { title: 'Existing vs new construction', text: 'Using an existing style avoids new tooling. Bespoke shapes, molds and hardware are quoted separately.' },
+  { title: 'Material and finish', text: 'Acetate, metal, silk, decoration, plating and special color effects have different setup and unit costs.' },
+  { title: 'Quantity and color split', text: 'MOQ may apply by style or color. Larger consolidated runs usually improve unit and freight efficiency.' },
+  { title: 'Branding and packaging', text: 'Logo method, labels, inserts, cards, pouches and boxes add artwork, tooling and assembly steps.' },
+];
+
 export default function Customization() {
   return (
     <div className="pt-24">
       <div className="container-site section-gap">
         <p className="section-label">OEM / ODM Capabilities</p>
-        <h1 className="text-[38px] leading-[1.1] sm:text-display-lg text-navy mb-4">Custom <span className="text-gold">Manufacturing</span></h1>
-        <p className="text-tan text-lg max-w-2xl mb-16 leading-relaxed">
-          Full-spectrum customization for global brands. From initial concept to final delivery — your product, your specifications, our manufacturing expertise.
+        <h1 className="text-[38px] leading-[1.1] sm:text-display-lg text-navy mb-4">Custom Hair Accessories <span className="text-gold">OEM & Private Label</span></h1>
+        <p className="text-tan text-lg max-w-3xl mb-10 leading-relaxed">
+          Develop custom hair clips, claw clips, headbands, scrunchies and bows with controlled materials, Pantone colors, dimensions, logos, labels and retail packaging. WINCOME supports the process from product brief and physical sample to inspected bulk production and global shipping.
         </p>
+
+        <div className="mb-20 grid grid-cols-2 border border-bronze/10 bg-white md:grid-cols-4" aria-label="Customization service facts">
+          {serviceFacts.map((fact, index) => (
+            <div key={fact.label} className={`p-5 md:p-6 ${index < 3 ? 'md:border-r md:border-bronze/10' : ''} ${index < 2 ? 'border-b border-bronze/10 md:border-b-0' : ''} ${index % 2 === 0 ? 'border-r border-bronze/10 md:border-r' : ''}`}>
+              <p className="font-display text-xl text-navy">{fact.value}</p>
+              <p className="mt-1 text-xs uppercase tracking-wider text-tan">{fact.label}</p>
+            </div>
+          ))}
+        </div>
 
         {/* Capabilities Grid */}
         <div className="grid md:grid-cols-3 gap-8 mb-24">
@@ -62,6 +93,36 @@ export default function Customization() {
           </div>
         </div>
 
+        <div className="mb-24 grid gap-10 lg:grid-cols-[0.75fr_1.25fr] lg:gap-16">
+          <div>
+            <p className="section-label">Private-Label Scope</p>
+            <h2 className="text-display-sm text-navy">What Your Brand Can Specify</h2>
+            <p className="mt-5 leading-relaxed text-tan">Start with an existing production direction or send a complete design brief. Each quotation separates the product, branding, packaging and any tooling so buyers can compare options clearly.</p>
+            <Link to="/sourcing" className="mt-6 inline-flex text-sm font-medium text-navy underline underline-offset-4 hover:text-gold">Review MOQ and order requirements</Link>
+          </div>
+          <div className="border border-bronze/10 bg-white">
+            {privateLabelRows.map(([area, detail], index) => (
+              <div key={area} className={`grid gap-2 p-5 sm:grid-cols-[0.28fr_0.72fr] sm:gap-6 ${index < privateLabelRows.length - 1 ? 'border-b border-bronze/10' : ''}`}>
+                <h3 className="text-sm font-medium text-navy">{area}</h3>
+                <p className="text-sm leading-relaxed text-tan">{detail}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="mb-24">
+          <p className="section-label">Factory-Direct Quotation</p>
+          <h2 className="text-display-sm text-navy">What Changes MOQ and Unit Cost</h2>
+          <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+            {quoteFactors.map((factor) => (
+              <article key={factor.title} className="border border-bronze/10 bg-sand/35 p-6">
+                <h3 className="font-display text-lg text-navy">{factor.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-tan">{factor.text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+
         {/* Custom Process */}
         <div className="bg-navy text-white p-12 md:p-20 mb-24">
           <p className="text-xs font-medium tracking-[0.15em] uppercase text-champagne mb-4">Custom Project Process</p>
@@ -85,6 +146,7 @@ export default function Customization() {
           <Link to="/contact" className="btn-primary text-base px-12 py-5">
             Request Custom Quote <span className="ml-1">→</span>
           </Link>
+          <p className="mt-5 text-sm text-tan">Need QC or compliance details first? <Link to="/quality" className="font-medium text-navy underline underline-offset-4 hover:text-gold">Review our quality-control process</Link>.</p>
         </div>
       </div>
     </div>

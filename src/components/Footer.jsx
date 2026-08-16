@@ -12,9 +12,9 @@ const footerLinks = {
   ],
   Services: [
     { to: '/customization', label: 'OEM / ODM' },
-    { to: '/customization', label: 'Custom Logo' },
-    { to: '/customization', label: 'Private Label' },
-    { to: '/customization', label: 'Packaging Design' },
+    { to: '/customization', label: 'Private Label & Packaging' },
+    { to: '/sourcing', label: 'MOQ & Sampling' },
+    { to: '/sourcing', label: 'Order & Shipping Process' },
   ],
   Company: [
     { to: '/about', label: 'About Us' },
