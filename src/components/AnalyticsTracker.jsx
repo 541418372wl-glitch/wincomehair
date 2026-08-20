@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
-import { trackEvent, trackProductInquiry } from '../lib/analytics';
+import { CONSENT_CHANGED_EVENT, trackEvent, trackProductInquiry } from '../lib/analytics';
+import { trackAiReferral } from '../lib/aiReferral';
 
 function productIdFromPath(pathname) {
   const match = pathname.match(/^\/products\/([^/]+)$/);
@@ -22,6 +23,13 @@ export default function AnalyticsTracker() {
     }
     previousPath.current = path;
   }, [location.pathname, location.search]);
+
+  useEffect(() => {
+    const recordAiReferral = () => { void trackAiReferral(); };
+    recordAiReferral();
+    window.addEventListener(CONSENT_CHANGED_EVENT, recordAiReferral);
+    return () => window.removeEventListener(CONSENT_CHANGED_EVENT, recordAiReferral);
+  }, []);
 
   useEffect(() => {
     const handleClick = (event) => {

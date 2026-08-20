@@ -1,6 +1,7 @@
 import { Link, useParams, useLocation } from 'react-router-dom';
 import { articles } from '../data/articles';
 import { waLink } from '../lib/whatsapp';
+import { ORGANIZATION_ID, SITE, WEBSITE_ID } from '../components/SEO';
 
 function parseLinks(text) {
   const parts = [];
@@ -112,7 +113,7 @@ export default function BlogPost() {
   }
 
   const faqItems = post.sections.filter(s => s.t === 'faq').flatMap(s => s.items);
-  const url = `https://wincomehair.com${location.pathname}`;
+  const url = SITE + location.pathname;
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -123,10 +124,12 @@ export default function BlogPost() {
         description: post.metaDescription,
         datePublished: post.date,
         dateModified: post.updatedDate || post.date,
-        image: `https://wincomehair.com${post.image}`,
-        author: { '@type': 'Organization', name: 'WINCOME Hair Accessories', url: 'https://wincomehair.com' },
-        publisher: { '@type': 'Organization', name: 'WINCOME Hair Accessories', url: 'https://wincomehair.com' },
+        image: SITE + post.image,
+        author: { '@id': ORGANIZATION_ID },
+        publisher: { '@id': ORGANIZATION_ID },
+        isPartOf: { '@id': WEBSITE_ID },
         mainEntityOfPage: url,
+        inLanguage: 'en',
         ...(post.sources?.length ? { citation: post.sources.map(source => source.url) } : {}),
       },
       ...(faqItems.length ? [{

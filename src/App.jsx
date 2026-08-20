@@ -15,6 +15,7 @@ const ProductCategory = lazy(() => import('./pages/ProductCategory'));
 const Customization = lazy(() => import('./pages/Customization'));
 const Sourcing = lazy(() => import('./pages/Sourcing'));
 const About = lazy(() => import('./pages/About'));
+const ManufacturerProfile = lazy(() => import('./pages/ManufacturerProfile'));
 const Contact = lazy(() => import('./pages/Contact'));
 const FAQ = lazy(() => import('./pages/FAQ'));
 const Quality = lazy(() => import('./pages/Quality'));
@@ -50,6 +51,7 @@ export function AppContent() {
             <Route path="/customization" element={<Customization />} />
             <Route path="/sourcing" element={<Sourcing />} />
             <Route path="/about" element={<About />} />
+            <Route path="/manufacturer-profile" element={<ManufacturerProfile />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/faq" element={<FAQ />} />
             <Route path="/quality" element={<Quality />} />

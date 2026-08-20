@@ -18,6 +18,7 @@ const footerLinks = {
   ],
   Company: [
     { to: '/about', label: 'About Us' },
+    { to: '/manufacturer-profile', label: 'Manufacturer Profile' },
     { to: '/about', label: 'Our Factory' },
     { to: '/faq', label: 'FAQ' },
     { to: '/contact', label: 'Contact' },

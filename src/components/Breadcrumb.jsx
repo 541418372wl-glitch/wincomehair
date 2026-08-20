@@ -9,6 +9,7 @@ const labels = {
   '/customization': 'OEM / ODM',
   '/sourcing': 'MOQ & Order Process',
   '/about': 'About',
+  '/manufacturer-profile': 'Manufacturer Profile',
   '/cases': 'Case Studies',
   '/quality': 'Quality Control',
   '/faq': 'FAQ',

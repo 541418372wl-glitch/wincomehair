@@ -15,7 +15,7 @@ const dist = path.join(root, 'dist');
 const serverEntry = path.join(root, 'dist-ssr', 'entry-server.js');
 
 const routes = [
-  '/', '/products', '/customization', '/sourcing', '/about', '/contact', '/faq', '/quality', '/cases', '/blog', '/privacy', '/terms',
+  '/', '/products', '/customization', '/sourcing', '/about', '/manufacturer-profile', '/contact', '/faq', '/quality', '/cases', '/blog', '/privacy', '/terms',
   ...Object.keys(productMeta).map((id) => `/products/${id}`),
   ...productCategories.map((category) => `/products/category/${category.slug}`),
   ...articles.map((article) => `/blog/${article.slug}`),

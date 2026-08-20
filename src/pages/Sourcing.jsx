@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { ORGANIZATION_ID, SITE, WEBSITE_ID } from '../components/SEO';
 
 const orderFacts = [
   { label: 'Quote response', value: 'Within 24 hours', note: 'Based on a complete product brief' },
@@ -55,12 +56,19 @@ export default function Sourcing() {
     '@graph': [
       {
         '@type': 'WebPage',
+        '@id': SITE + '/sourcing#webpage',
         name: 'Hair Accessories MOQ, Sampling & Production Guide',
-        url: 'https://wincomehair.com/sourcing',
+        url: SITE + '/sourcing',
         description: 'WINCOME buyer guide covering custom hair accessories MOQ, samples, production, payment, quality checks and international shipping.',
+        isPartOf: { '@id': WEBSITE_ID },
+        publisher: { '@id': ORGANIZATION_ID },
+        about: { '@id': ORGANIZATION_ID },
+        inLanguage: 'en',
       },
       {
         '@type': 'FAQPage',
+        '@id': SITE + '/sourcing#faq',
+        isPartOf: { '@id': SITE + '/sourcing#webpage' },
         mainEntity: faqs.map((item) => ({
           '@type': 'Question',
           name: item.q,

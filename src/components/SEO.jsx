@@ -7,16 +7,32 @@ import { productCategoryMeta } from '../data/productCategoryMeta';
 export const SITE = 'https://wincomehair.com';
 export const SITE_NAME = 'WINCOME Hair Accessories';
 export const OG_IMAGE = `${SITE}/og-image.png`;
+export const ORGANIZATION_ID = SITE + '/#organization';
+export const WEBSITE_ID = SITE + '/#website';
 export const SEO_DESCRIPTION_MIN = 105;
 export const SEO_DESCRIPTION_MAX = 155;
 export const ORGANIZATION_SCHEMA = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
+  '@id': ORGANIZATION_ID,
   name: SITE_NAME,
+  alternateName: 'WINCOME',
   url: SITE,
   logo: `${SITE}/logo-192.png`,
   description: 'Custom hair accessories manufacturer and OEM/ODM supplier for brands, wholesalers, retailers and importers.',
   foundingDate: '2010',
+  email: 'info@wincomehair.com',
+  telephone: '+86-189-8984-6141',
+  areaServed: 'Worldwide',
+  knowsAbout: [
+    'Custom hair accessories manufacturing',
+    'Private-label hair accessories',
+    'Hair claw clips',
+    'Headbands',
+    'Scrunchies',
+    'Hair bows',
+    'Hair clips and barrettes',
+  ],
   address: {
     '@type': 'PostalAddress',
     addressCountry: 'CN',
@@ -32,6 +48,32 @@ export const ORGANIZATION_SCHEMA = {
     contactType: 'sales',
     availableLanguage: ['English', 'Chinese'],
   },
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Custom Hair Accessories Manufacturing',
+    itemListElement: [
+      { '@type': 'OfferCatalog', name: 'Hair Claw Clips', url: `${SITE}/products/category/hair-claw-clips` },
+      { '@type': 'OfferCatalog', name: 'Headbands', url: `${SITE}/products/category/headbands` },
+      { '@type': 'OfferCatalog', name: 'Scrunchies', url: `${SITE}/products/category/scrunchies` },
+      { '@type': 'OfferCatalog', name: 'Hair Bows', url: `${SITE}/products/category/hair-bows` },
+      { '@type': 'OfferCatalog', name: 'Hair Clips and Barrettes', url: `${SITE}/products/category/hair-clips-barrettes` },
+    ],
+  },
+  subjectOf: {
+    '@type': 'ProfilePage',
+    '@id': `${SITE}/manufacturer-profile#webpage`,
+    url: `${SITE}/manufacturer-profile`,
+  },
+};
+
+export const WEBSITE_SCHEMA = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  '@id': WEBSITE_ID,
+  name: SITE_NAME,
+  url: SITE,
+  publisher: { '@id': ORGANIZATION_ID },
+  inLanguage: 'en',
 };
 
 const pageMeta = {
@@ -54,6 +96,10 @@ const pageMeta = {
   '/about': {
     title: 'About WINCOME Hair Accessories — Factory & Certifications',
     description: 'WINCOME Hair Accessories: 15+ years manufacturing experience, BSCI & ISO 9001 certified. 3,000m² factory, 200+ staff, serving 500+ global brands.',
+  },
+  '/manufacturer-profile': {
+    title: 'Hair Accessories Manufacturer Profile | WINCOME',
+    description: 'Review WINCOME buyer fit, product categories, MOQ, sampling, production, customization, quality documentation and direct contact details.',
   },
   '/contact': {
     title: 'Request a Quote — WINCOME Hair Accessories',
@@ -227,12 +273,7 @@ export default function SEO() {
     // Structured data
     if (location.pathname === '/') {
       upsertScript('org-jsonld', ORGANIZATION_SCHEMA);
-      upsertScript('website-jsonld', {
-        '@context': 'https://schema.org',
-        '@type': 'WebSite',
-        name: SITE_NAME,
-        url: SITE,
-      });
+      upsertScript('website-jsonld', WEBSITE_SCHEMA);
     } else {
       clearScript('org-jsonld');
       clearScript('website-jsonld');

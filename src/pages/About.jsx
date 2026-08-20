@@ -19,9 +19,12 @@ export default function About() {
             <p className="text-tan text-lg leading-relaxed mb-6">
               WINCOME Hair Accessories is the dedicated hair accessories division of WINCOME — a trusted name in global apparel manufacturing. We bring the same commitment to quality, reliability, and partnership to every hair accessory we produce.
             </p>
-            <p className="text-tan leading-relaxed">
+            <p className="text-tan leading-relaxed mb-6">
               Our 3,000m² integrated facility houses design, prototyping, production, and quality control under one roof. With 15+ years of manufacturing expertise and a team of 200+ skilled professionals, we deliver consistent quality at factory-direct pricing.
             </p>
+            <Link to="/manufacturer-profile" className="text-sm font-medium text-navy underline underline-offset-4 hover:text-gold transition-colors">
+              Review manufacturer facts and buyer fit →
+            </Link>
           </div>
           <div className="aspect-[4/3] bg-sand flex items-center justify-center border border-bronze/10">
             <img src="/assets/images/hero-clips.webp" alt="WINCOME Factory" loading="lazy" className="w-full h-full object-cover" />

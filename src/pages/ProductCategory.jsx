@@ -1,6 +1,7 @@
 import { Link, useParams } from 'react-router-dom';
 import { categoryMap, categoryProducts, productCategories } from '../data/productCatalog';
 import { productCategoryContent } from '../data/productCategoryContent';
+import { ORGANIZATION_ID, SITE, WEBSITE_ID } from '../components/SEO';
 
 function ProductCard({ product }) {
   return (
@@ -49,7 +50,7 @@ export default function ProductCategory() {
 
   const items = categoryProducts(category);
   const content = productCategoryContent[category];
-  const url = `https://wincomehair.com/products/category/${category}`;
+  const url = SITE + '/products/category/' + category;
   const jsonLd = {
     '@context': 'https://schema.org',
     '@graph': [
@@ -58,6 +59,8 @@ export default function ProductCategory() {
         name: data.title,
         description: data.description,
         url,
+        isPartOf: { '@id': WEBSITE_ID },
+        publisher: { '@id': ORGANIZATION_ID },
         mainEntity: {
           '@type': 'ItemList',
           numberOfItems: items.length,
@@ -65,7 +68,7 @@ export default function ProductCategory() {
             '@type': 'ListItem',
             position: index + 1,
             name: product.name,
-            url: `https://wincomehair.com/products/${product.id}`,
+            url: SITE + '/products/' + product.id,
           })),
         },
       },
