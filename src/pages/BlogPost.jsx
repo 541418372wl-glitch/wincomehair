@@ -127,6 +127,12 @@ export default function BlogPost() {
         image: SITE + post.image,
         author: { '@id': ORGANIZATION_ID },
         publisher: { '@id': ORGANIZATION_ID },
+        ...(post.reviewedBy ? {
+          reviewedBy: {
+            '@type': 'Organization',
+            name: post.reviewedBy,
+          },
+        } : {}),
         isPartOf: { '@id': WEBSITE_ID },
         mainEntityOfPage: url,
         inLanguage: 'en',
@@ -157,7 +163,9 @@ export default function BlogPost() {
         <div className="max-w-3xl">
           <div className="flex items-center gap-3 mb-4">
             <span className="text-[10px] tracking-wider uppercase bg-gold/10 text-bronze px-2 py-1">{post.category}</span>
-            <span className="text-[10px] tracking-wider uppercase text-tan">{post.updatedDate ? `Updated ${post.updatedDate}` : post.date} · {post.readTime} · By WINCOME Team</span>
+            <span className="text-[10px] tracking-wider uppercase text-tan">
+              {post.updatedDate ? `Updated ${post.updatedDate}` : post.date} · {post.readTime} · {post.reviewedBy ? `Reviewed by ${post.reviewedBy}` : 'By WINCOME Team'}
+            </span>
           </div>
           <h1 className="text-display-lg text-navy leading-tight mb-8">{post.title}</h1>
         </div>
@@ -172,7 +180,7 @@ export default function BlogPost() {
             <aside className="mt-12 border border-bronze/10 bg-sand/40 p-6">
               <h2 className="text-lg font-display text-navy mb-3">Research Sources</h2>
               <p className="text-sm text-tan leading-relaxed mb-4">
-                Community discussions identify recurring buyer questions; medical and safety statements rely on the cited authoritative sources. Community reports are not controlled product tests.
+                {post.evidenceNote || 'Community discussions identify recurring buyer questions; medical and safety statements rely on the cited authoritative sources. Community reports are not controlled product tests.'}
               </p>
               <ul className="space-y-2">
                 {post.sources.map(source => (
