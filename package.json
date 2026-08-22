@@ -5,11 +5,12 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && vite build --ssr src/entry-server.jsx --outDir dist-ssr && node scripts/prerender.mjs && node scripts/check-generated-assets.mjs && node scripts/check-ai-discovery.mjs",
+    "build": "vite build && vite build --ssr src/entry-server.jsx --outDir dist-ssr && node scripts/prerender.mjs && node scripts/check-generated-assets.mjs && node scripts/check-ai-discovery.mjs && node scripts/check-article-trust.mjs",
     "test:inquiry": "node scripts/test-inquiry.mjs",
     "test:csp": "node scripts/test-csp-report.mjs",
     "test:analytics": "node scripts/test-privacy-analytics.mjs",
     "test:ai-referral": "node scripts/test-ai-referral.mjs",
+    "test:content-trust": "node scripts/check-article-trust.mjs",
     "test:geo": "node scripts/check-ai-discovery.mjs",
     "submit:indexnow": "node scripts/submit-indexnow.mjs",
     "test": "node scripts/test-inquiry.mjs && node scripts/test-csp-report.mjs && node scripts/test-privacy-analytics.mjs && node scripts/test-ai-referral.mjs",

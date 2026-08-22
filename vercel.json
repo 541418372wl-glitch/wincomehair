@@ -8,7 +8,7 @@
         { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=()" },
         { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
         { "key": "Reporting-Endpoints", "value": "csp-endpoint=\"/api/csp-report\"" },
-        { "key": "Content-Security-Policy-Report-Only", "value": "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'self'; form-action 'self'; script-src 'self' https://*.googletagmanager.com; style-src 'self' 'sha256-25krprVkHy4orhD65g3YMn/9GxOl0kX7fnueMRPYLpY='; font-src 'self' data:; img-src 'self' data: https://*.google-analytics.com https://*.googletagmanager.com; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; frame-src 'none'; media-src 'self'; worker-src 'self' blob:; manifest-src 'self'; report-uri /api/csp-report; report-to csp-endpoint" }
+        { "key": "Content-Security-Policy-Report-Only", "value": "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'self'; form-action 'self'; script-src 'self' https://*.googletagmanager.com; style-src 'self' 'sha256-czWIwMkVr7z+u2M14aUQosi7+Edosc0H2HEtKJ6oO7Y='; font-src 'self' data:; img-src 'self' data: https://*.google-analytics.com https://*.googletagmanager.com; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; frame-src 'none'; media-src 'self'; worker-src 'self' blob:; manifest-src 'self'; report-uri /api/csp-report; report-to csp-endpoint" }
       ]
     },
     {
