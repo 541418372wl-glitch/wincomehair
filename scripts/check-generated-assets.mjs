@@ -7,6 +7,7 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const dist = path.join(root, 'dist');
 const minDescription = 105;
 const maxDescription = 155;
+const isoDateTimeWithTimezone = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})$/;
 
 function decodeHtml(value) {
   return value
@@ -38,6 +39,26 @@ for (const file of files) {
   const description = decodeHtml(match[1]);
   const routeDirectory = path.relative(dist, path.dirname(file)).split(path.sep).join('/');
   const route = routeDirectory ? `/${routeDirectory}` : '/';
+
+  if (route === '/manufacturer-profile') {
+    const jsonLdBlocks = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/gi)]
+      .map(([, json]) => JSON.parse(json));
+    const profilePage = jsonLdBlocks
+      .flatMap((block) => block['@graph'] || [block])
+      .find((node) => node['@type'] === 'ProfilePage');
+
+    if (!profilePage) throw new Error('Missing ProfilePage JSON-LD: /manufacturer-profile');
+    if (!profilePage.mainEntity?.['@id']) {
+      throw new Error('ProfilePage mainEntity is missing a stable @id: /manufacturer-profile');
+    }
+    if (
+      !isoDateTimeWithTimezone.test(profilePage.dateModified || '')
+      || Number.isNaN(Date.parse(profilePage.dateModified))
+    ) {
+      throw new Error('ProfilePage dateModified must be an ISO 8601 DateTime with timezone: /manufacturer-profile');
+    }
+  }
+
   if (description.length < minDescription || description.length > maxDescription) {
     throw new Error(`Meta description length ${description.length} outside ${minDescription}-${maxDescription}: ${route}`);
   }
