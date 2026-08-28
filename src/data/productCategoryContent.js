@@ -20,6 +20,7 @@ export const productCategoryContent = {
       { title: 'Subscription & gift programs', text: 'Combine selected styles into themed sets with cards, pouches or gift boxes.' },
     ],
     relatedGuides: [
+      { slug: 'flexible-vs-rigid-claw-clips', title: 'Flexible vs Rigid Claw Clips', text: 'Compare material identity, flex recovery, spring hold, testing and responsible product claims.' },
       { slug: 'acetate-vs-plastic-claw-clips', title: 'Acetate vs Plastic Claw Clips', text: 'Compare finish, durability, tooling and price positioning before selecting a material.' },
       { slug: 'claw-clip-size-guide', title: 'Claw Clip Size Guide', text: 'Match clip capacity, tooth depth and jaw opening to the target hairstyle.' },
       { slug: 'claw-clips-thick-long-hair', title: 'Claw Clips for Thick, Long Hair', text: 'See which construction details matter most for high-volume hair.' },
