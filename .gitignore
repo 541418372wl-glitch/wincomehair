@@ -1,10 +1,17 @@
-node_modules
-dist
-dist-ssr
-.vercel
-.accio
-.env
-.env.local
-.env.*.local
+# Dependencies and generated build output
+node_modules/
+dist/
+dist-ssr/
+.vite/
+
+# Provider and local runtime state
+.vercel/
+.accio/
+
+# Local secrets and private project data
+.env*
+!.env.example
 .private/
+
+# OS metadata
 .DS_Store
