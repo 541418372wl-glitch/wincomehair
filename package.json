@@ -1,19 +1,20 @@
 {
-  "name": "accio-react-vite-base",
+  "name": "wincomehair-site",
   "version": "0.1.0",
   "private": true,
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && vite build --ssr src/entry-server.jsx --outDir dist-ssr && node scripts/prerender.mjs && node scripts/check-generated-assets.mjs && node scripts/check-ai-discovery.mjs && node scripts/check-article-trust.mjs",
+    "build": "node scripts/check-repository-governance.mjs && vite build && vite build --ssr src/entry-server.jsx --outDir dist-ssr && node scripts/prerender.mjs && node scripts/check-generated-assets.mjs && node scripts/check-ai-discovery.mjs && node scripts/check-article-trust.mjs",
     "test:inquiry": "node scripts/test-inquiry.mjs",
     "test:csp": "node scripts/test-csp-report.mjs",
     "test:analytics": "node scripts/test-privacy-analytics.mjs",
     "test:ai-referral": "node scripts/test-ai-referral.mjs",
     "test:content-trust": "node scripts/check-article-trust.mjs",
     "test:geo": "node scripts/check-ai-discovery.mjs",
+    "test:repo-governance": "node scripts/check-repository-governance.mjs",
     "submit:indexnow": "node scripts/submit-indexnow.mjs",
-    "test": "node scripts/test-inquiry.mjs && node scripts/test-csp-report.mjs && node scripts/test-privacy-analytics.mjs && node scripts/test-ai-referral.mjs",
+    "test": "node scripts/check-repository-governance.mjs && node scripts/test-inquiry.mjs && node scripts/test-csp-report.mjs && node scripts/test-privacy-analytics.mjs && node scripts/test-ai-referral.mjs",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -31,14 +32,6 @@
     "vite": "6.4.3"
   },
   "overrides": {
-    "rollup": "npm:@rollup/wasm-node@4.62.4"
-  },
-  "pnpm": {
-    "overrides": {
-      "rollup": "npm:@rollup/wasm-node@4.62.4"
-    }
-  },
-  "resolutions": {
     "rollup": "npm:@rollup/wasm-node@4.62.4"
   }
 }

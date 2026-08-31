@@ -1,36 +1,85 @@
-# Setup Checklist
+# WINCOME Hair Development and Operations Setup
 
-This project is delivered in stages so beginners can see the site before cloud setup.
+This repository is only for the WINCOME Hair Accessories site:
 
-## 1. Local Preview
+- GitHub: `541418372wl-glitch/wincomehair`
+- Production: `https://wincomehair.com`
+- Vercel: team `wincomeapparel`, project `wincomehair`
+- Default branch: `main`
 
-- Build locally with `node scripts/site.js build --cwd <project>`.
-- Start preview with `node scripts/site.js preview:start --cwd <project> --mode vite`.
-- Keep the preview running until a public URL is verified.
+Read `AGENTS.md`, `PROJECT_HANDOFF.md`, and GitHub Issue #14 before starting work. Do not use files, credentials, content, or deployment settings from another site.
 
-## 2. Supabase Activation
+## Package manager
 
-Use this only when the site needs real products, inventory, orders, auth, or user-owned data.
+npm is the only supported package manager. `package-lock.json` is the authoritative lockfile. Do not add Bun, pnpm, or Yarn lockfiles unless a separately approved migration replaces npm everywhere.
 
-The agent first checks product authorization:
+Use a current Node.js LTS release with npm, then install exactly from the lockfile:
 
 ```bash
-accio-mcp-cli server supabase
+npm ci
 ```
 
-If Supabase is not connected, open Accio, go to the Accio Site Builder plugin, connect Supabase, and finish authorization. If connected, the Agent should run `accio-mcp-cli search supabase` to query tool usage, then use Supabase MCP tools such as `get_project_url`, `get_publishable_keys`, `list_tables`, `list_migrations`, `apply_migration`, `execute_sql`, `generate_typescript_types`, `deploy_edge_function`, `get_logs`, and `get_advisors`.
+## Local development
 
-Never paste `SUPABASE_SERVICE_ROLE_KEY`, database passwords, connection strings, or account access tokens in chat.
+```bash
+npm run dev
+```
 
-## 3. Commerce Requests
+Before opening a pull request, run:
 
-This plugin does not generate online payment, cart, checkout, or payment placeholder flows. For commerce-shaped sites, use product/service display, inquiry forms, booking requests, or off-site contact links.
+```bash
+npm run build
+npm test
+```
 
-## 4. Company Platform Publish
+The build performs client and SSR builds, prerenders every public route, and runs asset, metadata, GEO/AI discovery, article-trust, and repository-governance checks.
 
-Use the company platform publish button for a public URL. Keep the local preview running until the public URL is verified.
+To inspect the production build locally:
 
-## Completion
+```bash
+npm run preview
+```
 
-Final handoff should include `Access:` with either a public URL, a still-running local preview URL,
-or a blocker plus the exact next action.
+## Environment variables
+
+Copy `.env.example` to `.env.local` only when local server testing requires it. Never commit real values.
+
+The inquiry API uses these server-only variables:
+
+- `SUPABASE_URL`
+- `SUPABASE_SERVICE_ROLE_KEY`
+- `RESEND_API_KEY`
+- `NOTIFY_EMAIL`
+- optional `NOTIFY_FROM`
+
+The current browser bundle does not require a Supabase anonymous key. `SUPABASE_SERVICE_ROLE_KEY` must never be renamed with a `VITE_` prefix because Vite exposes `VITE_*` variables to browser code.
+
+Vercel supplies `VERCEL_URL` and `NODE_ENV`. Production values must be managed only in the verified Vercel project; do not copy values from another project or paste them into chat, Issues, pull requests, or documentation.
+
+## Data and storage boundaries
+
+- Public source and assets: this GitHub repository.
+- Production pages and public static assets: Vercel project `wincomehair`.
+- Customer inquiries: Supabase project `wincomehair`, table `public.inquiries`.
+- Distributed rate-limit hashes: Supabase `private.inquiry_rate_limits`.
+- Inquiry email notifications: Resend.
+- Local private working data: the current Codex project container `.private/`, outside the Git repository.
+
+Never place customer records, analytics exports, credentials, certificates, or backend screenshots in this public repository.
+
+## Database changes
+
+Supabase migrations live in `supabase/migrations/`. Review the live project identity and current migration list before preparing a new migration. Database writes, migrations, RLS changes, and environment-variable changes require explicit approval.
+
+## Git and release workflow
+
+1. Verify the repository, remote, latest `origin/main`, Vercel project, and production domain.
+2. Read Issue #14 completely and check for duplicate work.
+3. Create an `agent/<wincomehair-task>` branch from the latest `origin/main`.
+4. Review the full diff and run the build and test commands.
+5. Open a pull request with base `main`.
+6. Do not merge, deploy, submit indexing, change configuration, or contact external platforms without explicit approval.
+
+Direct scripts that write GitHub contents to `main` are prohibited. Production normally updates only after an approved pull request is merged and the verified Vercel Git integration completes.
+
+`npm run submit:indexnow` changes external state. Use `--dry-run` for validation and do not submit without explicit approval and Issue #14 deduplication.
