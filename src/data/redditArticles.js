@@ -145,15 +145,19 @@ export const redditArticles = [
   {
     slug: 'why-headbands-hurt-or-slip',
     title: 'Why Headbands Hurt or Slip Off: A Comfort and Fit Guide',
-    seoTitle: 'Why Headbands Hurt or Slip Off: Comfort & Fit Guide',
+    seoTitle: 'Why Do Headbands Hurt Behind the Ears or Slip Off?',
     date: '2026-08-12',
+    updatedDate: '2026-09-07',
     category: 'Fit Guide',
     readTime: '8 min read',
     image: '/images/blog/headband-comfort-fit.webp',
     excerpt: 'Headband pressure and headband slippage need different fixes. Compare shapes, padding, grip and fit tests for comfortable all-day designs.',
-    metaDescription: 'Learn why headbands hurt behind the ears or slip off, how shape, pressure and grip interact, and what consumers and brands should test for better fit.',
+    metaDescription: 'Why do headbands hurt behind the ears or slip off? Learn the pressure, fit and grip causes, practical fixes, and what brands should test before ordering.',
     keywords: ['why do headbands hurt', 'headband hurts behind ears', 'how to keep headband from slipping', 'comfortable headbands'],
+    reviewedBy: 'WINCOME product development and sourcing team',
+    evidenceNote: 'Community discussions identify recurring comfort and retention questions; they are not controlled product tests. The cited dermatology guidance covers tight hairstyles and repeated pulling, not headband product testing or any specific design.',
     sources: [
+      { label: 'American Academy of Dermatology — painful or irritating tight hairstyles should be removed or loosened', url: 'https://www.aad.org/public/diseases/hair-loss/causes/hairstyles' },
       { label: 'r/TheGirlSurvivalGuide: headbands that will not stay in place', url: 'https://www.reddit.com/r/TheGirlSurvivalGuide/comments/25ul4o/how_do_you_get_headbands_to_stay_on_your_head/' },
       { label: 'r/TheGirlSurvivalGuide: pressure and pain behind the ears', url: 'https://www.reddit.com/r/TheGirlSurvivalGuide/comments/bz4tqn/how_do_you_prevent_headband_ache/' },
       { label: 'r/AusFemaleFashion: slipping fabric headbands and grip methods', url: 'https://www.reddit.com/r/AusFemaleFashion/comments/1n8pwo5/how_do_you_get_those_stretchy_headbands_to_stay/' },
@@ -161,7 +165,7 @@ export const redditArticles = [
     sections: [
       { t: 'p', x: 'Headbands usually hurt because a stiff or narrow band concentrates pressure at the ends, often behind the ears. They usually slip because the shape does not match the head, the band is too loose, or the underside has too little friction. Solving one problem can worsen the other, so a comfortable headband needs balanced curvature, distributed pressure, low weight and controlled grip—not simply a tighter band.' },
       { t: 'h2', x: 'The Two Problems Need Different Fixes' },
-      { t: 'p', x: 'Across Reddit beauty and fashion communities, discussions about headbands recur for years: some users remove a rigid band because the ends ache, while others cannot keep a fabric band from moving backward. Community reports are valuable for discovering product problems, but they are not medical studies. Persistent or severe pain is a reason to stop wearing the item rather than keep adjusting it.' },
+      { t: 'p', x: 'Across Reddit beauty and fashion communities, discussions about headbands recur for years: some users remove a rigid band because the ends ache, while others cannot keep a fabric band from moving backward. Community reports are valuable for discovering product problems, but they are not medical studies. The cited dermatology guidance addresses tight hairstyles and repeated pulling—not headband product testing—and treats pain as a warning that the style is too tight. If a headband causes persistent or severe pain, remove it rather than keep tightening or adjusting it.' },
       { t: 'table', head: ['Symptom', 'Likely design cause', 'Better direction'], rows: [
         ['Pain behind the ears', 'High end pressure, hard tips or narrow contact area', 'Softer tips, wider contact and a more open curve'],
         ['Headache across the sides', 'Overall band tension is too high', 'More flexible core or a size with greater internal width'],
