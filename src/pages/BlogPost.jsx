@@ -1,7 +1,10 @@
 import { Link, useParams, useLocation } from 'react-router-dom';
 import { articles } from '../data/articles';
+import { buyerDecisionClusters } from '../data/buyerDecisionClusters';
 import { waLink } from '../lib/whatsapp';
 import { ORGANIZATION_ID, SITE, WEBSITE_ID } from '../components/SEO';
+
+const articleBySlug = new Map(articles.map(article => [article.slug, article]));
 
 function parseLinks(text) {
   const parts = [];
@@ -35,6 +38,43 @@ function FAQBlock({ items }) {
         </details>
       ))}
     </div>
+  );
+}
+
+function BuyerDecisionPath({ cluster, currentSlug }) {
+  return (
+    <nav aria-labelledby={`${cluster.id}-title`} className="mt-12 border border-bronze/10 bg-sand/40 p-6 md:p-8">
+      <p className="section-label">Buyer Decision Cluster</p>
+      <h2 id={`${cluster.id}-title`} className="text-display-md text-navy mb-3">{cluster.title}</h2>
+      <p className="text-sm text-tan leading-relaxed mb-6">{cluster.description}</p>
+
+      <ol className="grid gap-4 md:grid-cols-3">
+        {cluster.steps.map(step => {
+          const article = articleBySlug.get(step.slug);
+          const isCurrent = step.slug === currentSlug;
+          const title = article?.title || step.label;
+
+          return (
+            <li key={step.slug} className="bg-white border border-bronze/10 p-5">
+              <p className="text-[10px] tracking-wider uppercase text-gold mb-2">Step {step.number} · {step.label}</p>
+              <h3 className="text-sm font-display text-navy leading-relaxed mb-3">
+                {isCurrent
+                  ? <span aria-current="page">{title}</span>
+                  : <Link to={`/blog/${step.slug}`} className="hover:text-gold transition-colors">{title}</Link>}
+              </h3>
+              <p className="text-xs text-tan leading-relaxed">{step.question}</p>
+            </li>
+          );
+        })}
+      </ol>
+
+      <div className="flex flex-wrap gap-x-5 gap-y-2 mt-6 text-sm">
+        <Link to={cluster.hub.route} className="text-gold hover:underline">{cluster.hub.label} →</Link>
+        {cluster.supportLinks.map(link => (
+          <Link key={link.route} to={link.route} className="text-gold hover:underline">{link.label} →</Link>
+        ))}
+      </div>
+    </nav>
   );
 }
 
@@ -149,7 +189,18 @@ export default function BlogPost() {
     ],
   };
 
-  const related = articles.filter(a => a.slug !== post.slug).slice(0, 3);
+  const cluster = post.decisionCluster ? buyerDecisionClusters[post.decisionCluster] : null;
+  const clusterRelated = cluster
+    ? cluster.steps
+      .filter(step => step.slug !== post.slug)
+      .map(step => articleBySlug.get(step.slug))
+      .filter(Boolean)
+    : [];
+  const relatedSlugs = new Set(clusterRelated.map(article => article.slug));
+  const related = [
+    ...clusterRelated,
+    ...articles.filter(article => article.slug !== post.slug && !relatedSlugs.has(article.slug)),
+  ].slice(0, 3);
 
   return (
     <div>
@@ -176,6 +227,7 @@ export default function BlogPost() {
 
         <div className="max-w-3xl">
           {post.sections.map((s, i) => renderSection(s, i))}
+          {cluster ? <BuyerDecisionPath cluster={cluster} currentSlug={post.slug} /> : null}
           {post.sources?.length > 0 && (
             <aside className="mt-12 border border-bronze/10 bg-sand/40 p-6">
               <h2 className="text-lg font-display text-navy mb-3">Research Sources</h2>
