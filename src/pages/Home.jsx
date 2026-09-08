@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { articles } from '../data/articles';
+import { commercialLandingPages } from '../data/commercialLandingPages';
 
 function OptimizedProductImage({ image, alt, sizes, className, pictureClassName = '' }) {
   const base = image.replace(/\.webp$/, '');
@@ -37,12 +38,7 @@ const featuredProducts = [
   { id: 'bow-clip', name: 'Bow Hair Clips', image: '/assets/images/product-bow-clip.webp', moq: '200 pcs', leadTime: '12-15 days', material: 'Fabric + Metal Clip' },
 ];
 
-const stats = [
-  { value: '15+', label: 'Years Experience' },
-  { value: '500+', label: 'Global Brands' },
-  { value: '50+', label: 'Export Countries' },
-  { value: '3,000m²', label: 'Factory Floor' },
-];
+const homeLanding = commercialLandingPages.home;
 
 const processSteps = [
   { step: '01', title: 'Send Requirements', desc: 'Share your product idea, reference image, or design brief. No design files needed to start.', details: ['Approx. dimensions', 'Product type & quantity', 'Target material & color'] },
@@ -74,14 +70,14 @@ export default function Home() {
         <div className="container-site relative z-10 pt-28 pb-14 md:pt-32 md:pb-20">
           <div className="flex items-center gap-3 mb-4">
             <span className="w-8 h-px bg-blush" />
-            <p className="text-xs font-medium tracking-[0.15em] uppercase text-champagne">Custom Hair Accessories Manufacturer</p>
+            <p className="text-xs font-medium tracking-[0.15em] uppercase text-champagne">{homeLanding.eyebrow}</p>
           </div>
           <h1 className="text-white text-[38px] sm:text-[56px] md:text-[88px] max-w-3xl leading-[1.05] mb-6 md:mb-8">
-            Premium Hair Accessories.<br />
-            <span className="text-champagne italic font-light">Factory-Direct.</span>
+            {homeLanding.headingLines[0]}<br />
+            <span className="text-champagne italic font-light">{homeLanding.headingLines[1]}</span>
           </h1>
           <p className="text-white/80 text-lg max-w-xl mb-8 md:mb-12 leading-relaxed">
-            OEM & ODM hair clips, claw clips, headbands, scrunchies, and hair bows for global brands, wholesalers, and retailers. Low MOQ, free design service, worldwide shipping.
+            {homeLanding.summary}
           </p>
 
           <div className="flex flex-wrap gap-3 mb-8 md:mb-12">
@@ -95,12 +91,18 @@ export default function Home() {
 
           <div className="flex flex-wrap gap-4">
             <Link to="/contact" className="inline-flex w-full sm:w-auto justify-center items-center gap-2 border border-champagne bg-transparent text-champagne px-8 md:px-10 py-4 md:py-5 text-base font-medium tracking-wider uppercase transition-all duration-200 hover:bg-champagne hover:text-navy">
-              Request a Quote <span className="ml-1">→</span>
+              Request a Manufacturer Quote <span className="ml-1">→</span>
             </Link>
             <Link to="/products" className="btn-outline w-full sm:w-auto justify-center !border-white/20 !text-white hover:!border-white/40 hover:!bg-white/5 text-base px-8 md:px-10 py-4 md:py-5">
-              View Products
+              Compare Product Categories
             </Link>
           </div>
+          <p className="mt-5 text-sm text-white/65">
+            Sourcing clips or barrettes? Visit our{' '}
+            <Link to="/products/category/hair-clips-barrettes" className="text-champagne underline underline-offset-4 hover:text-white">
+              custom hair clip manufacturer page
+            </Link>.
+          </p>
         </div>
       </section>
 
@@ -108,7 +110,7 @@ export default function Home() {
       <section className="bg-white border-y border-bronze/10">
         <div className="container-site py-8 md:py-12">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-5 md:gap-8 text-center">
-            {stats.map(stat => (
+            {homeLanding.orderFacts.map(stat => (
               <div key={stat.label}>
                 <div className="text-display-sm text-navy font-display mb-1">{stat.value}</div>
                 <div className="text-xs tracking-[0.15em] uppercase text-tan">{stat.label}</div>

@@ -92,9 +92,10 @@ export default function ProductCategory() {
         <p className="mt-6 max-w-3xl text-lg leading-relaxed text-tan">{data.intro}</p>
         <p className="mt-4 max-w-3xl leading-relaxed text-bronze/80">{content.positioning}</p>
         <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-          <Link to="/contact" className="btn-primary justify-center">Request a Category Quote</Link>
+          <Link to="/contact" className="btn-primary justify-center">{data.quoteLabel || 'Request a Category Quote'}</Link>
           <Link to="/customization" className="btn-outline justify-center">Explore OEM / ODM</Link>
         </div>
+        {content.quoteBrief ? <p className="mt-5 max-w-3xl text-sm leading-relaxed text-tan">{content.quoteBrief}</p> : null}
       </section>
 
       <section className="container-site pb-14 md:pb-20" aria-label={`${data.shortName} order facts`}>
@@ -157,6 +158,7 @@ export default function ProductCategory() {
               <div className="mt-7 flex flex-col gap-3 sm:flex-row lg:flex-col lg:items-start">
                 <Link to="/customization" className="btn-outline justify-center">View OEM / ODM Capabilities</Link>
                 <Link to="/sourcing" className="text-sm font-medium text-navy underline underline-offset-4 hover:text-gold">Review MOQ, samples and production</Link>
+                <Link to="/quality" className="text-sm font-medium text-navy underline underline-offset-4 hover:text-gold">Review quality control</Link>
               </div>
             </div>
             <div className="border border-bronze/10">

@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { articles } from '../data/articles';
 import { productMeta } from '../data/productMeta';
 import { productCategoryMeta } from '../data/productCategoryMeta';
+import { commercialLandingPages } from '../data/commercialLandingPages';
 
 export const SITE = 'https://wincomehair.com';
 export const SITE_NAME = 'WINCOME Hair Accessories';
@@ -78,8 +79,8 @@ export const WEBSITE_SCHEMA = {
 
 const pageMeta = {
   '/': {
-    title: 'WINCOME — Custom Hair Accessories Manufacturer',
-    description: 'Custom hair clips, claw clips, headbands, scrunchies & hair bows manufacturer. OEM/ODM, MOQ from 100 pcs, free design service, global shipping.',
+    title: commercialLandingPages.home.seoTitle,
+    description: commercialLandingPages.home.metaDescription,
   },
   '/products': {
     title: 'Wholesale Hair Accessories Catalog | WINCOME',
