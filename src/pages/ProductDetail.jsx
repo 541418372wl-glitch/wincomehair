@@ -6,59 +6,59 @@ import { products as catalogProducts, categoryMap } from '../data/productCatalog
 const products = {
   'claw-acetate': {
     name: 'Acetate Hair Claw Clips', image: '/assets/images/product-claw-acetate.webp', category: 'Hair Claws & Clips',
-    moq: '100 pcs', leadTime: '12-15 days', material: 'Cellulose Acetate', style: 'Classic / Modern / Luxury',
+    moq: '1,000 pcs', leadTime: '12-15 days', material: 'Cellulose Acetate', style: 'Classic / Modern / Luxury',
     sizes: 'Small (6cm) / Medium (8cm) / Large (11cm)', finish: 'Matte / Gloss / Tortoiseshell Pattern',
     logo: 'Laser engraving, gold foil stamping, metal plate', packaging: 'Individual polybag, custom card, gift box',
     description: [
       'Cellulose acetate claw clips are cut from plant-based acetate sheets — the same material used in premium eyewear frames — then heated and pressed into shape. The result is a clip that is visibly denser, smoother and more polished than injection-molded plastic, with a depth of color that cheap materials cannot reproduce.',
       'For brands, acetate is the material that sells itself at a $10+ retail price point: it resists cracking and bending for years, feels substantial in the hand, and carries a genuine sustainability story (plant-based and biodegradable under industrial composting). Every clip is fitted with a stainless steel spring tested to 500+ open-close cycles, and all edges are polished to be snag-free.',
-      'We produce acetate claw clips in three sizes (6cm / 8cm / 11cm) with 20+ custom Pantone colors and signature tortoiseshell, marble, pearl and translucent effects. MOQ from 100 pcs, production in 12-15 days.',
+      'We produce acetate claw clips in three sizes (6cm / 8cm / 11cm) with 20+ custom Pantone colors and signature tortoiseshell, marble, pearl and translucent effects. Custom production MOQ is 1,000 pcs per design per color; samples and in-stock items may be available below that minimum.',
     ],
     details: ['Plant-based cellulose acetate (premium eyewear-grade)', 'Cut, heated and polished — denser than molded plastic', 'Stainless steel spring, 500+ open-close cycle tested', 'Glossy, burr-free polished edges', 'Tortoiseshell, marble, pearl & translucent patterns', '3 sizes: 6cm / 8cm / 11cm', '20+ custom Pantone colors', 'Lightweight yet durable', 'Biodegradable under industrial composting', 'Matte, gloss or custom finish'],
     applications: ['Beauty & haircare brands', 'Boutique retailers', 'Beauty subscription boxes', 'Bridal & event collections', 'Eco-conscious product lines'],
-    customization: ['Custom Pantone color matching', 'Tortoiseshell & marble pattern development', 'Laser engraving, foil stamping or metal plate logos', 'Custom packaging: polybag, display card, gift box', 'Mixed-size and mixed-color order ratios'],
+    customization: ['Custom Pantone color matching', 'Tortoiseshell & marble pattern development', 'Laser engraving, foil stamping or metal plate logos', 'Custom packaging: polybag, display card, gift box', 'Order planning per design and color MOQ'],
   },
   'claw-metal': {
     name: 'Metal Hair Claw Clips', image: '/assets/images/product-claw-metal.webp', category: 'Hair Claws & Clips',
-    moq: '200 pcs', leadTime: '15-18 days', material: 'Zinc Alloy', style: 'Classic / Minimal / Luxury',
+    moq: '1,000 pcs', leadTime: '15-18 days', material: 'Zinc Alloy', style: 'Classic / Minimal / Luxury',
     sizes: 'Small (6cm) / Medium (8cm) / Large (11cm)', finish: 'Gold / Silver / Rose Gold / Gunmetal plating',
     logo: 'Laser engraving, metal plate, charm tag', packaging: 'Individual polybag, display card, velvet pouch',
     description: [
       'Metal hair claw clips are die-cast from zinc alloy — the standard metal for hair accessories because it reproduces complex shapes (teeth, cutouts, filigree) at a fraction of the cost of solid-metal machining. Each clip is then electroplated in gold, silver, rose gold or gunmetal.',
       'The plating is half the product: we use a two-layer process (base coat + top coat) so the color does not chip or fade to reveal the base metal, and the finish is tarnish-resistant for daily use. Springs are stainless steel, fatigue-tested to 500+ cycles, and every edge is polished to avoid snagging. Nickel-free plating is available and EU nickel directive compliant.',
-      'Available in 6cm / 8cm / 11cm sizes with custom plating colors and logo options. MOQ from 200 pcs, production in 15-18 days.',
+      'Available in 6cm / 8cm / 11cm sizes with custom plating colors and logo options. Custom production MOQ is 1,000 pcs per design per color; samples and in-stock items may be available below that minimum.',
     ],
     details: ['Die-cast zinc alloy body — complex shapes at low cost', 'Two-layer electroplating (base + top coat)', 'Finishes: gold, silver, rose gold, gunmetal', 'Stainless steel spring, 500+ cycles tested', 'Tarnish-resistant and moisture-safe', 'Polished, burr-free edges', '3 sizes: 6cm / 8cm / 11cm', 'Nickel-free plating available (EU compliant)', 'Laser engraving, metal plate or charm tag', 'Velvet pouch or display card packaging'],
     applications: ['Fashion jewelry & accessory brands', 'Boutique retail', 'Premium gift lines', 'Bridal and evening wear', 'Durability-focused product lines'],
-    customization: ['Custom plating colors & finishes', 'Laser engraving or metal plate logos', 'Charm tag & pendant branding', 'Custom packaging: polybag, card, velvet pouch', 'Mixed-size order ratios'],
+    customization: ['Custom plating colors & finishes', 'Laser engraving or metal plate logos', 'Charm tag & pendant branding', 'Custom packaging: polybag, card, velvet pouch', 'Order planning per design and color MOQ'],
   },
   'claw-plastic': {
     name: 'Plastic Hair Claws', image: '/assets/images/product-claw-plastic.webp', category: 'Hair Claws & Clips',
-    moq: '300 pcs', leadTime: '10-14 days', material: 'ABS Plastic', style: 'Everyday / Classic / Minimal',
+    moq: '1,000 pcs', leadTime: '10-14 days', material: 'ABS Plastic', style: 'Everyday / Classic / Minimal',
     sizes: 'Small (6cm) / Medium (8cm) / Large (11cm)', finish: 'Gloss / Matte / Custom Pantone colors',
     logo: 'Pad printing, laser engraving, sticker label', packaging: 'Bulk polybag, display card',
     description: [
       'ABS plastic hair claws are the workhorse of the budget segment: fast injection molding keeps costs low, and the material is lightweight, impact-resistant and available in any color. For fast-fashion lines, party supplies and promotional items, ABS delivers the right product at the right price.',
       'Budget pricing does not mean cutting corners on what breaks. We fit stainless steel springs and round the tooth tips so clips do not snag hair — the two failure points that generate the worst reviews on cheap clips. Expect solid everyday performance at a fraction of acetate or metal cost.',
-      'Sizes 6cm / 8cm / 11cm in gloss, matte or any Pantone color. MOQ from 300 pcs, production in 10-14 days.',
+      'Sizes 6cm / 8cm / 11cm in gloss, matte or any Pantone color. Custom production MOQ is 1,000 pcs per design per color; samples and in-stock items may be available below that minimum.',
     ],
     details: ['Injection-molded ABS — fast, low-cost production', 'Gloss or matte finish', 'Any Pantone color', 'Stainless steel spring option', 'Rounded tooth tips, snag-free', 'Lightweight & impact-resistant', '3 sizes: 6cm / 8cm / 11cm', 'Pad printing, laser engraving or sticker logos', 'Bulk-friendly pricing', 'Party, festival & promo ready'],
     applications: ['Fast-fashion & budget lines', 'Party and festival supplies', 'Promotional & branded giveaways', 'Kids\' accessories', 'High-volume retail'],
-    customization: ['Custom Pantone colors', 'Pad printing & laser engraving', 'Sticker label branding', 'Bulk polybag or display card', 'Mixed color/size assortments'],
+    customization: ['Custom Pantone colors', 'Pad printing & laser engraving', 'Sticker label branding', 'Bulk polybag or display card', 'Order planning per design and color MOQ'],
   },
   'claw-butterfly': {
     name: 'Butterfly Hair Claw Clips', image: '/assets/images/product-claw-butterfly.webp', category: 'Hair Claws & Clips',
-    moq: '200 pcs', leadTime: '15-18 days', material: 'Metal Frame + Resin', style: 'Elegant / Vintage / Bridal',
+    moq: '1,000 pcs', leadTime: '15-18 days', material: 'Metal Frame + Resin', style: 'Elegant / Vintage / Bridal',
     sizes: 'Standard (7cm width)', finish: 'Gloss resin wings / Gold-tone frame',
     logo: 'Laser engraving, metal charm tag', packaging: 'Individual polybag, display card, gift box',
     description: [
       'Butterfly claw clips pair a gold-tone metal frame and spring with translucent resin wings — a statement accessory that photographs beautifully and sells on social channels. The resin carries real depth of color: amber, dusty rose, pearl, cream and tortoiseshell.',
       'Decoration is where these clips become special. Choose pearl, rhinestone or gold-bead embellishments along the wings and body — or keep them clean for an elegant minimal look. The metal frame is one-piece with the claw mechanism, so the clip holds securely without loosening.',
-      'Approximately 7cm wide — a true statement size. MOQ from 200 pcs, production in 15-18 days, with custom colors, embellishments and gift-box packaging.',
+      'Approximately 7cm wide — a true statement size. Custom production MOQ is 1,000 pcs per design per color; samples and in-stock items may be available below that minimum.',
     ],
     details: ['Gold-tone metal frame & spring mechanism', 'Translucent resin wings with depth of color', 'Pearl, rhinestone & gold-bead embellishment options', 'Secure claw grip for fine to medium hair', 'Hand-finished, no sharp edges', '~7cm width — statement size', 'Amber, pearl, dusty rose, tortoise & more', 'One-piece metal frame and claw', 'Gift-ready presentation', 'Bridal & event collections'],
     applications: ['Bridal and wedding collections', 'Gift sets & boutique retail', 'Social media-driven fashion brands', 'Evening & special occasion wear', 'Kids\' fancy dress'],
-    customization: ['Custom wing colors & patterns', 'Pearl / rhinestone / bead placement', 'Laser engraving & charm tags', 'Gift box packaging', 'Mixed color assortments'],
+    customization: ['Custom wing colors & patterns', 'Pearl / rhinestone / bead placement', 'Laser engraving & charm tags', 'Gift box packaging', 'Order planning per design and color MOQ'],
   },
   'headband-pearl': {
     name: 'Pearl Embellished Headbands', image: '/assets/images/product-headband-pearl.webp', category: 'Headbands',
@@ -188,17 +188,17 @@ const products = {
   },
   'claw-rectangular': {
     name: 'Rectangular Hair Claw Clips', image: '/assets/images/product-claw-rectangular.webp', category: 'Hair Claws & Clips',
-    moq: '200 pcs', leadTime: '12-15 days', material: 'Cellulose Acetate / Resin', style: 'Modern / Minimal / Office',
+    moq: '1,000 pcs', leadTime: '12-15 days', material: 'Cellulose Acetate / Resin', style: 'Modern / Minimal / Office',
     sizes: 'Medium (7cm) / Large (9cm)', finish: 'Gloss / Matte / Marble patterns',
     logo: 'Laser engraving, foil stamping', packaging: 'Individual polybag, display card, gift box',
     description: [
       'Rectangular claw clips bring a modern, architectural silhouette to the category: an open-frame design with a clean central cutout, made from cellulose acetate or resin in tortoiseshell, pearl, mint and matte black. The angular shape reads instantly contemporary in product photography.',
       'Under the minimal look is the same engineering as our curved clips: a stainless steel spring tested to 500+ cycles, polished edges, and interlocking teeth that hold fine and medium hair securely. This is a fast-growing shape in the trend-driven segment — office-chic and social media styling.',
-      'Available in 7cm and 9cm sizes with custom Pantone colors, marble and tortoiseshell patterns. MOQ from 200 pcs, production in 12-15 days.',
+      'Available in 7cm and 9cm sizes with custom Pantone colors, marble and tortoiseshell patterns. Custom production MOQ is 1,000 pcs per design per color; samples and in-stock items may be available below that minimum.',
     ],
     details: ['Modern open-frame rectangular design', 'Cellulose acetate or resin body', 'Stainless steel spring, 500+ cycles tested', 'Polished, burr-free edges', 'Tortoiseshell, marble, pearl, mint & black', '2 sizes: 7cm / 9cm', 'Secure interlocking teeth', 'Custom Pantone colors', 'Laser engraving / foil stamping logos', 'Display card & gift box packaging'],
     applications: ['Modern & minimalist brands', 'Office-chic styling', 'Social media-driven fashion', 'Boutique retail', 'Gift sets'],
-    customization: ['Custom colors & marble patterns', 'Laser engraving or foil stamping', 'Sizing mix (7cm/9cm)', 'Display card & gift box', 'Mixed color assortments'],
+    customization: ['Custom colors & marble patterns', 'Laser engraving or foil stamping', 'Sizing confirmed per design', 'Display card & gift box', 'Order planning per design and color MOQ'],
   },
   'headband-braided': {
     name: 'Braided Velvet Headbands', image: '/assets/images/product-headband-braided.webp', category: 'Headbands',
@@ -258,13 +258,13 @@ const products = {
   },
   'clip-pearl': {
     name: 'Pearl Hair Barrettes', image: '/assets/images/product-clip-pearl.webp', category: 'Hair Clips & Barrettes',
-    moq: '200 pcs', leadTime: '12-15 days', material: 'Metal + Faux Pearl', style: 'Classic / Bridal / Layered',
+    moq: '2,000 pcs', leadTime: '12-15 days', material: 'Metal + Faux Pearl', style: 'Classic / Bridal / Layered',
     sizes: 'Small (6cm) / Medium (9cm) / Large (12cm)', finish: 'Gold / Silver metal base',
     logo: 'Engraved charm tag, custom card', packaging: 'Individual polybag, velvet pouch, gift box',
     description: [
       'Pearl hair barrettes pair a gold or silver metal base with hand-placed faux pearls in single-row, graduated and cluster arrangements — the classic accessory that never goes out of season. The alligator clip mechanism holds securely without pulling, and the metal frame is tarnish-resistant.',
       'For brands, pearl barrettes earn their retail price. They sit comfortably at $8–18, photograph beautifully for e-commerce, and move strongly in bridal, gifting and everyday elegance segments. Rhinestone accents and mixed-size pearl layouts are available for premium positioning.',
-      'Available in 6cm / 9cm / 12cm with gold or silver finish. MOQ from 200 pcs, production in 12-15 days.',
+      'Available in 6cm / 9cm / 12cm with gold or silver finish. Custom production MOQ is 2,000 pcs per design per color; samples and in-stock items may be available below that minimum.',
     ],
     details: ['Hand-placed faux pearls', 'Gold or silver metal frame', 'Alligator clip mechanism', 'Tarnish-resistant finish', 'Single-row, graduated & cluster styles', 'Sizes: 6cm / 9cm / 12cm', 'Rhinestone accent option', 'Secure spring clip', 'Velvet pouch packaging option', 'Bridal-grade quality'],
     applications: ['Bridal & bridesmaid collections', 'Gift sets & boutique retail', 'Everyday elegance brands', 'Photo shoots & styling', 'Subscription boxes'],
@@ -272,27 +272,27 @@ const products = {
   },
   'clip-acetate': {
     name: 'Acetate Hair Barrettes', image: '/assets/images/product-clip-acetate.webp', category: 'Hair Clips & Barrettes',
-    moq: '100 pcs', leadTime: '12-15 days', material: 'Cellulose Acetate', style: 'Modern / Minimal / Sculptural',
+    moq: '2,000 pcs', leadTime: '12-15 days', material: 'Cellulose Acetate', style: 'Modern / Minimal / Sculptural',
     sizes: 'Standard (7cm–10cm)', finish: 'Gloss / Marble / Tortoiseshell patterns',
     logo: 'Laser engraving, foil stamping', packaging: 'Individual polybag, display card, gift box',
     description: [
       'Acetate hair barrettes bring sculptural shapes — oval cutouts, wide rectangles, tapered teardrops — in the same cellulose acetate used for premium eyewear. The marble, tortoiseshell and solid-color finishes have depth that photographs as genuine luxury.',
       'This is the barrette format that drives the accessible-luxury hair accessories segment: priced at $10–22 retail, it sells on material story and design geometry rather than embellishment. The French barrette mechanism is easy to use and holds thick and fine hair equally well.',
-      'Standard sizes 7–10cm in any Pantone color or signature marble effect. MOQ from 100 pcs, production in 12-15 days.',
+      'Standard sizes 7–10cm in any Pantone color or signature marble effect. Custom production MOQ is 2,000 pcs per design per color; samples and in-stock items may be available below that minimum.',
     ],
     details: ['Plant-based cellulose acetate', 'Sculptural shapes: oval / rectangle / teardrop', 'French barrette clip mechanism', 'Gloss polished finish', 'Marble, tortoiseshell & solid patterns', 'Standard 7–10cm sizes', 'Custom Pantone colors', 'Lightweight & durable', 'Laser engraving or foil stamping', 'Display card & gift box'],
     applications: ['Modern & minimalist brands', 'Boutique retail', 'Accessible-luxury lines', 'Social media-driven fashion', 'Gift sets'],
-    customization: ['Custom colors & marble patterns', 'Shape selection', 'Laser engraving or foil stamping', 'Custom packaging', 'Mixed-style assortments'],
+    customization: ['Custom colors & marble patterns', 'Shape selection', 'Laser engraving or foil stamping', 'Custom packaging', 'Order planning per design and color MOQ'],
   },
   'clip-matte': {
     name: 'Matte Snap Hair Clips', image: '/assets/images/product-clip-matte.webp', category: 'Hair Clips & Barrettes',
-    moq: '300 pcs', leadTime: '8-10 days', material: 'Coated Metal', style: 'Everyday / Minimalist / Multi-pack',
+    moq: '2,000 pcs', leadTime: '8-10 days', material: 'Coated Metal', style: 'Everyday / Minimalist / Multi-pack',
     sizes: 'Small (5cm) / Medium (7cm) / Large (9cm)', finish: 'Matte powder coat / Morandi palette',
     logo: 'Pad printing, custom hang tag', packaging: 'Bulk polybag, multi-pack display card',
     description: [
       'Matte snap clips are the everyday volume seller in hair accessories: a simple hinged metal clip with a soft powder-coat finish in a Morandi-inspired palette — dusty pink, sage green, powder blue, cream, grey, chocolate, taupe. The matte surface does not show fingerprints and feels considered rather than cheap.',
       'The snap mechanism opens and closes one-handed with a satisfying click, holds fine to medium hair securely, and comes in three sizes to cover different styling needs. Multi-pack sets of 6–8 colors are a strong gift and subscription-box play at affordable retail price points.',
-      'Sizes 5cm / 7cm / 9cm in Morandi palette or any custom color. MOQ from 300 pcs, production in 8-10 days.',
+      'Sizes 5cm / 7cm / 9cm in Morandi palette or any custom color. Custom production MOQ is 2,000 pcs per design per color; samples and in-stock items may be available below that minimum.',
     ],
     details: ['Hinged metal snap mechanism', 'Soft matte powder coat', 'Morandi color palette', 'No fingerprint surface', 'One-handed snap open & close', 'Sizes: 5cm / 7cm / 9cm', 'Multi-pack set option', 'Custom colors', 'Pad printing logo', 'Fast 8-10 day production'],
     applications: ['Everyday essentials brands', 'Gift sets & multi-packs', 'Subscription boxes', 'Kids\' & teen brands', 'High-volume retail'],
@@ -300,13 +300,13 @@ const products = {
   },
   'clip-crystal': {
     name: 'Crystal Rhinestone Barrettes', image: '/assets/images/product-clip-crystal.webp', category: 'Hair Clips & Barrettes',
-    moq: '200 pcs', leadTime: '15-18 days', material: 'Metal + Crystal', style: 'Bridal / Evening / Luxury',
+    moq: '2,000 pcs', leadTime: '15-18 days', material: 'Metal + Crystal', style: 'Bridal / Evening / Luxury',
     sizes: 'Medium (8cm) / Large (11cm)', finish: 'Gold-tone frame with crystal pave',
     logo: 'Laser engraving, custom gift card', packaging: 'Velvet pouch, gift box, display card',
     description: [
       'Crystal rhinestone barrettes are designed for the bridal and eveningwear market: a gold-tone metal frame fully paved or bordered with AAA-grade cubic zirconia, marquise crystals or mixed-cut stones. The effect reads as fine jewelry at a fraction of the cost.',
       'Available in full-pave rectangle, floral cluster, and mixed-stone linear formats. The French barrette mechanism is concealed beneath the crystal setting, keeping the front view completely clean. Champagne, clear and rose crystal options suit the full bridal color spectrum.',
-      'Sizes 8cm and 11cm with gold or silver frame. MOQ from 200 pcs, production in 15-18 days.',
+      'Sizes 8cm and 11cm with gold or silver frame. Custom production MOQ is 2,000 pcs per design per color; samples and in-stock items may be available below that minimum.',
     ],
     details: ['AAA cubic zirconia / mixed crystal stones', 'Gold or silver tone metal frame', 'Full-pave & floral cluster options', 'Concealed French barrette mechanism', 'Champagne, clear & rose crystal', 'Sizes: 8cm / 11cm', 'Secure spring mechanism', 'No-snag setting', 'Gift-box ready', 'Bridal & luxury event styling'],
     applications: ['Bridal & wedding collections', 'Evening wear brands', 'Luxury accessory lines', 'Gift sets & boutique retail', 'Photo shoots & editorial'],
@@ -314,13 +314,13 @@ const products = {
   },
   'clip-flower': {
     name: 'Flower Hair Clips', image: '/assets/images/product-clip-flower.webp', category: 'Hair Clips & Barrettes',
-    moq: '200 pcs', leadTime: '15-18 days', material: 'Metal + Crystal', style: 'Floral / Bridal / Everyday',
+    moq: '2,000 pcs', leadTime: '15-18 days', material: 'Metal + Crystal', style: 'Floral / Bridal / Everyday',
     sizes: 'Small (5cm) / Medium (7cm) / Large (9cm)', finish: 'Gold-tone frame with crystal petals',
     logo: 'Laser engraving, custom gift card', packaging: 'Individual polybag, velvet pouch, gift box',
     description: [
       'Flower hair clips shape a gold-tone metal frame into open floral petals, each petal outlined or filled with clear crystal. The silhouette reads delicate and feminine — a bestselling bridal and everyday accent that photographs beautifully.',
       'Unlike flat barrettes, the flower form sits on top of the hair like a small piece of jewelry, catching light from every angle. The spring-loaded clip base holds fine to medium hair securely, and the setting is snag-free against strands.',
-      'Available in 5cm / 7cm / 9cm flower sizes with gold or silver frames and custom crystal colors. MOQ from 200 pcs, production in 15-18 days.',
+      'Available in 5cm / 7cm / 9cm flower sizes with gold or silver frames and custom crystal colors. Custom production MOQ is 2,000 pcs per design per color; samples and in-stock items may be available below that minimum.',
     ],
     details: ['Open floral petal design', 'Gold or silver tone metal frame', 'Crystal-outlined petals', 'Spring-loaded clip base', 'Sits on top of hair like jewelry', 'Snag-free setting', 'Sizes: 5cm / 7cm / 9cm', 'Clear, champagne & rose crystal', 'Gift-box ready', 'Bridal & everyday styling'],
     applications: ['Bridal & wedding collections', 'Everyday feminine styling', 'Gift sets & boutique retail', 'Photo shoots & editorial', 'Seasonal floral themes'],
@@ -356,13 +356,13 @@ const products = {
   },
   'clip-pearl-barrette': {
     name: 'Pearl Cluster Barrettes', image: '/assets/images/product-clip-pearl-barrette.webp', category: 'Hair Clips & Barrettes',
-    moq: '200 pcs', leadTime: '12-15 days', material: 'Metal + Faux Pearl', style: 'Bridal / Occasion / Everyday',
+    moq: '2,000 pcs', leadTime: '12-15 days', material: 'Metal + Faux Pearl', style: 'Bridal / Occasion / Everyday',
     sizes: 'Small (5cm) / Medium (8cm) / Large (10cm)', finish: 'Gold-tone / Silver-tone frame',
     logo: 'Metal charm tag, laser engraving on clip body', packaging: 'Individual polybag, display card, velvet pouch',
     description: [
       'Pearl cluster barrettes combine micro-pearl paving with larger statement pearls across gold- or silver-tone metal frames. The assortment can include compact snap clips, elongated curved barrettes and open-center shapes for bridal, occasion and everyday collections.',
       'Buyers can specify the base mechanism, pearl size, layout, frame tone and finished dimensions during sampling. Material, coating adhesion, edge finish and holding force should be approved against the intended hairstyle and target market before bulk production.',
-      'Available in 5cm, 8cm and 10cm formats with multiple pearl layouts. MOQ starts from 200 pcs, with a typical production lead time of 12-15 days after sample approval.',
+      'Available in 5cm, 8cm and 10cm formats with multiple pearl layouts. Custom production MOQ is 2,000 pcs per design per color; samples and in-stock items may be available below that minimum.',
     ],
     details: ['Faux pearl decoration on a metal clip base', 'Micro-pave, graduated and cluster layout options', 'Gold-tone or silver-tone frame options', 'Snap, curved barrette and open-center formats', 'Pearl size and spacing confirmed during sampling', 'Sizes: 5cm / 8cm / 10cm', 'Edge finish and clip tension checked during approval', 'Display-card and pouch packaging options'],
     applications: ['Bridal and wedding collections', 'Boutique retail and gift sets', 'Occasion and formal-wear lines', 'Beauty subscription boxes', 'Premium fashion accessory brands'],
@@ -370,13 +370,13 @@ const products = {
   },
   'clip-acetate-snap': {
     name: 'Acetate Snap Hair Clips', image: '/assets/images/product-clip-acetate-snap.webp', category: 'Hair Clips & Barrettes',
-    moq: '150 pcs', leadTime: '12-15 days', material: 'Cellulose Acetate', style: 'Everyday / Minimal / Modern',
+    moq: '2,000 pcs', leadTime: '12-15 days', material: 'Cellulose Acetate', style: 'Everyday / Minimal / Modern',
     sizes: 'Small (5cm) / Medium (7cm) / Long (9cm)', finish: 'Marble / Tortoiseshell / Pearl-effect / Solid',
     logo: 'Laser engraving, foil stamping', packaging: 'Individual polybag, display card',
     description: [
       'Acetate snap clips and barrettes use patterned cellulose acetate to create marble, tortoiseshell, pearl-effect and solid colourways. Oval, tapered, rectangular and open-center profiles give private-label buyers several silhouettes within one coordinated range.',
       'Colour, pattern placement, sheet thickness, metal hardware and clip tension can be reviewed during sampling. Finished edges should be checked for smoothness, and the mechanism should be matched to the target hair type and product size.',
-      'Available in 5cm, 7cm and 9cm lengths. MOQ starts from 150 pcs, with a typical production lead time of 12-15 days after sample approval.',
+      'Available in 5cm, 7cm and 9cm lengths. Custom production MOQ is 2,000 pcs per design per color; samples and in-stock items may be available below that minimum.',
     ],
     details: ['Cellulose acetate decorative top', 'Marble, tortoiseshell, pearl-effect and solid finishes', 'Oval, tapered, rectangular and open-center shapes', 'Metal snap or barrette mechanism options', 'Sheet thickness and clip tension confirmed during sampling', 'Sizes: 5cm / 7cm / 9cm', 'Custom colour development available', 'Smooth edge finishing specified for production'],
     applications: ['Everyday fashion and lifestyle brands', 'Boutique retail and multipack sets', 'Travel and convenience retail', 'Salon accessory lines', 'Private-label seasonal collections'],
@@ -398,13 +398,13 @@ const products = {
   },
   'claw-butterfly-resin': {
     name: 'Resin Butterfly Claw Clips', image: '/assets/images/product-claw-butterfly-resin.webp', category: 'Hair Claws & Clips',
-    moq: '200 pcs', leadTime: '15-18 days', material: 'Resin + Metal Frame', style: 'Statement / Feminine / Boho',
+    moq: '1,000 pcs', leadTime: '15-18 days', material: 'Resin + Metal Frame', style: 'Statement / Feminine / Boho',
     sizes: 'Medium (7cm) / Large (9cm)', finish: 'Translucent resin / Gold-tone or rose-gold-tone frame',
     logo: 'Metal charm tag, laser engraving', packaging: 'Individual polybag, display card, gift box',
     description: [
       'Resin butterfly claw clips combine translucent wing panels with a metal frame and spring mechanism. Amber, cream, blush and champagne colourways can be developed with clean, pearl-accented or rhinestone-accented finishes.',
       'Buyers can specify the wing colour, resin effect, frame tone, decoration and finished size. Spring tension, tooth alignment, edge finish and decoration adhesion should be confirmed during sampling for the intended hair type and market.',
-      'Available in medium 7cm and large 9cm sizes. MOQ starts from 200 pcs, with a typical production lead time of 15-18 days after sample approval.',
+      'Available in medium 7cm and large 9cm sizes. Custom production MOQ is 1,000 pcs per design per color; samples and in-stock items may be available below that minimum.',
     ],
     details: ['Translucent resin butterfly wing panels', 'Metal frame and spring mechanism', 'Clean, pearl-accented and rhinestone-accented options', 'Amber, cream, blush and champagne colourways', 'Medium (7cm) and large (9cm) sizes', 'Spring tension and tooth alignment checked during sampling', 'Gold-tone and rose-gold-tone frame options', 'Display-card and gift-box packaging options'],
     applications: ['Statement accessory and fashion brands', 'Bridal and bridesmaid collections', 'Social-first styling ranges', 'Boutique gift sets and retail', 'Boho and romantic fashion labels'],
@@ -427,6 +427,7 @@ export default function ProductDetail() {
 
   const catalogProduct = catalogProducts.find(item => item.id === id);
   const categoryPage = catalogProduct ? categoryMap[catalogProduct.category] : null;
+  const usesPerDesignColorMoq = ['hair-claw-clips', 'hair-clips-barrettes'].includes(catalogProduct?.category);
 
   return (
     <div className="pt-24">
@@ -455,7 +456,7 @@ export default function ProductDetail() {
             ))}
 
             <div className="flex flex-wrap gap-2 mb-10">
-              <span className="badge">MOQ: {product.moq}</span>
+              <span className="badge">{usesPerDesignColorMoq ? 'Custom MOQ' : 'MOQ'}: {product.moq}</span>
               <span className="badge">Lead Time: {product.leadTime}</span>
               <span className="badge">Material: {product.material}</span>
             </div>
@@ -542,7 +543,9 @@ export default function ProductDetail() {
             <article className="bg-sand/25 p-6 md:p-8">
               <h3 className="text-lg font-display text-navy mb-3">What is the MOQ and lead time?</h3>
               <p className="text-sm text-bronze/80 leading-relaxed">
-                MOQ for {product.name} starts at {product.moq}. Standard production takes {product.leadTime} after sample approval and deposit. The final schedule depends on order quantity, customization and packaging.
+                {usesPerDesignColorMoq
+                  ? `Custom production MOQ for ${product.name} is ${product.moq} per design per color. Samples and in-stock items may be available below that minimum. Standard production takes ${product.leadTime} after sample approval and deposit.`
+                  : `MOQ for ${product.name} starts at ${product.moq}. Standard production takes ${product.leadTime} after sample approval and deposit. The final schedule depends on order quantity, customization and packaging.`}
               </p>
             </article>
             <article className="bg-sand/25 p-6 md:p-8">
@@ -564,7 +567,7 @@ export default function ProductDetail() {
           <p className="section-label !text-champagne">Start Your Project</p>
           <h2 className="text-display-md mb-4">Ready to Talk to a <span className="text-champagne italic font-light">Factory Directly?</span></h2>
           <p className="text-white/60 text-lg max-w-2xl mx-auto mb-8 leading-relaxed">
-            Free design mockup and factory-direct quote within 24 hours. MOQ from 100 pcs, samples in 5–7 days.
+            Free design mockup and factory-direct quote within 24 hours. Production MOQs vary by category; samples and in-stock items may be available below the custom minimum.
           </p>
           <Link
             to="/contact"

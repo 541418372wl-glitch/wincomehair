@@ -26,7 +26,7 @@ const customSteps = [
 ];
 
 const serviceFacts = [
-  { value: 'From 100 pcs', label: 'Starting MOQ' },
+  { value: 'By product', label: 'Custom MOQ' },
   { value: 'Within 24h', label: 'Initial response' },
   { value: '5–7 days', label: 'Physical sample' },
   { value: '8–18 days', label: 'Typical production' },
@@ -43,7 +43,7 @@ const privateLabelRows = [
 const quoteFactors = [
   { title: 'Existing vs new construction', text: 'Using an existing style avoids new tooling. Bespoke shapes, molds and hardware are quoted separately.' },
   { title: 'Material and finish', text: 'Acetate, metal, silk, decoration, plating and special color effects have different setup and unit costs.' },
-  { title: 'Quantity and color split', text: 'MOQ may apply by style or color. Larger consolidated runs usually improve unit and freight efficiency.' },
+  { title: 'Quantity and color split', text: 'Hair claws and hair clips or barrettes are quoted per design per color. Other categories retain their product-specific MOQ basis.' },
   { title: 'Branding and packaging', text: 'Logo method, labels, inserts, cards, pouches and boxes add artwork, tooling and assembly steps.' },
 ];
 

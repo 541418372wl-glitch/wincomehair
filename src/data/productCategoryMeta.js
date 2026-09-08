@@ -4,7 +4,7 @@ export const productCategoryMeta = {
   'hair-claw-clips': {
     shortName: 'Hair Claw Clips',
     seoTitle: 'Custom Hair Claw Clips Manufacturer | WINCOME',
-    description: 'Custom hair claw clips in acetate, metal and plastic with private-label colors, sizes, logos and packaging. MOQ from 100 pieces for brands.',
+    description: 'Custom hair claw clips in acetate, metal and plastic. Production MOQ: 1,000 pieces per design per color; samples and stock may be available below MOQ.',
   },
   headbands: {
     shortName: 'Headbands',

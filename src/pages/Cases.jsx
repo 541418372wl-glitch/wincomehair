@@ -6,7 +6,7 @@ const cases = [
     client: 'Mid-size US accessories brand',
     challenge: 'The client needed a 12-color acetate claw clip collection with custom logo, retail-ready packaging, and a 45-day launch timeline.',
     solution: 'We matched their Pantone colors across 12 acetate variants, designed a custom gold-foil logo stamp, created branded individual cards with barcodes, and completed the first bulk order in 38 days.',
-    results: ['12 SKUs delivered in 38 days', 'MOQ: 200 pcs per color', 'Gold foil logo + custom packaging', 'Reordered within 60 days'],
+    results: ['12 SKUs delivered in 38 days', 'Historical order: 200 pcs per color', 'Gold foil logo + custom packaging', 'Reordered within 60 days'],
   },
   {
     title: 'European Boutique Chain — Private Label Scrunchies',
@@ -39,6 +39,9 @@ export default function Cases() {
         <h1 className="text-display-lg text-navy mb-4">Projects We&apos;ve <span className="text-gold">Delivered</span></h1>
         <p className="text-tan text-lg max-w-2xl mb-16 leading-relaxed">
           Real projects, real clients, real results. Here&apos;s how we&apos;ve helped brands bring their hair accessories to market — from concept to delivery.
+        </p>
+        <p className="-mt-10 mb-16 max-w-2xl text-sm leading-relaxed text-bronze/80">
+          Historical case quantities reflect the original project and do not replace current production MOQs. Request a current category-specific quote before planning an order.
         </p>
 
         {/* Case Studies List */}
@@ -92,7 +95,7 @@ export default function Cases() {
             <h2 className="text-display-sm text-navy mb-8">Your Project, <span className="text-gold">Our Expertise</span></h2>
             <div className="grid md:grid-cols-3 gap-6 text-left">
               {[
-                { title: 'New Brand Launch', desc: 'From first sample to first bulk order — we guide new brands through the entire manufacturing process with low MOQ and fast sampling.' },
+                { title: 'New Brand Launch', desc: 'From first sample to first bulk order — we guide new brands through category-specific MOQs and the sampling process.' },
                 { title: 'Existing Line Expansion', desc: 'Add new categories, colors, or seasonal collections to your existing product line with consistent quality and on-time delivery.' },
                 { title: 'Private Label Partnership', desc: 'Full private label manufacturing with your branding on product, packaging, and marketing materials. We become your production partner.' },
               ].map(item => (

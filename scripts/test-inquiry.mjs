@@ -22,7 +22,7 @@ function validPayload(overrides = {}) {
     name: 'QA Buyer',
     email: 'buyer@example.com',
     product_type: 'claw-clips',
-    quantity: '300-1000',
+    quantity: '1000-1999',
     target_market: 'Europe / UK',
     message: 'Please quote our private-label accessory project.',
     website: '',

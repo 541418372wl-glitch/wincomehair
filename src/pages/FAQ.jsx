@@ -3,7 +3,7 @@ import { useState } from 'react';
 const faqData = [
   {
     q: 'What is the minimum order quantity (MOQ)?',
-    a: 'Our standard MOQ starts at 100 pcs for hair claws and rigid accessories, and 200–300 pcs for scrunchies, bows, and fabric-based products. We can discuss smaller trial quantities for new partnerships — just mention it in your inquiry.'
+    a: 'Custom production MOQ is 1,000 pcs per design per color for Hair Claws & Clips and 2,000 pcs per design per color for Hair Clips & Barrettes. Headbands, scrunchies and bows retain their product-specific MOQ. Samples and in-stock items may be available below the production MOQ.'
   },
   {
     q: 'How long does production take?',

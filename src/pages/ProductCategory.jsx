@@ -24,7 +24,7 @@ function ProductCard({ product }) {
         <p className="mb-2 text-[10px] uppercase tracking-wider text-tan">{product.material}</p>
         <h2 className="mb-3 text-base font-display text-navy transition-colors group-hover:text-gold">{product.name}</h2>
         <div className="mb-4 flex flex-wrap gap-2">
-          <span className="bg-sand/60 px-2 py-1 text-[10px] uppercase tracking-wider text-tan">MOQ: {product.moq}</span>
+          <span className="bg-sand/60 px-2 py-1 text-[10px] uppercase tracking-wider text-tan">Custom MOQ: {product.moq}</span>
           <span className="bg-sand/60 px-2 py-1 text-[10px] uppercase tracking-wider text-tan">{product.leadTime}</span>
         </div>
         <span className="inline-flex items-center gap-1 text-xs font-medium uppercase tracking-wider text-navy transition-colors group-hover:text-gold">

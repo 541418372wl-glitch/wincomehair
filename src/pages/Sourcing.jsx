@@ -5,13 +5,12 @@ const orderFacts = [
   { label: 'Quote response', value: 'Within 24 hours', note: 'Based on a complete product brief' },
   { label: 'Physical sample', value: '5–7 business days', note: 'Before bulk production' },
   { label: 'Bulk production', value: '8–18 days', note: 'After final sample approval' },
-  { label: 'Starting MOQ', value: 'From 100 pcs', note: 'For selected acetate designs' },
+  { label: 'Custom MOQ', value: 'By category', note: 'Review the product table below' },
 ];
 
 const moqRows = [
-  ['Cellulose acetate clips & claws', 'From 100 pcs', 'Cut-and-polish production; selected existing designs support lower entry quantities'],
-  ['Metal, resin & decorated clips', 'Usually 200 pcs', 'Plating, assembly and decorative placement affect setup'],
-  ['ABS plastic claw clips', 'Usually 300 pcs', 'Injection molding and color setup favor larger runs'],
+  ['Hair claw clips — acetate, ABS, metal or resin', '1,000 pcs', 'Custom production MOQ per design per color'],
+  ['Hair clips & barrettes — acetate, metal or decorated', '2,000 pcs', 'Custom production MOQ per design per color'],
   ['Headbands', 'Usually 200–300 pcs', 'Fabric, padding, decoration and construction determine the minimum'],
   ['Silk scrunchies', 'From 200 pcs', 'Fabric grade, size, stitching and labels affect the quotation'],
   ['Other fabric scrunchies', 'Usually 300–500 pcs', 'Material, fullness, color split and packaging affect the minimum'],
@@ -43,10 +42,10 @@ const shippingOptions = [
 ];
 
 const faqs = [
-  { q: 'Can I place a trial order below the standard MOQ?', a: 'Smaller paid trial quantities can be discussed for new partnerships. Feasibility and unit price depend on the style, available materials and level of customization.' },
+  { q: 'Can I order below the custom production MOQ?', a: 'Samples and in-stock items may be available below the production MOQ. Fully customized production follows the category minimum and is quoted per design per color.' },
   { q: 'What are the standard payment terms?', a: 'Standard terms are 30% deposit to begin production and 70% balance before shipment. T/T, PayPal and Alibaba Trade Assurance are supported. Qualified long-term clients may discuss credit terms after three successful orders.' },
   { q: 'When does the production lead time begin?', a: 'The quoted bulk-production period begins after the final physical sample and production details are approved and the required deposit is received.' },
-  { q: 'Can colors be mixed within one order?', a: 'Color splits are often possible, but the minimum may apply by style or color depending on the material and process. The quotation will state the approved split clearly.' },
+  { q: 'Can colors be mixed within one order?', a: 'Hair claws and hair clips or barrettes are quoted per design per color, so every custom color must meet its production MOQ. Other categories retain their product-specific color and quantity rules, stated in the quotation.' },
   { q: 'Which documents are supplied for shipping?', a: 'Commercial invoices, packing lists and the agreed export or compliance documents are provided. Requirements should be confirmed before sampling so they can be included in the production plan.' },
 ];
 
@@ -111,7 +110,7 @@ export default function Sourcing() {
           <p className="section-label">Minimum Order Quantities</p>
           <h2 className="max-w-3xl text-display-md text-navy">Typical MOQ by Product Type</h2>
           <p className="mt-5 max-w-3xl leading-relaxed text-tan">
-            MOQ is quoted per project because materials, color splits, molds, decoration and packaging change the production setup. These starting points help buyers prepare a realistic brief.
+            Hair claws and hair clips or barrettes are quoted per design per color. Other categories retain their product-specific MOQ basis. Samples and in-stock items may be available below production minimums; the quotation identifies which route applies.
           </p>
           <div className="mt-8 overflow-x-auto border border-bronze/10">
             <table className="w-full min-w-[720px] border-collapse text-left">
