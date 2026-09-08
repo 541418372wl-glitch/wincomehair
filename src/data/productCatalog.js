@@ -1,3 +1,7 @@
+import { commercialLandingPages } from './commercialLandingPages.js';
+
+const hairClipLanding = commercialLandingPages.hairClips;
+
 export const products = [
   { id: 'claw-acetate', name: 'Acetate Hair Claw Clips', category: 'hair-claw-clips', image: '/assets/images/product-claw-acetate.webp', moq: '100 pcs', leadTime: '12-15 days', material: 'Cellulose Acetate' },
   { id: 'claw-metal', name: 'Metal Hair Claw Clips', category: 'hair-claw-clips', image: '/assets/images/product-claw-metal.webp', moq: '200 pcs', leadTime: '15-18 days', material: 'Zinc Alloy' },
@@ -106,16 +110,18 @@ export const productCategories = [
   {
     slug: 'hair-clips-barrettes',
     shortName: 'Hair Clips & Barrettes',
-    title: 'Custom Hair Clips & Barrettes Manufacturer',
-    seoTitle: 'Custom Hair Clips & Barrettes Manufacturer | WINCOME',
-    description: 'Custom acetate, pearl, matte, crystal and flower hair clips and barrettes. Private-label materials, plating, logos and packaging. MOQ from 100 pieces.',
-    intro: 'WINCOME produces custom hair clips and barrettes in acetate, coated metal, pearl, crystal and decorative flower constructions. Buyers can specify base hardware, dimensions, plating or coating, surface decoration, branding and retail packaging.',
+    title: hairClipLanding.heading,
+    seoTitle: hairClipLanding.seoTitle,
+    description: hairClipLanding.metaDescription,
+    intro: hairClipLanding.intro,
+    quoteLabel: hairClipLanding.quoteLabel,
     buyerNotes: [
       'Acetate barrettes for premium color patterns and sculptural silhouettes.',
       'Snap clips and coated metal for accessible everyday collections.',
       'Pearl, crystal and flower designs for bridal, evening and gift assortments.',
     ],
     faq: [
+      { q: 'What should buyers confirm with a custom hair clip manufacturer?', a: 'Confirm the clip type, intended dimensions, base hardware, material or finish, order quantity, logo treatment, packaging and target market before sampling. These details allow the manufacturer to compare feasible constructions and quote the correct MOQ.' },
       { q: 'Which barrette and hair clip materials are available?', a: 'Options include cellulose acetate, coated metal, plated alloy, faux pearl, crystal and mixed decorative constructions.' },
       { q: 'Can the base clip and decoration be customized?', a: 'Yes. Base length, closure, plating, coating, acetate shape, stone or pearl layout, logo and packaging can be sampled to specification.' },
       { q: 'What is the MOQ for custom hair clips and barrettes?', a: 'Selected acetate barrettes start from 100 pieces. Most decorated metal clips start from 200 to 300 pieces per design.' },

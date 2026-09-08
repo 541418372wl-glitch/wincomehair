@@ -106,6 +106,7 @@ export const productCategoryContent = {
   },
   'hair-clips-barrettes': {
     positioning: 'Private-label clips and barrettes across acetate, coated metal, pearl, crystal and decorative constructions for everyday and occasion ranges.',
+    quoteBrief: 'For a useful first quote, share the clip type, approximate size, preferred material or finish, quantity, logo or packaging needs and destination market.',
     facts: [
       { label: 'Starting MOQ', value: '100 pcs', note: 'Selected acetate designs' },
       { label: 'Production', value: '8–18 days', note: 'After sample approval' },

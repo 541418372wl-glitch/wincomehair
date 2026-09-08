@@ -1,3 +1,5 @@
+import { commercialLandingPages } from './commercialLandingPages.js';
+
 export const productCategoryMeta = {
   'hair-claw-clips': {
     shortName: 'Hair Claw Clips',
@@ -21,7 +23,7 @@ export const productCategoryMeta = {
   },
   'hair-clips-barrettes': {
     shortName: 'Hair Clips & Barrettes',
-    seoTitle: 'Custom Hair Clips & Barrettes Manufacturer | WINCOME',
-    description: 'Custom acetate, pearl, matte, crystal and flower hair clips and barrettes. Private-label materials, plating, logos and packaging. MOQ from 100 pieces.',
+    seoTitle: commercialLandingPages.hairClips.seoTitle,
+    description: commercialLandingPages.hairClips.metaDescription,
   },
 };
