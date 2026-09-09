@@ -36,7 +36,7 @@ export default function Footer() {
               <span className="text-[10px] tracking-[0.2em] uppercase text-white/50">Hair Accessories</span>
             </div>
             <p className="text-sm text-white/50 leading-relaxed max-w-xs">
-              Custom hair accessories manufacturer for global brands. OEM/ODM, low MOQ, worldwide shipping.
+              Custom hair accessories manufacturer for global brands. OEM/ODM, category-specific MOQs, worldwide shipping.
             </p>
           </div>
 

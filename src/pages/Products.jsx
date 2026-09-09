@@ -32,7 +32,7 @@ export default function Products() {
 
         <div className="mb-12 grid grid-cols-2 border border-bronze/10 bg-white md:grid-cols-4" aria-label="Wholesale program facts">
           {[
-            ['From 100 pcs', 'Starting MOQ'],
+            ['By category', 'Custom MOQ'],
             ['5–7 days', 'Physical sampling'],
             ['8–18 days', 'Typical production'],
             ['50+ countries', 'Export experience'],
@@ -92,7 +92,7 @@ export default function Products() {
                 <p className="text-[10px] tracking-wider uppercase text-tan mb-2">{product.category}</p>
                 <h3 className="text-base font-display text-navy mb-3 group-hover:text-gold transition-colors">{product.name}</h3>
                 <div className="flex flex-wrap gap-2 mb-4">
-                  <span className="text-[10px] tracking-wider uppercase bg-sand/60 text-tan px-2 py-1">MOQ: {product.moq}</span>
+                  <span className="text-[10px] tracking-wider uppercase bg-sand/60 text-tan px-2 py-1">Custom MOQ: {product.moq}</span>
                   <span className="text-[10px] tracking-wider uppercase bg-sand/60 text-tan px-2 py-1">{product.leadTime}</span>
                 </div>
                 <span className="text-xs font-medium tracking-wider uppercase text-navy group-hover:text-gold transition-colors inline-flex items-center gap-1">

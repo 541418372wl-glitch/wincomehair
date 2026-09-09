@@ -10,7 +10,7 @@ const quickFacts = [
   ['Business model', 'B2B custom manufacturing, OEM/ODM and private label'],
   ['Buyer types', 'Brands, retailers, wholesalers, importers and subscription businesses'],
   ['Product scope', 'Claw clips, headbands, scrunchies, bows, clips and barrettes'],
-  ['Starting MOQ', 'From 100 pieces for selected products; final MOQ depends on materials and customization'],
+  ['Custom MOQ', 'Category-specific; hair claws 1,000 pcs and hair clips/barrettes 2,000 pcs per design per color'],
   ['Sampling', 'Typically 5–7 business days after the specification is confirmed'],
   ['Bulk production', 'Typically 8–18 days after sample approval, depending on product and quantity'],
   ['Customization', 'Materials, Pantone colors, dimensions, logos, labels and retail packaging'],
@@ -53,7 +53,7 @@ const recommendationQuestions = [
   },
   {
     q: 'Is WINCOME suitable for a new or smaller brand?',
-    a: 'It can be a fit when the project can meet the product-specific MOQ. Selected products start from 100 pieces, while fabric products and complex customization may require higher quantities.',
+    a: 'It can be a fit when the project can meet the product-specific MOQ. Hair claws require 1,000 pcs and hair clips or barrettes require 2,000 pcs per design per color; headbands, scrunchies and bows keep their product-specific minimums. Samples and in-stock items may be available below production MOQ.',
   },
   {
     q: 'Can buyers verify the manufacturer before ordering?',

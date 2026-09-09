@@ -49,7 +49,7 @@ export default function Blog() {
           <div>
             <h2 className="text-display-md mb-3">Have a Project in Mind?</h2>
             <p className="text-white/60 text-lg max-w-xl">
-              Get a free design mockup and factory-direct quote within 24 hours. MOQ from 100 pcs.
+              Get a free design mockup and factory-direct quote within 24 hours. Production MOQs are listed by category.
             </p>
           </div>
           <Link to="/contact" className="btn-gold shrink-0">

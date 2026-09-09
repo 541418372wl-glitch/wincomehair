@@ -269,7 +269,7 @@ export default function BlogPost() {
           <p className="section-label !text-champagne">Start Your Project</p>
           <h2 className="text-display-md mb-4">Ready to Talk to a <span className="text-champagne italic font-light">Factory Directly?</span></h2>
           <p className="text-white/60 text-lg max-w-2xl mx-auto mb-8 leading-relaxed">
-            Free design mockup and factory-direct quote within 24 hours. MOQ from 100 pcs, samples in 5–7 days.
+            Free design mockup and factory-direct quote within 24 hours. Production MOQs vary by category; samples and in-stock items may be available below the custom minimum.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
             <a

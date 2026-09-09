@@ -84,11 +84,11 @@ const pageMeta = {
   },
   '/products': {
     title: 'Wholesale Hair Accessories Catalog | WINCOME',
-    description: 'Browse 29 wholesale hair accessories with MOQ from 100 pieces. Custom materials, colors, logos and packaging for brands, retailers and importers.',
+    description: 'Browse 29 wholesale hair accessories with category-specific production MOQs. Custom materials, colors, logos and packaging for brands and importers.',
   },
   '/customization': {
     title: 'Custom Hair Accessories OEM & Private Label | WINCOME',
-    description: 'Custom hair accessories OEM/ODM with Pantone colors, materials, logos, labels and retail packaging. MOQ from 100 pieces and samples in 5–7 days.',
+    description: 'Custom hair accessories OEM/ODM with Pantone colors, materials, logos, labels and retail packaging. Category-specific MOQs; samples in 5–7 days.',
   },
   '/sourcing': {
     title: 'Hair Accessories MOQ, Samples & Production | WINCOME',
@@ -151,8 +151,26 @@ function buildArticleDescription(article) {
   return truncate(enriched);
 }
 
-function buildProductDescription(product) {
-  const facts = `MOQ ${product.moq}; lead time ${product.leadTime}. Custom colors, logo and packaging available.`;
+const PER_DESIGN_COLOR_MOQ_IDS = new Set([
+  'claw-acetate',
+  'claw-metal',
+  'claw-plastic',
+  'claw-butterfly',
+  'claw-rectangular',
+  'claw-butterfly-resin',
+  'clip-pearl',
+  'clip-acetate',
+  'clip-matte',
+  'clip-crystal',
+  'clip-flower',
+  'clip-pearl-barrette',
+  'clip-acetate-snap',
+]);
+
+function buildProductDescription(product, productId) {
+  const facts = PER_DESIGN_COLOR_MOQ_IDS.has(productId)
+    ? `Custom MOQ ${product.moq} per design per color; samples and stock may be available below MOQ.`
+    : `MOQ ${product.moq}; lead time ${product.leadTime}. Custom colors, logo and packaging available.`;
   const introMax = SEO_DESCRIPTION_MAX - facts.length - 1;
   return `${truncate(product.description, introMax)} ${facts}`;
 }
@@ -190,7 +208,7 @@ export function getSeoMeta(pathname) {
     if (pm) {
       meta = {
         title: `Custom ${pm.name} Manufacturer | WINCOME`,
-        description: buildProductDescription(pm),
+        description: buildProductDescription(pm, id),
       };
     }
   }

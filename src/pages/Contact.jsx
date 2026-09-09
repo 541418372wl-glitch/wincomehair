@@ -2,6 +2,36 @@ import { useState } from 'react';
 import { waLink } from '../lib/whatsapp';
 import { trackGenerateLead } from '../lib/analytics';
 
+const SAMPLE_STOCK_OPTION = {
+  value: 'sample-stock-below-moq',
+  label: 'Sample / in-stock items (below production MOQ)',
+};
+
+const VOLUME_OPTIONS = {
+  '1000-1999': { value: '1000-1999', label: '1,000–1,999 pcs' },
+  '2000-4999': { value: '2000-4999', label: '2,000–4,999 pcs' },
+  '5000+': { value: '5000+', label: '5,000+ pcs (High Volume)' },
+};
+
+const DEFAULT_QUANTITY_OPTIONS = [
+  SAMPLE_STOCK_OPTION,
+  { value: '200-999', label: '200–999 pcs' },
+  VOLUME_OPTIONS['1000-1999'],
+  VOLUME_OPTIONS['2000-4999'],
+  VOLUME_OPTIONS['5000+'],
+];
+
+const CUSTOM_MOQ_BY_PRODUCT_TYPE = {
+  'claw-clips': {
+    message: 'Custom production MOQ: 1,000 pcs per design per color.',
+    options: [SAMPLE_STOCK_OPTION, VOLUME_OPTIONS['1000-1999'], VOLUME_OPTIONS['2000-4999'], VOLUME_OPTIONS['5000+']],
+  },
+  pins: {
+    message: 'Custom production MOQ: 2,000 pcs per design per color.',
+    options: [SAMPLE_STOCK_OPTION, VOLUME_OPTIONS['2000-4999'], VOLUME_OPTIONS['5000+']],
+  },
+};
+
 export default function Contact() {
   const [step, setStep] = useState(1);
   const [submitting, setSubmitting] = useState(false);
@@ -13,7 +43,13 @@ export default function Contact() {
     dimensions: '', message: '', targetMarket: '', timeline: '', website: '',
   });
 
-  const update = (field, value) => setForm(prev => ({ ...prev, [field]: value }));
+  const update = (field, value) => setForm(prev => ({
+    ...prev,
+    [field]: value,
+    ...(field === 'productType' ? { quantity: '' } : {}),
+  }));
+  const activeMoqPolicy = CUSTOM_MOQ_BY_PRODUCT_TYPE[form.productType];
+  const quantityOptions = activeMoqPolicy?.options || DEFAULT_QUANTITY_OPTIONS;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -152,9 +188,14 @@ export default function Contact() {
                       <option value="headbands">Headbands</option>
                       <option value="scrunchies">Scrunchies & Hair Ties</option>
                       <option value="bows">Hair Bows & Ribbons</option>
-                      <option value="pins">Hair Pins & Barrettes</option>
+                      <option value="pins">Hair Clips & Barrettes</option>
                       <option value="other">Multiple Types / Other</option>
                     </select>
+                    {activeMoqPolicy && (
+                      <p className="mt-2 text-sm leading-relaxed text-bronze/80" role="status">
+                        {activeMoqPolicy.message} Samples and in-stock items may be available below this minimum.
+                      </p>
+                    )}
                   </div>
                   <div>
                     <label htmlFor="quantity" className="block text-xs tracking-wider uppercase text-tan mb-1">Estimated Quantity *</label>
@@ -167,10 +208,9 @@ export default function Contact() {
                       className="input-field"
                     >
                       <option value="">Select quantity range...</option>
-                      <option value="100-300">100–300 pcs (Low MOQ)</option>
-                      <option value="300-1000">300–1,000 pcs</option>
-                      <option value="1000-5000">1,000–5,000 pcs</option>
-                      <option value="5000+">5,000+ pcs (High Volume)</option>
+                      {quantityOptions.map(option => (
+                        <option key={option.value} value={option.value}>{option.label}</option>
+                      ))}
                     </select>
                   </div>
                   <div className="flex justify-end">

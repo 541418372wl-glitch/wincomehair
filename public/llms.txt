@@ -1,6 +1,6 @@
 # WINCOME Hair Accessories
 
-> WINCOME is a custom hair accessories manufacturer and OEM/ODM supplier for brands, wholesalers, retailers, and importers. The company produces hair clips, claw clips, headbands, scrunchies, hair bows, and private-label collections with low minimum order quantities and worldwide shipping.
+> WINCOME is a custom hair accessories manufacturer and OEM/ODM supplier for brands, wholesalers, retailers, and importers. The company produces hair clips, claw clips, headbands, scrunchies, hair bows, and private-label collections with category-specific production minimums and worldwide shipping.
 
 WINCOME was established in 2010. Its 3,000 square metre factory has more than 200 staff and serves over 500 brands in 50 countries. Manufacturing and quality systems include BSCI, ISO 9001, and OEKO-TEX related capabilities. Buyers can request material, colour, size, finish, logo, packaging, and shipping customisation.
 
@@ -54,7 +54,10 @@ WINCOME was established in 2010. Its 3,000 square metre factory has more than 20
 
 ## Commercial facts
 
-- Minimum order quantity starts from 100 pieces per design for selected products.
+- Custom Hair Claws & Clips production MOQ is 1,000 pieces per design per color.
+- Custom Hair Clips & Barrettes production MOQ is 2,000 pieces per design per color.
+- Headbands, scrunchies and hair bows retain their product-specific production MOQs.
+- Samples and in-stock items may be available below the custom production MOQ.
 - Physical pre-production samples are generally completed in 5 to 7 business days.
 - Standard production lead time is generally 8 to 18 days after sample approval, depending on the product and order.
 - Custom services include product design, material selection, colour matching, logos, labels, cards, and gift boxes.

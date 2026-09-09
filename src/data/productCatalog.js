@@ -3,11 +3,11 @@ import { commercialLandingPages } from './commercialLandingPages.js';
 const hairClipLanding = commercialLandingPages.hairClips;
 
 export const products = [
-  { id: 'claw-acetate', name: 'Acetate Hair Claw Clips', category: 'hair-claw-clips', image: '/assets/images/product-claw-acetate.webp', moq: '100 pcs', leadTime: '12-15 days', material: 'Cellulose Acetate' },
-  { id: 'claw-metal', name: 'Metal Hair Claw Clips', category: 'hair-claw-clips', image: '/assets/images/product-claw-metal.webp', moq: '200 pcs', leadTime: '15-18 days', material: 'Zinc Alloy' },
-  { id: 'claw-plastic', name: 'Plastic Hair Claws', category: 'hair-claw-clips', image: '/assets/images/product-claw-plastic.webp', moq: '300 pcs', leadTime: '10-14 days', material: 'ABS Plastic' },
-  { id: 'claw-butterfly', name: 'Butterfly Hair Claw Clips', category: 'hair-claw-clips', image: '/assets/images/product-claw-butterfly.webp', moq: '200 pcs', leadTime: '15-18 days', material: 'Metal Frame + Resin' },
-  { id: 'claw-rectangular', name: 'Rectangular Hair Claw Clips', category: 'hair-claw-clips', image: '/assets/images/product-claw-rectangular.webp', moq: '200 pcs', leadTime: '12-15 days', material: 'Cellulose Acetate / Resin' },
+  { id: 'claw-acetate', name: 'Acetate Hair Claw Clips', category: 'hair-claw-clips', image: '/assets/images/product-claw-acetate.webp', moq: '1,000 pcs', leadTime: '12-15 days', material: 'Cellulose Acetate' },
+  { id: 'claw-metal', name: 'Metal Hair Claw Clips', category: 'hair-claw-clips', image: '/assets/images/product-claw-metal.webp', moq: '1,000 pcs', leadTime: '15-18 days', material: 'Zinc Alloy' },
+  { id: 'claw-plastic', name: 'Plastic Hair Claws', category: 'hair-claw-clips', image: '/assets/images/product-claw-plastic.webp', moq: '1,000 pcs', leadTime: '10-14 days', material: 'ABS Plastic' },
+  { id: 'claw-butterfly', name: 'Butterfly Hair Claw Clips', category: 'hair-claw-clips', image: '/assets/images/product-claw-butterfly.webp', moq: '1,000 pcs', leadTime: '15-18 days', material: 'Metal Frame + Resin' },
+  { id: 'claw-rectangular', name: 'Rectangular Hair Claw Clips', category: 'hair-claw-clips', image: '/assets/images/product-claw-rectangular.webp', moq: '1,000 pcs', leadTime: '12-15 days', material: 'Cellulose Acetate / Resin' },
   { id: 'headband-pearl', name: 'Pearl Embellished Headbands', category: 'headbands', image: '/assets/images/product-headband-pearl.webp', moq: '200 pcs', leadTime: '15-18 days', material: 'Metal + Faux Pearl' },
   { id: 'headband-knotted', name: 'Knotted Fabric Headbands', category: 'headbands', image: '/assets/images/product-headband-knotted.webp', moq: '300 pcs', leadTime: '12-15 days', material: 'Cotton / Silk / Velvet' },
   { id: 'headband-padded', name: 'Padded Cushion Headbands', category: 'headbands', image: '/assets/images/product-headband-padded.webp', moq: '200 pcs', leadTime: '12-15 days', material: 'Fabric + Foam' },
@@ -23,15 +23,15 @@ export const products = [
   { id: 'bow-clip', name: 'Bow Hair Clips', category: 'hair-bows', image: '/assets/images/product-bow-clip.webp', moq: '200 pcs', leadTime: '12-15 days', material: 'Fabric + Metal Clip' },
   { id: 'bow-multilayer', name: 'Multi-Layer Satin Bow Clips', category: 'hair-bows', image: '/assets/images/product-bow-multilayer.webp', moq: '200 pcs', leadTime: '12-15 days', material: 'Premium Satin' },
   { id: 'bow-oversized', name: 'Oversized Hair Bows', category: 'hair-bows', image: '/assets/images/product-bow-oversized.webp', moq: '200 pcs', leadTime: '12-15 days', material: 'Premium Satin' },
-  { id: 'clip-pearl', name: 'Pearl Hair Barrettes', category: 'hair-clips-barrettes', image: '/assets/images/product-clip-pearl.webp', moq: '200 pcs', leadTime: '12-15 days', material: 'Metal + Faux Pearl' },
-  { id: 'clip-acetate', name: 'Acetate Hair Barrettes', category: 'hair-clips-barrettes', image: '/assets/images/product-clip-acetate.webp', moq: '100 pcs', leadTime: '12-15 days', material: 'Cellulose Acetate' },
-  { id: 'clip-matte', name: 'Matte Snap Hair Clips', category: 'hair-clips-barrettes', image: '/assets/images/product-clip-matte.webp', moq: '300 pcs', leadTime: '8-10 days', material: 'Coated Metal' },
-  { id: 'clip-crystal', name: 'Crystal Rhinestone Barrettes', category: 'hair-clips-barrettes', image: '/assets/images/product-clip-crystal.webp', moq: '200 pcs', leadTime: '15-18 days', material: 'Metal + Crystal' },
-  { id: 'clip-flower', name: 'Flower Hair Clips', category: 'hair-clips-barrettes', image: '/assets/images/product-clip-flower.webp', moq: '200 pcs', leadTime: '15-18 days', material: 'Metal + Crystal' },
-  { id: 'clip-pearl-barrette', name: 'Pearl Cluster Barrettes', category: 'hair-clips-barrettes', image: '/assets/images/product-clip-pearl-barrette.webp', moq: '200 pcs', leadTime: '12-15 days', material: 'Metal + Faux Pearl' },
-  { id: 'clip-acetate-snap', name: 'Acetate Snap Hair Clips', category: 'hair-clips-barrettes', image: '/assets/images/product-clip-acetate-snap.webp', moq: '150 pcs', leadTime: '12-15 days', material: 'Cellulose Acetate' },
+  { id: 'clip-pearl', name: 'Pearl Hair Barrettes', category: 'hair-clips-barrettes', image: '/assets/images/product-clip-pearl.webp', moq: '2,000 pcs', leadTime: '12-15 days', material: 'Metal + Faux Pearl' },
+  { id: 'clip-acetate', name: 'Acetate Hair Barrettes', category: 'hair-clips-barrettes', image: '/assets/images/product-clip-acetate.webp', moq: '2,000 pcs', leadTime: '12-15 days', material: 'Cellulose Acetate' },
+  { id: 'clip-matte', name: 'Matte Snap Hair Clips', category: 'hair-clips-barrettes', image: '/assets/images/product-clip-matte.webp', moq: '2,000 pcs', leadTime: '8-10 days', material: 'Coated Metal' },
+  { id: 'clip-crystal', name: 'Crystal Rhinestone Barrettes', category: 'hair-clips-barrettes', image: '/assets/images/product-clip-crystal.webp', moq: '2,000 pcs', leadTime: '15-18 days', material: 'Metal + Crystal' },
+  { id: 'clip-flower', name: 'Flower Hair Clips', category: 'hair-clips-barrettes', image: '/assets/images/product-clip-flower.webp', moq: '2,000 pcs', leadTime: '15-18 days', material: 'Metal + Crystal' },
+  { id: 'clip-pearl-barrette', name: 'Pearl Cluster Barrettes', category: 'hair-clips-barrettes', image: '/assets/images/product-clip-pearl-barrette.webp', moq: '2,000 pcs', leadTime: '12-15 days', material: 'Metal + Faux Pearl' },
+  { id: 'clip-acetate-snap', name: 'Acetate Snap Hair Clips', category: 'hair-clips-barrettes', image: '/assets/images/product-clip-acetate-snap.webp', moq: '2,000 pcs', leadTime: '12-15 days', material: 'Cellulose Acetate' },
   { id: 'bow-satin-barrette', name: 'Satin Ribbon Bow Barrettes', category: 'hair-bows', image: '/assets/images/product-bow-satin-barrette.webp', moq: '200 pcs', leadTime: '10-12 days', material: 'Premium Satin' },
-  { id: 'claw-butterfly-resin', name: 'Resin Butterfly Claw Clips', category: 'hair-claw-clips', image: '/assets/images/product-claw-butterfly-resin.webp', moq: '200 pcs', leadTime: '15-18 days', material: 'Resin + Metal Frame' },
+  { id: 'claw-butterfly-resin', name: 'Resin Butterfly Claw Clips', category: 'hair-claw-clips', image: '/assets/images/product-claw-butterfly-resin.webp', moq: '1,000 pcs', leadTime: '15-18 days', material: 'Resin + Metal Frame' },
 ];
 
 export const productCategories = [
@@ -40,15 +40,15 @@ export const productCategories = [
     shortName: 'Hair Claw Clips',
     title: 'Custom Hair Claw Clips Manufacturer',
     seoTitle: 'Custom Hair Claw Clips Manufacturer | WINCOME',
-    description: 'Custom hair claw clips in acetate, metal and plastic with private-label colors, sizes, logos and packaging. MOQ from 100 pieces for brands.',
+    description: 'Custom hair claw clips in acetate, metal and plastic. Production MOQ: 1,000 pieces per design per color; samples and stock may be available below MOQ.',
     intro: 'WINCOME manufactures custom hair claw clips for fashion, beauty and private-label brands. Choose cellulose acetate, zinc alloy, ABS or resin constructions; refine size, tooth geometry and spring performance; then add custom colors, logos and retail-ready packaging.',
     buyerNotes: [
-      'Cellulose acetate for premium patterns, polished edges and lower-MOQ collections.',
+      'Cellulose acetate for premium patterns, polished edges and design-led collections.',
       'Engineered plastic for lightweight, color-rich and price-sensitive ranges.',
       'Metal and resin statement clips for jewelry-inspired or social-first launches.',
     ],
     faq: [
-      { q: 'What is the MOQ for custom hair claw clips?', a: 'MOQ starts from 100 pieces for selected acetate designs. Metal, resin and injection-molded plastic styles generally start from 200 to 300 pieces per design.' },
+      { q: 'What is the MOQ for custom hair claw clips?', a: 'The custom production MOQ is 1,000 pieces per design per color. Samples and in-stock items may be available below the production MOQ.' },
       { q: 'Can claw clip size and teeth be customized?', a: 'Yes. Overall length, jaw opening, tooth depth, spacing, spring, color, finish and logo can be developed through sampling.' },
       { q: 'Which claw clip material is best for a premium brand?', a: 'Cellulose acetate is a common premium choice for depth of color and polished finishing. The final choice should also consider weight, target hairstyle, price point and durability tests.' },
     ],
@@ -124,7 +124,7 @@ export const productCategories = [
       { q: 'What should buyers confirm with a custom hair clip manufacturer?', a: 'Confirm the clip type, intended dimensions, base hardware, material or finish, order quantity, logo treatment, packaging and target market before sampling. These details allow the manufacturer to compare feasible constructions and quote the correct MOQ.' },
       { q: 'Which barrette and hair clip materials are available?', a: 'Options include cellulose acetate, coated metal, plated alloy, faux pearl, crystal and mixed decorative constructions.' },
       { q: 'Can the base clip and decoration be customized?', a: 'Yes. Base length, closure, plating, coating, acetate shape, stone or pearl layout, logo and packaging can be sampled to specification.' },
-      { q: 'What is the MOQ for custom hair clips and barrettes?', a: 'Selected acetate barrettes start from 100 pieces. Most decorated metal clips start from 200 to 300 pieces per design.' },
+      { q: 'What is the MOQ for custom hair clips and barrettes?', a: 'The custom production MOQ is 2,000 pieces per design per color. Samples and in-stock items may be available below the production MOQ.' },
     ],
   },
 ];

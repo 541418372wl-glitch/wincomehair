@@ -2,7 +2,7 @@ export const productCategoryContent = {
   'hair-claw-clips': {
     positioning: 'Built for fashion, beauty and private-label programs that need reliable grip, repeatable color and retail-ready presentation.',
     facts: [
-      { label: 'Starting MOQ', value: '100 pcs', note: 'Selected acetate designs' },
+      { label: 'Custom MOQ', value: '1,000 pcs', note: 'Per design per color' },
       { label: 'Production', value: '10–18 days', note: 'After sample approval' },
       { label: 'Materials', value: '4 core options', note: 'Acetate, ABS, metal and resin' },
       { label: 'Sampling', value: '5–7 days', note: 'For a physical pre-production sample' },
@@ -108,7 +108,7 @@ export const productCategoryContent = {
     positioning: 'Private-label clips and barrettes across acetate, coated metal, pearl, crystal and decorative constructions for everyday and occasion ranges.',
     quoteBrief: 'For a useful first quote, share the clip type, approximate size, preferred material or finish, quantity, logo or packaging needs and destination market.',
     facts: [
-      { label: 'Starting MOQ', value: '100 pcs', note: 'Selected acetate designs' },
+      { label: 'Custom MOQ', value: '2,000 pcs', note: 'Per design per color' },
       { label: 'Production', value: '8–18 days', note: 'After sample approval' },
       { label: 'Product directions', value: '7 options', note: 'Everyday through embellished' },
       { label: 'Sampling', value: '5–7 days', note: 'Closure and decoration approval' },
