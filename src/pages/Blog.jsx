@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { articles } from '../data/articles';
+import { articles } from 'virtual:article-summaries';
 
 export default function Blog() {
   return (

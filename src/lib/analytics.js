@@ -8,6 +8,7 @@ const BLOCKED_PARAMETER_NAMES = new Set(['email', 'phone', 'name', 'message', 'c
 let defaultsInitialized = false;
 let analyticsConfigured = false;
 let scriptPromise;
+let sessionConsent;
 
 function hasBrowser() {
   return typeof window !== 'undefined' && typeof document !== 'undefined';
@@ -42,6 +43,7 @@ export function initializeConsentDefaults() {
 
 export function readAnalyticsConsent() {
   if (!hasBrowser()) return null;
+  if (sessionConsent) return sessionConsent;
   try {
     const value = window.localStorage.getItem(ANALYTICS_CONSENT_KEY);
     return ALLOWED_CONSENT.has(value) ? value : null;
@@ -51,9 +53,11 @@ export function readAnalyticsConsent() {
 }
 
 function persistAnalyticsConsent(value) {
+  sessionConsent = undefined;
   try {
     window.localStorage.setItem(ANALYTICS_CONSENT_KEY, value);
   } catch {
+    sessionConsent = value;
     // Consent still applies for the current page if storage is unavailable.
   }
 }
@@ -90,19 +94,25 @@ function loadGoogleTag() {
     script.async = true;
     script.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(GA_MEASUREMENT_ID)}`;
     script.onload = () => resolve(true);
-    script.onerror = () => resolve(false);
+    script.onerror = () => {
+      script.remove?.();
+      scriptPromise = undefined;
+      resolve(false);
+    };
     document.head.appendChild(script);
   });
   return scriptPromise;
 }
 
 async function enableAnalytics() {
+  if (!hasBrowser() || readAnalyticsConsent() !== 'granted') return false;
   initializeConsentDefaults();
   const gtag = ensureGtag();
   gtag('consent', 'update', consentState('granted'));
 
   const loaded = await loadGoogleTag();
-  if (!loaded) return false;
+  // Consent may be withdrawn while the tag is downloading.
+  if (!loaded || readAnalyticsConsent() !== 'granted') return false;
   if (!analyticsConfigured) {
     gtag('js', new Date());
     gtag('config', GA_MEASUREMENT_ID, {
@@ -159,7 +169,7 @@ function sanitizeEventParams(params) {
 export async function trackEvent(eventName, params = {}) {
   if (!hasBrowser() || readAnalyticsConsent() !== 'granted') return false;
   const ready = await enableAnalytics();
-  if (!ready) return false;
+  if (!ready || readAnalyticsConsent() !== 'granted') return false;
   ensureGtag()('event', eventName.slice(0, 40), sanitizeEventParams(params));
   return true;
 }

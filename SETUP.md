@@ -32,7 +32,11 @@ npm run build
 npm test
 ```
 
-The build performs client and SSR builds, prerenders every public route, and runs asset, metadata, GEO/AI discovery, article-trust, and repository-governance checks.
+The build performs client and SSR builds, prerenders every public route, and runs asset, metadata, GEO/AI discovery, article-trust, repository-governance, and internal-link checks. Rendering errors fail the build. Article listings and SEO use a virtual summary module generated from the original content; full article bodies load with the article page. A bundle gate prevents those bodies from returning to the initial client graph.
+
+`npm test` includes mocked inquiry/provider timeout tests, analytics consent lifecycle tests, contact-form DOM interactions, SEO navigation, and SSR failure handling. It does not submit real inquiries or write to the database. JSDOM checks behavior, not visual layout; use a browser preview for visual review.
+
+Each inquiry provider request has an 8-second timeout, within the function’s configured 30-second duration. A timed-out write is not automatically retried; an email timeout after a saved inquiry returns saved status to avoid a duplicate submission.
 
 To inspect the production build locally:
 

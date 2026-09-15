@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "node scripts/check-repository-governance.mjs && node scripts/check-moq-consistency.mjs && vite build && vite build --ssr src/entry-server.jsx --outDir dist-ssr && node scripts/prerender.mjs && node scripts/check-generated-assets.mjs && node scripts/check-commercial-landing-pages.mjs && node scripts/check-ai-discovery.mjs && node scripts/check-article-trust.mjs && node scripts/check-buyer-decision-cluster.mjs",
+    "build": "node scripts/check-repository-governance.mjs && node scripts/check-moq-consistency.mjs && vite build && vite build --ssr src/entry-server.jsx --outDir dist-ssr && node scripts/prerender.mjs && node scripts/check-generated-assets.mjs && node scripts/check-commercial-landing-pages.mjs && node scripts/check-ai-discovery.mjs && node scripts/check-article-trust.mjs && node scripts/check-buyer-decision-cluster.mjs && node scripts/check-route-integrity.mjs",
     "test:inquiry": "node scripts/test-inquiry.mjs",
     "test:csp": "node scripts/test-csp-report.mjs",
     "test:analytics": "node scripts/test-privacy-analytics.mjs",
@@ -16,8 +16,13 @@
     "test:geo": "node scripts/check-ai-discovery.mjs",
     "test:repo-governance": "node scripts/check-repository-governance.mjs",
     "submit:indexnow": "node scripts/submit-indexnow.mjs",
-    "test": "node scripts/check-repository-governance.mjs && node scripts/check-moq-consistency.mjs && node scripts/test-inquiry.mjs && node scripts/test-csp-report.mjs && node scripts/test-privacy-analytics.mjs && node scripts/test-ai-referral.mjs",
-    "preview": "vite preview"
+    "test": "node scripts/check-repository-governance.mjs && node scripts/check-moq-consistency.mjs && node scripts/test-inquiry.mjs && node scripts/test-csp-report.mjs && node scripts/test-privacy-analytics.mjs && node scripts/test-ai-referral.mjs && node scripts/test-analytics-lifecycle.mjs && node scripts/test-ui-flows.mjs && node scripts/test-seo-navigation.mjs && node scripts/test-render-stream.mjs",
+    "preview": "vite preview",
+    "test:analytics-lifecycle": "node scripts/test-analytics-lifecycle.mjs",
+    "test:ui": "node scripts/test-ui-flows.mjs",
+    "test:seo-navigation": "node scripts/test-seo-navigation.mjs",
+    "test:ssr": "node scripts/test-render-stream.mjs",
+    "test:routes": "node scripts/check-route-integrity.mjs"
   },
   "dependencies": {
     "preact": "^10.29.8",
@@ -29,6 +34,8 @@
     "@rollup/wasm-node": "4.62.4",
     "@vitejs/plugin-react": "4.3.4",
     "autoprefixer": "10.4.20",
+    "esbuild": "0.25.12",
+    "jsdom": "26.1.0",
     "postcss": "8.5.26",
     "tailwindcss": "3.4.17",
     "vite": "6.4.3"

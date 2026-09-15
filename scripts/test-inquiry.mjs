@@ -234,6 +234,27 @@ try {
   assert.equal(unavailable.statusCode, 503);
   assert.equal(unavailableCalls, 1);
 
+  // Every provider receives a real abort signal. Simulate each timeout to
+  // verify storage is never retried and saved leads survive notification failure.
+  for (const stage of ['rate', 'database', 'email']) {
+    configure();
+    const timeoutCalls = [];
+    const normal = makeFetch();
+    const result = await run(validPayload(), async (url, options) => {
+      assert.ok(options.signal instanceof AbortSignal);
+      timeoutCalls.push(url);
+      const current = url.includes('/rpc/') ? 'rate' : url.endsWith('/inquiries') ? 'database' : 'email';
+      if (current === stage) throw new DOMException('Provider timed out', 'TimeoutError');
+      return normal(url, options);
+    });
+    assert.equal(result.statusCode, stage === 'rate' ? 503 : stage === 'database' ? 502 : 200);
+    assert.equal(timeoutCalls.length, stage === 'rate' ? 1 : stage === 'database' ? 2 : 3);
+    if (stage === 'email') {
+      assert.equal(result.body.saved, true);
+      assert.equal(result.body.notified, false);
+    }
+  }
+
   const events = new Set(structuredLogs.map((entry) => entry.event));
   for (const expected of [
     'inquiry.request.started',

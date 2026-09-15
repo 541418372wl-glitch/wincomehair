@@ -2,6 +2,42 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { readFileSync, writeFileSync, readdirSync, unlinkSync, existsSync } from 'fs';
 import { join } from 'path';
+import { articles } from './src/data/articles.js';
+
+// Generate listing/SEO data from the same content source without shipping the
+// full article bodies in the common entry chunk. BlogPost loads those on demand.
+function articleSummaries(buildingSsr) {
+  const id = 'virtual:article-summaries';
+  const resolvedId = '\0' + id;
+  const keys = ['slug', 'title', 'seoTitle', 'metaDescription', 'image', 'date', 'updatedDate', 'category', 'readTime', 'excerpt'];
+  return {
+    name: 'article-summaries',
+    resolveId(source) { if (source === id) return resolvedId; },
+    load(source) {
+      if (source !== resolvedId) return;
+      const summaries = articles.map(article => Object.fromEntries(
+        keys.filter(key => article[key] !== undefined).map(key => [key, article[key]]),
+      ));
+      return 'export const articles = ' + JSON.stringify(summaries) + ';';
+    },
+    generateBundle(_options, bundle) {
+      const entries = Object.values(bundle).filter(file => file.type === 'chunk' && file.isEntry);
+      const visited = new Set();
+      const visit = (chunk) => {
+        if (!chunk || chunk.type !== 'chunk' || visited.has(chunk.fileName)) return;
+        visited.add(chunk.fileName);
+        for (const moduleId of Object.keys(chunk.modules)) {
+          if (/[/\\]src[/\\]data[/\\](articles|redditArticles|redditTrendArticles)\.js$/.test(moduleId)) {
+            this.error('Full article content must not be in the initial client graph: ' + moduleId);
+          }
+        }
+        chunk.imports.forEach(name => visit(bundle[name]));
+      };
+      // SSR needs the full content for prerendering; only gate client entries.
+      if (!buildingSsr) entries.forEach(visit);
+    },
+  };
+}
 
 // Inline the built CSS into index.html (post-build) to eliminate
 // render-blocking stylesheet requests, then remove the .css file.
@@ -27,7 +63,7 @@ function inlineCss() {
 export default defineConfig(({ ssrBuild, isSsrBuild }) => {
   const buildingSsr = Boolean(ssrBuild || isSsrBuild);
   return {
-  plugins: [react(), ...(buildingSsr ? [] : [inlineCss()])],
+  plugins: [react(), articleSummaries(buildingSsr), ...(buildingSsr ? [] : [inlineCss()])],
   resolve: {
     alias: buildingSsr
       ? {}
@@ -43,6 +79,7 @@ export default defineConfig(({ ssrBuild, isSsrBuild }) => {
   },
   build: {
     target: 'es2017',
+    manifest: !buildingSsr,
     rollupOptions: buildingSsr
       ? {}
       : {

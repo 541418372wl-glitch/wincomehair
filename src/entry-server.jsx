@@ -1,5 +1,4 @@
-import { PassThrough } from 'node:stream';
-import { renderToPipeableStream } from 'react-dom/server';
+import { renderStream } from './lib/render-stream.js';
 import { StaticRouter } from 'react-router-dom';
 import { AppContent } from './App';
 import { getSeoMeta, OG_IMAGE, ORGANIZATION_SCHEMA, SITE, SITE_NAME, WEBSITE_SCHEMA } from './components/SEO';
@@ -58,45 +57,12 @@ function buildHead(pathname) {
   return tags.join('\n    ');
 }
 
-export function render(pathname) {
-  return new Promise((resolve, reject) => {
-    const destination = new PassThrough();
-    const chunks = [];
-    let settled = false;
-
-    destination.on('data', (chunk) => chunks.push(chunk));
-    destination.on('error', reject);
-    destination.on('end', () => {
-      settled = true;
-      resolve({
-        appHtml: Buffer.concat(chunks).toString('utf8'),
-        headHtml: buildHead(pathname),
-      });
-    });
-
-    const stream = renderToPipeableStream(
-      <StaticRouter location={pathname}>
-        <AppContent />
-      </StaticRouter>,
-      {
-        onAllReady() {
-          stream.pipe(destination);
-        },
-        onShellError(error) {
-          settled = true;
-          reject(error);
-        },
-        onError(error) {
-          console.error(`[ssg] ${pathname}`, error);
-        },
-      },
-    );
-
-    setTimeout(() => {
-      if (!settled) {
-        stream.abort();
-        reject(new Error(`SSR timed out for ${pathname}`));
-      }
-    }, 30000).unref();
-  });
+export async function render(pathname) {
+  const headHtml = buildHead(pathname);
+  const appHtml = await renderStream(
+    <StaticRouter location={pathname}>
+      <AppContent />
+    </StaticRouter>,
+  );
+  return { appHtml, headHtml };
 }

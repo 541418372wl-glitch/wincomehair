@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { articles } from '../data/articles';
+import { articles } from 'virtual:article-summaries';
 import { commercialLandingPages } from '../data/commercialLandingPages';
 
 function OptimizedProductImage({ image, alt, sizes, className, pictureClassName = '' }) {
@@ -313,7 +313,7 @@ export default function Home() {
           <div className="mobile-card-strip md:grid-cols-3 md:gap-6" role="region" aria-label="Featured hair accessories guides" tabIndex="0">
             {articles.slice(0, 3).map(post => (
               <Link to={`/blog/${post.slug}`} key={post.title} className="group bg-white p-6 md:p-8 border border-bronze/10 hover:border-bronze/20 transition-all duration-300">
-                <p className="text-[10px] tracking-wider uppercase text-tan mb-3">Aug 2026</p>
+                <p className="text-[10px] tracking-wider uppercase text-tan mb-3"><time dateTime={post.date}>{new Intl.DateTimeFormat('en', { month: 'short', year: 'numeric', timeZone: 'UTC' }).format(new Date(`${post.date}T00:00:00Z`))}</time></p>
                 <h3 className="text-base font-display text-navy group-hover:text-gold transition-colors leading-relaxed">{post.title}</h3>
                 <span className="text-xs font-medium tracking-wider uppercase text-navy mt-4 inline-flex items-center gap-1 group-hover:text-gold transition-colors">
                   Read Article <span className="group-hover:translate-x-1 transition-transform">→</span>

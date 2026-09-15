@@ -10,6 +10,8 @@ const RESEND_URL = 'https://api.resend.com/emails';
 const MAX_BODY = 64 * 1024;
 const MIN_FORM_FILL_MS = 2_000;
 const MAX_URLS = 3;
+// Bound each provider request. Never automatically retry database writes.
+const PROVIDER_TIMEOUT_MS = 8_000;
 
 const RATE_LIMITS = {
   ip: { limit: 5, windowSeconds: 15 * 60 },
@@ -243,6 +245,7 @@ async function consumeRateLimits({ req, requestId, supabaseUrl, serviceKey, rule
   try {
     const response = await fetch(`${supabaseUrl}/rest/v1/rpc/consume_inquiry_rate_limits`, {
       method: 'POST',
+      signal: AbortSignal.timeout(PROVIDER_TIMEOUT_MS),
       headers: {
         'Content-Type': 'application/json',
         apikey: serviceKey,
@@ -448,6 +451,7 @@ export default async function handler(req, res) {
   try {
     const dbResponse = await fetch(`${supabaseUrl}/rest/v1/inquiries`, {
       method: 'POST',
+      signal: AbortSignal.timeout(PROVIDER_TIMEOUT_MS),
       headers: {
         'Content-Type': 'application/json',
         apikey: serviceKey,
@@ -536,6 +540,7 @@ export default async function handler(req, res) {
   try {
     const emailResponse = await fetch(RESEND_URL, {
       method: 'POST',
+      signal: AbortSignal.timeout(PROVIDER_TIMEOUT_MS),
       headers: {
         Authorization: `Bearer ${apiKey}`,
         'Content-Type': 'application/json',

@@ -1,4 +1,7 @@
 {
+  "functions": {
+    "api/notify-inquiry.js": { "maxDuration": 30 }
+  },
   "headers": [
     {
       "source": "/(.*)",
