@@ -5,6 +5,7 @@ import Footer from './components/Footer';
 import WhatsAppButton from './components/WhatsAppButton';
 import SEO from './components/SEO';
 import Breadcrumb from './components/Breadcrumb';
+import NavigationScroll from './components/NavigationScroll';
 import AnalyticsTracker from './components/AnalyticsTracker';
 import ConsentBanner from './components/ConsentBanner';
 import Home from './pages/Home';
@@ -40,6 +41,7 @@ export function AppContent() {
       </header>
       <SEO />
       <Breadcrumb />
+      <NavigationScroll />
       <AnalyticsTracker />
       <main id="main-content" className="flex-1">
         <Suspense fallback={<div className="min-h-[60vh]" />}>
