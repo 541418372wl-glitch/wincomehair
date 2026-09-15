@@ -1,6 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import { productMeta } from '../data/productMeta';
-import { articles } from '../data/articles';
+import { articles } from 'virtual:article-summaries';
 import { productCategoryMeta } from '../data/productCategoryMeta';
 
 const labels = {
@@ -53,8 +53,8 @@ export default function Breadcrumb() {
         <ol className="flex min-w-0 items-center gap-2 text-xs">
           {crumbs
             .filter((_, i, arr) => i === 0 || i === arr.length - 1)
-            .map((crumb, i) => {
-              const isLast = i === crumbs.length - 1;
+            .map((crumb, i, visibleCrumbs) => {
+              const isLast = i === visibleCrumbs.length - 1;
               return (
                 <li key={crumb.path || crumb.label} className={`flex min-w-0 items-center gap-2 ${isLast ? 'flex-1' : 'shrink-0'}`}>
                   {i > 0 && <span className="text-tan/50 mx-1">/</span>}

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { waLink } from '../lib/whatsapp';
 import { trackGenerateLead } from '../lib/analytics';
 
@@ -35,6 +35,7 @@ const CUSTOM_MOQ_BY_PRODUCT_TYPE = {
 export default function Contact() {
   const [step, setStep] = useState(1);
   const [submitting, setSubmitting] = useState(false);
+  const submissionInFlight = useRef(false);
   const [submitError, setSubmitError] = useState(null);
   const [formStartedAt] = useState(() => Date.now());
   const [form, setForm] = useState({
@@ -53,8 +54,16 @@ export default function Contact() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (submissionInFlight.current) return;
+    // Enter in earlier steps advances the form, never sends a partial request.
+    if (step < 3) {
+      if (form.productType && form.quantity) setStep(step + 1);
+      return;
+    }
+    if (step !== 3 || !form.name.trim() || !form.email.trim()) return;
     // Honeypot: silently drop bot submissions
     if (form.website) return;
+    submissionInFlight.current = true;
     setSubmitting(true);
     setSubmitError(null);
 
@@ -103,6 +112,7 @@ export default function Contact() {
         `Failed to submit. Please try again or contact us via WhatsApp.${requestId ? ` Reference: ${requestId}` : ''}`,
       );
     } finally {
+      submissionInFlight.current = false;
       setSubmitting(false);
     }
   };
@@ -321,8 +331,8 @@ export default function Contact() {
                     By submitting this form you agree to our <a href="/privacy" className="text-gold underline">Privacy Policy</a>. We use your details only to respond to your inquiry and never share them with third parties.
                   </p>
                   <div className="flex justify-between pt-4">
-                    <button type="button" onClick={() => setStep(2)} className="btn-outline">← Back</button>
-                    {submitError && <p className="text-red-500 text-xs mb-4">{submitError}</p>}
+                    <button type="button" disabled={submitting} onClick={() => setStep(2)} className="btn-outline">← Back</button>
+                    {submitError && <p role="alert" className="text-red-500 text-xs mb-4">{submitError}</p>}
                     <button type="submit" disabled={submitting} className="btn-primary text-base px-12 py-5 disabled:opacity-50">
                       {submitting ? 'Submitting...' : <>Send My Request <span className="ml-1">→</span></>}
                     </button>

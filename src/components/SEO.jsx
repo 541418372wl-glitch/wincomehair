@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import { articles } from '../data/articles';
+import { articles } from 'virtual:article-summaries';
 import { productMeta } from '../data/productMeta';
 import { productCategoryMeta } from '../data/productCategoryMeta';
 import { commercialLandingPages } from '../data/commercialLandingPages';
@@ -179,7 +179,7 @@ export function getSeoMeta(pathname) {
   let meta = pageMeta[pathname];
 
   // Dynamic meta for blog article pages
-  if (!meta && pathname.startsWith('/blog/')) {
+  if (!meta && /^\/blog\/[^/]+$/.test(pathname)) {
     const slug = pathname.split('/')[2];
     const article = articles.find(a => a.slug === slug);
     if (article) {
@@ -196,7 +196,7 @@ export function getSeoMeta(pathname) {
   }
 
   // Dynamic meta for product detail pages — unique title/description per product
-  if (!meta && pathname.startsWith('/products/')) {
+  if (!meta && /^\/products\/(?:category\/)?[^/]+$/.test(pathname)) {
     const [, , segment, categorySlug] = pathname.split('/');
     if (segment === 'category') {
       const category = productCategoryMeta[categorySlug];
@@ -248,9 +248,22 @@ export default function SEO() {
   }
 
   useEffect(() => {
-    if (!meta) return;
+    if (!meta) {
+      document.title = 'Page Not Found — WINCOME Hair Accessories';
+      setMeta('robots', 'noindex');
+      document.querySelector('link[rel="canonical"]')?.remove();
+      for (const name of ['og:title', 'og:description', 'og:url', 'og:image', 'og:type', 'article:published_time', 'article:modified_time', 'article:section']) {
+        document.querySelector(`meta[property="${name}"]`)?.remove();
+      }
+      for (const name of ['description', 'twitter:title', 'twitter:description', 'twitter:image']) {
+        document.querySelector(`meta[name="${name}"]`)?.remove();
+      }
+      for (const id of ['org-jsonld', 'website-jsonld', 'product-jsonld']) clearScript(id);
+      return;
+    }
 
     document.title = meta.title;
+    setMeta('robots', 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1');
     setMeta('description', meta.description);
 
     const url = `${SITE}${location.pathname}`;
