@@ -40,7 +40,7 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
-  const dark = scrolled || location.pathname !== '/';
+  const dark = scrolled || menuOpen || location.pathname !== '/';
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -70,12 +70,12 @@ export default function Navbar() {
           <WincomeLogo scrolled={dark} />
         </Link>
 
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden xl:flex items-center gap-8">
           {navLinks.map(link => (
             <Link
               key={link.to}
               to={link.to}
-              className={`text-sm tracking-wide transition-colors duration-200 ${
+              className={`text-sm whitespace-nowrap tracking-wide transition-colors duration-200 ${
                 link.to === '/contact'
                   ? 'bg-white text-navy px-6 py-2 hover:bg-white/90 hover:text-navy'
                   : dark
@@ -89,20 +89,20 @@ export default function Navbar() {
         </div>
 
         <button
-          className="md:hidden flex flex-col gap-1.5 p-2"
+          className={`xl:hidden flex flex-col items-center justify-center gap-1.5 w-11 h-11 ${dark ? 'text-navy' : 'text-white'}`}
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Toggle menu"
           aria-expanded={menuOpen}
           aria-controls="mobile-menu"
         >
-          <span className={`block w-5 h-px bg-bronze transition-all ${menuOpen ? 'rotate-45 translate-y-[5px]' : ''}`} />
-          <span className={`block w-5 h-px bg-bronze transition-all ${menuOpen ? 'opacity-0' : ''}`} />
-          <span className={`block w-5 h-px bg-bronze transition-all ${menuOpen ? '-rotate-45 -translate-y-[5px]' : ''}`} />
+          <span className={`block w-5 h-0.5 bg-current transition-all ${menuOpen ? 'rotate-45 translate-y-2' : ''}`} />
+          <span className={`block w-5 h-0.5 bg-current transition-all ${menuOpen ? 'opacity-0' : ''}`} />
+          <span className={`block w-5 h-0.5 bg-current transition-all ${menuOpen ? '-rotate-45 -translate-y-2' : ''}`} />
         </button>
       </div>
 
       {menuOpen && (
-        <div id="mobile-menu" className="md:hidden bg-cream border-t border-bronze/10">
+        <div id="mobile-menu" className="xl:hidden bg-cream border-t border-bronze/10 max-h-[calc(100dvh-4rem)] md:max-h-[calc(100dvh-5rem)] overflow-y-auto">
           <div className="container-site py-6 flex flex-col gap-4">
             {navLinks.map(link => (
               <Link
