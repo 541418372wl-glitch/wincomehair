@@ -83,23 +83,28 @@ export default function Contact() {
       form_fill_time_ms: Date.now() - formStartedAt,
     };
 
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 35_000);
     try {
       const res = await fetch('/api/notify-inquiry', {
         method: 'POST',
+        signal: controller.signal,
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ record }),
       });
-      const result = await res.json().catch(() => ({}));
-      if (!res.ok || result.saved !== true) {
+      const result = await res.json().catch(() => ({ saveStatus: 'unknown' }));
+      if (!res.ok || result.ok !== true || result.saved !== true) {
         const submissionError = new Error(result.error || 'Failed to save inquiry');
         submissionError.requestId = result.requestId || res.headers.get('x-request-id');
+        submissionError.saveStatus = result.saveStatus || (res.ok ? 'unknown' : undefined);
         throw submissionError;
       }
 
       if (result.notified === false) {
-        console.warn('Inquiry saved, but email notification was not sent.');
+        console.warn('Inquiry saved, but email notification acceptance was not confirmed.');
       }
       void trackGenerateLead({
+        submission: result,
         productType: form.productType,
         quantity: form.quantity,
         targetMarket: form.targetMarket,
@@ -108,10 +113,15 @@ export default function Contact() {
     } catch (error) {
       console.error('Inquiry submission failed:', error);
       const requestId = error?.requestId;
+      const unconfirmed = error?.saveStatus === 'unknown'
+        || ['TimeoutError', 'AbortError', 'TypeError'].includes(error?.name);
       setSubmitError(
-        `Failed to submit. Please try again or contact us via WhatsApp.${requestId ? ` Reference: ${requestId}` : ''}`,
+        `${unconfirmed
+          ? 'We could not confirm whether your inquiry was saved. Please contact us via WhatsApp before submitting again.'
+          : 'Failed to submit. Please try again or contact us via WhatsApp.'}${requestId ? ` Reference: ${requestId}` : ''}`,
       );
     } finally {
+      clearTimeout(timeout);
       submissionInFlight.current = false;
       setSubmitting(false);
     }

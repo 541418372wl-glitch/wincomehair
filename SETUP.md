@@ -58,7 +58,7 @@ The inquiry API uses these server-only variables:
 
 The current browser bundle does not require a Supabase anonymous key. `SUPABASE_SERVICE_ROLE_KEY` must never be renamed with a `VITE_` prefix because Vite exposes `VITE_*` variables to browser code.
 
-Vercel supplies `VERCEL_URL` and `NODE_ENV`. Production values must be managed only in the verified Vercel project; do not copy values from another project or paste them into chat, Issues, pull requests, or documentation.
+Vercel supplies `VERCEL_URL`, `VERCEL_ENV`, and `NODE_ENV`. Non-production Vercel environments reject inquiry submissions before contacting providers. Production values must be managed only in the verified Vercel project; do not copy values from another project or paste them into chat, Issues, pull requests, or documentation.
 
 ## Data and storage boundaries
 
@@ -87,3 +87,7 @@ Supabase migrations live in `supabase/migrations/`. Review the live project iden
 Direct scripts that write GitHub contents to `main` are prohibited. Production normally updates only after an approved pull request is merged and the verified Vercel Git integration completes.
 
 `npm run submit:indexnow` changes external state. Use `--dry-run` for validation and do not submit without explicit approval and Issue #14 deduplication.
+
+## Inquiry operations and measurement
+
+See [INQUIRY_OPERATIONS.md](INQUIRY_OPERATIONS.md) for the save/notification response contract, production recovery steps, GA4 metric definitions, preview isolation, and release validation. GA4 inquiry events require a confirmed save and visitor consent; WhatsApp clicks measure contact intent.

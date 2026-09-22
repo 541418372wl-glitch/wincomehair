@@ -1,11 +1,13 @@
 import assert from 'node:assert/strict';
 
-function environment({ storageFails = false } = {}) {
+const savedSubmission = { ok: true, saved: true, requestId: '11111111-1111-4111-8111-111111111111' };
+
+function environment({ storageFails = false, hostname = 'wincomehair.com' } = {}) {
   const stored = new Map();
   const scripts = new Map();
   globalThis.CustomEvent = class { constructor(type, init) { this.type = type; this.detail = init?.detail; } };
   globalThis.window = {
-    dataLayer: [], location: { hostname: 'wincomehair.com' }, dispatchEvent() {},
+    dataLayer: [], location: { hostname }, dispatchEvent() {},
     localStorage: {
       getItem(key) { if (storageFails) throw new Error('blocked'); return stored.get(key); },
       setItem(key, value) { if (storageFails) throw new Error('blocked'); stored.set(key, value); },
@@ -30,7 +32,7 @@ async function fresh(options) {
 {
   const { analytics, scripts } = await fresh();
   analytics.setAnalyticsConsent('granted');
-  const pending = analytics.trackGenerateLead({ productType: 'pins' });
+  const pending = analytics.trackGenerateLead({ submission: savedSubmission, productType: 'pins' });
   analytics.setAnalyticsConsent('denied');
   scripts.get('wincome-ga4-script').onload();
   assert.equal(await pending, false);
@@ -63,6 +65,35 @@ async function fresh(options) {
   stored.set(analytics.ANALYTICS_CONSENT_KEY, 'denied');
   assert.equal(await analytics.trackEvent('form_start'), false);
 }
+// Consent never allows local, preview, or unrelated hosts into production GA4.
+for (const hostname of ['localhost', '127.0.0.1', 'wincomehair-preview.vercel.app', 'wincomehair.vercel.app', 'wincomehair.com.example.org']) {
+  const { analytics, scripts } = await fresh({ hostname });
+  analytics.setAnalyticsConsent('granted');
+  assert.equal(await analytics.trackEvent('whatsapp_click'), false);
+  assert.equal(await analytics.trackGenerateLead({ submission: savedSubmission }), false);
+  assert.equal(scripts.size, 0);
+  assert.equal(window.dataLayer.some(call => ['config', 'event'].includes(call[0])), false);
+}
+
+// Only a confirmed save qualifies; repeated/concurrent callbacks count once.
+{
+  const { analytics, scripts } = await fresh();
+  analytics.setAnalyticsConsent('granted');
+  for (const submission of [undefined, { saved: true }, { ...savedSubmission, saved: false }, { ...savedSubmission, ok: false }]) {
+    assert.equal(await analytics.trackGenerateLead({ submission }), false);
+  }
+  const first = analytics.trackGenerateLead({ submission: savedSubmission, productType: 'pins' });
+  const second = analytics.trackGenerateLead({ submission: savedSubmission, productType: 'pins' });
+  scripts.get('wincome-ga4-script').onload();
+  assert.deepEqual(await Promise.all([first, second]), [true, true]);
+  assert.equal(await analytics.trackGenerateLead({ submission: savedSubmission }), true);
+  const leads = window.dataLayer.filter(call => call[0] === 'event' && call[1] === 'generate_lead');
+  assert.equal(leads.length, 1);
+  assert.equal(leads[0][2].lead_status, 'saved');
+  assert.equal(leads[0][2].measurement_version, '2');
+  assert.equal(JSON.stringify(leads).includes(savedSubmission.requestId), false);
+}
+
 delete globalThis.window;
 delete globalThis.document;
 delete globalThis.CustomEvent;

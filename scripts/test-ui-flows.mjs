@@ -66,14 +66,67 @@ try {
   submit();
   await flush();
   assert.equal(calls, 2, 'The in-flight lock is released after a failure');
-  finishRequest(Response.json({ saved: true, notified: false }));
+  // A filtered request and an uncertain write must not show success.
+  finishRequest(Response.json({ ok: false, saved: false }, { status: 400 }));
+  await flush();
+  assert.ok(document.querySelector('[role="alert"]'));
+  assert.doesNotMatch(document.body.textContent, /Thank You for Your Inquiry/);
+  submit();
+  await flush();
+  finishRequest(Response.json({ ok: false, saved: false, saveStatus: 'unknown', requestId: 'local-reference' }, { status: 502 }));
+  await flush();
+  assert.match(document.querySelector('[role="alert"]').textContent, /before submitting again/);
+  assert.match(document.querySelector('[role="alert"]').textContent, /local-reference/);
+  assert.equal(calls, 3, 'Unconfirmed writes must not be retried automatically');
+  submit();
+  await flush();
+  finishRequest(Response.json({ ok: true, saved: true, notified: false, requestId: '11111111-1111-4111-8111-111111111111' }));
   await flush();
   assert.match(document.body.textContent, /Thank You for Your Inquiry/);
   assert.equal(window.dataLayer, undefined, 'No analytics may load without consent');
-  assert.equal(errors.length, 1);
+  assert.equal(errors.length, 3);
   assert.equal(errors[0][0], 'Inquiry submission failed:');
   assert.equal(warnings.length, 1);
   assert.match(warnings[0][0], /Inquiry saved/);
+
+  // Exercise the actual Contact -> analytics boundary with consent and a fake
+  // tag load. JSDOM still makes no external requests.
+  app.unmount();
+  await flush();
+  window.localStorage.setItem('wincome_analytics_consent_v1', 'granted');
+  const appendChild = document.head.appendChild.bind(document.head);
+  document.head.appendChild = element => {
+    const result = appendChild(element);
+    if (element.id === 'wincome-ga4-script') queueMicrotask(() => element.onload?.());
+    return result;
+  };
+  app.mount();
+  await flush();
+  await input('productType', 'pins');
+  await input('quantity', 'sample-stock-below-moq');
+  submit();
+  await flush();
+  submit();
+  await flush();
+  await input('name', 'Local consented QA');
+  await input('email', 'consented@example.invalid');
+  submit();
+  await flush();
+  finishRequest(Response.json({ ok: false, saved: false }, { status: 400 }));
+  await flush();
+  assert.equal((window.dataLayer || []).filter(call => call[0] === 'event' && call[1] === 'generate_lead').length, 0);
+  submit();
+  submit();
+  await flush();
+  finishRequest(Response.json({ ok: true, saved: true, notified: false, requestId: '22222222-2222-4222-8222-222222222222' }));
+  await flush();
+  const leads = window.dataLayer.filter(call => call[0] === 'event' && call[1] === 'generate_lead');
+  assert.equal(leads.length, 1, 'Only the confirmed save emits a consented lead');
+  assert.equal(leads[0][2].product_type, 'pins');
+  assert.equal(leads[0][2].lead_status, 'saved');
+  assert.equal(leads[0][2].measurement_version, '2');
+  assert.equal(JSON.stringify(leads).includes('example.invalid'), false);
+
 } finally {
   app.unmount();
   globalThis.fetch = originalFetch;

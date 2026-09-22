@@ -100,7 +100,8 @@ function responder(req, res, requestId, startedAt) {
       durationMs: Date.now() - startedAt,
       ...extra,
     });
-    return res.status(status).json({ ...body, requestId });
+    // saved means confirmed storage, never merely a handled HTTP request.
+    return res.status(status).json({ ok: false, saved: false, notified: false, ...body, requestId });
   };
 }
 
@@ -325,6 +326,12 @@ export default async function handler(req, res) {
     return send(405, { error: 'Method not allowed' }, 'method_not_allowed');
   }
 
+  // Preview/development deployments can inherit production credentials.
+  // Block before any rate-limit, inquiry, or email provider call.
+  if (process.env.VERCEL_ENV && process.env.VERCEL_ENV !== 'production') {
+    return send(403, { error: 'Inquiry submission is only available on the production website.' }, 'non_production_rejected');
+  }
+
   const contentType = getHeader(req, 'content-type').toLowerCase();
   if (!contentType.startsWith('application/json')) {
     return send(415, { error: 'Content-Type must be application/json.' }, 'unsupported_media_type');
@@ -360,8 +367,7 @@ export default async function handler(req, res) {
     return send(400, { error: 'Invalid payload' }, 'invalid_payload');
   }
 
-  // Honeypot and implausibly fast submissions receive a neutral response and
-  // create no database row or email, so automated clients get no useful signal.
+  // Use one generic rejection for spam signals, without claiming a saved lead.
   const honeypot = clean(raw.website, 200);
   const submittedFillDuration = Number(raw.form_fill_time_ms || raw.formFillTimeMs);
   const legacyFormStartedAt = Number(raw.form_started_at || raw.formStartedAt);
@@ -377,7 +383,7 @@ export default async function handler(req, res) {
       reason: honeypot ? 'honeypot' : 'implausible_fill_time',
       fillDurationMs: tooFast ? fillDurationMs : undefined,
     });
-    return send(200, { ok: true, saved: true, notified: false }, 'spam_filtered');
+    return send(400, { error: 'Unable to accept this submission. Please contact us via WhatsApp.' }, 'spam_filtered');
   }
 
   const name = clean(raw.name, 120);
@@ -399,7 +405,7 @@ export default async function handler(req, res) {
   }
   if (fields.reduce((total, value) => total + countUrls(value), 0) > MAX_URLS) {
     writeLog('warn', 'inquiry.antispam.filtered', { ...context, reason: 'excessive_urls' });
-    return send(200, { ok: true, saved: true, notified: false }, 'spam_filtered');
+    return send(400, { error: 'Unable to accept this submission. Please contact us via WhatsApp.' }, 'spam_filtered');
   }
   if (!name) {
     return send(400, { error: 'Name is required.' }, 'validation_failed');
@@ -485,7 +491,11 @@ export default async function handler(req, res) {
       emailId,
       durationMs: Date.now() - dbStartedAt,
     });
-    return send(502, { error: 'Failed to save inquiry. Please try again.' }, 'database_failed', { emailId });
+    // A lost response can follow a committed write. Do not invite a blind retry.
+    return send(502, {
+      error: 'We could not confirm whether your inquiry was saved. Please contact us via WhatsApp before submitting again.',
+      saveStatus: 'unknown',
+    }, 'database_unconfirmed', { emailId });
   }
 
   const apiKey = process.env.RESEND_API_KEY;
@@ -497,7 +507,7 @@ export default async function handler(req, res) {
       reason: 'not_configured',
       emailId,
     });
-    return send(200, { ok: true, saved: true, notified: false }, 'saved_email_skipped', { emailId });
+    return send(200, { ok: true, saved: true, notified: false, notificationStatus: 'skipped' }, 'saved_email_skipped', { emailId });
   }
 
   const productType = PRODUCT_TYPES[productTypeValue] || productTypeValue || '-';
@@ -556,14 +566,20 @@ export default async function handler(req, res) {
         emailId,
         durationMs: Date.now() - emailStartedAt,
       });
-      return send(200, { ok: true, saved: true, notified: false }, 'saved_email_failed', { emailId });
+      return send(200, { ok: true, saved: true, notified: false, notificationStatus: 'failed' }, 'saved_email_failed', { emailId });
     }
 
     const emailResult = await emailResponse.json().catch(() => ({}));
-    writeLog('info', 'inquiry.email.send_succeeded', {
+    const messageId = typeof emailResult?.id === 'string' ? clean(emailResult.id, 120) : '';
+    if (!messageId) {
+      writeLog('error', 'inquiry.email.send_unconfirmed', { ...context, provider: 'resend', reason: 'missing_message_id', emailId });
+      return send(200, { ok: true, saved: true, notified: false, notificationStatus: 'unknown' }, 'saved_email_unconfirmed', { emailId });
+    }
+    // Provider acceptance is not proof of delivery to the recipient's inbox.
+    writeLog('info', 'inquiry.email.accepted', {
       ...context,
       provider: 'resend',
-      messageId: clean(emailResult?.id, 120) || undefined,
+      messageId,
       emailId,
       durationMs: Date.now() - emailStartedAt,
     });
@@ -575,8 +591,8 @@ export default async function handler(req, res) {
       emailId,
       durationMs: Date.now() - emailStartedAt,
     });
-    return send(200, { ok: true, saved: true, notified: false }, 'saved_email_failed', { emailId });
+    return send(200, { ok: true, saved: true, notified: false, notificationStatus: 'unknown' }, 'saved_email_unconfirmed', { emailId });
   }
 
-  return send(200, { ok: true, saved: true, notified: true }, 'saved_and_notified', { emailId });
+  return send(200, { ok: true, saved: true, notified: true, notificationStatus: 'accepted' }, 'saved_notification_accepted', { emailId });
 }
