@@ -26,7 +26,7 @@ Only `wincomehair.com` and `www.wincomehair.com` load this production GA4 tag. L
 
 Report database counts, GA4 saved-lead events, and WhatsApp intent separately. Do not call the sum of GA4 key events “real inquiries.” Compare event counts with event counts and sessions with sessions; do not sum users across source rows.
 
-For GEO/AI reviews, use the same completed date range and Asia/Shanghai time boundary across systems, keep source/medium and channel group distinct, and disclose consent and internal-traffic exclusions. A source attribution in GA4 does not identify every inquiry in the database. Mark the actual deployment time of measurement version 2; do not backfill or retroactively relabel earlier data.
+For GEO/AI reviews, compare the same completed calendar-date labels and disclose each source timezone: GA4 and inquiry rollups use Asia/Shanghai, while GSC reports use Pacific Time. These daily boundaries differ, so do not join them as an exact session-by-session funnel. Keep source/medium and channel group distinct, and disclose consent and internal-traffic exclusions. A source attribution in GA4 does not identify every inquiry in the database. Mark the actual deployment time of measurement version 2; do not backfill or retroactively relabel earlier data.
 
 ## Production recovery and release checklist
 
