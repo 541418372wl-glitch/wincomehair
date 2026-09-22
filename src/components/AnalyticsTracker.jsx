@@ -38,6 +38,8 @@ export default function AnalyticsTracker() {
 
       const productId = productIdFromPath(window.location.pathname);
       void trackEvent('whatsapp_click', {
+        interaction_type: 'outbound_click',
+        measurement_version: '2',
         link_location: link.dataset.analyticsLocation || 'page_content',
         page_path: `${window.location.pathname}${window.location.search}`,
         product_id: productId,

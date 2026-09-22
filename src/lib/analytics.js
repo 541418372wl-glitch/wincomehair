@@ -5,6 +5,8 @@ export const OPEN_CONSENT_EVENT = 'wincome:open-consent-preferences';
 
 const ALLOWED_CONSENT = new Set(['granted', 'denied']);
 const BLOCKED_PARAMETER_NAMES = new Set(['email', 'phone', 'name', 'message', 'company']);
+const PRODUCTION_HOSTS = new Set(['wincomehair.com', 'www.wincomehair.com']);
+const leadTracking = new Map();
 let defaultsInitialized = false;
 let analyticsConfigured = false;
 let scriptPromise;
@@ -12,6 +14,10 @@ let sessionConsent;
 
 function hasBrowser() {
   return typeof window !== 'undefined' && typeof document !== 'undefined';
+}
+
+function isProductionWebsite() {
+  return hasBrowser() && PRODUCTION_HOSTS.has(window.location?.hostname);
 }
 
 function ensureGtag() {
@@ -105,7 +111,7 @@ function loadGoogleTag() {
 }
 
 async function enableAnalytics() {
-  if (!hasBrowser() || readAnalyticsConsent() !== 'granted') return false;
+  if (!isProductionWebsite() || readAnalyticsConsent() !== 'granted') return false;
   initializeConsentDefaults();
   const gtag = ensureGtag();
   gtag('consent', 'update', consentState('granted'));
@@ -167,20 +173,35 @@ function sanitizeEventParams(params) {
 }
 
 export async function trackEvent(eventName, params = {}) {
-  if (!hasBrowser() || readAnalyticsConsent() !== 'granted') return false;
+  if (!isProductionWebsite() || readAnalyticsConsent() !== 'granted') return false;
   const ready = await enableAnalytics();
   if (!ready || readAnalyticsConsent() !== 'granted') return false;
   ensureGtag()('event', eventName.slice(0, 40), sanitizeEventParams(params));
   return true;
 }
 
-export function trackGenerateLead({ productType, quantity, targetMarket }) {
-  return trackEvent('generate_lead', {
+export function trackGenerateLead({ submission, productType, quantity, targetMarket }) {
+  const requestId = submission?.requestId;
+  if (submission?.ok !== true || submission?.saved !== true
+    || typeof requestId !== 'string' || !/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(requestId)) {
+    return Promise.resolve(false);
+  }
+  // Deduplicate concurrent callbacks for this acknowledgement. The reference
+  // stays in memory; it is never sent to GA4 or persisted in browser storage.
+  if (leadTracking.has(requestId)) return leadTracking.get(requestId);
+  const pending = trackEvent('generate_lead', {
     lead_source: 'quote_form',
+    lead_status: 'saved',
+    measurement_version: '2',
     product_type: productType,
     quantity_range: quantity,
     target_market: targetMarket,
+  }).catch(() => false).then((tracked) => {
+    if (!tracked) leadTracking.delete(requestId);
+    return tracked;
   });
+  leadTracking.set(requestId, pending);
+  return pending;
 }
 
 export function trackProductInquiry({ productId, productName, method }) {

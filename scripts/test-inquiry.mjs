@@ -72,13 +72,15 @@ function response() {
 
 function configure() {
   process.env.NODE_ENV = 'production';
+  process.env.VERCEL_ENV = 'production';
+  delete process.env.SUPABASE_URL;
   process.env.VITE_SUPABASE_URL = 'https://example.supabase.co';
   process.env.SUPABASE_SERVICE_ROLE_KEY = 'service-role-test';
   process.env.RESEND_API_KEY = 'resend-test';
   process.env.NOTIFY_EMAIL = 'owner@example.com';
 }
 
-function makeFetch({ rateStatus = 200, rateAllowed = true, dbStatus = 201, emailStatus = 200 } = {}) {
+function makeFetch({ rateStatus = 200, rateAllowed = true, dbStatus = 201, emailStatus = 200, emailBody = { id: 'email_test_123' } } = {}) {
   return async (url, options) => {
     if (url.includes('/rpc/consume_inquiry_rate_limits')) {
       if (rateStatus !== 200) return new Response('', { status: rateStatus });
@@ -96,7 +98,7 @@ function makeFetch({ rateStatus = 200, rateAllowed = true, dbStatus = 201, email
       return new Response('', { status: dbStatus });
     }
     if (url === 'https://api.resend.com/emails') {
-      return Response.json({ id: 'email_test_123' }, { status: emailStatus });
+      return Response.json(emailBody, { status: emailStatus });
     }
     throw new Error(`Unexpected fetch URL: ${url}`);
   };
@@ -121,6 +123,7 @@ try {
   assert.equal(success.body.ok, true);
   assert.equal(success.body.saved, true);
   assert.equal(success.body.notified, true);
+  assert.equal(success.body.notificationStatus, 'accepted');
   assert.match(success.body.requestId, /^[0-9a-f-]{36}$/);
   assert.equal(success.getHeader('x-request-id'), success.body.requestId);
   assert.equal(success.getHeader('cache-control'), 'no-store');
@@ -180,8 +183,9 @@ try {
     botCalls += 1;
     return new Response('', { status: 200 });
   });
-  assert.equal(bot.statusCode, 200);
-  assert.equal(bot.body.saved, true);
+  assert.equal(bot.statusCode, 400);
+  assert.equal(bot.body.saved, false);
+  assert.equal(bot.body.ok, false);
   assert.equal(botCalls, 0);
 
   configure();
@@ -190,8 +194,8 @@ try {
     fastCalls += 1;
     return new Response('', { status: 200 });
   });
-  assert.equal(tooFast.statusCode, 200);
-  assert.equal(tooFast.body.saved, true);
+  assert.equal(tooFast.statusCode, 400);
+  assert.equal(tooFast.body.saved, false);
   assert.equal(fastCalls, 0);
 
   configure();
@@ -252,8 +256,42 @@ try {
     if (stage === 'email') {
       assert.equal(result.body.saved, true);
       assert.equal(result.body.notified, false);
+      assert.equal(result.body.notificationStatus, 'unknown');
+    } else {
+      assert.equal(result.body.saved, false);
+      if (stage === 'database') assert.equal(result.body.saveStatus, 'unknown');
     }
   }
+
+  // Rejected submissions must never reach either provider or claim a lead.
+  for (const overrides of [
+    { message: 'https://a.example https://b.example https://c.example https://d.example' },
+    { form_fill_time_ms: 90_000_000 },
+  ]) {
+    configure();
+    const rejected = await run(validPayload(overrides), () => { throw new Error('Provider must not be called'); });
+    assert.equal(rejected.statusCode, 400);
+    assert.equal(rejected.body.saved, false);
+    assert.equal(rejected.body.notified, false);
+  }
+
+  for (const deployment of ['preview', 'development', 'staging']) {
+    configure();
+    process.env.VERCEL_ENV = deployment;
+    const preview = await run(validPayload(), () => { throw new Error('Preview must not use production providers'); });
+    assert.equal(preview.statusCode, 403);
+    assert.equal(preview.body.saved, false);
+  }
+
+  configure();
+  const missingMessageId = await run(validPayload(), makeFetch({ emailBody: {} }));
+  assert.equal(missingMessageId.body.saved, true);
+  assert.equal(missingMessageId.body.notified, false);
+  assert.equal(missingMessageId.body.notificationStatus, 'unknown');
+  delete process.env.RESEND_API_KEY;
+  const skippedEmail = await run(validPayload(), makeFetch());
+  assert.equal(skippedEmail.body.saved, true);
+  assert.equal(skippedEmail.body.notificationStatus, 'skipped');
 
   const events = new Set(structuredLogs.map((entry) => entry.event));
   for (const expected of [
@@ -265,7 +303,8 @@ try {
     'inquiry.database.insert_succeeded',
     'inquiry.database.insert_failed',
     'inquiry.email.send_started',
-    'inquiry.email.send_succeeded',
+    'inquiry.email.accepted',
+    'inquiry.email.send_unconfirmed',
     'inquiry.email.send_failed',
     'inquiry.antispam.filtered',
   ]) {
