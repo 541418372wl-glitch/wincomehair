@@ -455,7 +455,7 @@ export const articles = [
     slug: 'hair-accessories-moq-guide',
     title: 'Hair Accessories MOQ Guide: Minimum Order Quantities Explained for Importers',
     date: '2026-08-08',
-    updatedDate: '2026-09-08',
+    updatedDate: '2026-09-09',
     category: 'Buying Guide',
     readTime: '9 min read',
     image: '/assets/images/blog-moq-guide.webp',
