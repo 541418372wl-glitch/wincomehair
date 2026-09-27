@@ -72,7 +72,7 @@
 
   <url>
     <loc>https://wincomehair.com/blog</loc>
-    <lastmod>2026-08-13</lastmod>
+    <lastmod>2026-09-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -310,7 +310,7 @@
 
   <url>
     <loc>https://wincomehair.com/blog/silk-vs-satin-scrunchies</loc>
-    <lastmod>2026-08-04</lastmod>
+    <lastmod>2026-09-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -431,5 +431,11 @@
     <lastmod>2026-08-08</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://wincomehair.com/blog/scrunchie-too-loose-too-tight</loc>
+    <lastmod>2026-09-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
 </urlset>
