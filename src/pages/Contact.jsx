@@ -338,7 +338,7 @@ export default function Contact() {
                     <input id="website" name="website" type="text" value={form.website} onChange={e => update('website', e.target.value)} tabIndex={-1} autoComplete="off" />
                   </div>
                   <p className="text-xs text-tan leading-relaxed">
-                    By submitting this form you agree to our <a href="/privacy" className="text-gold underline">Privacy Policy</a>. We use your details only to respond to your inquiry and never share them with third parties.
+                    We use your details to respond to your inquiry, with support from our database and email service providers. See our <a href="/privacy" className="text-gold underline">Privacy Policy</a> for details.
                   </p>
                   <div className="space-y-4 pt-4">
                     {submitError && <p role="alert" className="text-red-500 text-xs">{submitError}</p>}

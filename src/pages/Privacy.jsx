@@ -7,7 +7,7 @@ export default function Privacy() {
       <div className="container-site section-gap max-w-3xl">
         <p className="section-label">Legal</p>
         <h1 className="text-display-lg text-navy mb-4">Privacy <span className="text-gold">Policy</span></h1>
-        <p className="mb-10 text-sm text-tan">Last updated: 12 August 2026</p>
+        <p className="mb-10 text-sm text-tan">Last updated: 27 September 2026</p>
 
         <div className="space-y-8 text-tan leading-relaxed text-base">
           <section>
@@ -64,7 +64,7 @@ export default function Privacy() {
 
           <section>
             <h2 className="text-display-sm text-navy mb-3">5. Service Providers & International Processing</h2>
-            <p>We use Supabase for inquiry database hosting, Resend for email notifications, Vercel for site hosting and runtime logs, and—only after consent—Google Analytics for measurement. Google Fonts is requested from Google to display site typography, which may disclose standard connection data such as IP address and browser headers to Google. Providers may process data in countries outside your own under their contractual and legal transfer mechanisms.</p>
+            <p>We use Supabase for inquiry database hosting, Resend for email notifications, Vercel for site hosting and runtime logs, and—only after consent—Google Analytics for measurement. Site fonts are hosted on our own domain; loading them does not require a request to Google Fonts. Providers may process data in countries outside your own under their contractual and legal transfer mechanisms.</p>
           </section>
 
           <section>
