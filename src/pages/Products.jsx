@@ -65,7 +65,9 @@ export default function Products() {
               return (
                 <button
                   key={cat}
+                  type="button"
                   onClick={() => setActiveCat(cat)}
+                  aria-pressed={isActive}
                   className={`shrink-0 px-4 py-2 text-xs font-medium tracking-wider uppercase border transition-colors duration-200 ${
                     isActive ? 'border-navy bg-navy text-white' : 'border-bronze/20 text-tan hover:border-navy hover:text-navy'
                   }`}
@@ -78,6 +80,9 @@ export default function Products() {
         </div>
 
         {/* Product Grid */}
+        <p className="sr-only" role="status" aria-live="polite" aria-atomic="true">
+          {filtered.length} products shown{activeCat === 'All' ? ' in all categories' : ` in ${activeCat}`}.
+        </p>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filtered.map(product => (
             <Link

@@ -27,7 +27,7 @@ export default function About() {
             </Link>
           </div>
           <div className="aspect-[4/3] bg-sand flex items-center justify-center border border-bronze/10">
-            <img src="/assets/images/hero-clips.webp" alt="WINCOME Factory" loading="lazy" className="w-full h-full object-cover" />
+            <img src="/assets/images/hero-clips.webp" alt="Assorted claw hair clips arranged on fabric" loading="lazy" className="w-full h-full object-cover" />
           </div>
         </div>
 

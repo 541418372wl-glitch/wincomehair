@@ -75,7 +75,7 @@ const profileSchema = {
       url: `${SITE}/manufacturer-profile`,
       name: 'WINCOME Hair Accessories Manufacturer Profile',
       description: 'Buyer-focused manufacturer facts, product scope, order requirements, verification steps and direct contact details for WINCOME Hair Accessories.',
-      dateModified: '2026-08-20T00:00:00+08:00',
+      dateModified: '2026-09-09T19:22:12+08:00',
       inLanguage: 'en',
       isPartOf: { '@id': WEBSITE_ID },
       mainEntity: { '@id': ORGANIZATION_ID },
