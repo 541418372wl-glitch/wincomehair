@@ -36,12 +36,9 @@ function loadTurnstile() {
         finish(null, new Error('Verification unavailable'));
         return;
       }
-      try {
-        if (typeof api.ready === 'function') api.ready(() => finish(api));
-        else finish(api);
-      } catch {
-        finish(null, new Error('Verification unavailable'));
-      }
+      // The load event already confirms script execution. Turnstile rejects
+      // ready() when its script was loaded with async/defer.
+      finish(api);
     };
     script.onerror = () => finish(null, new Error('Verification unavailable'));
     try { document.head.appendChild(script); }

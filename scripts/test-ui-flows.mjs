@@ -16,8 +16,14 @@ async function harness({ siteKey = 'offline-unit-test-sitekey', hostname = 'winc
   globalThis.requestAnimationFrame = callback => nativeSetTimeout(callback, 0);
   globalThis.cancelAnimationFrame = nativeClearTimeout;
   const requests = [], widgets = [], pendingScripts = [], timeouts = [];
+  let readyCalls = 0;
   const api = {
-    ready: callback => queueMicrotask(callback),
+    // Model Cloudflare's actual async-script contract: ready() throws even if
+    // the API has loaded. The script load event must suffice for rendering.
+    ready() {
+      readyCalls++;
+      throw new Error('Turnstile ready() cannot be used with an async/defer script');
+    },
     render(container, options) {
       assert.ok(container.isConnected);
       const widget = { id: 'offline-widget-' + widgets.length, options, removed: false };
@@ -105,7 +111,9 @@ async function harness({ siteKey = 'offline-unit-test-sitekey', hostname = 'winc
     globalThis.fetch = originalFetch;
     dom.window.close();
   };
-  return { app, input, submit, clickText, loadScript, verify, contactStep, respond, cleanup, requests, widgets, pendingScripts, timeouts };
+  return { app, input, submit, clickText, loadScript, verify, contactStep, respond, cleanup, requests, widgets, pendingScripts, timeouts,
+    get readyCalls() { return readyCalls; },
+  };
 }
 
 const accepted = requestId => ({ ok: true, accepted: true, submissionStatus: 'accepted', requestId });
@@ -133,6 +141,8 @@ const rejected = { ok: false, accepted: false, submissionStatus: 'rejected' };
     test.submit(); await flush();
     assert.equal(test.requests.length, 0, 'Verification blocks programmatic submit');
     await test.loadScript();
+    assert.equal(test.readyCalls, 0, 'An async script load renders without calling the incompatible ready API');
+    assert.equal(test.widgets.length, 1, 'The first script load creates a widget without requiring a retry');
     assert.equal(test.widgets[0].options.action, 'inquiry');
     assert.equal(test.widgets[0].options['response-field'], false);
     await test.verify();
