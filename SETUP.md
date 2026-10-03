@@ -9,9 +9,9 @@ This repository is only for the WINCOME Hair Accessories site:
 
 Read `AGENTS.md`, `PROJECT_HANDOFF.md`, and GitHub Issue #14 before starting work. Do not use files, credentials, content, or deployment settings from another site.
 
-## Inquiry migration draft
+## Inquiry configuration
 
-This branch prepares Formspark + Cloudflare Turnstile for new inquiries. The owner has approved their Gmail address as this site's notification recipient. Dashboard checks have confirmed automatic spam filtering on, native challenge provider `None`, threading off, and a 250-submission balance. Production environment changes, any purchase, firewall publication, deployment, and a real acceptance test remain pending. The existing production service must not be assumed to match this branch.
+New inquiries use Formspark + Cloudflare Turnstile. The owner has approved their Gmail address as this site's notification recipient. Preparation checks on 2026-10-03 confirmed automatic spam filtering on, native challenge provider `None`, threading off, and an initial 250-submission balance. The owner authorized the site-specific verification widget, Production variables, firewall publication, merge/deployment, and one synthetic acceptance inquiry. The widget and all three Production variables have been configured, and the firewall rule below has been published and read back as active. No purchase is authorized or required for this test. Check Issue #14 for the actual deployment, cutover, archive, and inbox evidence; configuration alone does not establish those results.
 
 The browser continues to POST to `/api/notify-inquiry`. The server validates the request and a Turnstile token, then forwards the inquiry to the Formspark form dedicated to WINCOME Hair. Formspark provides the submission archive and configured email notifications. The form accepts no attachments; visitors send reference files by email or WhatsApp.
 
@@ -78,7 +78,7 @@ The new inquiry handler does not require `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_
 
 Never place customer records, analytics exports, credentials, certificates, or backend screenshots in this public repository.
 
-The new API does not call Supabase INSERTs or `consume_inquiry_rate_limits`. The old distributed email/IP/content quotas are removed from this intake path. Honeypot, fill-time, URL-count, and field validation remain, followed by server-side Turnstile and Formspark automatic filtering. No in-memory `Map` replaces the distributed quotas. A separate Vercel firewall rate-limit rule is only a proposal until its availability and publication are verified; see the operations runbook.
+The new API does not call Supabase INSERTs or `consume_inquiry_rate_limits`. The old distributed email/IP/content quotas are removed from this intake path. Honeypot, fill-time, URL-count, and field validation remain, followed by server-side Turnstile and Formspark automatic filtering. No in-memory `Map` replaces the distributed quotas. On 2026-10-03, the verified project's Vercel firewall rule was published and read back as active: method `POST` AND exact path `/api/notify-inquiry`, fixed window, 10 requests per IP per 60 seconds, default HTTP 429. Counts are per region; see the operations runbook.
 
 ## Database changes
 
