@@ -1,4 +1,5 @@
-import { useRef, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
+import InquiryChallenge from '../components/InquiryChallenge';
 import { waLink } from '../lib/whatsapp';
 import { trackGenerateLead } from '../lib/analytics';
 
@@ -36,7 +37,12 @@ export default function Contact() {
   const [step, setStep] = useState(1);
   const [submitting, setSubmitting] = useState(false);
   const submissionInFlight = useRef(false);
+  const submissionBlocked = useRef(false);
   const [submitError, setSubmitError] = useState(null);
+  const [submissionUnknown, setSubmissionUnknown] = useState(false);
+  const verificationToken = useRef('');
+  const [verified, setVerified] = useState(false);
+  const [challengeReset, setChallengeReset] = useState(0);
   const [formStartedAt] = useState(() => Date.now());
   const [form, setForm] = useState({
     name: '', company: '', email: '', phone: '',
@@ -51,10 +57,14 @@ export default function Contact() {
   }));
   const activeMoqPolicy = CUSTOM_MOQ_BY_PRODUCT_TYPE[form.productType];
   const quantityOptions = activeMoqPolicy?.options || DEFAULT_QUANTITY_OPTIONS;
+  const updateVerificationToken = useCallback((token) => {
+    verificationToken.current = token;
+    setVerified(Boolean(token));
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (submissionInFlight.current) return;
+    if (submissionInFlight.current || submissionBlocked.current) return;
     // Enter in earlier steps advances the form, never sends a partial request.
     if (step < 3) {
       if (form.productType && form.quantity) setStep(step + 1);
@@ -63,7 +73,10 @@ export default function Contact() {
     if (step !== 3 || !form.name.trim() || !form.email.trim()) return;
     // Honeypot: silently drop bot submissions
     if (form.website) return;
+    const turnstileToken = verificationToken.current;
+    if (!turnstileToken) return;
     submissionInFlight.current = true;
+    updateVerificationToken('');
     setSubmitting(true);
     setSubmitError(null);
 
@@ -90,19 +103,16 @@ export default function Contact() {
         method: 'POST',
         signal: controller.signal,
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ record }),
+        body: JSON.stringify({ record, turnstileToken }),
       });
-      const result = await res.json().catch(() => ({ saveStatus: 'unknown' }));
-      if (!res.ok || result.ok !== true || result.saved !== true) {
-        const submissionError = new Error(result.error || 'Failed to save inquiry');
+      const result = await res.json().catch(() => ({ submissionStatus: 'unknown' }));
+      if (!res.ok || result.ok !== true || result.accepted !== true || result.submissionStatus !== 'accepted') {
+        const submissionError = new Error('Inquiry acceptance was not confirmed');
         submissionError.requestId = result.requestId || res.headers.get('x-request-id');
-        submissionError.saveStatus = result.saveStatus || (res.ok ? 'unknown' : undefined);
+        submissionError.submissionStatus = result.submissionStatus || 'unknown';
         throw submissionError;
       }
 
-      if (result.notified === false) {
-        console.warn('Inquiry saved, but email notification acceptance was not confirmed.');
-      }
       void trackGenerateLead({
         submission: result,
         productType: form.productType,
@@ -111,19 +121,21 @@ export default function Contact() {
       });
       setStep(4);
     } catch (error) {
-      console.error('Inquiry submission failed:', error);
       const requestId = error?.requestId;
-      const unconfirmed = error?.saveStatus === 'unknown'
+      const unconfirmed = error?.submissionStatus === 'unknown'
         || ['TimeoutError', 'AbortError', 'TypeError'].includes(error?.name);
+      submissionBlocked.current = unconfirmed;
+      setSubmissionUnknown(unconfirmed);
       setSubmitError(
         `${unconfirmed
-          ? 'We could not confirm whether your inquiry was saved. Please contact us via WhatsApp before submitting again.'
+          ? 'We could not confirm your submission. Please contact us via WhatsApp before submitting again.'
           : 'Failed to submit. Please try again or contact us via WhatsApp.'}${requestId ? ` Reference: ${requestId}` : ''}`,
       );
     } finally {
       clearTimeout(timeout);
       submissionInFlight.current = false;
       setSubmitting(false);
+      setChallengeReset(value => value + 1);
     }
   };
 
@@ -184,10 +196,13 @@ export default function Contact() {
               <div className="w-16 h-16 mx-auto mb-6 bg-navy flex items-center justify-center">
                 <svg className="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 6L9 17l-5-5"/></svg>
               </div>
-              <h2 className="text-display-sm text-navy mb-4">Thank You for Your Inquiry</h2>
+              <h2 className="text-display-sm text-navy mb-4">Thank You for Your Request</h2>
               <p className="text-tan text-lg max-w-md mx-auto leading-relaxed">
-                Our product specialist will review your requirements and respond within 24 hours with a free design mockup and factory-direct quote.
+                Your submission has been accepted for processing. If you have not heard from us within 24 hours, please contact us via WhatsApp.
               </p>
+              <a href={waLink('Hello WINCOME, I would like to follow up on my hair accessories quote request.')} target="_blank" rel="noopener noreferrer" data-analytics-location="contact_follow_up" className="btn-whatsapp mt-6">
+                Contact us on WhatsApp →
+              </a>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="bg-white p-5 sm:p-8 md:p-16 border border-bronze/10">
@@ -338,13 +353,28 @@ export default function Contact() {
                     <input id="website" name="website" type="text" value={form.website} onChange={e => update('website', e.target.value)} tabIndex={-1} autoComplete="off" />
                   </div>
                   <p className="text-xs text-tan leading-relaxed">
-                    We use your details to respond to your inquiry, with support from our database and email service providers. See our <a href="/privacy" className="text-gold underline">Privacy Policy</a> for details.
+                    We use your details to respond to your inquiry and verify this form against spam, with support from our form and security service providers. See our <a href="/privacy" className="text-gold underline">Privacy Policy</a> for details.
                   </p>
+                  {!submissionUnknown && <InquiryChallenge onTokenChange={updateVerificationToken} resetKey={challengeReset} />}
                   <div className="space-y-4 pt-4">
                     {submitError && <p role="alert" className="text-red-500 text-xs">{submitError}</p>}
+                    {submissionUnknown && (
+                      <div className="space-y-3">
+                        <a href={waLink('Hello WINCOME, my quote form submission was not confirmed. Could you check whether it reached you?')} target="_blank" rel="noopener noreferrer" data-analytics-location="contact_unconfirmed" className="btn-whatsapp w-full sm:w-auto justify-center">
+                          Check with us on WhatsApp →
+                        </a>
+                        <button type="button" className="block text-xs text-gold underline" onClick={() => {
+                          submissionBlocked.current = false;
+                          setSubmissionUnknown(false);
+                          setSubmitError(null);
+                        }}>
+                          I have checked with WINCOME and need to resend
+                        </button>
+                      </div>
+                    )}
                     <div className="flex flex-col gap-4 sm:flex-row sm:justify-between">
                       <button type="button" disabled={submitting} onClick={() => setStep(2)} className="btn-outline w-full sm:w-auto justify-center">← Back</button>
-                      <button type="submit" disabled={submitting} className="btn-primary w-full sm:w-auto justify-center text-base px-6 sm:px-12 py-5 disabled:opacity-50">
+                      <button type="submit" disabled={submitting || !verified || submissionUnknown} className="btn-primary w-full sm:w-auto justify-center text-base px-6 sm:px-12 py-5 disabled:opacity-50">
                         {submitting ? 'Submitting...' : <>Send My Request <span className="ml-1">→</span></>}
                       </button>
                     </div>

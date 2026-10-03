@@ -47,10 +47,15 @@ const envKeys = new Set(
     .map((line) => line.slice(0, line.indexOf('='))),
 );
 
-for (const key of ['SUPABASE_URL', 'SUPABASE_SERVICE_ROLE_KEY', 'RESEND_API_KEY', 'NOTIFY_EMAIL', 'NOTIFY_FROM']) {
-  assert.ok(envKeys.has(key), `.env.example is missing server variable: ${key}`);
+for (const key of ['FORMSPARK_FORM_ID', 'TURNSTILE_SECRET_KEY', 'VITE_TURNSTILE_SITE_KEY']) {
+  assert.ok(envKeys.has(key), `.env.example is missing inquiry variable: ${key}`);
 }
-assert.ok(!envKeys.has('VITE_SUPABASE_ANON_KEY'), 'Unused browser Supabase key must not be documented');
+for (const key of ['SUPABASE_URL', 'SUPABASE_SERVICE_ROLE_KEY', 'VITE_SUPABASE_ANON_KEY', 'RESEND_API_KEY', 'NOTIFY_EMAIL', 'NOTIFY_FROM', 'VITE_FORMSPARK_FORM_ID', 'VITE_TURNSTILE_SECRET_KEY']) {
+  assert.ok(!envKeys.has(key), `Obsolete or server-only browser variable must not be documented: ${key}`);
+}
+for (const key of ['FORMSPARK_FORM_ID', 'TURNSTILE_SECRET_KEY', 'VITE_TURNSTILE_SITE_KEY']) {
+  assert.match(envExample, new RegExp(`^${key}=\\s*$`, 'm'), `Environment template must not contain a real value for ${key}`);
+}
 
 for (const requiredSetupText of [
   '541418372wl-glitch/wincomehair',

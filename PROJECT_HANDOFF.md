@@ -1,6 +1,18 @@
 # WINCOME Hair 项目交接
 
-更新时间：2026-08-31（Asia/Shanghai）
+更新时间：2026-10-03（Asia/Shanghai）
+
+## 2026-10-03 询盘迁移接续
+
+- 当前设备已核对的 Git 根为 `E:\wincomehair\.worktrees\wincomehair-audit-20260927`；它只是本设备路径，其他设备须重新解析。
+- 本次发布通过 PR #30、功能分支 `agent/wincomehair-formspark-migration-20261003` 准备，将新询盘接入 Formspark + Cloudflare Turnstile；历史 Supabase 记录和原环境配置保留，不读出、不迁移、不删除。
+- 用户已明确授权本站 Cloudflare 验证、Vercel 限流及 Production 变量、合并上线，并发送 **1 次**标明用途的测试询盘。通知继续发到用户已批准的 Formspark 账号 Gmail。此授权不包含购买、第二次测试、WhatsApp 消息、索引提交或其他站点操作。
+- 本站 Cloudflare Account/Zone 已在已登录账号内按 `wincomehair.com` 精确查询核对。专用 Managed widget 已创建，两个正式 hostname 已配置，pre-clearance 关闭。表单 ID 和验证密钥只存本站敏感 Production 变量，公开 site key 由新生产构建使用。
+- Vercel 项目和团队 ID 与下方身份表一致。询盘限流已发布并回读 active/valid：`POST` AND exact path `/api/notify-inquiry`，每地区固定窗口每 IP 10 次/60 秒，默认 429。
+- 部署 SHA、实际切换时间、唯一测试的 API/Formspark 存档/实际收件证据及余额以 Issue #14 最新评论为准；配置完成不能代替这些验收。
+- 下方 2026-08-31 的基线、路径、PR、数据时间点和风险状态为**历史快照**，不得当作当前线上事实。历史禁止测试状态已被本次单次测试的明确授权覆盖；项目隔离、隐私、真实性及一般授权规则继续有效。
+
+## 2026-08-31 历史快照
 
 ## 当前身份映射
 

@@ -7,7 +7,7 @@ export default function Privacy() {
       <div className="container-site section-gap max-w-3xl">
         <p className="section-label">Legal</p>
         <h1 className="text-display-lg text-navy mb-4">Privacy <span className="text-gold">Policy</span></h1>
-        <p className="mb-10 text-sm text-tan">Last updated: 27 September 2026</p>
+        <p className="mb-10 text-sm text-tan">Last updated: 3 October 2026</p>
 
         <div className="space-y-8 text-tan leading-relaxed text-base">
           <section>
@@ -17,7 +17,7 @@ export default function Privacy() {
 
           <section>
             <h2 className="text-display-sm text-navy mb-3">2. Data We Collect</h2>
-            <p>When you submit a quote request, we collect the information you provide, which may include your name, company, email address, phone or WhatsApp number, product requirements, quantity, material, target market, timeline, dimensions, and message. Our server also processes limited technical data needed for security and abuse prevention. Rate-limit records contain keyed hashes rather than raw IP addresses, email addresses, or inquiry text.</p>
+            <p>When you submit a quote request, we collect the information you provide, which may include your name, company, email address, phone or WhatsApp number, product requirements, quantity, material, target market, timeline, dimensions, and message. Our hosting and security providers also process limited technical data, including network and browser information, to operate the service and prevent abuse. Our application logs use a random request reference and do not include inquiry text or contact details.</p>
             <p className="mt-3">If you choose to contact us through WhatsApp, your interaction takes place on WhatsApp and is also governed by WhatsApp/Meta&apos;s terms and privacy practices.</p>
           </section>
 
@@ -64,12 +64,13 @@ export default function Privacy() {
 
           <section>
             <h2 className="text-display-sm text-navy mb-3">5. Service Providers & International Processing</h2>
-            <p>We use Supabase for inquiry database hosting, Resend for email notifications, Vercel for site hosting and runtime logs, and—only after consent—Google Analytics for measurement. Site fonts are hosted on our own domain; loading them does not require a request to Google Fonts. Providers may process data in countries outside your own under their contractual and legal transfer mechanisms.</p>
+            <p>We use Formspark to receive, store, and send email notifications about new quote requests, Cloudflare Turnstile to verify form submissions, Vercel for site hosting and runtime logs, and—only after consent—Google Analytics for measurement. Earlier inquiry records and notifications may remain in Supabase and Resend under our retention policy. Site fonts are hosted on our own domain; loading them does not require a request to Google Fonts. Providers may process data in countries outside your own under their contractual and legal transfer mechanisms.</p>
+            <p className="mt-3">Turnstile loads at the final form step for security, independently of optional analytics consent. It processes technical signals to distinguish people from automated submissions. We do not send your quote details to Turnstile.</p>
           </section>
 
           <section>
             <h2 className="text-display-sm text-navy mb-3">6. Retention & Security</h2>
-            <p>Inquiry records are generally retained for up to 24 months after our last business interaction, unless a longer period is needed for an active order, legal claim, accounting requirement, or other legal obligation. Short-lived anti-abuse counters expire automatically. We use access controls, server-only database credentials, request-level logging, and other safeguards appropriate to the service; no internet service can guarantee absolute security.</p>
+            <p>Inquiry records are generally retained for up to 24 months after our last business interaction, unless a longer period is needed for an active order, legal claim, accounting requirement, or other legal obligation. Our form provider does not automatically enforce this period; deletion requires a retention review by us. We use access controls, server-only routing and security credentials, request-level logging, and other safeguards appropriate to the service; no internet service can guarantee absolute security.</p>
           </section>
 
           <section>

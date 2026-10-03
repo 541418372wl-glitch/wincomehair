@@ -49,12 +49,28 @@ assert.equal(analytics.readAnalyticsConsent(), 'granted');
 assert.equal(await analytics.trackEvent('whatsapp_click', {
   link_location: 'footer',
   email: 'must-not-send@example.com',
+  turnstileToken: 'must-not-send-security-token',
+  requestId: 'must-not-send-reference',
 }), true);
 assert.equal(elements.has('wincome-ga4-script'), true);
 
 const eventCall = calls().find((call) => call[0] === 'event' && call[1] === 'whatsapp_click');
 assert.equal(eventCall[2].link_location, 'footer');
 assert.equal(Object.hasOwn(eventCall[2], 'email'), false);
+assert.equal(Object.hasOwn(eventCall[2], 'turnstileToken'), false);
+assert.equal(Object.hasOwn(eventCall[2], 'requestId'), false);
+
+assert.equal(await analytics.trackGenerateLead({
+  submission: { ok: true, accepted: true, submissionStatus: 'accepted', requestId: '11111111-1111-4111-8111-111111111111' },
+  productType: 'pins', quantity: '2000-4999', targetMarket: 'Europe / UK',
+}), true);
+const leadCall = calls().find((call) => call[0] === 'event' && call[1] === 'generate_lead');
+assert.equal(leadCall[2].lead_status, 'accepted');
+assert.equal(leadCall[2].measurement_version, '3');
+assert.deepEqual(Object.keys(leadCall[2]).sort(), [
+  'lead_source', 'lead_status', 'measurement_version', 'product_type', 'quantity_range', 'target_market',
+]);
+assert.equal(JSON.stringify(leadCall).includes('11111111-1111-4111-8111-111111111111'), false);
 
 const configCall = calls().find((call) => call[0] === 'config');
 assert.equal(configCall[1], analytics.GA_MEASUREMENT_ID);
