@@ -4,7 +4,10 @@ export const CONSENT_CHANGED_EVENT = 'wincome:analytics-consent-changed';
 export const OPEN_CONSENT_EVENT = 'wincome:open-consent-preferences';
 
 const ALLOWED_CONSENT = new Set(['granted', 'denied']);
-const BLOCKED_PARAMETER_NAMES = new Set(['email', 'phone', 'name', 'message', 'company']);
+const BLOCKED_PARAMETER_NAMES = new Set([
+  'email', 'phone', 'name', 'message', 'company',
+  'token', 'turnstileToken', 'turnstile_token', 'requestId',
+]);
 const PRODUCTION_HOSTS = new Set(['wincomehair.com', 'www.wincomehair.com']);
 const leadTracking = new Map();
 let defaultsInitialized = false;
@@ -182,7 +185,7 @@ export async function trackEvent(eventName, params = {}) {
 
 export function trackGenerateLead({ submission, productType, quantity, targetMarket }) {
   const requestId = submission?.requestId;
-  if (submission?.ok !== true || submission?.saved !== true
+  if (submission?.ok !== true || submission?.accepted !== true || submission?.submissionStatus !== 'accepted'
     || typeof requestId !== 'string' || !/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(requestId)) {
     return Promise.resolve(false);
   }
@@ -191,8 +194,8 @@ export function trackGenerateLead({ submission, productType, quantity, targetMar
   if (leadTracking.has(requestId)) return leadTracking.get(requestId);
   const pending = trackEvent('generate_lead', {
     lead_source: 'quote_form',
-    lead_status: 'saved',
-    measurement_version: '2',
+    lead_status: 'accepted',
+    measurement_version: '3',
     product_type: productType,
     quantity_range: quantity,
     target_market: targetMarket,

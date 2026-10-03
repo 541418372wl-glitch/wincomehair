@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 
-const savedSubmission = { ok: true, saved: true, requestId: '11111111-1111-4111-8111-111111111111' };
+const acceptedSubmission = { ok: true, accepted: true, submissionStatus: 'accepted', requestId: '11111111-1111-4111-8111-111111111111' };
 
 function environment({ storageFails = false, hostname = 'wincomehair.com' } = {}) {
   const stored = new Map();
@@ -32,7 +32,7 @@ async function fresh(options) {
 {
   const { analytics, scripts } = await fresh();
   analytics.setAnalyticsConsent('granted');
-  const pending = analytics.trackGenerateLead({ submission: savedSubmission, productType: 'pins' });
+  const pending = analytics.trackGenerateLead({ submission: acceptedSubmission, productType: 'pins' });
   analytics.setAnalyticsConsent('denied');
   scripts.get('wincome-ga4-script').onload();
   assert.equal(await pending, false);
@@ -70,28 +70,37 @@ for (const hostname of ['localhost', '127.0.0.1', 'wincomehair-preview.vercel.ap
   const { analytics, scripts } = await fresh({ hostname });
   analytics.setAnalyticsConsent('granted');
   assert.equal(await analytics.trackEvent('whatsapp_click'), false);
-  assert.equal(await analytics.trackGenerateLead({ submission: savedSubmission }), false);
+  assert.equal(await analytics.trackGenerateLead({ submission: acceptedSubmission }), false);
   assert.equal(scripts.size, 0);
   assert.equal(window.dataLayer.some(call => ['config', 'event'].includes(call[0])), false);
 }
 
-// Only a confirmed save qualifies; repeated/concurrent callbacks count once.
+// Accepted processing has its own measurement version, independent of old saves.
+// Repeated/concurrent callbacks for this acknowledgement count once.
 {
   const { analytics, scripts } = await fresh();
   analytics.setAnalyticsConsent('granted');
-  for (const submission of [undefined, { saved: true }, { ...savedSubmission, saved: false }, { ...savedSubmission, ok: false }]) {
+  for (const submission of [
+    undefined, { saved: true },
+    { ok: true, saved: true, requestId: acceptedSubmission.requestId },
+    { ...acceptedSubmission, accepted: false },
+    { ...acceptedSubmission, submissionStatus: 'unknown' },
+    { ...acceptedSubmission, submissionStatus: undefined },
+    { ...acceptedSubmission, ok: false },
+    { ...acceptedSubmission, requestId: 'invalid-reference' },
+  ]) {
     assert.equal(await analytics.trackGenerateLead({ submission }), false);
   }
-  const first = analytics.trackGenerateLead({ submission: savedSubmission, productType: 'pins' });
-  const second = analytics.trackGenerateLead({ submission: savedSubmission, productType: 'pins' });
+  const first = analytics.trackGenerateLead({ submission: acceptedSubmission, productType: 'pins' });
+  const second = analytics.trackGenerateLead({ submission: acceptedSubmission, productType: 'pins' });
   scripts.get('wincome-ga4-script').onload();
   assert.deepEqual(await Promise.all([first, second]), [true, true]);
-  assert.equal(await analytics.trackGenerateLead({ submission: savedSubmission }), true);
+  assert.equal(await analytics.trackGenerateLead({ submission: acceptedSubmission }), true);
   const leads = window.dataLayer.filter(call => call[0] === 'event' && call[1] === 'generate_lead');
   assert.equal(leads.length, 1);
-  assert.equal(leads[0][2].lead_status, 'saved');
-  assert.equal(leads[0][2].measurement_version, '2');
-  assert.equal(JSON.stringify(leads).includes(savedSubmission.requestId), false);
+  assert.equal(leads[0][2].lead_status, 'accepted');
+  assert.equal(leads[0][2].measurement_version, '3');
+  assert.equal(JSON.stringify(leads).includes(acceptedSubmission.requestId), false);
 }
 
 delete globalThis.window;
