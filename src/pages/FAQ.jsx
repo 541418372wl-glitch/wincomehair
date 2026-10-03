@@ -81,23 +81,28 @@ export default function FAQ() {
             {faqData.map((item, index) => (
               <div key={index} className="py-6">
                 <button
+                  type="button"
                   onClick={() => setOpenIndex(openIndex === index ? null : index)}
+                  aria-expanded={openIndex === index}
+                  aria-controls={`faq-answer-${index}`}
                   className="w-full text-left flex items-start justify-between gap-4 group"
                 >
                   <span className="text-base text-navy group-hover:text-gold transition-colors font-display leading-relaxed">
                     {item.q}
                   </span>
-                  <span className={`text-gold transition-transform duration-200 mt-1 shrink-0 ${openIndex === index ? 'rotate-45' : ''}`}>
+                  <span aria-hidden="true" className={`text-gold transition-transform duration-200 mt-1 shrink-0 ${openIndex === index ? 'rotate-45' : ''}`}>
                     <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                       <path d="M12 5v14M5 12h14"/>
                     </svg>
                   </span>
                 </button>
-                {openIndex === index && (
-                  <div className="mt-4 text-sm text-tan leading-relaxed pl-0 animate-[fadeIn_0.3s_ease-out]">
-                    {item.a}
-                  </div>
-                )}
+                <div
+                  id={`faq-answer-${index}`}
+                  hidden={openIndex !== index}
+                  className="mt-4 text-sm text-tan leading-relaxed pl-0 animate-[fadeIn_0.3s_ease-out]"
+                >
+                  {item.a}
+                </div>
               </div>
             ))}
           </div>
