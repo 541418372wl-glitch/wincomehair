@@ -40,6 +40,8 @@ npm test
 
 The build performs client and SSR builds, prerenders every public route, and runs asset, metadata, GEO/AI discovery, article-trust, repository-governance, and internal-link checks. Rendering errors fail the build. Article listings and SEO use a virtual summary module generated from the original content; full article bodies load with the article page. A bundle gate prevents those bodies from returning to the initial client graph.
 
+Retired article URLs use exact permanent redirects in `vercel.json`. The route check requires each destination to be a current canonical route and rejects duplicate sources, chains, and loops. Vercel serves these as HTTP 308 redirects; the local Vite preview does not emulate them. Verify both HTTP status and destination on the approved deployment.
+
 `npm test` uses fake inquiry providers for acceptance, rejection, timeouts, Turnstile validation, and preview isolation, alongside analytics consent lifecycle, contact-form DOM, SEO navigation, and SSR checks. It does not submit real inquiries. JSDOM checks behavior, not visual layout; use a browser preview for visual review.
 
 Provider calls have bounded timeouts within the function's configured duration. An uncertain Formspark response is not automatically retried. The browser preserves the form and locks resubmission on the current page when the result is unknown; the owner must reconcile the request reference before asking for another submission.
