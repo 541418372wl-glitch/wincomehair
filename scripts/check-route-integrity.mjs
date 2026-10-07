@@ -8,6 +8,18 @@ const dist = path.resolve('dist');
 const sitemap = fs.readFileSync(path.join(dist, 'sitemap.xml'), 'utf8');
 const routes = [...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map(match => new URL(match[1]).pathname);
 const failures = [];
+const redirects = JSON.parse(fs.readFileSync('vercel.json', 'utf8')).redirects || [];
+const redirectSources = new Set();
+for (const redirect of redirects) {
+  const { source, destination, permanent } = redirect;
+  // Retired article URLs must resolve directly to a current canonical page.
+  // Excluding canonical sources also prevents redirect chains and loops.
+  if (!/^\/blog\/[a-z0-9-]+$/.test(source) || routes.includes(source)) failures.push('Invalid retired article source: ' + source);
+  if (redirectSources.has(source)) failures.push('Duplicate redirect source: ' + source);
+  if (!routes.includes(destination)) failures.push('Redirect target is not a canonical route: ' + destination);
+  if (permanent !== true) failures.push('Article redirect must be permanent: ' + source);
+  redirectSources.add(source);
+}
 let links = 0;
 for (const route of routes) {
   const file = path.join(dist, route, 'index.html');
@@ -30,4 +42,4 @@ for (const route of routes) {
   dom.window.close();
 }
 assert.equal(failures.length, 0, [...new Set(failures)].join('\n'));
-console.log('Route integrity passed: ' + routes.length + ' pages, ' + links + ' internal links, H1, canonical, JSON-LD, image alt and same-page anchors');
+console.log('Route integrity passed: ' + routes.length + ' pages, ' + links + ' internal links, ' + redirects.length + ' permanent article redirects, H1, canonical, JSON-LD, image alt and same-page anchors');

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 const navLinks = [
@@ -39,6 +39,7 @@ function WincomeLogo({ scrolled }) {
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const menuButtonRef = useRef(null);
   const location = useLocation();
   const dark = scrolled || menuOpen || location.pathname !== '/';
 
@@ -55,7 +56,10 @@ export default function Navbar() {
   useEffect(() => {
     if (!menuOpen) return;
     const onKey = (e) => {
-      if (e.key === 'Escape') setMenuOpen(false);
+      if (e.key === 'Escape') {
+        setMenuOpen(false);
+        menuButtonRef.current?.focus();
+      }
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
@@ -89,6 +93,7 @@ export default function Navbar() {
         </div>
 
         <button
+          ref={menuButtonRef}
           className={`xl:hidden flex flex-col items-center justify-center gap-1.5 w-11 h-11 ${dark ? 'text-navy' : 'text-white'}`}
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Toggle menu"

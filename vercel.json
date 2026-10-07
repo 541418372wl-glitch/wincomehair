@@ -2,6 +2,18 @@
   "functions": {
     "api/notify-inquiry.js": { "maxDuration": 30 }
   },
+  "redirects": [
+    {
+      "source": "/blog/acetate-vs-plastic-hair-claws",
+      "destination": "/blog/acetate-vs-plastic-claw-clips",
+      "permanent": true
+    },
+    {
+      "source": "/blog/why-do-headbands-hurt-v-slip",
+      "destination": "/blog/why-headbands-hurt-or-slip",
+      "permanent": true
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",
