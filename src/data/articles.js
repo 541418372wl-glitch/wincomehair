@@ -1,3 +1,4 @@
+import { scrunchieCareArticle } from './scrunchieCareArticle.js';
 import { scrunchieFitArticle } from './scrunchieFitArticle.js';
 // WINCOME Hair Accessories — Blog articles (structured content for /blog pages)
 import { redditArticles } from './redditArticles.js';
@@ -55,6 +56,7 @@ const SOURCE_SETS = {
 // structured tables/steps, FAQ block, internal links, and a CTA to inquiry.
 
 export const articles = [
+  scrunchieCareArticle,
   scrunchieFitArticle,
   ...redditTrendArticles,
   ...redditArticles,
@@ -257,7 +259,7 @@ export const articles = [
     slug: 'silk-vs-satin-scrunchies',
     title: 'Silk vs Satin Scrunchies: Which Fabric Is Better for Hair — and for Your Business?',
     date: '2026-08-04',
-    updatedDate: '2026-09-27',
+    updatedDate: '2026-10-11',
     category: 'Material Guide',
     readTime: '7 min read',
     image: '/assets/images/blog-silk-vs-satin.webp',
@@ -275,7 +277,7 @@ export const articles = [
       { t: 'table', head: ['Factor', 'Mulberry Silk', 'Satin (Polyester)'], rows: [
         ['Hair-contact surface', 'Can be very smooth; verify weave, finish and seams', 'Can be very smooth; verify fiber, finish and seams'],
         ['Heat and moisture feel', 'Depends on silk weight, weave and construction', 'Depends on polyester weight, weave and construction'],
-        ['Durability', 'Delicate; needs gentle washing', 'Very durable, machine washable'],
+        ['Care and wash performance', 'Follow the finished product care instructions; compare representative samples', 'Machine wash only where the finished product instructions permit it; verify the specified process'],
         ['Cost (factory)', '$2.5–5 per unit', '$0.5–1.5 per unit'],
         ['Retail price point', '$15–25', '$5–9'],
         ['Perceived value', 'Luxury, "mulberry silk" sells itself', 'Value; needs branding to differentiate'],
@@ -283,10 +285,10 @@ export const articles = [
       { t: 'h2', x: 'What the Data and Communities Say' },
       { t: 'p', x: 'Hair-fiber research supports friction and abrasion as contributors to damage, but it does not establish that every silk scrunchie outperforms every polyester satin scrunchie. Community reports can help identify concerns such as snagging, slippage and heat, yet they are not controlled product tests. Compare representative samples on the same hair bundle and record surface snags, elastic force, seam exposure and wash performance.' },
       { t: 'h2', x: 'Which Should Your Brand Stock?' },
-      { t: 'ul', items: ['Stock silk if: your brand sells luxury positioning, gift sets, or subscription boxes where a $20+ unit price is normal. "100% mulberry silk" is a proven label that justifies the price.', 'Stock satin if: you sell volume, budget-friendly lines, or kids\' items that need to survive washing machines. Satin at $5–9 retail moves fast and repeats.', 'Stock both if: you want a price ladder — silk as the hero item, satin as the entry item. This is the most common strategy among our 500+ client brands.'] },
+      { t: 'ul', items: ['Stock silk if: your brand sells luxury positioning, gift sets, or subscription boxes where a $20+ unit price is normal. "100% mulberry silk" is a proven label that justifies the price.', 'Stock satin if: its appearance, price and finished construction suit the range. For washable designs, verify the proposed care process on representative samples instead of inferring machine washability from the fabric name.', 'Stock both if: you want a price ladder — silk as the hero item, satin as the entry item. This is the most common strategy among our 500+ client brands.'] },
       { t: 'p', x: 'If two wraps slip but three feel uncomfortable, fabric choice is only part of the question. Our [scrunchie fit, size and elastic guide](/blog/scrunchie-too-loose-too-tight) explains how to compare loop size, resistance and recovery, with a sample record for brands.' },
       { t: 'h2', x: 'What to Specify When Ordering Scrunchies Wholesale' },
-      { t: 'ul', items: ['Fiber content: 100% mulberry silk (grade 6A) vs polyester satin — get the exact spec in writing', 'Outer size: standard 12 cm diameter, slim, or extra-large', 'Elastic: covered elastic that does not twist inside the casing', 'Construction: fully enclosed casing, reinforced seam (survives repeated washing)', 'Labeling: woven silk label, printed care tag, or custom hang tag', 'OEKO-TEX certification for dyes if selling into the EU'] },
+      { t: 'ul', items: ['Fiber content: 100% mulberry silk (grade 6A) vs polyester satin — get the exact spec in writing', 'Outer size: standard 12 cm diameter, slim, or extra-large', 'Elastic: covered elastic that does not twist inside the casing', 'Construction: fully enclosed casing, reinforced seam and agreed checks after the specified wash process', 'Labeling: woven silk label, printed care tag, or custom hang tag', 'OEKO-TEX certification for dyes if selling into the EU'] },
       { t: 'p', x: 'WINCOME manufactures both mulberry silk and satin scrunchies with reinforced seams and OEKO-TEX-certified dyes, MOQ from 200 pcs. See the [silk scrunchies product page](/products/scrunchie-silk) for full specs, or send us your target price point for a material recommendation — [start your project](/contact).' },
       { t: 'faq', items: [
         { q: 'Are satin scrunchies as good as silk for hair?', a: 'The label alone cannot answer that. Compare fiber content, weave, finish, seams and elastic tension. A smooth, well-finished polyester satin product may outperform a rough or poorly sewn silk product in a specific use.' },
