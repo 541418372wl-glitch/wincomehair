@@ -124,7 +124,13 @@ export default function Sourcing() {
               <tbody>
                 {moqRows.map((row) => (
                   <tr key={row[0]} className="border-t border-bronze/10 text-sm">
-                    <th scope="row" className="p-4 font-medium text-navy">{row[0]}</th>
+                    <th scope="row" className="p-4 font-medium text-navy">
+                      {row[0].startsWith('Hair claw clips —') ? (
+                        <><Link to="/products/category/hair-claw-clips" className="underline underline-offset-4 hover:text-gold">Hair claw clips</Link>{row[0].slice('Hair claw clips'.length)}</>
+                      ) : row[0].startsWith('Hair clips & barrettes —') ? (
+                        <><Link to="/products/category/hair-clips-barrettes" className="underline underline-offset-4 hover:text-gold">Hair clips &amp; barrettes</Link>{row[0].slice('Hair clips & barrettes'.length)}</>
+                      ) : row[0]}
+                    </th>
                     <td className="p-4 text-navy">{row[1]}</td>
                     <td className="p-4 leading-relaxed text-tan">{row[2]}</td>
                   </tr>

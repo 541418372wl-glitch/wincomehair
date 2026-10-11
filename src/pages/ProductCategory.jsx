@@ -173,6 +173,45 @@ export default function ProductCategory() {
         </div>
       </section>
 
+      {content.developmentRoute ? (
+        <section className="container-site section-gap" aria-labelledby="development-route-title">
+          <p className="section-label">Product Development Route</p>
+          <h2 id="development-route-title" className="text-display-md text-navy">{content.developmentRoute.title}</h2>
+          <p className="mt-5 max-w-3xl leading-relaxed text-tan">{content.developmentRoute.intro}</p>
+          <div className="mt-8 grid gap-5 lg:grid-cols-3">
+            {content.developmentRoute.routes.map(route => (
+              <article key={route.startingPoint} className="border border-bronze/10 bg-white p-6">
+                <h3 className="font-display text-lg text-navy">{route.startingPoint}</h3>
+                <dl className="mt-5 space-y-4 text-sm leading-relaxed">
+                  <div><dt className="font-medium text-navy">Define in the brief</dt><dd className="mt-2 text-tan">{route.brief}</dd></div>
+                  <div><dt className="font-medium text-navy">Ask before sampling</dt><dd className="mt-2 text-tan">{route.question}</dd></div>
+                </dl>
+              </article>
+            ))}
+          </div>
+          <p className="mt-6 max-w-3xl leading-relaxed text-tan">
+            For an original outline or complex decoration, use the <Link to="/blog/custom-novelty-claw-clips-quality-guide" className="font-medium text-navy underline underline-offset-4 hover:text-gold">novelty claw clip development checklist</Link> for the detailed brief and sample checks.
+          </p>
+        </section>
+      ) : null}
+
+      {content.buyerDecisionPath ? (
+        <section className="container-site section-gap" aria-labelledby="buyer-decision-title">
+          <p className="section-label">Buyer Decision Path</p>
+          <h2 id="buyer-decision-title" className="text-display-md text-navy">{content.buyerDecisionPath.title}</h2>
+          <p className="mt-5 max-w-3xl leading-relaxed text-tan">{content.buyerDecisionPath.intro}</p>
+          <ol className="mt-8 grid gap-5 md:grid-cols-3">
+            {content.buyerDecisionPath.steps.map(step => (
+              <li key={step.slug} className="border border-bronze/10 bg-white p-6">
+                <h3 className="font-display text-lg text-navy"><span className="mr-3 text-gold">{step.number}</span>{step.label}</h3>
+                <p className="mt-4 text-sm leading-relaxed text-tan">{step.question}</p>
+                <Link to={'/blog/' + step.slug} className="mt-5 inline-block text-sm font-medium text-navy underline underline-offset-4 hover:text-gold">Read {step.label.toLowerCase()} guide</Link>
+              </li>
+            ))}
+          </ol>
+        </section>
+      ) : null}
+
       <section className="container-site section-gap">
         <p className="section-label">Wholesale & Private Label</p>
         <h2 className="max-w-3xl text-display-md text-navy">Programs This Category Supports</h2>

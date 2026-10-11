@@ -1,5 +1,28 @@
+import { buyerDecisionClusters, HAIR_CLIP_BUYER_DECISION_CLUSTER } from './buyerDecisionClusters.js';
+
 export const productCategoryContent = {
   'hair-claw-clips': {
+    developmentRoute: {
+      title: 'Decide What Needs to Change',
+      intro: 'Start with the change you need, rather than choosing a material from appearance alone. A familiar silhouette with a new color is a different brief from a clip that needs more usable capacity or an original outline. Ask the quotation to state which parts of the reference can be retained and which need development.',
+      routes: [
+        {
+          startingPoint: 'An existing product direction with appearance changes',
+          brief: 'Identify the reference, color or pattern, finish, logo placement and packaging version.',
+          question: 'Which changes are feasible on the reference construction, and which require a different process or tooling?',
+        },
+        {
+          startingPoint: 'A reference that needs a different fit or hold',
+          brief: 'Identify the target hairstyle and the requested changes to jaw opening, teeth, weight or spring behavior.',
+          question: 'Which dimensions and components must change, and how will the sample be assessed against the intended use?',
+        },
+        {
+          startingPoint: 'An original silhouette or decorative concept',
+          brief: 'Provide your design files, views, key dimensions and a list of features that must be preserved.',
+          question: 'Which development or tooling steps are proposed, and which costs and revision terms remain to be confirmed?',
+        },
+      ],
+    },
     positioning: 'Built for fashion, beauty and private-label programs that need reliable grip, repeatable color and retail-ready presentation.',
     facts: [
       { label: 'Custom MOQ', value: '1,000 pcs', note: 'Per design per color' },
@@ -105,6 +128,11 @@ export const productCategoryContent = {
     ],
   },
   'hair-clips-barrettes': {
+    buyerDecisionPath: {
+      title: 'Choose the Working Clip Before the Decoration',
+      intro: 'Use the same three decisions for an acetate barrette, a matte snap clip or a decorated piece: define what it must hold, specify the construction and finish, then confirm the quotation and sample plan. The decorative outline and the working base need separate dimensions in the brief.',
+      steps: buyerDecisionClusters[HAIR_CLIP_BUYER_DECISION_CLUSTER].steps,
+    },
     positioning: 'Private-label clips and barrettes across acetate, coated metal, pearl, crystal and decorative constructions for everyday and occasion ranges.',
     quoteBrief: 'For a useful first quote, share the clip type, approximate size, preferred material or finish, quantity, logo or packaging needs and destination market.',
     facts: [
@@ -126,8 +154,6 @@ export const productCategoryContent = {
       { title: 'Wholesalers & retailers', text: 'Balance accessible snap clips with premium barrettes across multiple price points.' },
     ],
     relatedGuides: [
-      { slug: 'metal-hair-clip-material-guide', title: 'Metal Hair Clip Material Guide', text: 'Compare zinc alloy, stainless steel and aluminum for finish and performance.' },
-      { slug: 'best-barrettes-fine-thin-hair', title: 'Barrettes for Fine, Thin Hair', text: 'Understand closure, weight and usable capacity for no-slip designs.' },
       { slug: 'private-label-hair-accessories-guide', title: 'Private-Label Hair Accessories Guide', text: 'Prepare branding, samples and packaging before ordering.' },
     ],
   },
