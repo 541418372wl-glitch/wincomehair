@@ -222,7 +222,7 @@ export default function BlogPost() {
         </div>
 
         <div className="aspect-[16/6] overflow-hidden mb-12 bg-sand">
-          <img src={post.image} alt={post.title} width="1535" height="864" fetchpriority="high" decoding="async" className="w-full h-full object-cover" />
+          <img src={post.image} alt={post.imageAlt || post.title} width="1535" height="864" fetchpriority="high" decoding="async" className="w-full h-full object-cover" />
         </div>
 
         <div className="max-w-3xl">

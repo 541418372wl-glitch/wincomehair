@@ -97,6 +97,7 @@ export const productCategoryContent = {
     ],
     relatedGuides: [
       { slug: 'silk-vs-satin-scrunchies', title: 'Silk vs Satin Scrunchies', text: 'Compare fiber, feel, care requirements and price positioning for a retail range.' },
+      { slug: 'how-to-wash-scrunchies', title: 'Scrunchie Washing & Care Guide', text: 'Review finished-product care instructions and record sample changes after washing and drying.' },
       { slug: 'hair-accessories-moq-guide', title: 'Hair Accessories MOQ Guide', text: 'Understand what changes minimum quantities for fabric accessories.' },
       { slug: 'private-label-hair-accessories-guide', title: 'Private-Label Hair Accessories Guide', text: 'Plan labels, packaging and sampling for a branded collection.' },
     ],
