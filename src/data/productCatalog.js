@@ -43,9 +43,9 @@ export const productCategories = [
     description: 'Custom hair claw clips in acetate, metal and plastic. Production MOQ: 1,000 pieces per design per color; samples and stock may be available below MOQ.',
     intro: 'WINCOME manufactures custom hair claw clips for fashion, beauty and private-label brands. Choose cellulose acetate, zinc alloy, ABS or resin constructions; refine size, tooth geometry and spring performance; then add custom colors, logos and retail-ready packaging.',
     buyerNotes: [
-      'Cellulose acetate for premium patterns, polished edges and design-led collections.',
-      'Engineered plastic for lightweight, color-rich and price-sensitive ranges.',
-      'Metal and resin statement clips for jewelry-inspired or social-first launches.',
+      'Record the intended hairstyle and hair profile, then request dimensions in millimeters rather than relying on small, medium or large labels.',
+      'Separate appearance changes from changes to the jaws, teeth, hinge or spring. Mark each requested change against the same reference so the sample brief is clear.',
+      'Identify the product and packaging versions to approve. Keep open questions separate from confirmed specifications and agree on the sample checks before approval.',
     ],
     faq: [
       { q: 'What is the MOQ for custom hair claw clips?', a: 'The custom production MOQ is 1,000 pieces per design per color. Samples and in-stock items may be available below the production MOQ.' },
@@ -116,9 +116,9 @@ export const productCategories = [
     intro: hairClipLanding.intro,
     quoteLabel: hairClipLanding.quoteLabel,
     buyerNotes: [
-      'Acetate barrettes for premium color patterns and sculptural silhouettes.',
-      'Snap clips and coated metal for accessible everyday collections.',
-      'Pearl, crystal and flower designs for bridal, evening and gift assortments.',
+      'Specify the working base separately from the visible shell or decoration: identify the closure type, base length, opening and the hair section it is intended to hold.',
+      'Mark the decoration layout, complete product weight and attachment details to confirm on the sample. A front-view image alone does not define the finished assembly.',
+      'List each style, color and packaging version in the quote request. If any detail is undecided, ask for it to be shown as an open assumption rather than treated as approved.',
     ],
     faq: [
       { q: 'What should buyers confirm with a custom hair clip manufacturer?', a: 'Confirm the clip type, intended dimensions, base hardware, material or finish, order quantity, logo treatment, packaging and target market before sampling. These details allow the manufacturer to compare feasible constructions and quote the correct MOQ.' },

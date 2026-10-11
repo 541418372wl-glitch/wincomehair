@@ -208,6 +208,7 @@ export const articles = [
   {
     slug: 'do-claw-clips-damage-hair',
     title: 'Do Claw Clips Damage Hair? Dents, Breakage & How to Wear Them Safely',
+    seoTitle: 'Do Claw Clips Damage Hair? Causes & Ways to Reduce Breakage',
     date: '2026-08-04',
     updatedDate: '2026-08-13',
     category: 'Hair Care',
