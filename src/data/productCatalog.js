@@ -95,16 +95,16 @@ export const productCategories = [
     title: 'Custom Hair Bows Manufacturer',
     seoTitle: 'Custom Hair Bows Manufacturer & Supplier | WINCOME',
     description: 'Custom satin, grosgrain, oversized and multi-layer hair bows for brands. Private-label colors, clips, logos and packaging. MOQ from 200 pieces.',
-    intro: 'WINCOME manufactures custom hair bows for fashion, kids, school, event and gift collections. Choose satin or grosgrain ribbon, bow dimensions, loop structure, tail length, clip hardware, edge finishing, branded labels and display packaging.',
+    intro: 'Compare satin hair bows, grosgrain ribbon bows and clip-mounted bow directions for your retail range. Define the ribbon, finished bow dimensions and working clip or barrette separately, then prepare a brief for the design you want to source.',
     buyerNotes: [
       'Satin bows for soft shine, events and premium gifting.',
       'Grosgrain constructions for crisp shape and everyday durability.',
       'Oversized and multi-layer formats for statement and social-first collections.',
     ],
     faq: [
-      { q: 'What types of hair bow can be customized?', a: 'Satin, grosgrain, oversized, multi-layer and clip-mounted bows can be developed in custom dimensions, colors and constructions.' },
-      { q: 'Which clip hardware can be used?', a: 'Alligator clips, barrettes and other suitable metal bases can be selected according to bow size, target age group and holding requirement.' },
-      { q: 'What is the MOQ for private-label hair bows?', a: 'Most custom hair bow styles start from 200 to 300 pieces per design.' },
+      { q: 'How should I compare samples of ribbon bow clips?', a: 'Use the same brief for each sample. Compare the front and back views, finished bow and clip-base dimensions, closure, ribbon attachment and edge finish. Assess the sample with the intended hairstyle rather than judging the bow from its front view alone.' },
+      { q: 'Can I send a reference for an existing style or a new design?', a: 'Identify the listed product direction you are considering, or include a reference or sketch and describe the changes you need. Ask which details can be retained and which need development. Materials, construction, sample steps and any development charges need confirmation for that specific request.' },
+      { q: 'How do I confirm order quantities and delivery timing?', a: 'State the quantity for each design and color, your destination and required delivery date. Ask for availability, the applicable order minimum, sample terms, production timing and shipping arrangements for the exact specification. Treat the catalog program figures as references, not a confirmed quotation for every selection.' },
     ],
   },
   {
