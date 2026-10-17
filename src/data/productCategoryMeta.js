@@ -13,8 +13,8 @@ export const productCategoryMeta = {
   },
   scrunchies: {
     shortName: 'Scrunchies',
-    seoTitle: 'Custom Scrunchies Manufacturer & Supplier | WINCOME',
-    description: 'Custom silk, satin, velvet and cotton scrunchies for brands and wholesalers. Private-label sizes, colors, logos and packaging. MOQ from 200 pieces.',
+    seoTitle: 'Wholesale Scrunchies: Silk, Satin & Fabric | WINCOME',
+    description: 'Compare silk, polyester satin and fabric scrunchies for wholesale sourcing. Review sizes and materials, then request availability and a quote.',
   },
   'hair-bows': {
     shortName: 'Hair Bows',
