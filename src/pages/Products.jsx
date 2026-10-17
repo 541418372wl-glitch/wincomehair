@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { products as catalogProducts, productCategories } from '../data/productCatalog';
+import { selectedProducts } from '../data/selectedProductStyles';
 
 const categoryLabels = {
   'hair-claw-clips': 'Claws & Clips',
@@ -10,7 +11,19 @@ const categoryLabels = {
   'hair-clips-barrettes': 'Hair Clips & Barrettes',
 };
 
-const allProducts = catalogProducts.map(product => ({
+const allProducts = [
+  ...selectedProducts.map(product => ({
+    id: product.slug,
+    name: product.title,
+    category: product.category,
+    image: product.image,
+    alt: product.alt,
+    imageWidth: product.imageWidth,
+    imageHeight: product.imageHeight,
+    selectedStyle: true,
+  })),
+  ...catalogProducts,
+].map(product => ({
   ...product,
   category: categoryLabels[product.category],
 }));
@@ -27,9 +40,11 @@ export default function Products() {
         <p className="section-label">Wholesale Product Catalog</p>
         <h1 className="max-w-4xl text-display-lg text-navy mb-4">Wholesale Hair Accessories for <span className="text-gold">Brands & Retailers</span></h1>
         <p className="text-tan text-lg max-w-3xl mb-10 leading-relaxed">
-          Explore {allProducts.length} customizable hair clips, claw clips, headbands, scrunchies and bows. Choose an existing production direction, then specify the size, color, material, finish, logo and retail packaging for your market.
+          Explore {allProducts.length} hair clips, claw clips, headbands, scrunchies and bows. Compare selected styles and custom production directions, then open a product page for specifications and an inquiry.
         </p>
 
+        <p className="section-label">Custom Program Reference</p>
+        <p className="text-sm text-tan leading-relaxed mb-4">The program references below apply to existing custom production directions. Confirm separate order terms for the selected scrunchie and fabric headband styles.</p>
         <div className="mb-12 grid grid-cols-2 border border-bronze/10 bg-white md:grid-cols-4" aria-label="Wholesale program facts">
           {[
             ['By category', 'Custom MOQ'],
@@ -91,15 +106,15 @@ export default function Products() {
               className="group bg-white overflow-hidden border border-bronze/10 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
             >
               <div className="aspect-square overflow-hidden">
-                <img src={product.image} alt={product.name} loading="lazy" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                <img src={product.image} alt={product.alt || product.name} width={product.imageWidth} height={product.imageHeight} loading="lazy" className={`w-full h-full ${product.selectedStyle ? 'object-contain' : 'object-cover'} transition-transform duration-700 group-hover:scale-105`} />
               </div>
               <div className="p-6">
                 <p className="text-[10px] tracking-wider uppercase text-tan mb-2">{product.category}</p>
                 <h3 className="text-base font-display text-navy mb-3 group-hover:text-gold transition-colors">{product.name}</h3>
-                <div className="flex flex-wrap gap-2 mb-4">
-                  <span className="text-[10px] tracking-wider uppercase bg-sand/60 text-tan px-2 py-1">Custom MOQ: {product.moq}</span>
-                  <span className="text-[10px] tracking-wider uppercase bg-sand/60 text-tan px-2 py-1">{product.leadTime}</span>
-                </div>
+                {product.moq || product.leadTime ? <div className="flex flex-wrap gap-2 mb-4">
+                  {product.moq ? <span className="text-[10px] tracking-wider uppercase bg-sand/60 text-tan px-2 py-1">Custom MOQ: {product.moq}</span> : null}
+                  {product.leadTime ? <span className="text-[10px] tracking-wider uppercase bg-sand/60 text-tan px-2 py-1">{product.leadTime}</span> : null}
+                </div> : null}
                 <span className="text-xs font-medium tracking-wider uppercase text-navy group-hover:text-gold transition-colors inline-flex items-center gap-1">
                   View Details <span className="group-hover:translate-x-1 transition-transform">→</span>
                 </span>
@@ -113,7 +128,7 @@ export default function Products() {
             <div>
               <p className="section-label">Planning a First Order?</p>
               <h2 className="text-display-sm text-navy">Compare MOQ, Samples and Production Before Requesting a Quote</h2>
-              <p className="mt-4 max-w-3xl leading-relaxed text-tan">Our buyer guide explains minimum quantities by product type, the 5–7 day sampling process, bulk-production milestones, payment terms and international shipping options.</p>
+              <p className="mt-4 max-w-3xl leading-relaxed text-tan">For custom production programs, our buyer guide explains minimum quantities by product type, the 5–7 day sampling process, bulk-production milestones, payment terms and international shipping options. Confirm order terms separately for selected styles.</p>
             </div>
             <div className="flex flex-col gap-3 sm:flex-row md:flex-col">
               <Link to="/sourcing" className="btn-primary justify-center">View Order Process</Link>
