@@ -2,6 +2,8 @@ import { Link, useParams } from 'react-router-dom';
 import { categoryMap, categoryProducts, productCategories } from '../data/productCatalog';
 import { productCategoryContent } from '../data/productCategoryContent';
 import { ORGANIZATION_ID, SITE, WEBSITE_ID } from '../components/SEO';
+import SelectedProductStyles from '../components/SelectedProductStyles';
+import { selectedProductStyles } from '../data/selectedProductStyles';
 
 function ProductCard({ product }) {
   return (
@@ -51,6 +53,11 @@ export default function ProductCategory() {
   const items = categoryProducts(category);
   const content = productCategoryContent[category];
   const url = SITE + '/products/category/' + category;
+  const selection = selectedProductStyles[category];
+  const listedItems = [
+    ...(selection?.items || []).map(product => ({ name: product.title, url: `${url}#selection-${product.id}` })),
+    ...items.map(product => ({ name: product.name, url: SITE + '/products/' + product.id })),
+  ];
   const jsonLd = {
     '@context': 'https://schema.org',
     '@graph': [
@@ -63,12 +70,12 @@ export default function ProductCategory() {
         publisher: { '@id': ORGANIZATION_ID },
         mainEntity: {
           '@type': 'ItemList',
-          numberOfItems: items.length,
-          itemListElement: items.map((product, index) => ({
+          numberOfItems: listedItems.length,
+          itemListElement: listedItems.map((product, index) => ({
             '@type': 'ListItem',
             position: index + 1,
             name: product.name,
-            url: SITE + '/products/' + product.id,
+            url: product.url,
           })),
         },
       },
@@ -94,11 +101,15 @@ export default function ProductCategory() {
         <div className="mt-8 flex flex-col gap-3 sm:flex-row">
           <Link to="/contact" className="btn-primary justify-center">{data.quoteLabel || 'Request a Category Quote'}</Link>
           <Link to="/customization" className="btn-outline justify-center">Explore OEM / ODM</Link>
+          {selection ? <a href="#selected-styles" className="btn-outline justify-center">View Selected Styles</a> : null}
         </div>
         {content.quoteBrief ? <p className="mt-5 max-w-3xl text-sm leading-relaxed text-tan">{content.quoteBrief}</p> : null}
       </section>
 
+      <SelectedProductStyles key={category} category={category} />
+
       <section className="container-site pb-14 md:pb-20" aria-label={`${data.shortName} order facts`}>
+        {selection ? <div className="mb-5"><h2 className="text-xl text-navy">Custom Program Reference</h2><p className="mt-2 max-w-3xl text-sm text-tan">The figures below describe the existing custom collection. Confirm separate order terms for the selected styles above.</p></div> : null}
         <div className="grid grid-cols-2 border border-bronze/10 bg-white md:grid-cols-4">
           {content.facts.map((fact, index) => (
             <div
