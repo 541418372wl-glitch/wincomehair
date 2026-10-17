@@ -66,7 +66,8 @@ export default function Products() {
               to={`/products/category/${category.slug}`}
               className="border border-bronze/10 bg-white p-4 text-sm font-medium text-navy transition-colors hover:border-gold hover:text-gold"
             >
-              {category.shortName} <span aria-hidden="true">→</span>
+              {category.slug === 'hair-bows' ? 'Ribbon Bows & Bow Clips' : category.shortName} <span aria-hidden="true">→</span>
+              {category.slug === 'hair-bows' ? <span className="mt-2 block text-xs font-normal leading-relaxed text-tan">Compare satin, grosgrain and clip-mounted directions.</span> : null}
             </Link>
           ))}
         </nav>

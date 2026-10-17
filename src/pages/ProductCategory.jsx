@@ -3,6 +3,7 @@ import { categoryMap, categoryProducts, productCategories } from '../data/produc
 import { productCategoryContent } from '../data/productCategoryContent';
 import { ORGANIZATION_ID, SITE, WEBSITE_ID } from '../components/SEO';
 import SelectedProductStyles from '../components/SelectedProductStyles';
+import BowSourcingGuide from '../components/BowSourcingGuide';
 import { selectedProductStyles, selectedProductPath } from '../data/selectedProductStyles';
 
 function ProductCard({ product }) {
@@ -144,7 +145,9 @@ export default function ProductCategory() {
         </div>
       </section>
 
-      <section className="container-site section-gap">
+      {category === 'hair-bows' ? <BowSourcingGuide /> : null}
+
+      <section id={category === 'hair-bows' ? 'bow-product-directions' : undefined} className={`container-site section-gap${category === 'hair-bows' ? ' scroll-mt-28' : ''}`}>
         <div className="mb-10 flex flex-col justify-between gap-4 md:flex-row md:items-end">
           <div>
             <p className="section-label">Customizable Collection</p>
