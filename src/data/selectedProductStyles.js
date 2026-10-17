@@ -173,3 +173,27 @@ export const selectedProductStyles = {
     ]
   }
 };
+
+const detailSlugs = {
+  oversized: 'oversized-polyester-scrunchie',
+  silk: 'mulberry-silk-scrunchie',
+  rhinestone: 'rhinestone-satin-scrunchie',
+  ruched: 'ruched-wide-fabric-headband',
+  stretch: 'solid-stretch-fabric-headband',
+};
+
+export const selectedProducts = Object.entries(selectedProductStyles).flatMap(([category, selection]) =>
+  selection.items.map(product => ({ ...product, category, slug: detailSlugs[product.id] }))
+);
+
+export function selectedProductPath(product) {
+  return `/products/${detailSlugs[product.id]}`;
+}
+
+export function findSelectedProduct(slug) {
+  return selectedProducts.find(product => product.slug === slug);
+}
+
+export function selectedProductInquiryPath(product) {
+  return `/contact?product=${detailSlugs[product.id]}`;
+}

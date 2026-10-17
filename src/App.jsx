@@ -17,7 +17,7 @@ const Customization = lazy(() => import('./pages/Customization'));
 const Sourcing = lazy(() => import('./pages/Sourcing'));
 const About = lazy(() => import('./pages/About'));
 const ManufacturerProfile = lazy(() => import('./pages/ManufacturerProfile'));
-const Contact = lazy(() => import('./pages/Contact'));
+const Contact = lazy(() => import('./pages/SelectedContactRoute'));
 const FAQ = lazy(() => import('./pages/FAQ'));
 const Quality = lazy(() => import('./pages/Quality'));
 const Cases = lazy(() => import('./pages/Cases'));

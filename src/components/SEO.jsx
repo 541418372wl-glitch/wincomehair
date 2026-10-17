@@ -207,8 +207,9 @@ export function getSeoMeta(pathname) {
     const pm = productMeta[id];
     if (pm) {
       meta = {
-        title: `Custom ${pm.name} Manufacturer | WINCOME`,
-        description: buildProductDescription(pm, id),
+        title: pm.seoTitle || `Custom ${pm.name} Manufacturer | WINCOME`,
+        description: pm.seoDescription || buildProductDescription(pm, id),
+        ...(pm.image ? { image: `${SITE}${pm.image}` } : {}),
       };
     }
   }

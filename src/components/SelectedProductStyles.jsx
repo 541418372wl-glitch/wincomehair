@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { selectedProductStyles } from '../data/selectedProductStyles';
+import { selectedProductStyles, selectedProductPath, selectedProductInquiryPath } from '../data/selectedProductStyles';
 
 function StyleFacts({ rows }) {
   return (
@@ -49,13 +49,13 @@ function SelectedStyleCard({ product, number }) {
 
   return (
     <article id={`selection-${product.id}`} className="selected-style-card">
-      <div className="selected-style-photo">
+      <Link to={selectedProductPath(product)} className="selected-style-photo" aria-label={`View ${product.title}`}>
         <img src={product.image} alt={product.alt} width={product.imageWidth} height={product.imageHeight} loading="lazy" decoding="async" />
         <span className="selected-style-number" aria-hidden="true">{String(number).padStart(2, '0')}</span>
-      </div>
+      </Link>
       <div className="selected-style-copy">
         <p className="selected-style-label">{product.tag}</p>
-        <h3>{product.title}</h3>
+        <h3><Link to={selectedProductPath(product)}>{product.title}</Link></h3>
         <p className="selected-style-intro">{product.intro}</p>
         <StyleFacts rows={product.facts} />
         <button type="button" className="selected-style-open" onClick={openSpecifications} aria-haspopup="dialog" aria-controls={`selected-style-dialog-${product.id}`} aria-label={`View specifications for ${product.title}`}>
@@ -83,6 +83,8 @@ function SelectedStyleCard({ product, number }) {
             ) : null}
             {product.care ? <><h3>Care instructions</h3><p>{product.care}</p></> : null}
             {product.note ? <p className="selected-style-note">{product.note}</p> : null}
+            <Link to={selectedProductPath(product)} className="btn-outline" onClick={() => dialogRef.current.close()}>Full product details →</Link>
+            <Link to={selectedProductInquiryPath(product)} className="selected-style-inquire" onClick={() => dialogRef.current.close()}>Ask about this product →</Link>
           </div>
         </div>
       </dialog>

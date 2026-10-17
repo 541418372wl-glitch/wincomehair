@@ -3,7 +3,7 @@ import { categoryMap, categoryProducts, productCategories } from '../data/produc
 import { productCategoryContent } from '../data/productCategoryContent';
 import { ORGANIZATION_ID, SITE, WEBSITE_ID } from '../components/SEO';
 import SelectedProductStyles from '../components/SelectedProductStyles';
-import { selectedProductStyles } from '../data/selectedProductStyles';
+import { selectedProductStyles, selectedProductPath } from '../data/selectedProductStyles';
 
 function ProductCard({ product }) {
   return (
@@ -55,7 +55,7 @@ export default function ProductCategory() {
   const url = SITE + '/products/category/' + category;
   const selection = selectedProductStyles[category];
   const listedItems = [
-    ...(selection?.items || []).map(product => ({ name: product.title, url: `${url}#selection-${product.id}` })),
+    ...(selection?.items || []).map(product => ({ name: product.title, url: SITE + selectedProductPath(product) })),
     ...items.map(product => ({ name: product.name, url: SITE + '/products/' + product.id })),
   ];
   const jsonLd = {

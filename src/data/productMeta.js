@@ -1,7 +1,15 @@
 // Lightweight product meta data for SEO — kept separate from ProductDetail.jsx
 // to avoid the static-import / dynamic-import conflict with Vite chunking.
 
+import { selectedProducts } from './selectedProductStyles.js';
+
 export const productMeta = {
+  ...Object.fromEntries(selectedProducts.map(product => [product.slug, {
+    name: product.title,
+    seoTitle: `${product.title} | WINCOME`,
+    seoDescription: `${product.intro} View product specifications and discuss your order with WINCOME.`,
+    image: product.image,
+  }])),
   'claw-acetate':     { name: 'Acetate Hair Claw Clips',           material: 'Cellulose Acetate',  moq: '1,000 pcs', leadTime: '12-15 days', description: 'Premium cellulose acetate hair claw clips with spring-loaded mechanism. Available in 20+ custom colors and 3 sizes. Ideal for fashion brands, boutique retailers, and beauty subscription boxes.' },
   'claw-metal':       { name: 'Metal Hair Claw Clips',             material: 'Zinc Alloy',          moq: '1,000 pcs', leadTime: '15-18 days', description: 'Durable zinc alloy hair claw clips with electroplated finishes and stainless steel springs. A premium metal option for fashion brands and boutiques that want lasting hold with a metallic look.' },
   'claw-plastic':     { name: 'Plastic Hair Claws',                material: 'ABS Plastic',         moq: '1,000 pcs', leadTime: '10-14 days', description: 'ABS plastic hair claws for budget-friendly lines. Fast injection molding, lightweight, impact-resistant and available in any color.' },
