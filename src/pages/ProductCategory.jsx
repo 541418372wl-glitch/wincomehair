@@ -94,7 +94,7 @@ export default function ProductCategory() {
     <div>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <section className="container-site pb-14 pt-12 md:pb-20 md:pt-20">
-        <p className="section-label">Factory-Direct Product Category</p>
+        <p className="section-label">{content.eyebrow || 'Factory-Direct Product Category'}</p>
         <h1 className="max-w-4xl text-display-lg leading-tight text-navy">{data.title}</h1>
         <p className="mt-6 max-w-3xl text-lg leading-relaxed text-tan">{data.intro}</p>
         <p className="mt-4 max-w-3xl leading-relaxed text-bronze/80">{content.positioning}</p>
@@ -260,7 +260,7 @@ export default function ProductCategory() {
 
       <section className="container-site section-gap">
         <p className="section-label">Category FAQ</p>
-        <h2 className="mb-8 text-display-md text-navy">Questions Buyers Ask</h2>
+        <h2 className="mb-8 text-display-md text-navy">{content.faqTitle || 'Questions Buyers Ask'}</h2>
         <div className="max-w-3xl space-y-3">
           {data.faq.map(item => (
             <details key={item.q} className="group border border-bronze/10 bg-white open:border-bronze/25">

@@ -76,7 +76,9 @@ export const productCategoryContent = {
     ],
   },
   scrunchies: {
-    positioning: 'Custom scrunchie programs for beauty, sleep, fashion and gift brands, with control over fabric, fullness, elastic, labels and packaging.',
+    eyebrow: 'Wholesale Scrunchie Sourcing',
+    positioning: 'Custom programs are listed separately; their minimums do not automatically apply to the selected styles. Confirm availability, order quantities and delivery timing for your selection.',
+    faqTitle: 'Questions About Custom Scrunchie Programs',
     facts: [
       { label: 'Starting MOQ', value: '200 pcs', note: 'Selected silk designs' },
       { label: 'Production', value: '8–12 days', note: 'After sample approval' },

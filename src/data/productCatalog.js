@@ -74,10 +74,10 @@ export const productCategories = [
   {
     slug: 'scrunchies',
     shortName: 'Scrunchies',
-    title: 'Custom Scrunchies Manufacturer',
-    seoTitle: 'Custom Scrunchies Manufacturer & Supplier | WINCOME',
-    description: 'Custom silk, satin, velvet and cotton scrunchies for brands and wholesalers. Private-label sizes, colors, logos and packaging. MOQ from 200 pieces.',
-    intro: 'WINCOME manufactures private-label scrunchies in mulberry silk, satin, velvet and cotton. Brands can customize fabric weight, finished diameter, elastic tension, fullness, stitching, labels and packaging for everyday, premium, gift and seasonal collections.',
+    title: 'Wholesale Scrunchies for Retailers and Brands',
+    seoTitle: 'Wholesale Scrunchies: Silk, Satin & Fabric | WINCOME',
+    description: 'Compare silk, polyester satin and fabric scrunchies for wholesale sourcing. Review sizes and materials, then request availability and a quote.',
+    intro: 'Compare scrunchie styles by fabric, finished size and decorative detail. Start with the selected styles below, then send your preferred colors, quantities and destination for an availability check and quote.',
     buyerNotes: [
       'Mulberry silk and satin for smooth premium or sleep-focused positioning.',
       'Velvet and layered constructions for fuller seasonal statement products.',
