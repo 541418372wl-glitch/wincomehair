@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { build } from 'esbuild';
 import { JSDOM } from 'jsdom';
+import { selectedProducts } from '../src/data/selectedProductStyles.js';
 
 // No external resources are loaded. Every API and widget call is simulated.
 const originalFetch = globalThis.fetch;
@@ -58,7 +59,7 @@ async function harness({ siteKey = 'offline-unit-test-sitekey', hostname = 'winc
   const bundle = await build({
     stdin: {
       contents: 'import { h, render } from "preact"; import Contact from "./src/pages/Contact.jsx"; import InquiryChallenge from "./src/components/InquiryChallenge.jsx";'
-        + 'export const mount = () => render(h(Contact), document.getElementById("root"));'
+        + 'export const mount = (props = {}) => render(h(Contact, props), document.getElementById("root"));'
         + 'export const mountChallenge = props => render(h(InquiryChallenge, props), document.getElementById("root"));'
         + 'export const unmount = () => render(null, document.getElementById("root"));'
         + 'export const sequence = ' + ++bundleSequence + ';',
@@ -274,6 +275,42 @@ for (const options of [{ siteKey: '' }, { siteKey: '1x00000000000000000000AA' },
     assert.equal(test.pendingScripts.length, 0);
     test.submit(); await flush();
     assert.equal(test.requests.length, 0);
+  } finally { test.cleanup(); }
+}
+
+// Product context reaches the existing message field without changing the API.
+// All requests below use the harness's in-memory fetch mock, never the network.
+for (const product of selectedProducts) {
+  const test = await harness();
+  try {
+    test.app.mount({ selectedProduct: product }); await flush();
+    assert.equal(document.getElementById('productType').value, product.category);
+    assert.match(document.querySelector('.selected-inquiry-summary').textContent, new RegExp(product.title));
+    const whatsapp = new URL(document.querySelector('[data-analytics-location="contact_primary"]').href);
+    assert.ok(whatsapp.searchParams.get('text').includes(product.title));
+    await test.input('quantity', 'sample-stock-below-moq');
+    test.submit(); await flush();
+    await test.input('message', 'Please confirm colors and delivery timing.');
+    test.submit(); await flush();
+    await test.input('name', 'Offline QA');
+    await test.input('email', 'offline@example.invalid');
+    await test.loadScript(); await test.verify();
+    test.submit();
+    assert.equal(test.requests.length, 1);
+    const { record } = JSON.parse(test.requests[0].options.body);
+    assert.equal(record.product_type, product.category);
+    assert.equal(record.message, `Product: ${product.title}\nProduct page: https://wincomehair.com/products/${product.slug}\n\nPlease confirm colors and delivery timing.`);
+    await test.respond(accepted('44444444-4444-4444-8444-444444444444'));
+  } finally { test.cleanup(); }
+}
+for (const clearBy of ['remove', 'category']) {
+  const test = await harness();
+  try {
+    test.app.mount({ selectedProduct: selectedProducts[0] }); await flush();
+    if (clearBy === 'remove') await test.clickText('Remove product selection');
+    else await test.input('productType', 'headbands');
+    assert.equal(document.querySelector('.selected-inquiry-summary'), null);
+    assert.ok(!new URL(document.querySelector('[data-analytics-location="contact_primary"]').href).searchParams.get('text').includes(selectedProducts[0].title));
   } finally { test.cleanup(); }
 }
 

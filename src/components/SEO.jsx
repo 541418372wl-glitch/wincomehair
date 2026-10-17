@@ -84,7 +84,7 @@ const pageMeta = {
   },
   '/products': {
     title: 'Wholesale Hair Accessories Catalog | WINCOME',
-    description: 'Browse 29 wholesale hair accessories with category-specific production MOQs. Custom materials, colors, logos and packaging for brands and importers.',
+    description: 'Browse 34 hair accessories, including selected scrunchies and fabric headbands. Compare product specifications and discuss order requirements.',
   },
   '/customization': {
     title: 'Custom Hair Accessories OEM & Private Label | WINCOME',
@@ -207,8 +207,9 @@ export function getSeoMeta(pathname) {
     const pm = productMeta[id];
     if (pm) {
       meta = {
-        title: `Custom ${pm.name} Manufacturer | WINCOME`,
-        description: buildProductDescription(pm, id),
+        title: pm.seoTitle || `Custom ${pm.name} Manufacturer | WINCOME`,
+        description: pm.seoDescription || buildProductDescription(pm, id),
+        ...(pm.image ? { image: `${SITE}${pm.image}` } : {}),
       };
     }
   }

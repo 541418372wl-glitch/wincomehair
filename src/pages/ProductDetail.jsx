@@ -2,6 +2,8 @@ import { useParams, Link } from 'react-router-dom';
 import { waLink } from '../lib/whatsapp';
 import { trackProductInquiry } from '../lib/analytics';
 import { products as catalogProducts, categoryMap } from '../data/productCatalog';
+import { findSelectedProduct } from '../data/selectedProductStyles';
+import SelectedProductDetail from './SelectedProductDetail';
 
 const products = {
   'claw-acetate': {
@@ -414,6 +416,8 @@ const products = {
 
 export default function ProductDetail() {
   const { id } = useParams();
+  const selectedProduct = findSelectedProduct(id);
+  if (selectedProduct) return <SelectedProductDetail product={selectedProduct} />;
   const product = products[id];
 
   if (!product) {

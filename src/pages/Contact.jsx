@@ -33,7 +33,8 @@ const CUSTOM_MOQ_BY_PRODUCT_TYPE = {
   },
 };
 
-export default function Contact() {
+export default function Contact({ selectedProduct = null }) {
+  const [inquiryProduct, setInquiryProduct] = useState(selectedProduct);
   const [step, setStep] = useState(1);
   const [submitting, setSubmitting] = useState(false);
   const submissionInFlight = useRef(false);
@@ -46,15 +47,18 @@ export default function Contact() {
   const [formStartedAt] = useState(() => Date.now());
   const [form, setForm] = useState({
     name: '', company: '', email: '', phone: '',
-    productType: '', quantity: '', material: '', logoPlacement: '',
+    productType: selectedProduct?.category || '', quantity: '', material: '', logoPlacement: '',
     dimensions: '', message: '', targetMarket: '', timeline: '', website: '',
   });
 
-  const update = (field, value) => setForm(prev => ({
-    ...prev,
-    [field]: value,
-    ...(field === 'productType' ? { quantity: '' } : {}),
-  }));
+  const update = (field, value) => {
+    if (field === 'productType' && value !== inquiryProduct?.category) setInquiryProduct(null);
+    setForm(prev => ({
+      ...prev,
+      [field]: value,
+      ...(field === 'productType' ? { quantity: '' } : {}),
+    }));
+  };
   const activeMoqPolicy = CUSTOM_MOQ_BY_PRODUCT_TYPE[form.productType];
   const quantityOptions = activeMoqPolicy?.options || DEFAULT_QUANTITY_OPTIONS;
   const updateVerificationToken = useCallback((token) => {
@@ -92,7 +96,9 @@ export default function Contact() {
       target_market: form.targetMarket || null,
       timeline: form.timeline || null,
       dimensions: form.dimensions || null,
-      message: form.message || null,
+      message: inquiryProduct
+        ? `Product: ${inquiryProduct.title}\nProduct page: https://wincomehair.com/products/${inquiryProduct.slug}\n\n${form.message}`.trim()
+        : form.message || null,
       form_fill_time_ms: Date.now() - formStartedAt,
     };
 
@@ -161,7 +167,9 @@ export default function Contact() {
               Average reply within 1–2 hours on WhatsApp — much faster than email. Send your product idea, quantity and reference photos and get an instant first response.
             </p>
             <a
-              href={waLink('Hello WINCOME, I would like to discuss a custom hair accessories project. Can we chat?')}
+              href={waLink(inquiryProduct
+                ? `Hello WINCOME, I would like to ask about ${inquiryProduct.title}. https://wincomehair.com/products/${inquiryProduct.slug}`
+                : 'Hello WINCOME, I would like to discuss a custom hair accessories project. Can we chat?')}
               target="_blank"
               rel="noopener noreferrer"
               data-analytics-location="contact_primary"
@@ -206,6 +214,12 @@ export default function Contact() {
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="bg-white p-5 sm:p-8 md:p-16 border border-bronze/10">
+              {inquiryProduct ? <div className="selected-inquiry-summary">
+                <p>Product inquiry</p>
+                <strong>{inquiryProduct.title}</strong>
+                <p>This product name and page link will be included with your request.</p>
+                <button type="button" onClick={() => setInquiryProduct(null)}>Remove product selection</button>
+              </div> : null}
               {step === 1 && (
                 <div className="space-y-8">
                   <div>
