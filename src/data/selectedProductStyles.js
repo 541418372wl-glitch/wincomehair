@@ -211,7 +211,45 @@ selectedProductStyles['hair-claw-clips'] = {
   ],
 };
 
+selectedProductStyles['hair-bows'] = {
+  title: 'Selected Bow Clip Styles',
+  intro: 'Compare textured long tails, a velvet finish and a shorter double-layer bow, with individual product details and inquiry options.',
+  items: [
+    {
+      id: 'texturedBow', group: 'Hair bows', title: 'Textured Long-Tail Bow Barrette',
+      tag: 'TEXTURED FABRIC · LONG TAILS',
+      alt: 'Khaki textured fabric bow with two long tails on a white background',
+      intro: 'A textured fabric bow with long tails and a spring-barrette fastening.',
+      facts: [['Material', 'Fabric'], ['Fastening', 'Spring barrette'], ['Approx. bow dimensions', '15 cm wide × 25 cm long']],
+      details: 'The layered loops and long tails create an elongated shape. The khaki product photograph shows the visible fabric texture and pointed tail ends.',
+      note: 'The dimensions describe the finished bow, including the tails, not the metal barrette. Measurements are manual and may vary slightly.',
+      image: '/assets/images/selected-textured-long-tail-bow.webp', imageWidth: 1886, imageHeight: 1886,
+    },
+    {
+      id: 'velvetBow', group: 'Hair bows', title: 'Long-Tail Velvet Bow Hair Clip',
+      tag: 'VELVET FINISH · LONG TAILS',
+      alt: 'Plain red velvet bow hair clip with long tails on a white background',
+      intro: 'A polyester velvet bow with long tails and a duckbill clip, shown in red.',
+      facts: [['Fabric', 'Polyester velvet'], ['Fastening', 'Duckbill clip'], ['Selected colors', 'Red · Black']],
+      details: 'This selection is the plain long-tail bow without added ornaments. Compare its velvet surface with the textured fabric and shorter double-layer styles.',
+      image: '/assets/images/selected-long-tail-velvet-bow.webp', imageWidth: 800, imageHeight: 800,
+    },
+    {
+      id: 'layeredBow', group: 'Hair bows', title: 'Double-Layer Short-Tail Bow Hair Clip',
+      tag: 'LAYERED LOOPS · SHORT TAILS',
+      alt: 'Black double-layer fabric bow hair clip held against a white background',
+      intro: 'A double-layer fabric bow with short tails and a duckbill clip.',
+      facts: [['Material', 'Fabric'], ['Fastening', 'Duckbill clip'], ['Shape', 'Double-layer bow with short tails']],
+      details: 'The layered loops and shorter tails create a compact silhouette compared with the long-tail selections. The black photograph shows the fabric sheen and folded shape.',
+      image: '/assets/images/selected-double-layer-short-tail-bow.webp', imageWidth: 687, imageHeight: 687,
+    },
+  ],
+};
+
 const detailSlugs = {
+  texturedBow: 'textured-long-tail-bow-barrette',
+  velvetBow: 'long-tail-velvet-bow-hair-clip',
+  layeredBow: 'double-layer-short-tail-bow-hair-clip',
   oversized: 'oversized-polyester-scrunchie',
   silk: 'mulberry-silk-scrunchie',
   rhinestone: 'rhinestone-satin-scrunchie',
@@ -239,5 +277,6 @@ export function selectedProductInquiryPath(product) {
 }
 
 export function selectedProductInquiryCategory(product) {
-  return product?.category === 'hair-claw-clips' ? 'claw-clips' : product?.category || '';
+  const inquiryCategories = { 'hair-claw-clips': 'claw-clips', 'hair-bows': 'bows' };
+  return inquiryCategories[product?.category] || product?.category || '';
 }

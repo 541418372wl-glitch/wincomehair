@@ -6,8 +6,8 @@ import { selectedProductBuyingGuide } from '../data/selectedProductBuyingGuide';
 export default function SelectedProductDetail({ product }) {
   const related = selectedProducts.filter(item => item.category === product.category && item.id !== product.id);
   const guide = selectedProductBuyingGuide[product.id];
-  const categoryLabel = { scrunchies: 'Scrunchies', headbands: 'Soft Fabric Headbands', 'hair-claw-clips': 'Claw Clips' }[product.category];
-  const comparisonLabel = { scrunchies: 'scrunchies', headbands: 'fabric headbands', 'hair-claw-clips': 'claw clips' }[product.category];
+  const categoryLabel = { scrunchies: 'Scrunchies', headbands: 'Soft Fabric Headbands', 'hair-claw-clips': 'Claw Clips', 'hair-bows': 'Hair Bows' }[product.category];
+  const comparisonLabel = { scrunchies: 'scrunchies', headbands: 'fabric headbands', 'hair-claw-clips': 'claw clips', 'hair-bows': 'bow clips' }[product.category];
   return (
     <div className="container-site selected-product-page">
       <a className="selected-product-back" href={`/products/category/${product.category}#selected-styles`}>← Back to {categoryLabel}</a>

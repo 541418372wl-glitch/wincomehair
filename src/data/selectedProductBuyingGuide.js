@@ -1,5 +1,38 @@
 // Product-specific buying guidance based on the approved specifications.
 export const selectedProductBuyingGuide = {
+  texturedBow: {
+    advice: [
+      'Compare the 15 cm bow width and 25 cm overall length together when planning a long-tail silhouette for your assortment.',
+      'Review the fabric texture and spring-barrette fastening alongside the velvet and short-tail options. Assess a sample in the intended hairstyle before confirming fit.',
+    ],
+    faq: [
+      { question: 'Does 15 × 25 cm describe the bow or the clip?', answer: 'It describes the finished bow: approximately 15 cm wide and 25 cm long including the tails. It is not the length of the metal barrette. Manual measurements may vary slightly.' },
+      { question: 'How does this style fasten?', answer: 'This bow uses a spring barrette on the back. Compare the closure and ribbon attachment on a sample with the hairstyle you intend to use.' },
+      { question: 'What should I include in a wholesale inquiry?', answer: 'Reference the Textured Long-Tail Bow Barrette and include preferred colors, quantity, destination and required delivery date. Availability, minimum quantities and delivery timing are confirmed for your selection.' },
+    ],
+  },
+  velvetBow: {
+    advice: [
+      'Choose this direction when you want a velvet surface and long tails alongside the smoother-looking double-layer bow.',
+      'Specify red or black and the plain, unembellished design in your request so that the selected style is clear.',
+    ],
+    faq: [
+      { question: 'What fabric and fastening does this bow use?', answer: 'This selected style uses polyester velvet and a duckbill clip. The photograph shows the plain red long-tail version.' },
+      { question: 'Does this selection include rhinestones or a flower ornament?', answer: 'No. This product selection is the plain long-tail design in red or black. The pictured style has no added rhinestone or flower decoration.' },
+      { question: 'What should I provide for a bulk order quote?', answer: 'Reference the Long-Tail Velvet Bow Hair Clip, your preferred red or black selection, quantity, destination and required delivery date. Include any size requirements so we can review the product and order details with you.' },
+    ],
+  },
+  layeredBow: {
+    advice: [
+      'Compare the shorter tails and layered loops with the two long-tail styles when choosing a mix of bow silhouettes.',
+      'Use the black photograph to review the folded shape. Confirm the preferred color and assess a sample with your intended hairstyle before ordering.',
+    ],
+    faq: [
+      { question: 'How does this bow differ from the long-tail styles?', answer: 'It has a double-layer loop arrangement with shorter tails, giving a more compact silhouette than the textured long-tail barrette or velvet long-tail clip.' },
+      { question: 'Which fastening is listed for this style?', answer: 'This fabric bow uses a duckbill clip. Review the clip closure and attachment on a sample before confirming suitability for your intended use.' },
+      { question: 'How can I request this specific product?', answer: 'Reference the Double-Layer Short-Tail Bow Hair Clip and share your preferred color, quantity, destination and required delivery date. Include any size requirements; availability and order terms are confirmed for this selection.' },
+    ],
+  },
   crossedClaw: {
     advice: [
       'Consider this 13 cm style when selecting a long, crossed silhouette. Compare its profile with the shorter rounded PC style.',
