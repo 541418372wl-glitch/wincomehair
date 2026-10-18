@@ -16,7 +16,7 @@
     "test:geo": "node scripts/check-ai-discovery.mjs",
     "test:repo-governance": "node scripts/check-repository-governance.mjs",
     "submit:indexnow": "node scripts/submit-indexnow.mjs",
-    "test": "node scripts/check-repository-governance.mjs && node scripts/check-moq-consistency.mjs && node scripts/test-inquiry.mjs && node scripts/test-csp-report.mjs && node scripts/test-privacy-analytics.mjs && node scripts/test-ai-referral.mjs && node scripts/test-analytics-lifecycle.mjs && node scripts/test-ui-flows.mjs && node scripts/test-seo-navigation.mjs && node scripts/test-render-stream.mjs",
+    "test": "node scripts/check-repository-governance.mjs && node scripts/check-moq-consistency.mjs && node scripts/test-inquiry.mjs && node scripts/test-csp-report.mjs && node scripts/test-privacy-analytics.mjs && node scripts/test-ai-referral.mjs && node scripts/test-analytics-lifecycle.mjs && node scripts/test-ui-flows.mjs && node scripts/test-seo-navigation.mjs && node scripts/test-related-articles.mjs && node scripts/test-render-stream.mjs",
     "preview": "vite preview",
     "test:analytics-lifecycle": "node scripts/test-analytics-lifecycle.mjs",
     "test:ui": "node scripts/test-ui-flows.mjs",

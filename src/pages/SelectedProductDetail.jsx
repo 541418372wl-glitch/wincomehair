@@ -8,7 +8,7 @@ export default function SelectedProductDetail({ product }) {
   const guide = selectedProductBuyingGuide[product.id];
   return (
     <div className="container-site selected-product-page">
-      <Link className="selected-product-back" to={`/products/category/${product.category}#selected-styles`}>← Back to {product.category === 'scrunchies' ? 'Scrunchies' : 'Soft Fabric Headbands'}</Link>
+      <a className="selected-product-back" href={`/products/category/${product.category}#selected-styles`}>← Back to {product.category === 'scrunchies' ? 'Scrunchies' : 'Soft Fabric Headbands'}</a>
       <div className="selected-product-layout">
         <div className="selected-product-image">
           <img src={product.image} alt={product.alt} width={product.imageWidth} height={product.imageHeight} fetchpriority="high" />
