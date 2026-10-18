@@ -1,6 +1,7 @@
 import { Link, useParams, useLocation } from 'react-router-dom';
 import { articles } from '../data/articles';
 import { buyerDecisionClusters } from '../data/buyerDecisionClusters';
+import { selectRelatedArticles } from '../data/relatedArticles';
 import { waLink } from '../lib/whatsapp';
 import { ORGANIZATION_ID, SITE, WEBSITE_ID } from '../components/SEO';
 
@@ -190,17 +191,7 @@ export default function BlogPost() {
   };
 
   const cluster = post.decisionCluster ? buyerDecisionClusters[post.decisionCluster] : null;
-  const clusterRelated = cluster
-    ? cluster.steps
-      .filter(step => step.slug !== post.slug)
-      .map(step => articleBySlug.get(step.slug))
-      .filter(Boolean)
-    : [];
-  const relatedSlugs = new Set(clusterRelated.map(article => article.slug));
-  const related = [
-    ...clusterRelated,
-    ...articles.filter(article => article.slug !== post.slug && !relatedSlugs.has(article.slug)),
-  ].slice(0, 3);
+  const related = selectRelatedArticles(articles, post.slug, cluster?.steps.map(step => step.slug));
 
   return (
     <div>
