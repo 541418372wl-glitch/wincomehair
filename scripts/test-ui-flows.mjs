@@ -284,7 +284,7 @@ for (const product of selectedProducts) {
   const test = await harness();
   try {
     test.app.mount({ selectedProduct: product }); await flush();
-    const expectedCategory = product.category === 'hair-claw-clips' ? 'claw-clips' : product.category;
+    const expectedCategory = { 'hair-claw-clips': 'claw-clips', 'hair-bows': 'bows' }[product.category] || product.category;
     assert.equal(document.getElementById('productType').value, expectedCategory);
     assert.ok(!document.querySelector('form').textContent.includes('Custom production MOQ:'));
     assert.match(document.querySelector('.selected-inquiry-summary').textContent, new RegExp(product.title));
