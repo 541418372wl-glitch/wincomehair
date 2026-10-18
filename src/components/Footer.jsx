@@ -65,7 +65,7 @@ export default function Footer() {
             <Link to="/privacy" className="text-white/60 hover:text-gold transition-colors duration-200">Privacy Policy</Link>
             <Link to="/terms" className="text-white/60 hover:text-gold transition-colors duration-200">Terms</Link>
             <button type="button" onClick={openConsentPreferences} className="text-white/60 hover:text-gold transition-colors duration-200">Cookie Settings</button>
-            <a href="mailto:angelasmithuk8@gmail.com" className="text-white/60 hover:text-gold transition-colors duration-200">angelasmithuk8@gmail.com</a>
+            <a href="mailto:info@wincomehair.com" className="text-white/60 hover:text-gold transition-colors duration-200">info@wincomehair.com</a>
             <a
               href={waLink('Hello WINCOME, I would like to inquire about your custom hair accessories. Can we chat?')}
               target="_blank"

@@ -195,7 +195,7 @@ export default function ManufacturerProfile() {
             <p className="section-label">Contact</p>
             <h2 className="text-display-md text-navy">Send a Complete Product Brief</h2>
             <p className="mt-5 leading-relaxed text-tan">
-              Email <a href="mailto:angelasmithuk8@gmail.com" className="font-medium text-navy underline underline-offset-4">angelasmithuk8@gmail.com</a>, WhatsApp +86 156 5801 3186, or use the quotation form. Include quantity, materials, branding, packaging, destination and target date.
+              Email <a href="mailto:info@wincomehair.com" className="font-medium text-navy underline underline-offset-4">info@wincomehair.com</a>, WhatsApp +86 156 5801 3186, or use the quotation form. Include quantity, materials, branding, packaging, destination and target date.
             </p>
             <Link to="/contact" className="btn-primary mt-8 px-10 py-4">Start a Quote Request <span aria-hidden="true">→</span></Link>
           </div>
