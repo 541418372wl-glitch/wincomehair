@@ -12,7 +12,7 @@ export default function Privacy() {
         <div className="space-y-8 text-tan leading-relaxed text-base">
           <section>
             <h2 className="text-display-sm text-navy mb-3">1. Who Controls Your Data</h2>
-            <p>Hangzhou Superwhale Technology Co., Ltd., trading as WINCOME Hair Accessories, is the controller of personal data collected through wincomehair.com. Privacy requests can be sent to <a href="mailto:angelasmithuk8@gmail.com" className="text-gold underline">angelasmithuk8@gmail.com</a>.</p>
+            <p>Hangzhou Superwhale Technology Co., Ltd., trading as WINCOME Hair Accessories, is the controller of personal data collected through wincomehair.com. Privacy requests can be sent to <a href="mailto:info@wincomehair.com" className="text-gold underline">info@wincomehair.com</a>.</p>
           </section>
 
           <section>
@@ -75,12 +75,12 @@ export default function Privacy() {
 
           <section>
             <h2 className="text-display-sm text-navy mb-3">7. Your Choices & Rights</h2>
-            <p>Depending on your location, you may have rights to access, correct, delete, restrict, object to, or obtain a copy of your personal data, and to withdraw consent. Email <a href="mailto:angelasmithuk8@gmail.com" className="text-gold underline">angelasmithuk8@gmail.com</a> to make a request. You may also complain to your local data protection authority.</p>
+            <p>Depending on your location, you may have rights to access, correct, delete, restrict, object to, or obtain a copy of your personal data, and to withdraw consent. Email <a href="mailto:info@wincomehair.com" className="text-gold underline">info@wincomehair.com</a> to make a request. You may also complain to your local data protection authority.</p>
           </section>
 
           <section>
             <h2 className="text-display-sm text-navy mb-3">8. Updates & Contact</h2>
-            <p>We may update this policy when our services or legal obligations change and will post the revised date above. Contact: WINCOME Hair Accessories / Hangzhou Superwhale Technology Co., Ltd.; email <a href="mailto:angelasmithuk8@gmail.com" className="text-gold underline">angelasmithuk8@gmail.com</a>; WhatsApp +86 156 5801 3186.</p>
+            <p>We may update this policy when our services or legal obligations change and will post the revised date above. Contact: WINCOME Hair Accessories / Hangzhou Superwhale Technology Co., Ltd.; email <a href="mailto:info@wincomehair.com" className="text-gold underline">info@wincomehair.com</a>; WhatsApp +86 156 5801 3186.</p>
           </section>
 
           <p className="pt-4"><Link to="/terms" className="text-gold underline">View Terms of Service</Link></p>
