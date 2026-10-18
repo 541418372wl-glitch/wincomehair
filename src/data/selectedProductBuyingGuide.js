@@ -1,5 +1,38 @@
 // Product-specific buying guidance based on the approved specifications.
 export const selectedProductBuyingGuide = {
+  crossedClaw: {
+    advice: [
+      'Consider this 13 cm style when selecting a long, crossed silhouette. Compare its profile with the shorter rounded PC style.',
+      'For a buyer assortment, identify the preferred color and intended hairstyle, then assess a sample before confirming fit or hold claims.',
+    ],
+    faq: [
+      { question: 'Is this clip acrylic or cellulose acetate?', answer: 'This selected style is acrylic. It should not be described as cellulose acetate; the material specification applies to this product rather than to every claw clip in the category.' },
+      { question: 'What does the 13 cm measurement describe?', answer: 'It is the listed clip length. It does not describe the jaw opening or determine how much hair the clip can hold. Compare the shape and assess a sample for your intended hairstyle.' },
+      { question: 'What should I include in a bulk order inquiry?', answer: 'Reference the Long Crossed Acrylic Claw Clip, with preferred colors, quantity, destination and required delivery date. Availability, minimum order quantities and delivery timing are confirmed for this selection.' },
+    ],
+  },
+  roundedClaw: {
+    advice: [
+      'Compare this 9.5 cm long rounded shape with the longer crossed style when planning a choice of silhouettes for your assortment.',
+      'Use the transparent blue photograph to assess the shell and tooth shape. Sample the clip with the intended hairstyle before making a holding-performance claim.',
+    ],
+    faq: [
+      { question: 'What does PC mean for this claw clip?', answer: 'PC means polycarbonate, the listed material for this style. The product has a rounded shell and rounded teeth, shown in transparent blue.' },
+      { question: 'Are 9.5 × 5 × 4 cm the product or packaging dimensions?', answer: 'They are the listed overall product dimensions; 4 cm is the marked thickness. They do not specify jaw opening or establish suitability for fine or thick hair.' },
+      { question: 'How do I request a wholesale quote?', answer: 'Reference the Medium Rounded PC Claw Clip and share preferred colors, quantity, destination and required delivery date. We will confirm the available selection and its order terms before you order.' },
+    ],
+  },
+  openworkClaw: {
+    advice: [
+      'Consider the arched openwork shape when adding a more rounded silhouette alongside a long crossed clip.',
+      'Compare the full 11 × 7 × 5.5 cm dimensions, not length alone, when planning the product presentation and assessing samples.',
+    ],
+    faq: [
+      { question: 'What material and construction are shown?', answer: 'This style is ABS, with spaced outer ribs forming an arched openwork shape. The product photograph shows the red option.' },
+      { question: 'What size is the finished clip?', answer: 'The product dimension diagram lists 11 × 7 × 5.5 cm. These are overall product dimensions, rather than packaging measurements or a measure of hair-holding capacity.' },
+      { question: 'What should I provide for an order inquiry?', answer: 'Reference the Openwork ABS Claw Clip and include preferred colors, quantity, destination and required delivery date. Availability, minimum order quantities and timing are confirmed for your request.' },
+    ],
+  },
   oversized: {
     advice: [
       'Compare the regular fabric option for a smaller gathered silhouette with the larger satin option for a more prominent accessory.',

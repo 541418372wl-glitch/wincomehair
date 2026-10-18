@@ -44,7 +44,7 @@ export default function Products() {
         </p>
 
         <p className="section-label">Custom Program Reference</p>
-        <p className="text-sm text-tan leading-relaxed mb-4">The program references below apply to existing custom production directions. Confirm separate order terms for the selected scrunchie and fabric headband styles.</p>
+        <p className="text-sm text-tan leading-relaxed mb-4">The program references below apply to existing custom production directions. Confirm separate order terms for the selected product styles.</p>
         <div className="mb-12 grid grid-cols-2 border border-bronze/10 bg-white md:grid-cols-4" aria-label="Wholesale program facts">
           {[
             ['By category', 'Custom MOQ'],

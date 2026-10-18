@@ -284,7 +284,9 @@ for (const product of selectedProducts) {
   const test = await harness();
   try {
     test.app.mount({ selectedProduct: product }); await flush();
-    assert.equal(document.getElementById('productType').value, product.category);
+    const expectedCategory = product.category === 'hair-claw-clips' ? 'claw-clips' : product.category;
+    assert.equal(document.getElementById('productType').value, expectedCategory);
+    assert.ok(!document.querySelector('form').textContent.includes('Custom production MOQ:'));
     assert.match(document.querySelector('.selected-inquiry-summary').textContent, new RegExp(product.title));
     const whatsapp = new URL(document.querySelector('[data-analytics-location="contact_primary"]').href);
     assert.ok(whatsapp.searchParams.get('text').includes(product.title));
@@ -298,7 +300,7 @@ for (const product of selectedProducts) {
     test.submit();
     assert.equal(test.requests.length, 1);
     const { record } = JSON.parse(test.requests[0].options.body);
-    assert.equal(record.product_type, product.category);
+    assert.equal(record.product_type, expectedCategory);
     assert.equal(record.message, `Product: ${product.title}\nProduct page: https://wincomehair.com/products/${product.slug}\n\nPlease confirm colors and delivery timing.`);
     await test.respond(accepted('44444444-4444-4444-8444-444444444444'));
   } finally { test.cleanup(); }

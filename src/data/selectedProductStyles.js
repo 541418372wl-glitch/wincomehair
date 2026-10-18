@@ -174,12 +174,52 @@ export const selectedProductStyles = {
   }
 };
 
+selectedProductStyles['hair-claw-clips'] = {
+  title: 'Selected Claw Clip Styles',
+  intro: 'Compare three distinct shapes in acrylic, polycarbonate and ABS, with product dimensions to guide your selection.',
+  items: [
+    {
+      id: 'crossedClaw', group: 'Claw clips', title: 'Long Crossed Acrylic Claw Clip',
+      tag: 'LONG SHAPE · CROSSED DESIGN',
+      alt: 'Clear acrylic claw clip with a long curved crossed design on a white background',
+      intro: 'A long acrylic claw clip with a curved, crossed silhouette.',
+      facts: [['Material', 'Acrylic'], ['Listed length', '13 cm']],
+      details: 'The crossed outer shape creates an elongated profile. Compare the listed product length with the silhouette you want for your assortment.',
+      note: 'The listed length describes the clip, not the jaw opening or the volume of hair it will hold.',
+      image: '/assets/images/selected-long-crossed-acrylic-claw.webp', imageWidth: 800, imageHeight: 800,
+    },
+    {
+      id: 'roundedClaw', group: 'Claw clips', title: 'Medium Rounded PC Claw Clip',
+      tag: 'MEDIUM SIZE · ROUNDED PROFILE',
+      alt: 'Transparent blue rounded polycarbonate claw clip on a light background',
+      intro: 'A medium claw clip in PC (polycarbonate), with a rounded shell and rounded teeth.',
+      facts: [['Material', 'PC (polycarbonate)'], ['Listed dimensions', '9.5 × 5 × 4 cm']],
+      details: 'The transparent blue style shows the curved shell and tooth arrangement. Its listed overall dimensions are 9.5 × 5 × 4 cm, with 4 cm marked as the thickness.',
+      note: 'Overall product dimensions do not specify the jaw opening or establish suitability for a particular hair type.',
+      image: '/assets/images/selected-medium-rounded-pc-claw.webp', imageWidth: 800, imageHeight: 800,
+    },
+    {
+      id: 'openworkClaw', group: 'Claw clips', title: 'Openwork ABS Claw Clip',
+      tag: 'OPENWORK SHAPE · ARCHED PROFILE',
+      alt: 'Red ABS claw clip with an arched openwork design on a white background',
+      intro: 'An ABS claw clip with an arched openwork silhouette, shown in red.',
+      facts: [['Material', 'ABS'], ['Listed dimensions', '11 × 7 × 5.5 cm']],
+      details: 'The spaced outer ribs form a rounded, openwork profile. Use the listed overall dimensions to compare its shape with the longer crossed and medium rounded styles.',
+      note: 'These are overall product dimensions, not packaging measurements or a guarantee of hair-holding capacity.',
+      image: '/assets/images/selected-openwork-abs-claw.webp', imageWidth: 1000, imageHeight: 1000,
+    },
+  ],
+};
+
 const detailSlugs = {
   oversized: 'oversized-polyester-scrunchie',
   silk: 'mulberry-silk-scrunchie',
   rhinestone: 'rhinestone-satin-scrunchie',
   ruched: 'ruched-wide-fabric-headband',
   stretch: 'solid-stretch-fabric-headband',
+  crossedClaw: 'long-crossed-acrylic-claw-clip',
+  roundedClaw: 'medium-rounded-pc-claw-clip',
+  openworkClaw: 'openwork-abs-claw-clip',
 };
 
 export const selectedProducts = Object.entries(selectedProductStyles).flatMap(([category, selection]) =>
@@ -196,4 +236,8 @@ export function findSelectedProduct(slug) {
 
 export function selectedProductInquiryPath(product) {
   return `/contact?product=${detailSlugs[product.id]}`;
+}
+
+export function selectedProductInquiryCategory(product) {
+  return product?.category === 'hair-claw-clips' ? 'claw-clips' : product?.category || '';
 }
