@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { JSDOM } from 'jsdom';
+import { selectedProducts, selectedProductPath } from '../src/data/selectedProductStyles.js';
 
 const origin = 'https://wincomehair.com';
 const dist = path.resolve('dist');
@@ -31,6 +32,18 @@ for (const route of routes) {
     try { JSON.parse(node.textContent); } catch { failures.push(route + ': invalid JSON-LD'); }
   }
   for (const img of doc.querySelectorAll('img')) if (!img.hasAttribute('alt')) failures.push(route + ': image lacks alt');
+  // Every selected style, including future additions, must have a real detail
+  // route and consistent image, name and primary action links on its category.
+  for (const product of selectedProducts.filter(item => route === `/products/category/${item.category}`)) {
+    const target = selectedProductPath(product);
+    const card = doc.getElementById(`selection-${product.id}`);
+    if (!routes.includes(target)) failures.push(route + ': missing product detail route ' + target);
+    for (const selector of ['.selected-style-photo', 'h3 a', '.selected-style-open']) {
+      const link = card?.querySelector(selector);
+      if (link?.tagName !== 'A' || link.getAttribute('href') !== target) failures.push(route + ': product detail entry mismatch ' + product.id + ' ' + selector);
+    }
+    if (card?.querySelector('dialog')) failures.push(route + ': selected style must open a detail page, not a dialog: ' + product.id);
+  }
   for (const link of doc.querySelectorAll('a[href]')) {
     const url = new URL(link.href);
     if (url.origin !== origin) continue;

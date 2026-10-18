@@ -1,6 +1,5 @@
-import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { selectedProductStyles, selectedProductPath, selectedProductInquiryPath } from '../data/selectedProductStyles';
+import { selectedProductStyles, selectedProductPath } from '../data/selectedProductStyles';
 
 function StyleFacts({ rows }) {
   return (
@@ -13,40 +12,6 @@ function StyleFacts({ rows }) {
 }
 
 function SelectedStyleCard({ product, number }) {
-  const dialogRef = useRef(null);
-  const previousOverflow = useRef(null);
-  const titleId = `selected-style-title-${product.id}`;
-
-  function restoreScroll() {
-    if (previousOverflow.current !== null) {
-      document.body.style.overflow = previousOverflow.current;
-      previousOverflow.current = null;
-    }
-  }
-
-  useEffect(() => () => restoreScroll(), []);
-
-  function openSpecifications() {
-    if (!dialogRef.current || dialogRef.current.open) return;
-    dialogRef.current.showModal();
-    previousOverflow.current = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
-  }
-
-  function keepFocusInDialog(event) {
-    if (event.key !== 'Tab') return;
-    const controls = dialogRef.current.querySelectorAll('button, a[href], input, select, textarea, [tabindex="0"]');
-    const first = controls[0];
-    const last = controls[controls.length - 1];
-    if (event.shiftKey && document.activeElement === first) {
-      event.preventDefault();
-      last.focus();
-    } else if (!event.shiftKey && document.activeElement === last) {
-      event.preventDefault();
-      first.focus();
-    }
-  }
-
   return (
     <article id={`selection-${product.id}`} className="selected-style-card">
       <Link to={selectedProductPath(product)} className="selected-style-photo" aria-label={`View ${product.title}`}>
@@ -58,36 +23,10 @@ function SelectedStyleCard({ product, number }) {
         <h3><Link to={selectedProductPath(product)}>{product.title}</Link></h3>
         <p className="selected-style-intro">{product.intro}</p>
         <StyleFacts rows={product.facts} />
-        <button type="button" className="selected-style-open" onClick={openSpecifications} aria-haspopup="dialog" aria-controls={`selected-style-dialog-${product.id}`} aria-label={`View specifications for ${product.title}`}>
-          View specifications <span aria-hidden="true">↗</span>
-        </button>
+        <Link to={selectedProductPath(product)} className="selected-style-open" aria-label={`View product details for ${product.title}`}>
+          View product details <span aria-hidden="true">→</span>
+        </Link>
       </div>
-      <dialog ref={dialogRef} id={`selected-style-dialog-${product.id}`} className="selected-style-dialog" aria-labelledby={titleId} onClose={restoreScroll} onKeyDown={keepFocusInDialog}>
-        <div className="selected-style-dialog-header">
-          <span>WINCOME / PRODUCT SPECIFICATIONS</span>
-          <button type="button" className="selected-style-close" onClick={() => dialogRef.current.close()} aria-label="Close specifications">Close ×</button>
-        </div>
-        <div className="selected-style-detail">
-          <img src={product.image} alt={product.alt} width={product.imageWidth} height={product.imageHeight} loading="lazy" decoding="async" />
-          <div className="selected-style-detail-copy">
-            <p className="selected-style-label">{product.group}</p>
-            <h2 id={titleId}>{product.title}</h2>
-            <p>{product.details}</p>
-            <StyleFacts rows={[...product.facts, ...(product.extra || [])]} />
-            {product.table ? (
-              <table>
-                <caption>Size options</caption>
-                <thead><tr>{product.table.heads.map(heading => <th key={heading} scope="col">{heading}</th>)}</tr></thead>
-                <tbody>{product.table.rows.map(row => <tr key={row[0]}>{row.map((value, index) => <td key={index}>{value}</td>)}</tr>)}</tbody>
-              </table>
-            ) : null}
-            {product.care ? <><h3>Care instructions</h3><p>{product.care}</p></> : null}
-            {product.note ? <p className="selected-style-note">{product.note}</p> : null}
-            <Link to={selectedProductPath(product)} className="btn-outline" onClick={() => dialogRef.current.close()}>Full product details →</Link>
-            <Link to={selectedProductInquiryPath(product)} className="selected-style-inquire" onClick={() => dialogRef.current.close()}>Ask about this product →</Link>
-          </div>
-        </div>
-      </dialog>
     </article>
   );
 }
