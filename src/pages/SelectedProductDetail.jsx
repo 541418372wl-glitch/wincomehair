@@ -6,9 +6,11 @@ import { selectedProductBuyingGuide } from '../data/selectedProductBuyingGuide';
 export default function SelectedProductDetail({ product }) {
   const related = selectedProducts.filter(item => item.category === product.category && item.id !== product.id);
   const guide = selectedProductBuyingGuide[product.id];
+  const categoryLabel = { scrunchies: 'Scrunchies', headbands: 'Soft Fabric Headbands', 'hair-claw-clips': 'Claw Clips' }[product.category];
+  const comparisonLabel = { scrunchies: 'scrunchies', headbands: 'fabric headbands', 'hair-claw-clips': 'claw clips' }[product.category];
   return (
     <div className="container-site selected-product-page">
-      <a className="selected-product-back" href={`/products/category/${product.category}#selected-styles`}>← Back to {product.category === 'scrunchies' ? 'Scrunchies' : 'Soft Fabric Headbands'}</a>
+      <a className="selected-product-back" href={`/products/category/${product.category}#selected-styles`}>← Back to {categoryLabel}</a>
       <div className="selected-product-layout">
         <div className="selected-product-image">
           <img src={product.image} alt={product.alt} width={product.imageWidth} height={product.imageHeight} fetchpriority="high" />
@@ -52,7 +54,7 @@ export default function SelectedProductDetail({ product }) {
         </div>
       </section>
       <section className="selected-product-related" aria-labelledby="related-styles-title">
-        <h2 id="related-styles-title">Compare other {product.category === 'scrunchies' ? 'scrunchies' : 'fabric headbands'}</h2>
+        <h2 id="related-styles-title">Compare other {comparisonLabel}</h2>
         <div>{related.map(item => <Link to={selectedProductPath(item)} key={item.id}>
           <img src={item.image} alt={item.alt} width={item.imageWidth} height={item.imageHeight} loading="lazy" />
           <span>{item.title} →</span>

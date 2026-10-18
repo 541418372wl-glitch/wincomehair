@@ -2,6 +2,7 @@ import { useCallback, useRef, useState } from 'react';
 import InquiryChallenge from '../components/InquiryChallenge';
 import { waLink } from '../lib/whatsapp';
 import { trackGenerateLead } from '../lib/analytics';
+import { selectedProductInquiryCategory } from '../data/selectedProductStyles';
 
 const SAMPLE_STOCK_OPTION = {
   value: 'sample-stock-below-moq',
@@ -47,19 +48,19 @@ export default function Contact({ selectedProduct = null }) {
   const [formStartedAt] = useState(() => Date.now());
   const [form, setForm] = useState({
     name: '', company: '', email: '', phone: '',
-    productType: selectedProduct?.category || '', quantity: '', material: '', logoPlacement: '',
+    productType: selectedProductInquiryCategory(selectedProduct), quantity: '', material: '', logoPlacement: '',
     dimensions: '', message: '', targetMarket: '', timeline: '', website: '',
   });
 
   const update = (field, value) => {
-    if (field === 'productType' && value !== inquiryProduct?.category) setInquiryProduct(null);
+    if (field === 'productType' && value !== selectedProductInquiryCategory(inquiryProduct)) setInquiryProduct(null);
     setForm(prev => ({
       ...prev,
       [field]: value,
       ...(field === 'productType' ? { quantity: '' } : {}),
     }));
   };
-  const activeMoqPolicy = CUSTOM_MOQ_BY_PRODUCT_TYPE[form.productType];
+  const activeMoqPolicy = inquiryProduct ? null : CUSTOM_MOQ_BY_PRODUCT_TYPE[form.productType];
   const quantityOptions = activeMoqPolicy?.options || DEFAULT_QUANTITY_OPTIONS;
   const updateVerificationToken = useCallback((token) => {
     verificationToken.current = token;

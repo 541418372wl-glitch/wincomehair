@@ -84,7 +84,7 @@ const pageMeta = {
   },
   '/products': {
     title: 'Wholesale Hair Accessories Catalog | WINCOME',
-    description: 'Browse 34 hair accessories, including selected scrunchies and fabric headbands. Compare product specifications and discuss order requirements.',
+    description: 'Browse 37 hair accessories, including selected claw clips, scrunchies and fabric headbands. Compare specifications and discuss order requirements.',
   },
   '/customization': {
     title: 'Custom Hair Accessories OEM & Private Label | WINCOME',
