@@ -22,8 +22,8 @@ export const ORGANIZATION_SCHEMA = {
   logo: `${SITE}/logo-192.png`,
   description: 'Custom hair accessories manufacturer and OEM/ODM supplier for brands, wholesalers, retailers and importers.',
   foundingDate: '2010',
-  email: 'info@wincomehair.com',
-  telephone: '+86-189-8984-6141',
+  email: 'angelasmithuk8@gmail.com',
+  telephone: '+86-156-5801-3186',
   areaServed: 'Worldwide',
   knowsAbout: [
     'Custom hair accessories manufacturing',
@@ -44,8 +44,8 @@ export const ORGANIZATION_SCHEMA = {
   },
   contactPoint: {
     '@type': 'ContactPoint',
-    telephone: '+86-189-8984-6141',
-    email: 'info@wincomehair.com',
+    telephone: '+86-156-5801-3186',
+    email: 'angelasmithuk8@gmail.com',
     contactType: 'sales',
     availableLanguage: ['English', 'Chinese'],
   },
