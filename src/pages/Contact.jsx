@@ -1,7 +1,7 @@
 import { useCallback, useRef, useState } from 'react';
 import InquiryChallenge from '../components/InquiryChallenge';
 import { waLink } from '../lib/whatsapp';
-import { trackGenerateLead } from '../lib/analytics';
+import { trackGenerateLead, readAnalyticsConsentSnapshot } from '../lib/analytics';
 import { selectedProductInquiryCategory } from '../data/selectedProductStyles';
 
 const SAMPLE_STOCK_OPTION = {
@@ -110,7 +110,10 @@ export default function Contact({ selectedProduct = null }) {
         method: 'POST',
         signal: controller.signal,
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ record, turnstileToken }),
+        body: JSON.stringify({
+          record, turnstileToken,
+          diagnostics: { version: '1', consentAtSubmit: readAnalyticsConsentSnapshot() },
+        }),
       });
       const result = await res.json().catch(() => ({ submissionStatus: 'unknown' }));
       if (!res.ok || result.ok !== true || result.accepted !== true || result.submissionStatus !== 'accepted') {

@@ -7,7 +7,7 @@ export default function Privacy() {
       <div className="container-site section-gap max-w-3xl">
         <p className="section-label">Legal</p>
         <h1 className="text-display-lg text-navy mb-4">Privacy <span className="text-gold">Policy</span></h1>
-        <p className="mb-10 text-sm text-tan">Last updated: 3 October 2026</p>
+        <p className="mb-10 text-sm text-tan">Last updated: 20 October 2026</p>
 
         <div className="space-y-8 text-tan leading-relaxed text-base">
           <section>
@@ -18,6 +18,7 @@ export default function Privacy() {
           <section>
             <h2 className="text-display-sm text-navy mb-3">2. Data We Collect</h2>
             <p>When you submit a quote request, we collect the information you provide, which may include your name, company, email address, phone or WhatsApp number, product requirements, quantity, material, target market, timeline, dimensions, and message. Our hosting and security providers also process limited technical data, including network and browser information, to operate the service and prevent abuse. Our application logs use a random request reference and do not include inquiry text or contact details.</p>
+            <p className="mt-3">Your quote record also includes the analytics choice reported by your browser when you submit, together with technical version information, to help us troubleshoot missing inquiry measurements. This information follows the same retention policy as your inquiry. Recording this choice does not enable optional analytics or confirm that Google has received an event.</p>
             <p className="mt-3">If you choose to contact us through WhatsApp, your interaction takes place on WhatsApp and is also governed by WhatsApp/Meta&apos;s terms and privacy practices.</p>
           </section>
 
