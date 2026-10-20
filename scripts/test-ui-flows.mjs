@@ -161,6 +161,7 @@ const rejected = { ok: false, accepted: false, submissionStatus: 'rejected' };
     assert.match(payload.turnstileToken, /^offline-token-/);
     assert.equal(Object.hasOwn(payload.record, 'turnstileToken'), false);
     assert.equal(payload.record.email, 'offline@example.invalid');
+    assert.deepEqual(payload.diagnostics, { version: '1', consentAtSubmit: 'unset' });
     assert.equal(document.querySelector('button[type="submit"]').disabled, true);
     assert.equal(document.querySelector('button[type="button"]').disabled, true);
     await test.respond(rejected, 422);
@@ -216,6 +217,49 @@ const rejected = { ok: false, accepted: false, submissionStatus: 'rejected' };
     assert.equal(leads[0][2].lead_status, 'accepted');
     assert.equal(leads[0][2].measurement_version, '3');
     assert.doesNotMatch(JSON.stringify(leads), /example\.invalid|offline-token|33333333/);
+    assert.deepEqual(JSON.parse(test.requests.at(-1).options.body).diagnostics, { version: '1', consentAtSubmit: 'granted' });
+    assert.deepEqual(Object.keys(leads[0][2]).sort(),
+      ['lead_source', 'lead_status', 'measurement_version', 'product_type', 'quantity_range'],
+      'no private metadata or callbacks are added to Google events');
+  } finally { test.cleanup(); }
+}
+
+// Submission snapshots are independent of analytics delivery. Every fetch is
+// intercepted by harness(), which only accepts the original inquiry endpoint.
+for (const [choice, expected] of [
+  ['denied', 'denied'], [null, 'unset'], ['invalid-choice', 'unknown'], ['storage-error', 'unknown'],
+]) {
+  const test = await harness();
+  try {
+    if (choice === 'storage-error') {
+      Object.defineProperty(window, 'localStorage', { configurable: true, get() { throw new Error('Storage blocked'); } });
+    } else if (choice !== null) window.localStorage.setItem('wincome_analytics_consent_v1', choice);
+    test.app.mount(); await flush();
+    await test.contactStep(); await test.loadScript(); await test.verify();
+    test.submit(); test.submit();
+    assert.equal(test.requests.length, 1);
+    assert.deepEqual(JSON.parse(test.requests[0].options.body).diagnostics, { version: '1', consentAtSubmit: expected });
+    await test.respond(accepted('44444444-4444-4444-8444-444444444444'));
+    assert.match(document.body.textContent, /Thank You for Your Request/);
+    assert.equal(test.requests.length, 1, 'no follow-up report or duplicate inquiry');
+    assert.equal(document.getElementById('wincome-ga4-script'), null);
+    assert.equal((window.dataLayer || []).filter(call => call[0] === 'event').length, 0);
+  } finally { test.cleanup(); }
+}
+{
+  const test = await harness();
+  try {
+    window.localStorage.setItem('wincome_analytics_consent_v1', 'granted');
+    test.app.mount(); await flush();
+    await test.contactStep(); await test.loadScript(); await test.verify();
+    test.submit();
+    window.localStorage.setItem('wincome_analytics_consent_v1', 'denied');
+    await test.respond(accepted('55555555-5555-4555-8555-555555555555'));
+    assert.equal(JSON.parse(test.requests[0].options.body).diagnostics.consentAtSubmit, 'granted',
+      'the stored snapshot describes submission time, not acknowledgement time');
+    assert.equal((window.dataLayer || []).filter(call => call[0] === 'event').length, 0);
+    assert.match(document.body.textContent, /Thank You for Your Request/);
+    assert.equal(test.requests.length, 1);
   } finally { test.cleanup(); }
 }
 

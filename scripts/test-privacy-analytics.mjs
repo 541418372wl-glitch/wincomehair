@@ -32,6 +32,18 @@ Object.defineProperty(globalThis.document, 'cookie', {
 });
 
 const analytics = await import(`../src/lib/analytics.js?test=${Date.now()}`);
+assert.equal(analytics.readAnalyticsConsentSnapshot(), 'unset');
+stored.set(analytics.ANALYTICS_CONSENT_KEY, 'invalid-choice');
+assert.equal(analytics.readAnalyticsConsentSnapshot(), 'unknown');
+assert.equal(analytics.readAnalyticsConsent(), null, 'invalid values must not grant consent');
+stored.delete(analytics.ANALYTICS_CONSENT_KEY);
+const getItem = window.localStorage.getItem;
+window.localStorage.getItem = () => { throw new Error('Storage unavailable'); };
+assert.equal(analytics.readAnalyticsConsentSnapshot(), 'unknown');
+assert.equal(analytics.readAnalyticsConsent(), null);
+window.localStorage.getItem = getItem;
+assert.equal(window.dataLayer.length, 0, 'reading a snapshot must not initialize analytics');
+assert.equal(elements.size, 0);
 analytics.initializeConsentDefaults();
 
 const calls = () => window.dataLayer.map((args) => Array.from(args));
@@ -41,11 +53,13 @@ assert.equal(calls()[0][2].ad_storage, 'denied');
 
 analytics.setAnalyticsConsent('denied');
 assert.equal(analytics.readAnalyticsConsent(), 'denied');
+assert.equal(analytics.readAnalyticsConsentSnapshot(), 'denied');
 assert.equal(await analytics.trackEvent('whatsapp_click', { link_location: 'footer' }), false);
 assert.equal(elements.has('wincome-ga4-script'), false);
 
 analytics.setAnalyticsConsent('granted');
 assert.equal(analytics.readAnalyticsConsent(), 'granted');
+assert.equal(analytics.readAnalyticsConsentSnapshot(), 'granted');
 assert.equal(await analytics.trackEvent('whatsapp_click', {
   link_location: 'footer',
   email: 'must-not-send@example.com',
@@ -77,8 +91,18 @@ assert.equal(configCall[1], analytics.GA_MEASUREMENT_ID);
 assert.equal(configCall[2].allow_google_signals, false);
 assert.equal(configCall[2].allow_ad_personalization_signals, false);
 
+// A real choice remains available for this page even if persistence is blocked.
+window.localStorage.getItem = () => { throw new Error('Storage unavailable'); };
+window.localStorage.setItem = () => { throw new Error('Storage unavailable'); };
+analytics.setAnalyticsConsent('denied');
+assert.equal(analytics.readAnalyticsConsentSnapshot(), 'denied');
+assert.equal(analytics.readAnalyticsConsent(), 'denied');
+assert.equal(await analytics.trackEvent('whatsapp_click', {}), false);
+
 delete globalThis.window;
 delete globalThis.document;
 delete globalThis.CustomEvent;
+assert.equal(analytics.readAnalyticsConsentSnapshot(), 'unknown');
+assert.equal(analytics.readAnalyticsConsent(), null);
 
 console.log('Analytics consent and event privacy tests passed');

@@ -145,6 +145,9 @@ try {
     assert.equal(submitted[key], validPayload()[key], 'all inquiry fields must survive forwarding');
   }
   assert.equal(submitted.request_reference, accepted.body.requestId);
+  assert.equal(submitted.analytics_consent_at_submit, 'unknown', 'legacy submissions remain accepted');
+  assert.equal(submitted.diagnostic_version, '1');
+  assert.equal(submitted.measurement_version, '3');
   assert.deepEqual(submitted._email, { subject: 'New inquiry from wincomehair.com' });
   assert.equal(calls[1].options.body.includes(TOKEN), false, 'consumed token must not reach Formspark');
   assert.equal(calls[1].options.body.includes(SECRET), false, 'server secret must not reach Formspark');
@@ -182,6 +185,47 @@ try {
   assert.equal(nested.calls[1].options.body.includes('attacker'), false);
   assert.equal(nested.calls[1].options.body.includes('must-not-forward'), false);
   assert.equal((await execute(JSON.stringify(validPayload()))).res.body.accepted, true);
+
+  // Consent metadata accompanies exactly one original provider submission.
+  // Malformed metadata must not reject an otherwise valid business inquiry.
+  for (const [diagnostics, expected] of [
+    ...['granted', 'denied', 'unset', 'unknown'].map(consentAtSubmit => [{ version: '1', consentAtSubmit }, consentAtSubmit]),
+    [{ version: '1', consentAtSubmit: 'must-not-forward@example.invalid' }, 'unknown'],
+    [{ version: '1', consentAtSubmit: {} }, 'unknown'],
+    [{ version: '1', consentAtSubmit: true }, 'unknown'],
+    [{ version: '2', consentAtSubmit: 'granted' }, 'unknown'],
+    [{ version: 1, consentAtSubmit: 'granted' }, 'unknown'],
+    [{ version: '1' }, 'unknown'],
+    [null, 'unknown'], [[], 'unknown'], ['granted', 'unknown'], [false, 'unknown'],
+    [{ version: '1', consentAtSubmit: 'granted', email: 'must-not-forward@example.invalid',
+      measurement_version: '999', request_reference: 'must-not-forward' }, 'granted'],
+  ]) {
+    const result = await execute({
+      record: { ...validPayload(), analytics_consent_at_submit: 'must-not-forward', diagnostic_version: '999' },
+      turnstileToken: TOKEN, diagnostics,
+    });
+    assert.equal(result.res.body.accepted, true);
+    assert.deepEqual(result.calls.map(call => call.url), [TURNSTILE_URL, FORMSPARK_URL]);
+    assert.deepEqual(Object.keys(result.res.body).sort(), ['accepted', 'ok', 'requestId', 'submissionStatus']);
+    const forwarded = JSON.parse(result.calls[1].options.body);
+    assert.equal(forwarded.analytics_consent_at_submit, expected);
+    assert.equal(forwarded.diagnostic_version, '1');
+    assert.equal(forwarded.measurement_version, '3');
+    assert.equal(forwarded.request_reference, result.res.body.requestId);
+    assert.deepEqual(forwarded._email, { subject: 'New inquiry from wincomehair.com' });
+    assert.equal(JSON.stringify(forwarded).includes('must-not-forward'), false);
+  }
+  for (const formsparkStatus of [400, 502]) {
+    const result = await execute({
+      record: validPayload(), turnstileToken: TOKEN,
+      diagnostics: { version: '1', consentAtSubmit: 'granted' },
+    }, { fetchImpl: makeFetch({ formsparkStatus }) });
+    assert.equal(result.res.body.accepted, false);
+    assert.equal(result.res.body.submissionStatus, 'unknown');
+    assert.equal(result.calls.length, 2, 'metadata must not cause retries');
+  }
+  assert.equal(JSON.stringify(structuredLogs).includes('analytics_consent_at_submit'), false,
+    'consent snapshot is not an additional runtime log');
 
   // Removing every old provider variable must not affect new inquiries.
   assert.ok(oldVariableNames.every((key) => process.env[key] === undefined));

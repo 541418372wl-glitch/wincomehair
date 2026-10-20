@@ -51,13 +51,21 @@ export function initializeConsentDefaults() {
 }
 
 export function readAnalyticsConsent() {
-  if (!hasBrowser()) return null;
+  const value = readAnalyticsConsentSnapshot();
+  return ALLOWED_CONSENT.has(value) ? value : null;
+}
+
+// For the original inquiry record only. Unreadable or invalid storage is not
+// evidence that a visitor has never made a choice.
+export function readAnalyticsConsentSnapshot() {
+  if (!hasBrowser()) return 'unknown';
   if (sessionConsent) return sessionConsent;
   try {
     const value = window.localStorage.getItem(ANALYTICS_CONSENT_KEY);
-    return ALLOWED_CONSENT.has(value) ? value : null;
+    if (value === null) return 'unset';
+    return ALLOWED_CONSENT.has(value) ? value : 'unknown';
   } catch {
-    return null;
+    return 'unknown';
   }
 }
 

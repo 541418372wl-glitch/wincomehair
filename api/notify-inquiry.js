@@ -1,5 +1,18 @@
 import { randomUUID } from 'node:crypto';
 
+const CONSENT_SNAPSHOTS = new Set(['granted', 'denied', 'unset', 'unknown']);
+function submissionMetadata(input) {
+  // Browser-reported snapshot, not proof of consent or Google ingestion.
+  // Never forward arbitrary diagnostic fields or client-supplied versions.
+  const valid = input && typeof input === 'object' && !Array.isArray(input)
+    && input.version === '1' && CONSENT_SNAPSHOTS.has(input.consentAtSubmit);
+  return {
+    analytics_consent_at_submit: valid ? input.consentAtSubmit : 'unknown',
+    diagnostic_version: '1',
+    measurement_version: '3',
+  };
+}
+
 // The same-origin API validates every Turnstile token before forwarding a form.
 // Formspark's HTTP acknowledgement confirms acceptance, not archive or delivery.
 const ROUTE = '/api/notify-inquiry';
@@ -303,6 +316,7 @@ export default async function handler(req, res) {
       body: JSON.stringify({
         ...record,
         request_reference: requestId,
+        ...submissionMetadata(payload.diagnostics),
         _email: { subject: 'New inquiry from wincomehair.com' },
       }),
     });

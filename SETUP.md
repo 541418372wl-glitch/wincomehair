@@ -102,3 +102,5 @@ Direct scripts that write GitHub contents to `main` are prohibited. Production n
 ## Inquiry operations and measurement
 
 See [INQUIRY_OPERATIONS.md](INQUIRY_OPERATIONS.md) for the accepted/unknown response contract, Turnstile ownership, deployment order, recipient and archive/email acceptance checks, balance monitoring, rollback, and measurement definitions. GA4 `generate_lead` requires visitor consent and a confirmed provider acceptance, using `lead_status=accepted` and `measurement_version=3`. It does not confirm a stored or qualified inquiry. Keep older `saved` version 2 events separate; WhatsApp clicks continue to measure contact intent with version 2.
+
+See [INQUIRY_DIAGNOSTICS.md](INQUIRY_DIAGNOSTICS.md) for the browser-reported consent snapshot saved with the original Formspark submission. This uses the existing endpoint and credentials, with no additional submission, diagnostic endpoint, signing key, database, rate-limit rule, or paid log retention. The metadata follows inquiry retention, not a separate 30-day deletion policy. Tests use mocked providers only.
