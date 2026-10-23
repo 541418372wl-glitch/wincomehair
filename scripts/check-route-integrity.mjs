@@ -3,6 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { JSDOM } from 'jsdom';
 import { selectedProducts, selectedProductPath } from '../src/data/selectedProductStyles.js';
+import { products as catalogProducts } from '../src/data/productCatalog.js';
 
 const origin = 'https://wincomehair.com';
 const dist = path.resolve('dist');
@@ -32,6 +33,14 @@ for (const route of routes) {
     try { JSON.parse(node.textContent); } catch { failures.push(route + ': invalid JSON-LD'); }
   }
   for (const img of doc.querySelectorAll('img')) if (!img.hasAttribute('alt')) failures.push(route + ': image lacks alt');
+  const inquiryProduct = [...selectedProducts.map(product => product.slug), ...catalogProducts.map(product => product.id)]
+    .find(slug => route === `/products/${slug}`);
+  if (inquiryProduct) {
+    const formLinks = [...doc.querySelectorAll('main a[href^="/contact"]')];
+    if (formLinks.length !== 2 || formLinks.some(link => link.getAttribute('href') !== `/contact?product=${inquiryProduct}`)) {
+      failures.push(route + ': product inquiry links must retain the product context');
+    }
+  }
   // Every selected style, including future additions, must have a real detail
   // route and consistent image, name and primary action links on its category.
   for (const product of selectedProducts.filter(item => route === `/products/category/${item.category}`)) {

@@ -2,6 +2,7 @@ import { renderStream } from './lib/render-stream.js';
 import { StaticRouter } from 'react-router-dom';
 import { AppContent } from './App';
 import { getSeoMeta, OG_IMAGE, ORGANIZATION_SCHEMA, SITE, SITE_NAME, WEBSITE_SCHEMA } from './components/SEO';
+import { canonicalPath } from './lib/canonicalPath';
 
 function escapeHtml(value) {
   return String(value ?? '')
@@ -16,6 +17,7 @@ function jsonLd(value) {
 }
 
 function buildHead(pathname) {
+  pathname = canonicalPath(pathname);
   const meta = getSeoMeta(pathname);
   if (!meta) throw new Error(`Missing SEO metadata for ${pathname}`);
 

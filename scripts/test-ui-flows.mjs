@@ -2,6 +2,8 @@ import assert from 'node:assert/strict';
 import { build } from 'esbuild';
 import { JSDOM } from 'jsdom';
 import { selectedProducts } from '../src/data/selectedProductStyles.js';
+import { products as catalogProducts } from '../src/data/productCatalog.js';
+import { findInquiryProduct } from '../src/data/productInquiry.js';
 
 // No external resources are loaded. Every API and widget call is simulated.
 const originalFetch = globalThis.fetch;
@@ -59,6 +61,9 @@ async function harness({ siteKey = 'offline-unit-test-sitekey', hostname = 'winc
   const bundle = await build({
     stdin: {
       contents: 'import { h, render } from "preact"; import Contact from "./src/pages/Contact.jsx"; import InquiryChallenge from "./src/components/InquiryChallenge.jsx";'
+        + 'import { MemoryRouter, useNavigate } from "react-router-dom"; import SelectedContactRoute from "./src/pages/SelectedContactRoute.jsx";'
+        + 'export let navigate; function Route() { navigate = useNavigate(); return h(SelectedContactRoute); }'
+        + 'export const mountRoute = url => render(h(MemoryRouter, { initialEntries: [url] }, h(Route)), document.getElementById("root"));'
         + 'export const mount = (props = {}) => render(h(Contact, props), document.getElementById("root"));'
         + 'export const mountChallenge = props => render(h(InquiryChallenge, props), document.getElementById("root"));'
         + 'export const unmount = () => render(null, document.getElementById("root"));'
@@ -324,13 +329,25 @@ for (const options of [{ siteKey: '' }, { siteKey: '1x00000000000000000000AA' },
 
 // Product context reaches the existing message field without changing the API.
 // All requests below use the harness's in-memory fetch mock, never the network.
-for (const product of selectedProducts) {
+for (const invalid of [null, undefined, '', '__proto__', 'constructor', 'toString', 'unknown-product', '../claw-acetate', '<script>alert(1)</script>', 'https://example.invalid/claw-acetate']) {
+  assert.equal(findInquiryProduct(invalid), undefined, 'Only an exact existing product slug is accepted');
+}
+for (const product of [...selectedProducts, ...catalogProducts.map(item => findInquiryProduct(item.id))]) {
   const test = await harness();
   try {
+    window.localStorage.setItem('wincome_analytics_consent_v1', 'granted');
     test.app.mount({ selectedProduct: product }); await flush();
-    const expectedCategory = { 'hair-claw-clips': 'claw-clips', 'hair-bows': 'bows' }[product.category] || product.category;
+    const expectedCategory = { 'hair-claw-clips': 'claw-clips', 'hair-bows': 'bows', 'hair-clips-barrettes': 'pins' }[product.category] || product.category;
     assert.equal(document.getElementById('productType').value, expectedCategory);
-    assert.ok(!document.querySelector('form').textContent.includes('Custom production MOQ:'));
+    if (product.customProduction && ['claw-clips', 'pins'].includes(expectedCategory)) {
+      assert.ok(document.querySelector('form').textContent.includes(expectedCategory === 'claw-clips'
+        ? 'Custom production MOQ: 1,000 pcs per design per color.'
+        : 'Custom production MOQ: 2,000 pcs per design per color.'));
+      assert.equal(document.querySelector('#quantity option[value="200-999"]'), null);
+      assert.equal(Boolean(document.querySelector('#quantity option[value="1000-1999"]')), expectedCategory === 'claw-clips');
+    } else {
+      assert.ok(!document.querySelector('form').textContent.includes('Custom production MOQ:'));
+    }
     assert.match(document.querySelector('.selected-inquiry-summary').textContent, new RegExp(product.title));
     const whatsapp = new URL(document.querySelector('[data-analytics-location="contact_primary"]').href);
     assert.ok(whatsapp.searchParams.get('text').includes(product.title));
@@ -343,10 +360,38 @@ for (const product of selectedProducts) {
     await test.loadScript(); await test.verify();
     test.submit();
     assert.equal(test.requests.length, 1);
+    await flush();
+    assert.equal([...document.querySelectorAll('button')].find(button => button.textContent.includes('Remove product selection')).disabled, true, 'Product selection cannot change during an active submission');
     const { record } = JSON.parse(test.requests[0].options.body);
     assert.equal(record.product_type, expectedCategory);
     assert.equal(record.message, `Product: ${product.title}\nProduct page: https://wincomehair.com/products/${product.slug}\n\nPlease confirm colors and delivery timing.`);
     await test.respond(accepted('44444444-4444-4444-8444-444444444444'));
+    const leads = window.dataLayer.filter(call => call[0] === 'event' && call[1] === 'generate_lead');
+    assert.equal(leads.length, 1);
+    assert.deepEqual(Object.keys(leads[0][2]).sort(), ['lead_source', 'lead_status', 'measurement_version', 'product_type', 'quantity_range']);
+    assert.doesNotMatch(JSON.stringify(leads), /Product page:|Please confirm|offline@example/);
+  } finally { test.cleanup(); }
+}
+
+// URL selection is hydrated from the same allowlist; extra parameters cannot
+// override business terms or inject a product name/link/message.
+{
+  const test = await harness();
+  try {
+    test.app.mountRoute('/contact?product=claw-acetate&customProduction=false&title=Injected&message=Injected');
+    await flush(); await flush(); await flush();
+    assert.match(document.querySelector('.selected-inquiry-summary').textContent, /Acetate Hair Claw Clips/);
+    assert.doesNotMatch(document.body.textContent, /Injected/);
+    assert.match(document.querySelector('form').textContent, /Custom production MOQ: 1,000 pcs/);
+    await test.input('quantity', '1000-1999');
+    test.app.navigate('/contact?product=clip-pearl'); await flush(); await flush(); await flush();
+    assert.equal(document.getElementById('productType').value, 'pins');
+    assert.equal(document.getElementById('quantity').value, '');
+    assert.match(document.querySelector('form').textContent, /Custom production MOQ: 2,000 pcs/);
+    test.app.navigate('/contact?product=unknown-product'); await flush(); await flush(); await flush();
+    assert.equal(document.querySelector('.selected-inquiry-summary'), null);
+    assert.equal(document.getElementById('productType').value, '');
+    assert.equal(test.requests.length, 0);
   } finally { test.cleanup(); }
 }
 for (const clearBy of ['remove', 'category']) {
@@ -357,6 +402,23 @@ for (const clearBy of ['remove', 'category']) {
     else await test.input('productType', 'headbands');
     assert.equal(document.querySelector('.selected-inquiry-summary'), null);
     assert.ok(!new URL(document.querySelector('[data-analytics-location="contact_primary"]').href).searchParams.get('text').includes(selectedProducts[0].title));
+  } finally { test.cleanup(); }
+}
+
+for (const removalStep of [1, 2, 3]) {
+  const test = await harness();
+  try {
+    test.app.mount({ selectedProduct: selectedProducts.find(product => product.category === 'hair-claw-clips') }); await flush();
+    await test.input('quantity', '200-999');
+    for (let step = 1; step < removalStep; step++) { test.submit(); await flush(); }
+    await test.clickText('Remove product selection');
+    assert.ok(document.getElementById('productType'), 'Removing a product returns to the first step so revised MOQ and quantity are reviewed');
+    assert.equal(document.getElementById('quantity').value, '', 'Removing a selected style resets a quantity that may no longer satisfy the custom program');
+    assert.equal(document.querySelector('#quantity option[value="200-999"]'), null);
+    assert.match(document.querySelector('form').textContent, /Custom production MOQ: 1,000 pcs/);
+    test.submit(); await flush();
+    assert.ok(document.getElementById('productType'), 'A cleared quantity cannot advance or submit');
+    assert.equal(test.requests.length, 0);
   } finally { test.cleanup(); }
 }
 

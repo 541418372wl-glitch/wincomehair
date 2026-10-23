@@ -4,6 +4,7 @@ import { articles } from 'virtual:article-summaries';
 import { productMeta } from '../data/productMeta';
 import { productCategoryMeta } from '../data/productCategoryMeta';
 import { commercialLandingPages } from '../data/commercialLandingPages';
+import { canonicalPath } from '../lib/canonicalPath';
 
 export const SITE = 'https://wincomehair.com';
 export const SITE_NAME = 'WINCOME Hair Accessories';
@@ -176,7 +177,8 @@ function buildProductDescription(product, productId) {
 }
 
 export function getSeoMeta(pathname) {
-  let meta = pageMeta[pathname];
+  pathname = canonicalPath(pathname);
+  let meta = Object.prototype.hasOwnProperty.call(pageMeta, pathname) ? pageMeta[pathname] : undefined;
 
   // Dynamic meta for blog article pages
   if (!meta && /^\/blog\/[^/]+$/.test(pathname)) {
@@ -199,12 +201,12 @@ export function getSeoMeta(pathname) {
   if (!meta && /^\/products\/(?:category\/)?[^/]+$/.test(pathname)) {
     const [, , segment, categorySlug] = pathname.split('/');
     if (segment === 'category') {
-      const category = productCategoryMeta[categorySlug];
+      const category = Object.prototype.hasOwnProperty.call(productCategoryMeta, categorySlug) ? productCategoryMeta[categorySlug] : undefined;
       if (category) meta = { title: category.seoTitle, description: category.description };
       return meta;
     }
     const id = segment;
-    const pm = productMeta[id];
+    const pm = Object.prototype.hasOwnProperty.call(productMeta, id) ? productMeta[id] : undefined;
     if (pm) {
       meta = {
         title: pm.seoTitle || `Custom ${pm.name} Manufacturer | WINCOME`,
@@ -219,7 +221,8 @@ export function getSeoMeta(pathname) {
 
 export default function SEO() {
   const location = useLocation();
-  const meta = getSeoMeta(location.pathname);
+  const pathname = canonicalPath(location.pathname);
+  const meta = getSeoMeta(pathname);
 
   function setMeta(name, content, isProperty = false) {
     const attr = isProperty ? 'property' : 'name';
@@ -267,7 +270,7 @@ export default function SEO() {
     setMeta('robots', 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1');
     setMeta('description', meta.description);
 
-    const url = `${SITE}${location.pathname}`;
+    const url = `${SITE}${pathname}`;
     const image = meta.image || OG_IMAGE;
 
     // Open Graph
@@ -304,7 +307,7 @@ export default function SEO() {
     canonical.setAttribute('href', url);
 
     // Structured data
-    if (location.pathname === '/') {
+    if (pathname === '/') {
       upsertScript('org-jsonld', ORGANIZATION_SCHEMA);
       upsertScript('website-jsonld', WEBSITE_SCHEMA);
     } else {
@@ -316,7 +319,7 @@ export default function SEO() {
     // Do not emit Product rich-result JSON-LD until one of those is visible
     // on the page; an Offer without a numeric price is invalid for Google.
     clearScript('product-jsonld');
-  }, [meta, location.pathname]);
+  }, [meta, pathname]);
 
   return null;
 }

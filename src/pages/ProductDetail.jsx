@@ -418,7 +418,7 @@ export default function ProductDetail() {
   const { id } = useParams();
   const selectedProduct = findSelectedProduct(id);
   if (selectedProduct) return <SelectedProductDetail product={selectedProduct} />;
-  const product = products[id];
+  const product = Object.prototype.hasOwnProperty.call(products, id) ? products[id] : undefined;
 
   if (!product) {
     return (
@@ -478,7 +478,7 @@ export default function ProductDetail() {
                 Discuss on WhatsApp <span className="ml-1">→</span>
               </a>
               <Link
-                to="/contact"
+                to={`/contact?product=${encodeURIComponent(id)}`}
                 onClick={() => void trackProductInquiry({ productId: id, productName: product.name, method: 'quote_form' })}
                 className="btn-outline text-base px-10 py-5"
               >
@@ -574,7 +574,7 @@ export default function ProductDetail() {
             Free design mockup and factory-direct quote within 24 hours. Production MOQs vary by category; samples and in-stock items may be available below the custom minimum.
           </p>
           <Link
-            to="/contact"
+            to={`/contact?product=${encodeURIComponent(id)}`}
             onClick={() => void trackProductInquiry({ productId: id, productName: product.name, method: 'quote_form' })}
             className="btn-gold"
           >
