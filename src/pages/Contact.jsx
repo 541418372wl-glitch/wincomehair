@@ -2,7 +2,7 @@ import { useCallback, useRef, useState } from 'react';
 import InquiryChallenge from '../components/InquiryChallenge';
 import { waLink } from '../lib/whatsapp';
 import { trackGenerateLead, readAnalyticsConsentSnapshot } from '../lib/analytics';
-import { selectedProductInquiryCategory } from '../data/selectedProductStyles';
+import { inquiryProductCategory } from '../data/productInquiry';
 
 const SAMPLE_STOCK_OPTION = {
   value: 'sample-stock-below-moq',
@@ -48,19 +48,21 @@ export default function Contact({ selectedProduct = null }) {
   const [formStartedAt] = useState(() => Date.now());
   const [form, setForm] = useState({
     name: '', company: '', email: '', phone: '',
-    productType: selectedProductInquiryCategory(selectedProduct), quantity: '', material: '', logoPlacement: '',
+    productType: inquiryProductCategory(selectedProduct), quantity: '', material: '', logoPlacement: '',
     dimensions: '', message: '', targetMarket: '', timeline: '', website: '',
   });
 
   const update = (field, value) => {
-    if (field === 'productType' && value !== selectedProductInquiryCategory(inquiryProduct)) setInquiryProduct(null);
+    if (field === 'productType' && value !== inquiryProductCategory(inquiryProduct)) setInquiryProduct(null);
     setForm(prev => ({
       ...prev,
       [field]: value,
       ...(field === 'productType' ? { quantity: '' } : {}),
     }));
   };
-  const activeMoqPolicy = inquiryProduct ? null : CUSTOM_MOQ_BY_PRODUCT_TYPE[form.productType];
+  const activeMoqPolicy = inquiryProduct && !inquiryProduct.customProduction
+    ? null
+    : CUSTOM_MOQ_BY_PRODUCT_TYPE[form.productType];
   const quantityOptions = activeMoqPolicy?.options || DEFAULT_QUANTITY_OPTIONS;
   const updateVerificationToken = useCallback((token) => {
     verificationToken.current = token;
@@ -222,7 +224,12 @@ export default function Contact({ selectedProduct = null }) {
                 <p>Product inquiry</p>
                 <strong>{inquiryProduct.title}</strong>
                 <p>This product name and page link will be included with your request.</p>
-                <button type="button" onClick={() => setInquiryProduct(null)}>Remove product selection</button>
+                <button type="button" disabled={submitting} onClick={() => {
+                  if (submissionInFlight.current) return;
+                  setInquiryProduct(null);
+                  setForm(prev => ({ ...prev, quantity: '' }));
+                  setStep(1);
+                }}>Remove product selection</button>
               </div> : null}
               {step === 1 && (
                 <div className="space-y-8">

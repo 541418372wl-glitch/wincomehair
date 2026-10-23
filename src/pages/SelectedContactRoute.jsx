@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import Contact from './Contact';
-import { findSelectedProduct } from '../data/selectedProductStyles';
+import { findInquiryProduct } from '../data/productInquiry';
 
 export default function SelectedContactRoute() {
   const { search } = useLocation();
@@ -9,6 +9,6 @@ export default function SelectedContactRoute() {
   // selection after hydration, and reset the form when the selection changes.
   const [activeSearch, setActiveSearch] = useState('');
   useEffect(() => setActiveSearch(search), [search]);
-  const product = findSelectedProduct(new URLSearchParams(activeSearch).get('product'));
+  const product = findInquiryProduct(new URLSearchParams(activeSearch).get('product'));
   return <Contact key={product?.slug || 'general'} selectedProduct={product || null} />;
 }

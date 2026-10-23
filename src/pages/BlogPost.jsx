@@ -4,6 +4,7 @@ import { buyerDecisionClusters } from '../data/buyerDecisionClusters';
 import { selectRelatedArticles } from '../data/relatedArticles';
 import { waLink } from '../lib/whatsapp';
 import { ORGANIZATION_ID, SITE, WEBSITE_ID } from '../components/SEO';
+import { canonicalPath } from '../lib/canonicalPath';
 
 const articleBySlug = new Map(articles.map(article => [article.slug, article]));
 
@@ -154,7 +155,7 @@ export default function BlogPost() {
   }
 
   const faqItems = post.sections.filter(s => s.t === 'faq').flatMap(s => s.items);
-  const url = SITE + location.pathname;
+  const url = SITE + canonicalPath(location.pathname);
 
   const jsonLd = {
     '@context': 'https://schema.org',

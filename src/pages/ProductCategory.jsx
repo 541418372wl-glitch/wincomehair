@@ -40,7 +40,7 @@ function ProductCard({ product }) {
 
 export default function ProductCategory() {
   const { category } = useParams();
-  const data = categoryMap[category];
+  const data = Object.prototype.hasOwnProperty.call(categoryMap, category) ? categoryMap[category] : undefined;
 
   if (!data) {
     return (
