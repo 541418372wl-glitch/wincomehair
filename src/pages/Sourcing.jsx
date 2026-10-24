@@ -11,10 +11,10 @@ const orderFacts = [
 const moqRows = [
   ['Hair claw clips — acetate, ABS, metal or resin', '1,000 pcs', 'Custom production MOQ per design per color'],
   ['Hair clips & barrettes — acetate, metal or decorated', '2,000 pcs', 'Custom production MOQ per design per color'],
-  ['Headbands', 'Usually 200–300 pcs', 'Fabric, padding, decoration and construction determine the minimum'],
-  ['Silk scrunchies', 'From 200 pcs', 'Fabric grade, size, stitching and labels affect the quotation'],
-  ['Other fabric scrunchies', 'Usually 300–500 pcs', 'Material, fullness, color split and packaging affect the minimum'],
-  ['Hair bows', 'Usually 200–300 pcs', 'Ribbon, layering, clip hardware and branding affect setup'],
+  ['Headbands', '1,000 pcs', 'Applies to all listed headbands, including selected styles'],
+  ['Silk scrunchies', '1,500 pcs', 'Fabric grade, size, stitching and labels affect the quotation'],
+  ['Other fabric scrunchies', '1,500 pcs', 'Includes selected styles; confirm materials, colors and packaging'],
+  ['Hair bows', '1,500 pcs', 'Applies to all listed bows, including selected styles'],
 ];
 
 const steps = [

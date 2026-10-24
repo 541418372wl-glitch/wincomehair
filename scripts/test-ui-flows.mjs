@@ -339,13 +339,14 @@ for (const product of [...selectedProducts, ...catalogProducts.map(item => findI
     test.app.mount({ selectedProduct: product }); await flush();
     const expectedCategory = { 'hair-claw-clips': 'claw-clips', 'hair-bows': 'bows', 'hair-clips-barrettes': 'pins' }[product.category] || product.category;
     assert.equal(document.getElementById('productType').value, expectedCategory);
-    if (product.customProduction && ['claw-clips', 'pins'].includes(expectedCategory)) {
-      assert.ok(document.querySelector('form').textContent.includes(expectedCategory === 'claw-clips'
-        ? 'Custom production MOQ: 1,000 pcs per design per color.'
-        : 'Custom production MOQ: 2,000 pcs per design per color.'));
+    if (product.customProduction) {
+      const minimum = { 'claw-clips': '1,000', pins: '2,000', headbands: '1,000', scrunchies: '1,500', bows: '1,500' }[expectedCategory];
+      assert.ok(document.querySelector('form').textContent.includes('Custom production MOQ: ' + minimum + ' pcs'));
       assert.equal(document.querySelector('#quantity option[value="200-999"]'), null);
-      assert.equal(Boolean(document.querySelector('#quantity option[value="1000-1999"]')), expectedCategory === 'claw-clips');
+      assert.equal(Boolean(document.querySelector('#quantity option[value="1000-1999"]')), ['claw-clips', 'headbands'].includes(expectedCategory));
+      assert.equal(Boolean(document.querySelector('#quantity option[value="1500-1999"]')), ['scrunchies', 'bows'].includes(expectedCategory));
     } else {
+      assert.equal(expectedCategory, 'claw-clips', 'Only selected claw styles retain separately confirmed minimums');
       assert.ok(!document.querySelector('form').textContent.includes('Custom production MOQ:'));
     }
     assert.match(document.querySelector('.selected-inquiry-summary').textContent, new RegExp(product.title));
@@ -418,6 +419,42 @@ for (const removalStep of [1, 2, 3]) {
     assert.match(document.querySelector('form').textContent, /Custom production MOQ: 1,000 pcs/);
     test.submit(); await flush();
     assert.ok(document.getElementById('productType'), 'A cleared quantity cannot advance or submit');
+    assert.equal(test.requests.length, 0);
+  } finally { test.cleanup(); }
+}
+
+// Category policy applies to generic inquiries as well as every selected style.
+for (const category of ['headbands', 'scrunchies', 'bows']) {
+  const test = await harness();
+  try {
+    test.app.mount(); await flush();
+    await test.input('productType', category);
+    const firstRange = category === 'headbands' ? '1000-1999' : '1500-1999';
+    assert.equal(document.querySelector('#quantity option[value="200-999"]'), null);
+    if (category !== 'headbands') assert.equal(document.querySelector('#quantity option[value="1000-1999"]'), null);
+    assert.ok(document.querySelector('#quantity option[value="sample-stock-below-moq"]'));
+    // An injected obsolete option cannot advance past the validated quantity step.
+    const injected = document.createElement('option'); injected.value = '200-999';
+    document.getElementById('quantity').appendChild(injected);
+    await test.input('quantity', '200-999');
+    test.submit(); await flush();
+    assert.ok(document.getElementById('quantity'));
+    assert.equal(test.requests.length, 0);
+    await test.input('quantity', firstRange);
+    test.submit(); await flush();
+    assert.ok(document.getElementById('material'), 'Approved production range advances');
+  } finally { test.cleanup(); }
+}
+{
+  const test = await harness();
+  try {
+    test.app.mount(); await flush();
+    await test.input('productType', 'headbands');
+    await test.input('quantity', '1000-1999');
+    await test.input('productType', 'scrunchies');
+    assert.equal(document.getElementById('quantity').value, '');
+    test.submit(); await flush();
+    assert.ok(document.getElementById('quantity'), 'Changing category cannot carry a below-minimum quantity forward');
     assert.equal(test.requests.length, 0);
   } finally { test.cleanup(); }
 }

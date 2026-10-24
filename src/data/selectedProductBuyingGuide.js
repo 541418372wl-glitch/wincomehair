@@ -8,7 +8,7 @@ export const selectedProductBuyingGuide = {
     faq: [
       { question: 'Does 15 × 25 cm describe the bow or the clip?', answer: 'It describes the finished bow: approximately 15 cm wide and 25 cm long including the tails. It is not the length of the metal barrette. Manual measurements may vary slightly.' },
       { question: 'How does this style fasten?', answer: 'This bow uses a spring barrette on the back. Compare the closure and ribbon attachment on a sample with the hairstyle you intend to use.' },
-      { question: 'What should I include in a wholesale inquiry?', answer: 'Reference the Textured Long-Tail Bow Barrette and include preferred colors, quantity, destination and required delivery date. Availability, minimum quantities and delivery timing are confirmed for your selection.' },
+      { question: 'What should I include in a wholesale inquiry?', answer: 'Reference the Textured Long-Tail Bow Barrette and include preferred colors, quantity, destination and required delivery date. Availability and delivery timing are confirmed for your selection.' },
     ],
   },
   velvetBow: {
@@ -74,7 +74,7 @@ export const selectedProductBuyingGuide = {
     faq: [
       { question: 'How do the two fabric options differ?', answer: 'Both are 100% polyester. The regular solid-color fabric option has an approximate outer diameter of 13–14 cm; the larger satin option is approximately 16–18 cm. Select the fabric option before comparing sizes.' },
       { question: 'Is the satin option made from silk?', answer: 'No. The satin option is polyester charmeuse with a silk-like appearance. Satin describes the fabric construction; this product is not a mulberry silk scrunchie.' },
-      { question: 'What should I include in an order inquiry?', answer: 'Specify regular fabric or larger satin, preferred colors, quantity for each option, destination and required delivery date. Minimum order quantities, availability and delivery timing are confirmed for that selection.' },
+      { question: 'What should I include in an order inquiry?', answer: 'Specify regular fabric or larger satin, preferred colors, quantity for each option, destination and required delivery date. Availability and delivery timing are confirmed for that selection.' },
     ],
   },
   silk: {
@@ -85,7 +85,7 @@ export const selectedProductBuyingGuide = {
     faq: [
       { question: 'Which outer diameter goes with each listed width?', answer: 'The listed widths of 2, 4, 6 and 8 cm correspond to approximate finished outer diameters of 6, 8, 12 and 16 cm respectively. These are separate size options; the same outer diameter does not apply to all four.' },
       { question: 'What is the fabric and inner construction?', answer: 'The fabric is 100% mulberry silk, with an elastic inner band. The listed width and outer diameter describe the product dimensions; they do not specify the elastic opening or how many times it will wrap around a ponytail.' },
-      { question: 'How do I request a quote for several sizes?', answer: 'List each required width with its corresponding outer diameter, preferred colors and quantity per option. Add your destination and required delivery date so availability, minimum order quantities and timing can be confirmed.' },
+      { question: 'How do I request a quote for several sizes?', answer: 'List each required width with its corresponding outer diameter, preferred colors and quantity per option. Add your destination and required delivery date so availability and timing can be confirmed.' },
     ],
   },
   rhinestone: {
@@ -96,7 +96,7 @@ export const selectedProductBuyingGuide = {
     faq: [
       { question: 'Is this a silk scrunchie, and how are the rhinestones attached?', answer: 'The fabric is 100% polyester charmeuse satin, not silk. The rhinestones are attached using a hot-fix process.' },
       { question: 'How should the embellished fabric be cared for?', answer: 'Gently hand wash in cold water and avoid rubbing the embellished area. Do not machine wash, spin-dry or tumble dry at high temperature. Dry flat in the shade.' },
-      { question: 'What information is needed for a quote?', answer: 'Reference the Rhinestone Satin Scrunchie and specify preferred colors, quantity, destination and required delivery date. Availability, minimum order quantities and delivery timing are confirmed for your request.' },
+      { question: 'What information is needed for a quote?', answer: 'Reference the Rhinestone Satin Scrunchie and specify preferred colors, quantity, destination and required delivery date. Availability and delivery timing are confirmed for your request.' },
     ],
   },
   ruched: {

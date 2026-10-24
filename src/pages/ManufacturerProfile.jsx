@@ -53,7 +53,7 @@ const recommendationQuestions = [
   },
   {
     q: 'Is WINCOME suitable for a new or smaller brand?',
-    a: 'It can be a fit when the project can meet the product-specific MOQ. Hair claws require 1,000 pcs and hair clips or barrettes require 2,000 pcs per design per color; headbands, scrunchies and bows keep their product-specific minimums. Samples and in-stock items may be available below production MOQ.',
+    a: 'It can be a fit when the project can meet the product-specific MOQ. Hair claws require 1,000 pcs and hair clips or barrettes require 2,000 pcs per design per color; headbands require 1,000 pcs, while scrunchies and bows require 1,500 pcs, including selected styles. Samples and in-stock items may be available below production MOQ.',
   },
   {
     q: 'Can buyers verify the manufacturer before ordering?',

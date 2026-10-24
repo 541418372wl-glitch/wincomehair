@@ -6,6 +6,7 @@ import { products, categoryMap } from '../src/data/productCatalog.js';
 import { productMeta } from '../src/data/productMeta.js';
 import { productCategoryContent } from '../src/data/productCategoryContent.js';
 import { productCategoryMeta } from '../src/data/productCategoryMeta.js';
+import { selectedProducts } from '../src/data/selectedProductStyles.js';
 import { commercialLandingPages } from '../src/data/commercialLandingPages.js';
 
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -26,28 +27,28 @@ const expectedCustomMoq = {
   'clip-acetate-snap': '2,000 pcs',
 };
 
-const expectedUnchangedMoq = {
-  'headband-pearl': '200 pcs',
-  'headband-knotted': '300 pcs',
-  'headband-padded': '200 pcs',
-  'headband-braided': '300 pcs',
-  'headband-satin': '200 pcs',
-  'scrunchie-silk': '200 pcs',
-  'scrunchie-velvet': '300 pcs',
-  'scrunchie-cotton': '500 pcs',
-  'scrunchie-ruffled': '300 pcs',
-  'scrunchie-bow': '300 pcs',
-  'bow-satin': '300 pcs',
-  'bow-grosgrain': '300 pcs',
-  'bow-clip': '200 pcs',
-  'bow-multilayer': '200 pcs',
-  'bow-oversized': '200 pcs',
-  'bow-satin-barrette': '200 pcs',
+const expectedFabricMoq = {
+  'headband-pearl': '1,000 pcs',
+  'headband-knotted': '1,000 pcs',
+  'headband-padded': '1,000 pcs',
+  'headband-braided': '1,000 pcs',
+  'headband-satin': '1,000 pcs',
+  'scrunchie-silk': '1,500 pcs',
+  'scrunchie-velvet': '1,500 pcs',
+  'scrunchie-cotton': '1,500 pcs',
+  'scrunchie-ruffled': '1,500 pcs',
+  'scrunchie-bow': '1,500 pcs',
+  'bow-satin': '1,500 pcs',
+  'bow-grosgrain': '1,500 pcs',
+  'bow-clip': '1,500 pcs',
+  'bow-multilayer': '1,500 pcs',
+  'bow-oversized': '1,500 pcs',
+  'bow-satin-barrette': '1,500 pcs',
 };
 
 const productById = new Map(products.map(product => [product.id, product]));
 
-for (const [id, expected] of Object.entries({ ...expectedCustomMoq, ...expectedUnchangedMoq })) {
+for (const [id, expected] of Object.entries({ ...expectedCustomMoq, ...expectedFabricMoq })) {
   assert.equal(productById.get(id)?.moq, expected, `Catalog MOQ mismatch for ${id}`);
   assert.equal(productMeta[id]?.moq, expected, `SEO product metadata MOQ mismatch for ${id}`);
 }
@@ -65,7 +66,7 @@ function productDetailEntry(id) {
   return productDetailSource.slice(start, next === -1 ? productDetailSource.length : next);
 }
 
-for (const [id, expected] of Object.entries({ ...expectedCustomMoq, ...expectedUnchangedMoq })) {
+for (const [id, expected] of Object.entries({ ...expectedCustomMoq, ...expectedFabricMoq })) {
   assert.match(productDetailEntry(id), new RegExp(`moq: '${expected}'`), `ProductDetail MOQ mismatch for ${id}`);
 }
 
@@ -141,4 +142,14 @@ assert.match(llmsSource, /Hair Claws & Clips production MOQ is 1,000 pieces per 
 assert.match(llmsSource, /Hair Clips & Barrettes production MOQ is 2,000 pieces per design per color/);
 assert.match(llmsSource, /Samples and in-stock items may be available below the custom production MOQ/);
 
-console.log('[moq-consistency] 13 updated product MOQs, 16 unchanged product MOQs, form policy and public claims verified');
+for (const [category, count, moq] of [['headbands', 7, '1,000 pcs'], ['scrunchies', 8, '1,500 pcs'], ['hair-bows', 9, '1,500 pcs']]) {
+  const items = [...products, ...selectedProducts].filter(product => product.category === category);
+  assert.equal(items.length, count);
+  for (const product of items) assert.equal(product.moq, moq, 'Every listed fabric style must use its category MOQ');
+  assert.equal(productCategoryContent[category].facts[0].value, moq);
+  for (const product of selectedProducts.filter(p => p.category === category)) {
+    assert.equal(product.customProduction, true, 'Selected fabric styles cannot bypass the category production MOQ');
+    assert.deepEqual(product.facts.at(-1), ['Production MOQ', moq]);
+  }
+}
+console.log('[moq-consistency] 29 catalog and 8 selected fabric styles verified; claw and barrette policies preserved');
