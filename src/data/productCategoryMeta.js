@@ -9,7 +9,7 @@ export const productCategoryMeta = {
   headbands: {
     shortName: 'Headbands',
     seoTitle: 'Custom Headbands Manufacturer & Supplier | WINCOME',
-    description: 'Custom padded, satin, velvet, knotted and pearl headbands for private-label brands. Choose cores, fabrics, logos and packaging. MOQ from 200 pieces.',
+    description: 'Custom padded, satin, velvet, knotted and pearl headbands for private-label brands. Choose cores, fabrics, logos and packaging. MOQ from 1,000 pieces.',
   },
   scrunchies: {
     shortName: 'Scrunchies',
@@ -19,7 +19,7 @@ export const productCategoryMeta = {
   'hair-bows': {
     shortName: 'Hair Bows',
     seoTitle: 'Custom Hair Bows Manufacturer & Supplier | WINCOME',
-    description: 'Custom satin, grosgrain, oversized and multi-layer hair bows for brands. Private-label colors, clips, logos and packaging. MOQ from 200 pieces.',
+    description: 'Custom satin, grosgrain, oversized and multi-layer hair bows for brands. Private-label colors, clips, logos and packaging. MOQ from 1,500 pieces.',
   },
   'hair-clips-barrettes': {
     shortName: 'Hair Clips & Barrettes',

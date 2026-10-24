@@ -52,7 +52,7 @@ export const productCategoryContent = {
   headbands: {
     positioning: 'Private-label headband production with adjustable structure, comfort, fabric, decoration and packaging for fashion and occasion collections.',
     facts: [
-      { label: 'Starting MOQ', value: '200 pcs', note: 'Depending on construction' },
+      { label: 'Starting MOQ', value: '1,000 pcs', note: 'All listed headband styles' },
       { label: 'Production', value: '12–18 days', note: 'After sample approval' },
       { label: 'Core styles', value: '5 directions', note: 'Padded, knotted, braided, satin and pearl' },
       { label: 'Sampling', value: '5–7 days', note: 'Fit and finish approval' },
@@ -77,10 +77,10 @@ export const productCategoryContent = {
   },
   scrunchies: {
     eyebrow: 'Wholesale Scrunchie Sourcing',
-    positioning: 'Custom programs are listed separately; their minimums do not automatically apply to the selected styles. Confirm availability, order quantities and delivery timing for your selection.',
+    positioning: 'Production MOQ is 1,500 pcs for all listed scrunchies, including selected styles. Samples and in-stock items can be discussed separately. Confirm availability and delivery timing for your selection.',
     faqTitle: 'Questions About Custom Scrunchie Programs',
     facts: [
-      { label: 'Starting MOQ', value: '200 pcs', note: 'Selected silk designs' },
+      { label: 'Starting MOQ', value: '1,500 pcs', note: 'All listed scrunchie styles' },
       { label: 'Production', value: '8–12 days', note: 'After sample approval' },
       { label: 'Materials', value: '4 core options', note: 'Silk, satin, velvet and cotton' },
       { label: 'Sampling', value: '5–7 days', note: 'Size, tension and finish approval' },
@@ -107,7 +107,7 @@ export const productCategoryContent = {
   'hair-bows': {
     positioning: 'Custom bow manufacturing for fashion, school, kids, event and gift collections with controllable ribbon, dimensions, hardware and presentation.',
     facts: [
-      { label: 'Starting MOQ', value: '200 pcs', note: 'Depending on bow construction' },
+      { label: 'Starting MOQ', value: '1,500 pcs', note: 'All listed bow styles' },
       { label: 'Production', value: '10–15 days', note: 'After sample approval' },
       { label: 'Core materials', value: 'Satin & grosgrain', note: 'Other approved fabrics available' },
       { label: 'Sampling', value: '5–7 days', note: 'Shape, tails and clip approval' },

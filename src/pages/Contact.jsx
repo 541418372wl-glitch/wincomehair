@@ -10,6 +10,7 @@ const SAMPLE_STOCK_OPTION = {
 };
 
 const VOLUME_OPTIONS = {
+  '1500-1999': { value: '1500-1999', label: '1,500–1,999 pcs' },
   '1000-1999': { value: '1000-1999', label: '1,000–1,999 pcs' },
   '2000-4999': { value: '2000-4999', label: '2,000–4,999 pcs' },
   '5000+': { value: '5000+', label: '5,000+ pcs (High Volume)' },
@@ -24,6 +25,18 @@ const DEFAULT_QUANTITY_OPTIONS = [
 ];
 
 const CUSTOM_MOQ_BY_PRODUCT_TYPE = {
+  headbands: {
+    message: 'Custom production MOQ: 1,000 pcs. Samples and in-stock items can be discussed separately.',
+    options: [SAMPLE_STOCK_OPTION, VOLUME_OPTIONS['1000-1999'], VOLUME_OPTIONS['2000-4999'], VOLUME_OPTIONS['5000+']],
+  },
+  scrunchies: {
+    message: 'Custom production MOQ: 1,500 pcs. Samples and in-stock items can be discussed separately.',
+    options: [SAMPLE_STOCK_OPTION, VOLUME_OPTIONS['1500-1999'], VOLUME_OPTIONS['2000-4999'], VOLUME_OPTIONS['5000+']],
+  },
+  bows: {
+    message: 'Custom production MOQ: 1,500 pcs. Samples and in-stock items can be discussed separately.',
+    options: [SAMPLE_STOCK_OPTION, VOLUME_OPTIONS['1500-1999'], VOLUME_OPTIONS['2000-4999'], VOLUME_OPTIONS['5000+']],
+  },
   'claw-clips': {
     message: 'Custom production MOQ: 1,000 pcs per design per color.',
     options: [SAMPLE_STOCK_OPTION, VOLUME_OPTIONS['1000-1999'], VOLUME_OPTIONS['2000-4999'], VOLUME_OPTIONS['5000+']],
@@ -64,6 +77,7 @@ export default function Contact({ selectedProduct = null }) {
     ? null
     : CUSTOM_MOQ_BY_PRODUCT_TYPE[form.productType];
   const quantityOptions = activeMoqPolicy?.options || DEFAULT_QUANTITY_OPTIONS;
+  const validQuantity = quantityOptions.some(option => option.value === form.quantity);
   const updateVerificationToken = useCallback((token) => {
     verificationToken.current = token;
     setVerified(Boolean(token));
@@ -74,10 +88,10 @@ export default function Contact({ selectedProduct = null }) {
     if (submissionInFlight.current || submissionBlocked.current) return;
     // Enter in earlier steps advances the form, never sends a partial request.
     if (step < 3) {
-      if (form.productType && form.quantity) setStep(step + 1);
+      if (form.productType && validQuantity) setStep(step + 1);
       return;
     }
-    if (step !== 3 || !form.name.trim() || !form.email.trim()) return;
+    if (step !== 3 || !form.productType || !validQuantity || !form.name.trim() || !form.email.trim()) return;
     // Honeypot: silently drop bot submissions
     if (form.website) return;
     const turnstileToken = verificationToken.current;
@@ -277,7 +291,7 @@ export default function Contact({ selectedProduct = null }) {
                     <button
                       type="button"
                       onClick={() => setStep(2)}
-                      disabled={!form.productType || !form.quantity}
+                      disabled={!form.productType || !validQuantity}
                       className="btn-primary w-full sm:w-auto justify-center disabled:opacity-40 disabled:cursor-not-allowed"
                     >
                       Next: Details →

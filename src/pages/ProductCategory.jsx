@@ -110,7 +110,7 @@ export default function ProductCategory() {
       <SelectedProductStyles key={category} category={category} />
 
       <section className="container-site pb-14 md:pb-20" aria-label={`${data.shortName} order facts`}>
-        {selection ? <div className="mb-5"><h2 className="text-xl text-navy">Custom Program Reference</h2><p className="mt-2 max-w-3xl text-sm text-tan">The figures below describe the existing custom collection. Confirm separate order terms for the selected styles above.</p></div> : null}
+        {selection ? <div className="mb-5"><h2 className="text-xl text-navy">Custom Program Reference</h2><p className="mt-2 max-w-3xl text-sm text-tan">{['headbands', 'scrunchies', 'hair-bows'].includes(category) ? 'The production MOQ applies to all listed styles, including the selected styles above. Samples and in-stock items can be discussed separately.' : 'The figures below describe the existing custom collection. Confirm separate order terms for the selected styles above.'}</p></div> : null}
         <div className="grid grid-cols-2 border border-bronze/10 bg-white md:grid-cols-4">
           {content.facts.map((fact, index) => (
             <div

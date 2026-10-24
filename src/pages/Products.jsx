@@ -21,6 +21,7 @@ const allProducts = [
     imageWidth: product.imageWidth,
     imageHeight: product.imageHeight,
     selectedStyle: true,
+    moq: product.moq,
   })),
   ...catalogProducts,
 ].map(product => ({
@@ -44,7 +45,7 @@ export default function Products() {
         </p>
 
         <p className="section-label">Custom Program Reference</p>
-        <p className="text-sm text-tan leading-relaxed mb-4">The program references below apply to existing custom production directions. Confirm separate order terms for the selected product styles.</p>
+        <p className="text-sm text-tan leading-relaxed mb-4">The program references below apply to existing custom production directions. Headbands start at 1,000 pcs; scrunchies and bows at 1,500 pcs, including selected styles. Samples and in-stock items can be discussed separately.</p>
         <div className="mb-12 grid grid-cols-2 border border-bronze/10 bg-white md:grid-cols-4" aria-label="Wholesale program facts">
           {[
             ['By category', 'Custom MOQ'],

@@ -33,7 +33,7 @@ export default function SelectedProductDetail({ product }) {
           {product.note ? <p className="selected-style-note">{product.note}</p> : null}
           <div className="selected-product-inquiry">
             <h2>Ask about this product</h2>
-            <p>Tell us your preferred colors, size option, quantity and destination. Availability, minimum order and delivery timing are confirmed for your request.</p>
+            <p>{product.moq ? `Production MOQ: ${product.moq}. Samples and in-stock items can be discussed separately. Tell us your preferred colors, size option, quantity and destination so availability and delivery timing can be confirmed.` : 'Tell us your preferred colors, size option, quantity and destination. Availability, minimum order and delivery timing are confirmed for your request.'}</p>
             <Link to={selectedProductInquiryPath(product)} className="btn-primary" onClick={() => void trackProductInquiry({ productId: product.slug, productName: product.title, method: 'quote_form' })}>Request a quote for this product →</Link>
           </div>
         </div>

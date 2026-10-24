@@ -33,9 +33,9 @@ const productCategories = [
 
 const featuredProducts = [
   { id: 'claw-butterfly', name: 'Butterfly Hair Claw Clips', image: '/assets/images/product-claw-butterfly.webp', moq: '1,000 pcs', leadTime: '15-18 days', material: 'Metal Frame + Resin' },
-  { id: 'headband-braided', name: 'Braided Velvet Headbands', image: '/assets/images/product-headband-braided.webp', moq: '300 pcs', leadTime: '12-15 days', material: 'Premium Velvet' },
-  { id: 'scrunchie-velvet', name: 'Velvet Scrunchies', image: '/assets/images/product-scrunchie-velvet.webp', moq: '300 pcs', leadTime: '10-12 days', material: 'Premium Velvet' },
-  { id: 'bow-clip', name: 'Bow Hair Clips', image: '/assets/images/product-bow-clip.webp', moq: '200 pcs', leadTime: '12-15 days', material: 'Fabric + Metal Clip' },
+  { id: 'headband-braided', name: 'Braided Velvet Headbands', image: '/assets/images/product-headband-braided.webp', moq: '1,000 pcs', leadTime: '12-15 days', material: 'Premium Velvet' },
+  { id: 'scrunchie-velvet', name: 'Velvet Scrunchies', image: '/assets/images/product-scrunchie-velvet.webp', moq: '1,500 pcs', leadTime: '10-12 days', material: 'Premium Velvet' },
+  { id: 'bow-clip', name: 'Bow Hair Clips', image: '/assets/images/product-bow-clip.webp', moq: '1,500 pcs', leadTime: '12-15 days', material: 'Fabric + Metal Clip' },
 ];
 
 const homeLanding = commercialLandingPages.home;

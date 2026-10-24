@@ -3,7 +3,7 @@ import { useState } from 'react';
 const faqData = [
   {
     q: 'What is the minimum order quantity (MOQ)?',
-    a: 'Custom production MOQ is 1,000 pcs per design per color for Hair Claws & Clips and 2,000 pcs per design per color for Hair Clips & Barrettes. Headbands, scrunchies and bows retain their product-specific MOQ. Samples and in-stock items may be available below the production MOQ.'
+    a: 'Custom production MOQ is 1,000 pcs per design per color for Hair Claws & Clips and 2,000 pcs per design per color for Hair Clips & Barrettes. Headbands require 1,000 pcs; scrunchies and bows require 1,500 pcs, including selected styles. Samples and in-stock items may be available below the production MOQ.'
   },
   {
     q: 'How long does production take?',

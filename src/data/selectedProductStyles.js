@@ -246,6 +246,15 @@ selectedProductStyles['hair-bows'] = {
   ],
 };
 
+// Confirmed category production minimums also apply to these selected styles.
+const selectedProductionMoq = { headbands: '1,000 pcs', scrunchies: '1,500 pcs', 'hair-bows': '1,500 pcs' };
+for (const [category, moq] of Object.entries(selectedProductionMoq)) {
+  selectedProductStyles[category].items = selectedProductStyles[category].items.map(product => ({
+    ...product, moq, customProduction: true,
+    facts: [...product.facts, ['Production MOQ', moq]],
+  }));
+}
+
 const detailSlugs = {
   texturedBow: 'textured-long-tail-bow-barrette',
   velvetBow: 'long-tail-velvet-bow-hair-clip',
