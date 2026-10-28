@@ -3,11 +3,11 @@ import { commercialLandingPages } from './commercialLandingPages.js';
 const hairClipLanding = commercialLandingPages.hairClips;
 
 export const products = [
-  { id: 'claw-acetate', name: 'Acetate Hair Claw Clips', category: 'hair-claw-clips', image: '/assets/images/product-claw-acetate.webp', moq: '1,000 pcs', leadTime: '12-15 days', material: 'Cellulose Acetate' },
-  { id: 'claw-metal', name: 'Metal Hair Claw Clips', category: 'hair-claw-clips', image: '/assets/images/product-claw-metal.webp', moq: '1,000 pcs', leadTime: '15-18 days', material: 'Zinc Alloy' },
-  { id: 'claw-plastic', name: 'Plastic Hair Claws', category: 'hair-claw-clips', image: '/assets/images/product-claw-plastic.webp', moq: '1,000 pcs', leadTime: '10-14 days', material: 'ABS Plastic' },
-  { id: 'claw-butterfly', name: 'Butterfly Hair Claw Clips', category: 'hair-claw-clips', image: '/assets/images/product-claw-butterfly.webp', moq: '1,000 pcs', leadTime: '15-18 days', material: 'Metal Frame + Resin' },
-  { id: 'claw-rectangular', name: 'Rectangular Hair Claw Clips', category: 'hair-claw-clips', image: '/assets/images/product-claw-rectangular.webp', moq: '1,000 pcs', leadTime: '12-15 days', material: 'Cellulose Acetate / Resin' },
+  { id: 'claw-acetate', name: 'Acetate Hair Claw Clips', category: 'hair-claw-clips', image: '/assets/images/product-claw-acetate.webp', moq: '1,000 pcs', leadTime: 'Production schedule on request', material: 'Cellulose Acetate' },
+  { id: 'claw-metal', name: 'Metal Hair Claw Clips', category: 'hair-claw-clips', image: '/assets/images/product-claw-metal.webp', moq: '1,000 pcs', leadTime: 'Production schedule on request', material: 'Zinc Alloy' },
+  { id: 'claw-plastic', name: 'Plastic Hair Claws', category: 'hair-claw-clips', image: '/assets/images/product-claw-plastic.webp', moq: '1,000 pcs', leadTime: 'Production schedule on request', material: 'ABS Plastic' },
+  { id: 'claw-butterfly', name: 'Butterfly Hair Claw Clips', category: 'hair-claw-clips', image: '/assets/images/product-claw-butterfly.webp', moq: '1,000 pcs', leadTime: 'Production schedule on request', material: 'Metal Frame + Resin' },
+  { id: 'claw-rectangular', name: 'Rectangular Hair Claw Clips', category: 'hair-claw-clips', image: '/assets/images/product-claw-rectangular.webp', moq: '1,000 pcs', leadTime: 'Production schedule on request', material: 'Cellulose Acetate / Resin' },
   { id: 'headband-pearl', name: 'Pearl Embellished Headbands', category: 'headbands', image: '/assets/images/product-headband-pearl.webp', moq: '1,000 pcs', leadTime: '15-18 days', material: 'Metal + Faux Pearl' },
   { id: 'headband-knotted', name: 'Knotted Fabric Headbands', category: 'headbands', image: '/assets/images/product-headband-knotted.webp', moq: '1,000 pcs', leadTime: '12-15 days', material: 'Cotton / Silk / Velvet' },
   { id: 'headband-padded', name: 'Padded Cushion Headbands', category: 'headbands', image: '/assets/images/product-headband-padded.webp', moq: '1,000 pcs', leadTime: '12-15 days', material: 'Fabric + Foam' },
@@ -31,7 +31,7 @@ export const products = [
   { id: 'clip-pearl-barrette', name: 'Pearl Cluster Barrettes', category: 'hair-clips-barrettes', image: '/assets/images/product-clip-pearl-barrette.webp', moq: '2,000 pcs', leadTime: '12-15 days', material: 'Metal + Faux Pearl' },
   { id: 'clip-acetate-snap', name: 'Acetate Snap Hair Clips', category: 'hair-clips-barrettes', image: '/assets/images/product-clip-acetate-snap.webp', moq: '2,000 pcs', leadTime: '12-15 days', material: 'Cellulose Acetate' },
   { id: 'bow-satin-barrette', name: 'Satin Ribbon Bow Barrettes', category: 'hair-bows', image: '/assets/images/product-bow-satin-barrette.webp', moq: '1,500 pcs', leadTime: '10-12 days', material: 'Premium Satin' },
-  { id: 'claw-butterfly-resin', name: 'Resin Butterfly Claw Clips', category: 'hair-claw-clips', image: '/assets/images/product-claw-butterfly-resin.webp', moq: '1,000 pcs', leadTime: '15-18 days', material: 'Resin + Metal Frame' },
+  { id: 'claw-butterfly-resin', name: 'Resin Butterfly Claw Clips', category: 'hair-claw-clips', image: '/assets/images/product-claw-butterfly-resin.webp', moq: '1,000 pcs', leadTime: 'Production schedule on request', material: 'Resin + Metal Frame' },
 ];
 
 export const productCategories = [

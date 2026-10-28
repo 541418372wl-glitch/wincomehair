@@ -23,12 +23,13 @@ export const productCategoryContent = {
         },
       ],
     },
+    quoteBrief: 'For a custom quote, share the style or reference, quantity and color split, logo artwork and placement, packaging, destination and required delivery date. Logo methods and the production schedule need confirmation for the selected construction.',
     positioning: 'Built for fashion, beauty and private-label programs that need reliable grip, repeatable color and retail-ready presentation.',
     facts: [
       { label: 'Custom MOQ', value: '1,000 pcs', note: 'Per design per color' },
-      { label: 'Production', value: '10–18 days', note: 'After sample approval' },
+      { label: 'Production', value: 'Confirm separately', note: 'Schedule depends on specifications, quantity and sample approval' },
       { label: 'Materials', value: '4 core options', note: 'Acetate, ABS, metal and resin' },
-      { label: 'Sampling', value: '5–7 days', note: 'For a physical pre-production sample' },
+      { label: 'Sampling', value: 'Approx. 15 days', note: 'Confirm the sample schedule for your selected style and requirements' },
     ],
     customization: [
       { area: 'Construction', options: 'Cellulose acetate, ABS plastic, zinc alloy, resin or mixed-material designs' },

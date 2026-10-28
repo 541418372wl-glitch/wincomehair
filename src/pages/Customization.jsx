@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 
 const capabilities = [
-  { title: 'Logo & Branding', icon: 'M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5', desc: 'Laser engraving, foil stamping, metal plates, woven labels, custom printed ribbon — your brand identity applied with precision.' },
+  { title: 'Logo & Branding', icon: 'M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5', desc: 'Discuss laser engraving, foil stamping, metal plates, woven labels or printed ribbon. The suitable method depends on the selected material, construction and logo placement.' },
   { title: 'Color Customization', icon: 'M12 22C6.5 22 2 17.5 2 12S6.5 2 12 2s10 4.5 10 10-4.5 10-10 10z', desc: 'Pantone color matching across all materials. Custom colors for acetate, fabric, metal plating, and embellishments.' },
   { title: 'Material Selection', icon: 'M4 7v10c0 2 1 3 3 3h10c2 0 3-1 3-3V7', desc: 'Choose from cellulose acetate, zinc alloy, mulberry silk, premium satin, organic cotton, velvet, and more.' },
   { title: 'Packaging Design', icon: 'M20 12H4m16 0l-4-4m4 4l-4 4', desc: 'Custom packaging from individual cards to luxury gift boxes. Complete unboxing experience design.' },
@@ -19,23 +19,23 @@ const materialsList = [
 ];
 
 const customSteps = [
-  { step: '01', title: 'Share Your Vision', desc: 'Send us your design brief, reference images, or rough sketches. Our team will create initial specifications within 24 hours.' },
-  { step: '02', title: 'Design & Prototype', desc: 'We produce digital 3D mockups and physical samples. Iterate until every detail matches your brand requirements.' },
-  { step: '03', title: 'Bulk Production', desc: 'Once you approve the final sample, we move to full production with regular photo updates at every milestone.' },
+  { step: '01', title: 'Share Your Vision', desc: 'Send the selected style or reference, quantity, colors, logo artwork and placement, packaging and delivery requirements so we can review the brief.' },
+  { step: '02', title: 'Design & Prototype', desc: 'Physical sampling takes approximately 15 days. Confirm the sample schedule, artwork and any development or revision steps for your specific brief.' },
+  { step: '03', title: 'Bulk Production', desc: 'Confirm the bulk production schedule separately for the approved specifications, quantity and packaging. Agree on the sample approval and delivery requirements before production.' },
   { step: '04', title: 'Quality & Shipping', desc: 'Final QC inspection, professional packaging, and global shipping via your preferred logistics method.' },
 ];
 
 const serviceFacts = [
   { value: 'By product', label: 'Custom MOQ' },
   { value: 'Within 24h', label: 'Initial response' },
-  { value: '5–7 days', label: 'Physical sample' },
-  { value: '8–18 days', label: 'Typical production' },
+  { value: 'Approx. 15 days', label: 'Physical sample' },
+  { value: 'Confirm separately', label: 'Production schedule' },
 ];
 
 const privateLabelRows = [
   ['Product development', 'Existing catalog styles, modified constructions or new shapes with custom dimensions and performance requirements'],
   ['Color & finish', 'Pantone-matched materials, custom prints, metal plating, surface coating and coordinated seasonal color sets'],
-  ['Product branding', 'Laser engraving, foil stamping, metal logo plates, woven labels and printed ribbon'],
+  ['Product branding', 'Share logo artwork, intended size and placement. Confirm a suitable method for the selected material and construction before sampling'],
   ['Retail packaging', 'Logo cards, hang tags, pouches, gift boxes, inserts, barcodes and display-ready packaging'],
   ['Compliance support', 'Material documentation, agreed testing, destination labels and pre-shipment inspection records'],
 ];
@@ -142,7 +142,14 @@ export default function Customization() {
         {/* CTA */}
         <div className="text-center max-w-2xl mx-auto">
           <h2 className="text-display-sm text-navy mb-4">Start Your <span className="text-gold">Custom Project</span></h2>
-          <p className="text-tan text-lg mb-8">Tell us your requirements and receive a free design mockup with factory-direct pricing within 24 hours.</p>
+          <p className="text-tan text-lg mb-8">Send the details below with your inquiry. We will review the selected construction, branding and packaging before confirming the sample plan and quotation.</p>
+          <ul aria-label="Custom quote checklist" className="mb-8 list-disc space-y-3 pl-5 text-left text-sm leading-relaxed text-tan">
+            <li><strong className="font-medium text-navy">Style:</strong> Product name or link, reference photos or drawings, and the changes you need.</li>
+            <li><strong className="font-medium text-navy">Quantity and colors:</strong> Total quantity, quantity per style and color, and color references.</li>
+            <li><strong className="font-medium text-navy">Logo:</strong> Artwork file, desired size and placement on the product or packaging. The suitable process needs confirmation.</li>
+            <li><strong className="font-medium text-navy">Packaging:</strong> Card, pouch or box requirements, packing quantities, labels and barcodes if needed.</li>
+            <li><strong className="font-medium text-navy">Delivery:</strong> Destination country or region and required arrival date. Physical sampling takes approximately 15 days; bulk production and shipping schedules are confirmed separately.</li>
+          </ul>
           <Link to="/contact" className="btn-primary text-base px-12 py-5">
             Request Custom Quote <span className="ml-1">→</span>
           </Link>

@@ -8,7 +8,7 @@ import SelectedProductDetail from './SelectedProductDetail';
 const products = {
   'claw-acetate': {
     name: 'Acetate Hair Claw Clips', image: '/assets/images/product-claw-acetate.webp', category: 'Hair Claws & Clips',
-    moq: '1,000 pcs', leadTime: '12-15 days', material: 'Cellulose Acetate', style: 'Classic / Modern / Luxury',
+    moq: '1,000 pcs', leadTime: 'Production schedule on request', material: 'Cellulose Acetate', style: 'Classic / Modern / Luxury',
     sizes: 'Small (6cm) / Medium (8cm) / Large (11cm)', finish: 'Matte / Gloss / Tortoiseshell Pattern',
     logo: 'Laser engraving, gold foil stamping, metal plate', packaging: 'Individual polybag, custom card, gift box',
     description: [
@@ -22,7 +22,7 @@ const products = {
   },
   'claw-metal': {
     name: 'Metal Hair Claw Clips', image: '/assets/images/product-claw-metal.webp', category: 'Hair Claws & Clips',
-    moq: '1,000 pcs', leadTime: '15-18 days', material: 'Zinc Alloy', style: 'Classic / Minimal / Luxury',
+    moq: '1,000 pcs', leadTime: 'Production schedule on request', material: 'Zinc Alloy', style: 'Classic / Minimal / Luxury',
     sizes: 'Small (6cm) / Medium (8cm) / Large (11cm)', finish: 'Gold / Silver / Rose Gold / Gunmetal plating',
     logo: 'Laser engraving, metal plate, charm tag', packaging: 'Individual polybag, display card, velvet pouch',
     description: [
@@ -36,7 +36,7 @@ const products = {
   },
   'claw-plastic': {
     name: 'Plastic Hair Claws', image: '/assets/images/product-claw-plastic.webp', category: 'Hair Claws & Clips',
-    moq: '1,000 pcs', leadTime: '10-14 days', material: 'ABS Plastic', style: 'Everyday / Classic / Minimal',
+    moq: '1,000 pcs', leadTime: 'Production schedule on request', material: 'ABS Plastic', style: 'Everyday / Classic / Minimal',
     sizes: 'Small (6cm) / Medium (8cm) / Large (11cm)', finish: 'Gloss / Matte / Custom Pantone colors',
     logo: 'Pad printing, laser engraving, sticker label', packaging: 'Bulk polybag, display card',
     description: [
@@ -50,7 +50,7 @@ const products = {
   },
   'claw-butterfly': {
     name: 'Butterfly Hair Claw Clips', image: '/assets/images/product-claw-butterfly.webp', category: 'Hair Claws & Clips',
-    moq: '1,000 pcs', leadTime: '15-18 days', material: 'Metal Frame + Resin', style: 'Elegant / Vintage / Bridal',
+    moq: '1,000 pcs', leadTime: 'Production schedule on request', material: 'Metal Frame + Resin', style: 'Elegant / Vintage / Bridal',
     sizes: 'Standard (7cm width)', finish: 'Gloss resin wings / Gold-tone frame',
     logo: 'Laser engraving, metal charm tag', packaging: 'Individual polybag, display card, gift box',
     description: [
@@ -190,7 +190,7 @@ const products = {
   },
   'claw-rectangular': {
     name: 'Rectangular Hair Claw Clips', image: '/assets/images/product-claw-rectangular.webp', category: 'Hair Claws & Clips',
-    moq: '1,000 pcs', leadTime: '12-15 days', material: 'Cellulose Acetate / Resin', style: 'Modern / Minimal / Office',
+    moq: '1,000 pcs', leadTime: 'Production schedule on request', material: 'Cellulose Acetate / Resin', style: 'Modern / Minimal / Office',
     sizes: 'Medium (7cm) / Large (9cm)', finish: 'Gloss / Matte / Marble patterns',
     logo: 'Laser engraving, foil stamping', packaging: 'Individual polybag, display card, gift box',
     description: [
@@ -400,7 +400,7 @@ const products = {
   },
   'claw-butterfly-resin': {
     name: 'Resin Butterfly Claw Clips', image: '/assets/images/product-claw-butterfly-resin.webp', category: 'Hair Claws & Clips',
-    moq: '1,000 pcs', leadTime: '15-18 days', material: 'Resin + Metal Frame', style: 'Statement / Feminine / Boho',
+    moq: '1,000 pcs', leadTime: 'Production schedule on request', material: 'Resin + Metal Frame', style: 'Statement / Feminine / Boho',
     sizes: 'Medium (7cm) / Large (9cm)', finish: 'Translucent resin / Gold-tone or rose-gold-tone frame',
     logo: 'Metal charm tag, laser engraving', packaging: 'Individual polybag, display card, gift box',
     description: [
@@ -547,7 +547,9 @@ export default function ProductDetail() {
             <article className="bg-sand/25 p-6 md:p-8">
               <h3 className="text-lg font-display text-navy mb-3">What is the MOQ and lead time?</h3>
               <p className="text-sm text-bronze/80 leading-relaxed">
-                {usesPerDesignColorMoq
+                {id.startsWith('claw-')
+                  ? `Custom production MOQ for ${product.name} is ${product.moq} per design per color. Samples and in-stock items may be available below that minimum. Physical sampling takes approximately 15 days. Confirm the bulk production schedule separately for the selected specifications, quantity and packaging.`
+                  : usesPerDesignColorMoq
                   ? `Custom production MOQ for ${product.name} is ${product.moq} per design per color. Samples and in-stock items may be available below that minimum. Standard production takes ${product.leadTime} after sample approval and deposit.`
                   : `MOQ for ${product.name} starts at ${product.moq}. Standard production takes ${product.leadTime} after sample approval and deposit. The final schedule depends on order quantity, customization and packaging.`}
               </p>
