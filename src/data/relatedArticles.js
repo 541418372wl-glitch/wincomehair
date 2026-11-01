@@ -1,4 +1,9 @@
 export const relatedArticleSlugs = {
+  'hair-accessory-packaging-guide': [
+    'private-label-hair-accessories-guide',
+    'how-to-source-hair-accessories-from-china',
+    'hair-accessories-moq-guide',
+  ],
   'best-claw-clips-fine-thin-hair': [
     'claw-clip-size-guide',
     'flexible-vs-rigid-claw-clips',

@@ -1,4 +1,5 @@
 import { scrunchieCareArticle } from './scrunchieCareArticle.js';
+import { hairAccessoryPackagingArticle } from './hairAccessoryPackagingArticle.js';
 import { scrunchieFitArticle } from './scrunchieFitArticle.js';
 // WINCOME Hair Accessories — Blog articles (structured content for /blog pages)
 import { redditArticles } from './redditArticles.js';
@@ -513,4 +514,5 @@ export const articles = [
       { t: 'p', x: 'Not sure what a realistic MOQ is for your product idea? Send us your target product, quantity and retail price — we will recommend the lowest-cost path, including which [catalog styles](/products) to test first. [Request a factory quote](/contact).' },
     ],
   },
+  hairAccessoryPackagingArticle,
 ];
