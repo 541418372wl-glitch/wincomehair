@@ -89,7 +89,7 @@ const pageMeta = {
   },
   '/customization': {
     title: 'Custom Hair Accessories OEM & Private Label | WINCOME',
-    description: 'Custom hair accessories OEM/ODM with Pantone colors, materials, logos, labels and retail packaging. Category-specific MOQs; samples in 5–7 days.',
+    description: 'Plan custom hair accessories by style, quantity per color, logo and packaging. Sampling takes about 15 days; confirm bulk timing with your quote.',
   },
   '/sourcing': {
     title: 'Hair Accessories MOQ, Samples & Production | WINCOME',
