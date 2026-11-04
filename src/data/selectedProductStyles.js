@@ -175,8 +175,15 @@ export const selectedProductStyles = {
 };
 
 selectedProductStyles['hair-claw-clips'] = {
-  title: 'Selected Claw Clip Styles',
-  intro: 'Compare the dimensions and unit weights of three claw clip styles. For these selections, minimum quantities and unit prices are quoted by style. Include your quantity per color when requesting a quote.',
+  title: 'Compare Three Claw Clip Styles',
+  intro: 'Start with the listed material, overall dimensions and unit weight. Minimum quantities and unit prices for these selected styles are confirmed individually.',
+  comparison: {
+    heading: 'Compare the product, then confirm the fit.',
+    note: 'Photos are not to scale. Overall dimensions do not specify jaw opening or effective gripping length. Maximum jaw opening, effective gripping length and tooth spacing are not currently available for these three styles. Suitability for a particular hair type and holding performance require sample evaluation.',
+    quoteHeading: 'Ready to compare quotations?',
+    quoteBrief: 'Share the selected style, quantity per color, packaging requirements and destination. We confirm the minimum order quantity and unit price for each style in the quotation.',
+    timing: 'Sampling takes about 15 days. Bulk production timing is confirmed separately.',
+  },
   items: [
     {
       id: 'crossedClaw', group: 'Claw clips', title: 'Long Crossed Acrylic Claw Clip',
