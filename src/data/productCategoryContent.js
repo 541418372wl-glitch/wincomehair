@@ -54,9 +54,9 @@ export const productCategoryContent = {
     positioning: 'Private-label headband production with adjustable structure, comfort, fabric, decoration and packaging for fashion and occasion collections.',
     facts: [
       { label: 'Starting MOQ', value: '1,000 pcs', note: 'All listed headband styles' },
-      { label: 'Production', value: '12–18 days', note: 'After sample approval' },
+      { label: 'Production', value: 'Confirm separately', note: 'Schedule depends on specifications, quantity and sample approval' },
       { label: 'Core styles', value: '5 directions', note: 'Padded, knotted, braided, satin and pearl' },
-      { label: 'Sampling', value: '5–7 days', note: 'Fit and finish approval' },
+      { label: 'Sampling', value: 'Approx. 15 days', note: 'Physical sample for fit and finish approval' },
     ],
     customization: [
       { area: 'Core & fit', options: 'Core width, curvature, end treatment, pressure and underside grip' },
@@ -82,9 +82,9 @@ export const productCategoryContent = {
     faqTitle: 'Questions About Custom Scrunchie Programs',
     facts: [
       { label: 'Starting MOQ', value: '1,500 pcs', note: 'All listed scrunchie styles' },
-      { label: 'Production', value: '8–12 days', note: 'After sample approval' },
+      { label: 'Production', value: 'Confirm separately', note: 'Schedule depends on specifications, quantity and sample approval' },
       { label: 'Materials', value: '4 core options', note: 'Silk, satin, velvet and cotton' },
-      { label: 'Sampling', value: '5–7 days', note: 'Size, tension and finish approval' },
+      { label: 'Sampling', value: 'Approx. 15 days', note: 'Physical sample for size, tension and finish approval' },
     ],
     customization: [
       { area: 'Fabric', options: 'Mulberry silk, satin, velvet, cotton and approved customer-specified materials' },
@@ -109,9 +109,9 @@ export const productCategoryContent = {
     positioning: 'Custom bow manufacturing for fashion, school, kids, event and gift collections with controllable ribbon, dimensions, hardware and presentation.',
     facts: [
       { label: 'Starting MOQ', value: '1,500 pcs', note: 'All listed bow styles' },
-      { label: 'Production', value: '10–15 days', note: 'After sample approval' },
+      { label: 'Production', value: 'Confirm separately', note: 'Schedule depends on specifications, quantity and sample approval' },
       { label: 'Core materials', value: 'Satin & grosgrain', note: 'Other approved fabrics available' },
-      { label: 'Sampling', value: '5–7 days', note: 'Shape, tails and clip approval' },
+      { label: 'Sampling', value: 'Approx. 15 days', note: 'Physical sample for shape, tails and clip approval' },
     ],
     customization: [
       { area: 'Ribbon & fabric', options: 'Satin, grosgrain and approved customer-specified materials or prints' },
@@ -141,9 +141,9 @@ export const productCategoryContent = {
     quoteBrief: 'For a useful first quote, share the clip type, approximate size, preferred material or finish, quantity, logo or packaging needs and destination market.',
     facts: [
       { label: 'Custom MOQ', value: '2,000 pcs', note: 'Per design per color' },
-      { label: 'Production', value: '8–18 days', note: 'After sample approval' },
+      { label: 'Production', value: 'Confirm separately', note: 'Schedule depends on specifications, quantity and sample approval' },
       { label: 'Product directions', value: '7 options', note: 'Everyday through embellished' },
-      { label: 'Sampling', value: '5–7 days', note: 'Closure and decoration approval' },
+      { label: 'Sampling', value: 'Approx. 15 days', note: 'Physical sample for closure and decoration approval' },
     ],
     customization: [
       { area: 'Base hardware', options: 'Snap clips, barrettes and other suitable closures in custom dimensions' },

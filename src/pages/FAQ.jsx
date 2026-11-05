@@ -7,11 +7,11 @@ const faqData = [
   },
   {
     q: 'How long does production take?',
-    a: 'Standard lead time is 12–18 days after sample approval, depending on product type, quantity, and customization complexity. Rush orders (7–10 days) are possible for certain products — please confirm availability when you inquire.'
+    a: 'Bulk production timing is confirmed separately based on the selected style, specifications, quantity and packaging. Share your required delivery date when requesting a quote so the production and shipping schedules can be checked for your order.'
   },
   {
     q: 'Do you provide physical samples before bulk production?',
-    a: 'Yes, always. We produce a physical pre-production sample within 5–7 business days for your approval before any bulk production begins. Sample shipping is via DHL/FedEx (1–3 days). Sample cost is typically credited toward your first bulk order.'
+    a: 'Physical pre-production sampling takes about 15 days, with sample approval before bulk production begins. Sample shipping is separate and is via DHL/FedEx (1–3 days). Sample cost is typically credited toward your first bulk order.'
   },
   {
     q: 'Can I use my own design / Pantone colors?',
