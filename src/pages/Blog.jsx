@@ -1,6 +1,49 @@
 import { Link } from 'react-router-dom';
 import { articles } from 'virtual:article-summaries';
 
+const buyingTopics = [
+  {
+    title: 'Styles & Materials',
+    description: 'Compare materials before choosing your product range.',
+    links: [
+      { label: 'Claw clip materials', to: '/blog/acetate-vs-plastic-claw-clips' },
+      { label: 'Silk vs satin scrunchies', to: '/blog/silk-vs-satin-scrunchies' },
+    ],
+  },
+  {
+    title: 'Size & Fit',
+    description: 'Know what to measure and what to check with samples.',
+    links: [
+      { label: 'Claw clip size guide', to: '/blog/claw-clip-size-guide' },
+      { label: 'Scrunchie fit guide', to: '/blog/scrunchie-too-loose-too-tight' },
+    ],
+  },
+  {
+    title: 'MOQ & Quotes',
+    description: 'Plan quantities and prepare a clear quotation brief.',
+    links: [
+      { label: 'MOQ planning guide', to: '/blog/hair-accessories-moq-guide' },
+      { label: 'Compare three claw clips', to: '/products/category/hair-claw-clips#selected-styles' },
+    ],
+  },
+  {
+    title: 'Packaging',
+    description: 'Match the packaging brief to the selected accessory.',
+    links: [
+      { label: 'Packaging guide', to: '/blog/hair-accessory-packaging-guide' },
+      { label: 'Customization options', to: '/customization' },
+    ],
+  },
+  {
+    title: 'Sourcing & Samples',
+    description: 'Prepare supplier checks, sample approvals and order details.',
+    links: [
+      { label: 'China sourcing checklist', to: '/blog/how-to-source-hair-accessories-from-china' },
+      { label: 'Quality review', to: '/quality' },
+    ],
+  },
+];
+
 export default function Blog() {
   return (
     <div className="pt-24">
@@ -12,6 +55,33 @@ export default function Blog() {
           for brands, wholesalers, and sellers building their own hair accessories lines.
         </p>
 
+        <nav className="blog-buying-nav" aria-labelledby="buying-guides-heading">
+          <div className="blog-buying-heading">
+            <div>
+              <p className="section-label">Plan Your Purchase</p>
+              <h2 id="buying-guides-heading">Find a Guide for Your Next Decision</h2>
+            </div>
+            <a href="#all-articles" className="blog-all-articles-link">Browse all articles <span aria-hidden="true">↓</span></a>
+          </div>
+          <ul className="blog-buying-topics">
+            {buyingTopics.map((topic, index) => (
+              <li key={topic.title}>
+                <span className="blog-topic-number" aria-hidden="true">0{index + 1}</span>
+                <h3>{topic.title}</h3>
+                <p>{topic.description}</p>
+                <ul className="blog-topic-links">
+                  {topic.links.map(link => (
+                    <li key={link.to}>
+                      <Link to={link.to} reloadDocument={link.to.includes('#')}>{link.label} <span aria-hidden="true">→</span></Link>
+                    </li>
+                  ))}
+                </ul>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <h2 id="all-articles" className="blog-all-articles-heading">All Articles</h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {articles.map(post => (
             <Link
@@ -35,7 +105,7 @@ export default function Blog() {
                   <span className="text-[10px] tracking-wider uppercase bg-gold/10 text-bronze px-2 py-1">{post.category}</span>
                   <span className="text-[10px] tracking-wider uppercase text-tan">{post.date} · {post.readTime}</span>
                 </div>
-                <h2 className="text-base font-display text-navy leading-relaxed mb-3 group-hover:text-gold transition-colors">{post.title}</h2>
+                <h3 className="text-base font-display text-navy leading-relaxed mb-3 group-hover:text-gold transition-colors">{post.title}</h3>
                 <p className="text-sm text-tan leading-relaxed mb-4">{post.excerpt}</p>
                 <span className="text-xs font-medium tracking-wider uppercase text-navy inline-flex items-center gap-1 group-hover:text-gold transition-colors">
                   Read Article <span className="group-hover:translate-x-1 transition-transform">→</span>

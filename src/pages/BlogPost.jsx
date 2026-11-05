@@ -18,7 +18,7 @@ function parseLinks(text) {
     const internal = m[2].startsWith('/');
     parts.push(
       internal
-        ? <Link key={m.index} to={m[2]} className="text-gold hover:underline">{m[1]}</Link>
+        ? <Link key={m.index} to={m[2]} reloadDocument={m[2].includes('#')} className="text-gold hover:underline">{m[1]}</Link>
         : <a key={m.index} href={m[2]} target="_blank" rel="noopener noreferrer" className="text-gold hover:underline">{m[1]}</a>
     );
     last = m.index + m[0].length;
