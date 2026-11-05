@@ -11,8 +11,8 @@ const quickFacts = [
   ['Buyer types', 'Brands, retailers, wholesalers, importers and subscription businesses'],
   ['Product scope', 'Claw clips, headbands, scrunchies, bows, clips and barrettes'],
   ['Custom MOQ', 'Category-specific; hair claws 1,000 pcs and hair clips/barrettes 2,000 pcs per design per color'],
-  ['Sampling', 'Typically 5–7 business days after the specification is confirmed'],
-  ['Bulk production', 'Typically 8–18 days after sample approval, depending on product and quantity'],
+  ['Sampling', 'About 15 days after the specification is confirmed; shipping is separate'],
+  ['Bulk production', 'Confirmed separately based on specifications, quantity and packaging'],
   ['Customization', 'Materials, Pantone colors, dimensions, logos, labels and retail packaging'],
   ['Service area', 'Worldwide shipping from China'],
 ];

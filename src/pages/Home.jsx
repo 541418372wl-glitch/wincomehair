@@ -32,10 +32,10 @@ const productCategories = [
 ];
 
 const featuredProducts = [
-  { id: 'claw-butterfly', name: 'Butterfly Hair Claw Clips', image: '/assets/images/product-claw-butterfly.webp', moq: '1,000 pcs', leadTime: '15-18 days', material: 'Metal Frame + Resin' },
-  { id: 'headband-braided', name: 'Braided Velvet Headbands', image: '/assets/images/product-headband-braided.webp', moq: '1,000 pcs', leadTime: '12-15 days', material: 'Premium Velvet' },
-  { id: 'scrunchie-velvet', name: 'Velvet Scrunchies', image: '/assets/images/product-scrunchie-velvet.webp', moq: '1,500 pcs', leadTime: '10-12 days', material: 'Premium Velvet' },
-  { id: 'bow-clip', name: 'Bow Hair Clips', image: '/assets/images/product-bow-clip.webp', moq: '1,500 pcs', leadTime: '12-15 days', material: 'Fabric + Metal Clip' },
+  { id: 'claw-butterfly', name: 'Butterfly Hair Claw Clips', image: '/assets/images/product-claw-butterfly.webp', moq: '1,000 pcs', leadTime: 'Production schedule on request', material: 'Metal Frame + Resin' },
+  { id: 'headband-braided', name: 'Braided Velvet Headbands', image: '/assets/images/product-headband-braided.webp', moq: '1,000 pcs', leadTime: 'Production schedule on request', material: 'Premium Velvet' },
+  { id: 'scrunchie-velvet', name: 'Velvet Scrunchies', image: '/assets/images/product-scrunchie-velvet.webp', moq: '1,500 pcs', leadTime: 'Production schedule on request', material: 'Premium Velvet' },
+  { id: 'bow-clip', name: 'Bow Hair Clips', image: '/assets/images/product-bow-clip.webp', moq: '1,500 pcs', leadTime: 'Production schedule on request', material: 'Fabric + Metal Clip' },
 ];
 
 const homeLanding = commercialLandingPages.home;
@@ -43,8 +43,8 @@ const homeLanding = commercialLandingPages.home;
 const processSteps = [
   { step: '01', title: 'Send Requirements', desc: 'Share your product idea, reference image, or design brief. No design files needed to start.', details: ['Approx. dimensions', 'Product type & quantity', 'Target material & color'] },
   { step: '02', title: 'Design & Quote in 24h', desc: 'Our team creates structural specs and a detailed quotation within one business day.', details: ['3D rendered mockup', 'Material & finish options', 'Itemized factory-direct price'] },
-  { step: '03', title: 'Approve Sample', desc: 'Review a physical pre-production sample before committing to bulk production.', details: ['Sample ready in 5-7 days', 'Shipped via DHL/FedEx', 'Unlimited revisions'] },
-  { step: '04', title: 'Production & Delivery', desc: 'We manufacture, you track. Every production milestone is documented with photo updates.', details: ['10-18 days production', 'Sea freight or air shipping', 'Amazon FBA direct supported'] },
+  { step: '03', title: 'Approve Sample', desc: 'Review a physical pre-production sample before committing to bulk production.', details: ['Sampling takes about 15 days', 'Shipped via DHL/FedEx', 'Unlimited revisions'] },
+  { step: '04', title: 'Production & Delivery', desc: 'We manufacture, you track. Every production milestone is documented with photo updates.', details: ['Bulk timing confirmed separately', 'Sea freight or air shipping', 'Amazon FBA direct supported'] },
 ];
 
 const testimonials = [
@@ -81,7 +81,7 @@ export default function Home() {
           </p>
 
           <div className="flex flex-wrap gap-3 mb-8 md:mb-12">
-            {['Custom MOQ: By Category', 'Lead Time: 12 Days', 'Free Design Service', 'Global Shipping'].map(badge => (
+            {['Custom MOQ: By Category', 'Sampling: About 15 Days', 'Free Design Service', 'Global Shipping'].map(badge => (
               <span key={badge} className="badge !border-white/20 !bg-white/12 !text-white/90">
                 <svg className="badge-icon !text-champagne" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 6L9 17l-5-5"/></svg>
                 {badge}
@@ -213,7 +213,7 @@ export default function Home() {
                   { win: 'Bespoke Customization — any size, any material', lose: 'Limited template designs' },
                   { win: '1-on-1 Design Expert Support', lose: 'Bot or generic customer service' },
                   { win: 'Factory-direct logistics at trade rates', lose: 'Standard carrier rates, no negotiation' },
-                  { win: 'Physical samples in 5-7 days', lose: 'No sample or 2+ week wait' },
+                  { win: 'Physical sampling: about 15 days', lose: 'Confirm the sample schedule with each supplier' },
                 ].map((row, i) => (
                   <div key={i} className="flex items-start gap-4 py-3 border-b border-white/10">
                     <div className="flex-1">

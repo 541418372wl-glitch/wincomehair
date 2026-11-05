@@ -3,8 +3,8 @@ import { ORGANIZATION_ID, SITE, WEBSITE_ID } from '../components/SEO';
 
 const orderFacts = [
   { label: 'Quote response', value: 'Within 24 hours', note: 'Based on a complete product brief' },
-  { label: 'Physical sample', value: '5–7 business days', note: 'Before bulk production' },
-  { label: 'Bulk production', value: '8–18 days', note: 'After final sample approval' },
+  { label: 'Physical sample', value: 'About 15 days', note: 'Before bulk production; shipping is separate' },
+  { label: 'Bulk production', value: 'Confirm separately', note: 'Based on specifications, quantity and packaging' },
   { label: 'Custom MOQ', value: 'By category', note: 'Review the product table below' },
 ];
 
@@ -44,7 +44,7 @@ const shippingOptions = [
 const faqs = [
   { q: 'Can I order below the custom production MOQ?', a: 'Samples and in-stock items may be available below the production MOQ. Fully customized production follows the category minimum and is quoted per design per color.' },
   { q: 'What are the standard payment terms?', a: 'Standard terms are 30% deposit to begin production and 70% balance before shipment. T/T, PayPal and Alibaba Trade Assurance are supported. Qualified long-term clients may discuss credit terms after three successful orders.' },
-  { q: 'When does the production lead time begin?', a: 'The quoted bulk-production period begins after the final physical sample and production details are approved and the required deposit is received.' },
+  { q: 'When does the production lead time begin?', a: 'Bulk production timing is confirmed separately for each order. The quoted bulk-production period begins after the final physical sample and production details are approved and the required deposit is received.' },
   { q: 'Can colors be mixed within one order?', a: 'Hair claws and hair clips or barrettes are quoted per design per color, so every custom color must meet its production MOQ. Other categories retain their product-specific color and quantity rules, stated in the quotation.' },
   { q: 'Which documents are supplied for shipping?', a: 'Commercial invoices, packing lists and the agreed export or compliance documents are provided. Requirements should be confirmed before sampling so they can be included in the production plan.' },
 ];

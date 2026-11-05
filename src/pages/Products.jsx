@@ -49,8 +49,8 @@ export default function Products() {
         <div className="mb-12 grid grid-cols-2 border border-bronze/10 bg-white md:grid-cols-4" aria-label="Wholesale program facts">
           {[
             ['By category', 'Custom MOQ'],
-            ['5–7 days', 'Physical sampling'],
-            ['8–18 days', 'Typical production'],
+            ['About 15 days', 'Physical sampling'],
+            ['Confirm separately', 'Bulk production'],
             ['50+ countries', 'Export experience'],
           ].map(([value, label], index) => (
             <div key={label} className={`p-5 md:p-6 ${index < 3 ? 'md:border-r md:border-bronze/10' : ''} ${index < 2 ? 'border-b border-bronze/10 md:border-b-0' : ''} ${index % 2 === 0 ? 'border-r border-bronze/10 md:border-r' : ''}`}>
@@ -130,7 +130,7 @@ export default function Products() {
             <div>
               <p className="section-label">Planning a First Order?</p>
               <h2 className="text-display-sm text-navy">Compare MOQ, Samples and Production Before Requesting a Quote</h2>
-              <p className="mt-4 max-w-3xl leading-relaxed text-tan">For custom production programs, our buyer guide explains minimum quantities by product type, the 5–7 day sampling process, bulk-production milestones, payment terms and international shipping options. Confirm order terms separately for selected styles.</p>
+              <p className="mt-4 max-w-3xl leading-relaxed text-tan">For custom production programs, our buyer guide explains minimum quantities by product type, physical sampling of about 15 days, bulk-production milestones, payment terms and international shipping options. Bulk production timing is confirmed separately. Confirm order terms separately for selected styles.</p>
             </div>
             <div className="flex flex-col gap-3 sm:flex-row md:flex-col">
               <Link to="/sourcing" className="btn-primary justify-center">View Order Process</Link>

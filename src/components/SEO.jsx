@@ -93,7 +93,7 @@ const pageMeta = {
   },
   '/sourcing': {
     title: 'Hair Accessories MOQ, Samples & Production | WINCOME',
-    description: 'Plan a custom hair accessories order with clear MOQ, 5–7 day sampling, 8–18 day production, payment terms, quality checks and worldwide shipping.',
+    description: 'Plan custom hair accessories with clear MOQ and sampling of about 15 days. Confirm bulk timing separately; review payment, QC and shipping.',
   },
   '/about': {
     title: 'About WINCOME Hair Accessories — Factory & Certifications',
@@ -171,7 +171,7 @@ const PER_DESIGN_COLOR_MOQ_IDS = new Set([
 function buildProductDescription(product, productId) {
   const facts = PER_DESIGN_COLOR_MOQ_IDS.has(productId)
     ? `Custom MOQ ${product.moq} per design per color; samples and stock may be available below MOQ.`
-    : `MOQ ${product.moq}; lead time ${product.leadTime}. Custom colors, logo and packaging available.`;
+    : `MOQ ${product.moq}; bulk timing confirmed separately. Custom colors, logo and packaging available.`;
   const introMax = SEO_DESCRIPTION_MAX - facts.length - 1;
   return `${truncate(product.description, introMax)} ${facts}`;
 }

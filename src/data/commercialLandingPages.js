@@ -10,8 +10,8 @@ export const commercialLandingPages = {
     orderFacts: [
       { value: '5', label: 'Product Categories' },
       { value: 'By category', label: 'Custom MOQ' },
-      { value: '5–7 days', label: 'Typical Sampling' },
-      { value: '8–18 days', label: 'Production Range' },
+      { value: 'Approx. 15 days', label: 'Physical Sampling' },
+      { value: 'On request', label: 'Production Schedule' },
     ],
   },
   hairClips: {
