@@ -1,4 +1,9 @@
 export const relatedArticleSlugs = {
+  'hair-clip-types-names-closures': [
+    'best-barrettes-fine-thin-hair',
+    'metal-hair-clip-material-guide',
+    'hair-bows-for-adults-style-guide',
+  ],
   'hair-accessory-packaging-guide': [
     'private-label-hair-accessories-guide',
     'how-to-source-hair-accessories-from-china',

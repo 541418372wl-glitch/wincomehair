@@ -128,6 +128,19 @@ function renderSection(s, i) {
           </table>
         </div>
       );
+    case 'image-grid':
+      return (
+        <div key={i} className="grid gap-5 sm:grid-cols-3 mb-8">
+          {s.items.map(item => (
+            <Link key={item.src} to={item.href} className="block group">
+              <figure className="border border-bronze/10 bg-white">
+                <img src={item.src} alt={item.alt} width={item.width} height={item.height} loading="lazy" decoding="async" className="w-full aspect-square object-contain" />
+                <figcaption className="p-4 text-sm text-navy leading-relaxed group-hover:text-gold">{item.caption} →</figcaption>
+              </figure>
+            </Link>
+          ))}
+        </div>
+      );
     case 'faq':
       return (
         <div key={i} className="mt-12">
@@ -213,8 +226,8 @@ export default function BlogPost() {
           <h1 className="text-display-lg text-navy leading-tight mb-8">{post.title}</h1>
         </div>
 
-        <div className="aspect-[16/6] overflow-hidden mb-12 bg-sand">
-          <img src={post.image} alt={post.imageAlt || post.title} width="1535" height="864" fetchpriority="high" decoding="async" className="w-full h-full object-cover" />
+        <div className={`${post.imageFit === 'contain' ? 'aspect-[4/3] sm:aspect-[16/6]' : 'aspect-[16/6]'} overflow-hidden mb-12 bg-sand`}>
+          <img src={post.image} alt={post.imageAlt || post.title} width={post.imageWidth || 1535} height={post.imageHeight || 864} fetchpriority="high" decoding="async" className={`w-full h-full ${post.imageFit === 'contain' ? 'object-contain' : 'object-cover'}`} />
         </div>
 
         <div className="max-w-3xl">
