@@ -1,5 +1,6 @@
 import { scrunchieCareArticle } from './scrunchieCareArticle.js';
 import { hairAccessoryPackagingArticle } from './hairAccessoryPackagingArticle.js';
+import { hairClipNamesArticle } from './hairClipNamesArticle.js';
 import { scrunchieFitArticle } from './scrunchieFitArticle.js';
 // WINCOME Hair Accessories — Blog articles (structured content for /blog pages)
 import { redditArticles } from './redditArticles.js';
@@ -518,4 +519,5 @@ export const articles = [
     ],
   },
   hairAccessoryPackagingArticle,
+  hairClipNamesArticle,
 ];
