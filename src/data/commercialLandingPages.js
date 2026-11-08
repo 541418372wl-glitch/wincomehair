@@ -3,7 +3,7 @@ export const commercialLandingPages = {
     keyword: 'custom hair accessories manufacturer',
     route: '/',
     seoTitle: 'Custom Hair Accessories Manufacturer | WINCOME',
-    metaDescription: 'Custom hair accessories manufacturer for brands and wholesalers. OEM/ODM clips, headbands, scrunchies and bows with category-specific production MOQs.',
+    metaDescription: 'Custom hair accessories manufacturer for brands and wholesalers. Compare clips, headbands, scrunchies and bows; request OEM/ODM pricing and samples.',
     eyebrow: 'OEM / ODM · Private Label · Wholesale',
     headingLines: ['Custom Hair Accessories', 'Manufacturer'],
     summary: 'WINCOME develops OEM/ODM hair clips, claw clips, headbands, scrunchies and hair bows for brands, wholesalers and retailers. Compare product types, MOQs, sample timing and customization before requesting a quote.',

@@ -43,7 +43,7 @@ const privateLabelRows = [
 const quoteFactors = [
   { title: 'Existing vs new construction', text: 'Using an existing style avoids new tooling. Bespoke shapes, molds and hardware are quoted separately.' },
   { title: 'Material and finish', text: 'Acetate, metal, silk, decoration, plating and special color effects have different setup and unit costs.' },
-  { title: 'Quantity and color split', text: 'Hair claws and hair clips or barrettes are quoted per design per color. Other categories retain their product-specific MOQ basis.' },
+  { title: 'Quantity and color split', text: 'Confirm MOQ and price for the selected style and color split. Standard custom claws and barrettes use a per-design, per-color basis; selected styles may have their own quotation terms.' },
   { title: 'Branding and packaging', text: 'Logo method, labels, inserts, cards, pouches and boxes add artwork, tooling and assembly steps.' },
 ];
 
@@ -52,7 +52,7 @@ export default function Customization() {
     <div className="pt-24">
       <div className="container-site section-gap">
         <p className="section-label">OEM / ODM Capabilities</p>
-        <h1 className="text-[38px] leading-[1.1] sm:text-display-lg text-navy mb-4">Custom Hair Accessories <span className="text-gold">OEM & Private Label</span></h1>
+        <h1 className="text-[38px] leading-[1.1] sm:text-display-lg text-navy mb-4">Custom Hair Accessories Manufacturer <span className="text-gold">&amp; Wholesale Supply Partner</span></h1>
         <p className="text-tan text-lg max-w-3xl mb-10 leading-relaxed">
           Develop custom hair clips, claw clips, headbands, scrunchies and bows with controlled materials, Pantone colors, dimensions, logos, labels and retail packaging. WINCOME supports the process from product brief and physical sample to inspected bulk production and global shipping.
         </p>
@@ -66,18 +66,25 @@ export default function Customization() {
           ))}
         </div>
 
-        {/* Capabilities Grid */}
-        <div className="grid md:grid-cols-3 gap-8 mb-24">
-          {capabilities.map(cap => (
-            <div key={cap.title} className="bg-white p-8 border border-bronze/10">
-              <svg className="w-10 h-10 text-gold mb-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <path d={cap.icon} />
-              </svg>
-              <h3 className="text-lg font-display text-navy mb-3">{cap.title}</h3>
-              <p className="text-sm text-tan leading-relaxed">{cap.desc}</p>
-            </div>
-          ))}
-        </div>
+        <section id="claw-clips-barrettes" aria-labelledby="claw-capabilities-title" className="scroll-mt-28 mb-24">
+          <h2 id="claw-capabilities-title" className="text-display-sm text-navy mb-6">Custom Hair Claw Clips &amp; Metal Barrettes OEM/ODM Capabilities</h2>
+          <p className="text-tan leading-relaxed max-w-3xl mb-6">When comparing hair accessories manufacturers, start with the exact construction, material, dimensions and finish you need. Review cellulose acetate claw clips and metal barrette directions in the catalog; confirm the selected material, hardware and available changes before sampling. A material name alone does not establish grip or wear performance.</p>
+          <div className="flex flex-wrap gap-x-6 gap-y-3 text-sm mb-8">
+            <Link to="/products/category/hair-claw-clips" className="text-navy underline underline-offset-4 hover:text-gold">Compare custom claw clip options →</Link>
+            <Link to="/products/category/hair-clips-barrettes" className="text-navy underline underline-offset-4 hover:text-gold">Custom hair clip manufacturer: clips and barrettes →</Link>
+          </div>
+          <div className="grid md:grid-cols-3 gap-8">
+            {capabilities.map(cap => (
+              <div key={cap.title} className="bg-white p-8 border border-bronze/10">
+                <svg className="w-10 h-10 text-gold mb-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <path d={cap.icon} />
+                </svg>
+                <h3 className="text-lg font-display text-navy mb-3">{cap.title}</h3>
+                <p className="text-sm text-tan leading-relaxed">{cap.desc}</p>
+              </div>
+            ))}
+          </div>
+        </section>
 
         {/* Materials */}
         <div className="mb-24">
@@ -93,11 +100,12 @@ export default function Customization() {
           </div>
         </div>
 
-        <div className="mb-24 grid gap-10 lg:grid-cols-[0.75fr_1.25fr] lg:gap-16">
+        <section id="private-label-moq" aria-labelledby="private-label-title" className="scroll-mt-28 mb-24 grid gap-10 lg:grid-cols-[0.75fr_1.25fr] lg:gap-16">
           <div>
             <p className="section-label">Private-Label Scope</p>
-            <h2 className="text-display-sm text-navy">What Your Brand Can Specify</h2>
+            <h2 id="private-label-title" className="text-display-sm text-navy">Flexible MOQ &amp; Private Label Solutions for Emerging Accessory Brands</h2>
             <p className="mt-5 leading-relaxed text-tan">Start with an existing production direction or send a complete design brief. Each quotation separates the product, branding, packaging and any tooling so buyers can compare options clearly.</p>
+            <p className="mt-5 leading-relaxed text-tan">Custom production MOQ depends on the product and construction; there is no single minimum for every style. The three selected claw clips are quoted individually. Samples and in-stock items may be available below the custom MOQ; confirm availability and terms for your selection.</p>
             <Link to="/sourcing" className="mt-6 inline-flex text-sm font-medium text-navy underline underline-offset-4 hover:text-gold">Review MOQ and order requirements</Link>
           </div>
           <div className="border border-bronze/10 bg-white">
@@ -108,7 +116,18 @@ export default function Customization() {
               </div>
             ))}
           </div>
-        </div>
+        </section>
+
+        <section id="headband-fit-options" aria-labelledby="headband-fit-title" className="scroll-mt-28 mb-24 border border-bronze/10 bg-sand/40 p-6 md:p-8">
+          <p className="section-label">Headband Development Brief</p>
+          <h2 id="headband-fit-title" className="text-display-sm text-navy mb-4">Review Headband Fit &amp; Grip Options</h2>
+          <p className="text-tan leading-relaxed max-w-3xl mb-4">Specify the intended head size, hairstyle and wear time. For rigid bands, discuss core width, curvature and end treatment; for fabric loops, review width, elastic recovery and seam placement. Describe any underside texture or lining you want assessed, then confirm feasibility and compare representative samples for pressure and slipping.</p>
+          <p className="text-tan leading-relaxed max-w-3xl mb-6">Comfort and grip depend on the finished construction and wearer. The selected solid stretch fabric headband has no silicone anti-slip strip; a fabric or lining name alone does not establish non-slip performance.</p>
+          <div className="flex flex-wrap gap-x-6 gap-y-3 text-sm">
+            <Link to="/products/category/headbands" className="text-navy underline underline-offset-4 hover:text-gold">Compare headband styles →</Link>
+            <Link to="/contact" className="text-navy underline underline-offset-4 hover:text-gold">Discuss a fit-focused sample brief →</Link>
+          </div>
+        </section>
 
         <div className="mb-24">
           <p className="section-label">Factory-Direct Quotation</p>

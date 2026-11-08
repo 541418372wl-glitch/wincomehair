@@ -36,6 +36,18 @@ for (const route of routes) {
   const inquiryProduct = [...selectedProducts.map(product => product.slug), ...catalogProducts.map(product => product.id)]
     .find(slug => route === `/products/${slug}`);
   if (inquiryProduct) {
+    const allProducts = [...selectedProducts.map(product => ({ id: product.slug, category: product.category })), ...catalogProducts];
+    const category = allProducts.find(product => product.id === inquiryProduct)?.category;
+    const recommendations = doc.querySelector('#related-products');
+    const productLinks = [...(recommendations?.querySelectorAll('a[href^="/products/"]') || [])]
+      .map(link => link.getAttribute('href'))
+      .filter(href => !href.startsWith('/products/category/'));
+    if (productLinks.length !== 3 || new Set(productLinks).size !== 3) failures.push(route + ': expected three static related-product links');
+    for (const href of productLinks) {
+      const sibling = allProducts.find(product => href === `/products/${product.id}`);
+      if (!sibling || sibling.id === inquiryProduct || sibling.category !== category) failures.push(route + ': invalid same-category recommendation ' + href);
+    }
+    if (!recommendations?.querySelector(`a[href="/products/category/${category}"]`)) failures.push(route + ': missing related-products category link');
     const formLinks = [...doc.querySelectorAll('main a[href^="/contact"]')];
     if (formLinks.length !== 2 || formLinks.some(link => link.getAttribute('href') !== `/contact?product=${inquiryProduct}`)) {
       failures.push(route + ': product inquiry links must retain the product context');
