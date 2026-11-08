@@ -80,6 +80,22 @@ function BuyerDecisionPath({ cluster, currentSlug }) {
   );
 }
 
+function ProcurementCard({ card }) {
+  return (
+    <aside aria-labelledby="procurement-card-title" className="mt-12 border border-bronze/10 bg-sand/40 p-6 md:p-8">
+      <p className="section-label">For Brands & Buyers</p>
+      <h2 id="procurement-card-title" className="text-display-md text-navy mb-3">{card.title}</h2>
+      <p className="text-sm text-tan leading-relaxed mb-4">{card.text}</p>
+      <p className="text-sm text-tan leading-relaxed mb-6">{card.note}</p>
+      <div className="flex flex-wrap gap-x-5 gap-y-3 text-sm">
+        {card.links.map(link => (
+          <Link key={link.to} to={link.to} reloadDocument={link.to.includes("#")} className="text-gold hover:underline">{link.label} →</Link>
+        ))}
+      </div>
+    </aside>
+  );
+}
+
 function renderSection(s, i) {
   switch (s.t) {
     case 'h2':
@@ -232,6 +248,7 @@ export default function BlogPost() {
 
         <div className="max-w-3xl">
           {post.sections.map((s, i) => renderSection(s, i))}
+          {post.procurementCard ? <ProcurementCard card={post.procurementCard} /> : null}
           {cluster ? <BuyerDecisionPath cluster={cluster} currentSlug={post.slug} /> : null}
           {post.sources?.length > 0 && (
             <aside className="mt-12 border border-bronze/10 bg-sand/40 p-6">

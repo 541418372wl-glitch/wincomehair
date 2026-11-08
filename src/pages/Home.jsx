@@ -125,7 +125,7 @@ export default function Home() {
         <div className="container-site">
           <p className="section-label">Product Categories</p>
           <h2 className="text-display-lg text-navy mb-4">What We <span className="text-gold">Manufacture</span></h2>
-          <p className="text-tan text-lg max-w-xl mb-10 md:mb-12">Full-category hair accessories manufacturing with complete customization — from material to finish, logo to packaging.</p>
+          <p className="text-tan text-lg max-w-xl mb-10 md:mb-12">WINCOME is a custom hair accessories manufacturer for brands and wholesalers. Compare the five categories below, then review our <Link to="/customization" className="text-navy underline underline-offset-4 hover:text-gold">OEM/ODM and private-label options</Link> for materials, dimensions, logos and packaging.</p>
 
           <div className="grid grid-cols-2 gap-4 md:grid-cols-3 md:gap-6 lg:grid-cols-5">
             {productCategories.map(cat => (

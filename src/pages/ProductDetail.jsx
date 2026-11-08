@@ -4,6 +4,7 @@ import { trackProductInquiry } from '../lib/analytics';
 import { products as catalogProducts, categoryMap } from '../data/productCatalog';
 import { findSelectedProduct } from '../data/selectedProductStyles';
 import SelectedProductDetail from './SelectedProductDetail';
+import RelatedProducts from '../components/RelatedProducts';
 
 const products = {
   'claw-acetate': {
@@ -568,6 +569,8 @@ export default function ProductDetail() {
             </article>
           </div>
         </div>
+
+        <RelatedProducts productId={id} category={catalogProduct?.category} />
 
         <div className="mt-16 bg-navy text-white p-10 md:p-14 text-center">
           <p className="section-label !text-champagne">Start Your Project</p>

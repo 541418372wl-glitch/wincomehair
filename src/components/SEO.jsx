@@ -88,8 +88,8 @@ const pageMeta = {
     description: 'Browse 40 hair accessories, including bow clips, claw clips, scrunchies and fabric headbands. Compare specifications and discuss order requirements.',
   },
   '/customization': {
-    title: 'Custom Hair Accessories OEM & Private Label | WINCOME',
-    description: 'Plan custom hair accessories by style, quantity per color, logo and packaging. Sampling takes about 15 days; confirm bulk timing with your quote.',
+    title: 'Custom Hair Accessories Manufacturer | Hair Clips & Claw Clips Wholesale - Wincome Hair',
+    description: 'Custom hair accessories manufacturer for OEM/ODM claw clips, barrettes, scrunchies and headbands. Confirm MOQ by style and request a custom quote.',
   },
   '/sourcing': {
     title: 'Hair Accessories MOQ, Samples & Production | WINCOME',
