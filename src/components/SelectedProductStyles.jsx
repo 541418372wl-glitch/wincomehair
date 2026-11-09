@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { selectedProductStyles, selectedProductPath } from '../data/selectedProductStyles';
+import ScrunchieBuyingComparison from './ScrunchieBuyingComparison';
 
 function StyleFacts({ rows }) {
   return (
@@ -50,14 +51,14 @@ export default function SelectedProductStyles({ category }) {
           <p>{selection.comparison.note}</p>
         </aside>
       ) : null}
-      <div className="selected-styles-brief">
+      {category === 'scrunchies' ? <ScrunchieBuyingComparison products={selection.items} /> : <div className="selected-styles-brief">
         <div>
           <h3>{selection.comparison?.quoteHeading || 'Start with the right product details.'}</h3>
           <p>{selection.comparison?.quoteBrief || 'Share the style name, preferred colors, size option, quantity and destination. Availability, order quantities, customization and lead times are confirmed for the selected style.'}</p>
           {selection.comparison ? <p>{selection.comparison.timing}</p> : null}
         </div>
         <Link to="/contact" className="btn-primary">{selection.comparison ? 'Prepare an Inquiry' : 'Discuss Your Selection'} <span aria-hidden="true">→</span></Link>
-      </div>
+      </div>}
     </section>
   );
 }
