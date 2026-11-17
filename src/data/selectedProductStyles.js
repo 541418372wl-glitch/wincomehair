@@ -174,14 +174,16 @@ export const selectedProductStyles = {
   }
 };
 
+const selectedClawOrderTerms = 'Stock MOQ: 500 pieces per style per color. Logo and packaging customization are quoted separately. New tooling requires a higher minimum order quantity, to be agreed for the design. Share your selected colors, quantity per color and destination to confirm pricing, availability and delivery timing.';
+
 selectedProductStyles['hair-claw-clips'] = {
   title: 'Compare Three Claw Clip Styles',
-  intro: 'Start with the listed material, overall dimensions and unit weight. Minimum quantities and unit prices for these selected styles are confirmed individually.',
+  intro: 'Start with the listed material, overall dimensions and unit weight. Stock MOQ for these three selected styles is 500 pieces per style per color. Customization is quoted separately.',
   comparison: {
     heading: 'Compare the product, then confirm the fit.',
     note: 'Photos are not to scale. Overall dimensions do not specify jaw opening or effective gripping length. Maximum jaw opening, effective gripping length and tooth spacing are not currently available for these three styles. Suitability for a particular hair type and holding performance require sample evaluation.',
     quoteHeading: 'Ready to compare quotations?',
-    quoteBrief: 'Share the selected style, quantity per color, packaging requirements and destination. We confirm the minimum order quantity and unit price for each style in the quotation.',
+    quoteBrief: selectedClawOrderTerms,
     timing: 'Sampling takes about 15 days. Bulk production timing is confirmed separately.',
   },
   items: [
@@ -190,7 +192,8 @@ selectedProductStyles['hair-claw-clips'] = {
       tag: 'LONG SHAPE · CROSSED DESIGN',
       alt: 'Clear acrylic claw clip with a long curved crossed design on a white background',
       intro: 'A long acrylic claw clip with a curved, crossed silhouette.',
-      facts: [['Material', 'Acrylic'], ['Size (L × W × H)', '14 × 4 × 5 cm'], ['Unit weight', '16 g']],
+      facts: [['Material', 'Acrylic'], ['Size (L × W × H)', '13 × 4 × 5 cm'], ['Unit weight', '16 g'], ['Stock colors', '9 colors'], ['Stock MOQ', '500 pcs per style per color']],
+      inquiryNote: selectedClawOrderTerms,
       details: 'The crossed outer shape creates an elongated profile. Compare the listed product length with the silhouette you want for your assortment.',
       note: 'The listed length describes the clip, not the jaw opening or the volume of hair it will hold.',
       image: '/assets/images/selected-long-crossed-acrylic-claw.webp', imageWidth: 800, imageHeight: 800,
@@ -200,7 +203,8 @@ selectedProductStyles['hair-claw-clips'] = {
       tag: 'MEDIUM SIZE · ROUNDED PROFILE',
       alt: 'Transparent blue rounded polycarbonate claw clip on a light background',
       intro: 'A medium claw clip in PC (polycarbonate), with a rounded shell and rounded teeth.',
-      facts: [['Material', 'PC (polycarbonate)'], ['Size (L × W × H)', '11 × 7 × 5 cm'], ['Unit weight', '34 g']],
+      facts: [['Material', 'PC (polycarbonate)'], ['Size (L × W × H)', '9.5 × 5 × 4 cm'], ['Net weight (unpacked)', '23 g'], ['Stock colors', 'Transparent blue · Transparent white · Transparent grey'], ['Stock MOQ', '500 pcs per style per color']],
+      inquiryNote: selectedClawOrderTerms,
       details: 'The transparent blue style shows the curved shell and tooth arrangement.',
       note: 'Overall product dimensions do not specify the jaw opening or establish suitability for a particular hair type.',
       image: '/assets/images/selected-medium-rounded-pc-claw.webp', imageWidth: 800, imageHeight: 800,
@@ -210,7 +214,8 @@ selectedProductStyles['hair-claw-clips'] = {
       tag: 'OPENWORK SHAPE · ARCHED PROFILE',
       alt: 'Red ABS claw clip with an arched openwork design on a white background',
       intro: 'An ABS claw clip with an arched openwork silhouette, shown in red.',
-      facts: [['Material', 'ABS'], ['Size (L × W × H)', '9 × 5 × 4.3 cm'], ['Unit weight', '23 g']],
+      facts: [['Material', 'ABS'], ['Size (L × W × H)', '11 × 7 × 5.5 cm'], ['Net weight (unpacked)', '34 g'], ['Stock colors', 'Black · Natural white · Red · Coffee · Lotus pink · Cream · Pale pink (7 colors)'], ['Stock MOQ', '500 pcs per style per color']],
+      inquiryNote: selectedClawOrderTerms,
       details: 'The spaced outer ribs form a rounded, openwork profile. Use the listed overall dimensions to compare its shape with the longer crossed and medium rounded styles.',
       note: 'These are overall product dimensions, not packaging measurements or a guarantee of hair-holding capacity.',
       image: '/assets/images/selected-openwork-abs-claw.webp', imageWidth: 1000, imageHeight: 1000,

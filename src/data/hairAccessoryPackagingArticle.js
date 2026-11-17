@@ -150,7 +150,7 @@ export const hairAccessoryPackagingArticle = {
       "rows": [
         [
           "Medium Rounded PC Claw Clip",
-          "Polycarbonate; overall dimensions of 11 × 7 × 5 cm (L × W × H); unit weight 34 g",
+          "Polycarbonate; overall dimensions of 9.5 × 5 × 4 cm (L × W × H); net weight 23 g without packaging",
           "How will the complete clip be positioned, supported and separated from neighboring items?"
         ],
         [
