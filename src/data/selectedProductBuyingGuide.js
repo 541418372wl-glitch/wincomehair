@@ -35,35 +35,35 @@ export const selectedProductBuyingGuide = {
   },
   crossedClaw: {
     advice: [
-      'Consider this 14 cm style when selecting a long, crossed silhouette. Compare its profile with the shorter rounded PC style.',
+      'Consider this 13 cm style when selecting a long, crossed silhouette. Compare its profile with the shorter rounded PC style.',
       'For a buyer assortment, identify the preferred color and intended hairstyle, then assess a sample before confirming fit or hold claims.',
     ],
     faq: [
       { question: 'Is this clip acrylic or cellulose acetate?', answer: 'This selected style is acrylic. It should not be described as cellulose acetate; the material specification applies to this product rather than to every claw clip in the category.' },
-      { question: 'What does the 14 cm measurement describe?', answer: 'It is the listed clip length. It does not describe the jaw opening or determine how much hair the clip can hold. Compare the shape and assess a sample for your intended hairstyle.' },
-      { question: 'How do I get the minimum order quantity and unit price for this clip?', answer: 'We quote the Long Crossed Acrylic Claw Clip by style. Send the quantity you need in each color, your packaging choice and destination so we can confirm the minimum and unit price for your order.' },
+      { question: 'What does the 13 cm measurement describe?', answer: 'It is the clip length. It does not describe the jaw opening or determine how much hair the clip can hold. Compare the shape and assess a sample for your intended hairstyle.' },
+      { question: 'How do I get the minimum order quantity and unit price for this clip?', answer: 'The Long Crossed Acrylic Claw Clip has 9 stock colors with a minimum of 500 pieces per style per color. Logo and packaging customization are quoted separately; new tooling requires a higher minimum to be agreed. Send your selected colors, quantity per color, packaging requirements and destination for a quote.' },
     ],
   },
   roundedClaw: {
     advice: [
-      'Compare this 11 cm long rounded shape with the longer crossed style when planning a choice of silhouettes for your assortment.',
+      'Compare this 9.5 cm long rounded shape with the longer crossed style when planning a choice of silhouettes for your assortment.',
       'Use the transparent blue photograph to assess the shell and tooth shape. Sample the clip with the intended hairstyle before making a holding-performance claim.',
     ],
     faq: [
       { question: 'What does PC mean for this claw clip?', answer: 'PC means polycarbonate, the listed material for this style. The product has a rounded shell and rounded teeth, shown in transparent blue.' },
-      { question: 'Are 11 × 7 × 5 cm the product or packaging dimensions?', answer: 'They are the listed overall product dimensions (length × width × height). They do not specify jaw opening or establish suitability for fine or thick hair.' },
-      { question: 'How are the minimum quantity and wholesale price confirmed?', answer: 'Request a quote for the Medium Rounded PC Claw Clip with your quantity per color, packaging and destination. We confirm the minimum quantity and unit price for this style in the quotation.' },
+      { question: 'Are 9.5 × 5 × 4 cm the product or packaging dimensions?', answer: 'They are the overall product dimensions (length × width × height). Net weight is 23 g without packaging. These dimensions do not specify jaw opening or establish suitability for fine or thick hair.' },
+      { question: 'How are the minimum quantity and wholesale price confirmed?', answer: 'The Medium Rounded PC Claw Clip is available in transparent blue, transparent white and transparent grey, with a stock minimum of 500 pieces per style per color. Logo and packaging customization are quoted separately; new tooling requires a higher minimum to be agreed. Include your quantity per color, packaging requirements and destination when requesting a price.' },
     ],
   },
   openworkClaw: {
     advice: [
       'Consider the arched openwork shape when adding a more rounded silhouette alongside a long crossed clip.',
-      'Compare the full 9 × 5 × 4.3 cm dimensions, not length alone, when planning the product presentation and assessing samples.',
+      'Compare the full 11 × 7 × 5.5 cm dimensions, not length alone, when planning the product presentation and assessing samples.',
     ],
     faq: [
       { question: 'What material and construction are shown?', answer: 'This style is ABS, with spaced outer ribs forming an arched openwork shape. The product photograph shows the red option.' },
-      { question: 'What size is the finished clip?', answer: 'The finished clip measures 9 × 5 × 4.3 cm. These are overall product dimensions, rather than packaging measurements or a measure of hair-holding capacity.' },
-      { question: 'What is the minimum order and price for the openwork style?', answer: 'We quote the Openwork ABS Claw Clip individually. Include your quantity per color, packaging requirements and destination to receive the minimum order quantity and price per clip.' },
+      { question: 'What size is the finished clip?', answer: 'The finished clip measures 11 × 7 × 5.5 cm, with a net weight of 34 g without packaging. These are overall product dimensions, rather than packaging measurements or a measure of hair-holding capacity.' },
+      { question: 'What is the minimum order and price for the openwork style?', answer: 'The Openwork ABS Claw Clip has 7 stock colors with a minimum of 500 pieces per style per color. Logo and packaging customization are quoted separately; new tooling requires a higher minimum to be agreed. Include your selected colors, quantity per color, packaging requirements and destination for a quote.' },
     ],
   },
   oversized: {
