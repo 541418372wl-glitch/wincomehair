@@ -230,7 +230,7 @@ export const articles = [
     procurementCard: {
       title: 'Compare Claw Clips Before Requesting Samples',
       text: 'Compare the listed dimensions, materials and unit weights of three selected styles. Maximum opening, effective gripping length and tooth spacing are not yet available; evaluate fit on samples.',
-      note: 'Minimum quantity and unit price are confirmed individually for each selected claw clip. Share the style, quantity per color, packaging and destination.',
+      note: 'Stock orders for these three styles start at 500 pieces per style per color. Share your quantities, packaging and destination for a quote. Custom logos and packaging are quoted separately. A new mold requires a higher minimum agreed for the design.',
       links: [
         { label: 'Compare Three Claw Clips', to: '/products/category/hair-claw-clips#selected-styles' },
         { label: 'Review Custom Clip Development', to: '/customization#claw-clips-barrettes' },
@@ -513,7 +513,7 @@ export const articles = [
         ['Cotton hair ties', '1,500 pcs', 'High-volume commodity; lowest unit price'],
         ['Custom logo / embroidery', 'Quoted by method', 'Artwork, stitch or print setup, placement and color count'],
       ]},
-      { t: 'p', x: 'These category figures describe custom production. For the [three selected claw clip styles](/products/category/hair-claw-clips#selected-styles), minimum quantities and unit prices are confirmed individually. Send the selected style, quantity per color, packaging requirements and destination for a style-specific quotation.' },
+      { t: 'p', x: 'The table covers custom production. Stock orders for the [three selected claw clip styles](/products/category/hair-claw-clips#selected-styles) start at 500 pieces per style per color. Share the color split and destination for pricing. Custom logos and packaging are quoted separately. A new mold requires a higher minimum agreed for the design.' },
       { t: 'h2', x: 'The Strategy Behind Smart Ordering' },
       { t: 'p', x: 'The fastest way to overpay is to think of MOQ as a wall. It is a production floor. Plan within the applicable minimum and distinguish samples or available stock from custom production:' },
       { t: 'ul', items: ['Ask for color breaks explicitly: Hair Claws & Clips and Hair Clips & Barrettes are quoted per design per color, and other categories may also have color or material constraints.', 'Consolidate freight where useful: different style MOQs may share one shipment, but one style does not offset another style\'s production minimum.', 'Test first with a sample or available stock item before committing to custom production; these routes may be available below production MOQ.', 'Model order frequency: compare setup and freight savings from consolidation with the inventory and markdown risk of holding more stock.'] },
