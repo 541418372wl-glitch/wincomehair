@@ -1,4 +1,4 @@
-import { trackEvent } from './analytics.js';
+import { readAnalyticsConsent, trackEvent } from './analytics.js';
 
 export const AI_REFERRAL_SESSION_KEY = 'wincome_ai_referral_tracked_v1';
 
@@ -13,6 +13,7 @@ const AI_REFERRAL_SOURCES = [
 ];
 
 let referralPromise;
+let trackedInDocument = false;
 
 function hasBrowser() {
   return typeof window !== 'undefined' && typeof document !== 'undefined';
@@ -49,6 +50,7 @@ export function detectAiReferral({ referrer, href } = {}) {
 }
 
 function hasTrackedAiReferral() {
+  if (trackedInDocument) return true;
   try {
     return window.sessionStorage?.getItem(AI_REFERRAL_SESSION_KEY) === '1';
   } catch {
@@ -57,23 +59,36 @@ function hasTrackedAiReferral() {
 }
 
 function markAiReferralTracked() {
+  trackedInDocument = true;
   try {
     window.sessionStorage?.setItem(AI_REFERRAL_SESSION_KEY, '1');
   } catch {
-    // The event may still be sent if session storage is unavailable.
+    // In-page consent changes still count this entry only once.
   }
 }
 
 export function trackAiReferral() {
-  if (!hasBrowser() || hasTrackedAiReferral()) return Promise.resolve(false);
+  if (!hasBrowser() || readAnalyticsConsent() !== 'granted' || hasTrackedAiReferral()) return Promise.resolve(false);
 
-  const referral = detectAiReferral();
+  // Consent may be granted after a client-side navigation. The document's
+  // navigation entry still identifies the original landing URL in that case.
+  let landing = new URL(window.location.href);
+  try {
+    const entry = window.performance?.getEntriesByType?.('navigation')?.[0];
+    if (entry?.name) {
+      const original = new URL(entry.name);
+      if (original.origin === landing.origin) landing = original;
+    }
+  } catch {
+    // Navigation timing may be unavailable in privacy-restricted browsers.
+  }
+  const referral = detectAiReferral({ href: landing.href });
   if (!referral) return Promise.resolve(false);
   if (referralPromise) return referralPromise;
 
   referralPromise = trackEvent('ai_referral_visit', {
     ...referral,
-    landing_path: window.location?.pathname || '/',
+    landing_path: landing.pathname,
   }).then((tracked) => {
     if (tracked) markAiReferralTracked();
     return tracked;

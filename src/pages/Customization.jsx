@@ -43,7 +43,7 @@ const privateLabelRows = [
 const quoteFactors = [
   { title: 'Existing vs new construction', text: 'Using an existing style avoids new tooling. Bespoke shapes, molds and hardware are quoted separately.' },
   { title: 'Material and finish', text: 'Acetate, metal, silk, decoration, plating and special color effects have different setup and unit costs.' },
-  { title: 'Quantity and color split', text: 'Confirm MOQ and price for the selected style and color split. Standard custom claws and barrettes use a per-design, per-color basis; selected styles may have their own quotation terms.' },
+  { title: 'Quantity and color split', text: 'List the quantity for each design and color. Standard custom claws and barrettes have category-specific production minimums. Stock orders for the three selected claw clips start at 500 pieces per style per color.' },
   { title: 'Branding and packaging', text: 'Logo method, labels, inserts, cards, pouches and boxes add artwork, tooling and assembly steps.' },
 ];
 
@@ -105,7 +105,7 @@ export default function Customization() {
             <p className="section-label">Private-Label Scope</p>
             <h2 id="private-label-title" className="text-display-sm text-navy">Flexible MOQ &amp; Private Label Solutions for Emerging Accessory Brands</h2>
             <p className="mt-5 leading-relaxed text-tan">Start with an existing production direction or send a complete design brief. Each quotation separates the product, branding, packaging and any tooling so buyers can compare options clearly.</p>
-            <p className="mt-5 leading-relaxed text-tan">Custom production MOQ depends on the product and construction; there is no single minimum for every style. The three selected claw clips are quoted individually. Samples and in-stock items may be available below the custom MOQ; confirm availability and terms for your selection.</p>
+            <p className="mt-5 leading-relaxed text-tan">Custom production MOQ depends on the product and construction. For the three selected claw clips, stock orders start at 500 pieces per style per color. Custom logos and packaging are quoted separately. A new mold requires a higher minimum agreed for the design. Ask about pricing and sample availability for your selection.</p>
             <Link to="/sourcing" className="mt-6 inline-flex text-sm font-medium text-navy underline underline-offset-4 hover:text-gold">Review MOQ and order requirements</Link>
           </div>
           <div className="border border-bronze/10 bg-white">
