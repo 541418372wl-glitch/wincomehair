@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { articles } from 'virtual:article-summaries';
+import { responsivePhotoProps } from '../lib/responsivePhotos';
 
 const buyingTopics = [
   {
@@ -92,6 +93,7 @@ export default function Blog() {
               <div className="aspect-[16/9] overflow-hidden bg-sand">
                 <img
                   src={post.image}
+                  {...responsivePhotoProps(post.image)}
                   alt={post.title}
                   width="1535"
                   height="864"

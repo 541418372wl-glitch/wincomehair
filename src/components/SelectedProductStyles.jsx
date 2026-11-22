@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { selectedProductStyles, selectedProductPath } from '../data/selectedProductStyles';
 import ScrunchieBuyingComparison from './ScrunchieBuyingComparison';
+import { responsivePhotoProps } from '../lib/responsivePhotos';
 
 function StyleFacts({ rows }) {
   return (
@@ -16,7 +17,7 @@ function SelectedStyleCard({ product, number }) {
   return (
     <article id={`selection-${product.id}`} className="selected-style-card">
       <Link to={selectedProductPath(product)} className="selected-style-photo" aria-label={`View ${product.title}`}>
-        <img src={product.image} alt={product.alt} width={product.imageWidth} height={product.imageHeight} loading="lazy" decoding="async" />
+        <img src={product.image} {...responsivePhotoProps(product.image)} alt={product.alt} width={product.imageWidth} height={product.imageHeight} loading="lazy" decoding="async" />
         <span className="selected-style-number" aria-hidden="true">{String(number).padStart(2, '0')}</span>
       </Link>
       <div className="selected-style-copy">

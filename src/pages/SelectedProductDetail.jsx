@@ -3,6 +3,7 @@ import { selectedProductInquiryPath } from '../data/selectedProductStyles';
 import { trackProductInquiry } from '../lib/analytics';
 import { selectedProductBuyingGuide } from '../data/selectedProductBuyingGuide';
 import RelatedProducts from '../components/RelatedProducts';
+import { responsivePhotoProps } from '../lib/responsivePhotos';
 
 export default function SelectedProductDetail({ product }) {
   const guide = selectedProductBuyingGuide[product.id];
@@ -12,7 +13,12 @@ export default function SelectedProductDetail({ product }) {
       <a className="selected-product-back" href={`/products/category/${product.category}#selected-styles`}>← Back to {categoryLabel}</a>
       <div className="selected-product-layout">
         <div className="selected-product-image">
-          <img src={product.image} alt={product.alt} width={product.imageWidth} height={product.imageHeight} fetchpriority="high" />
+          <img
+            src={product.image}
+            {...responsivePhotoProps(product.image, '(min-width: 1440px) 616px, (min-width: 768px) calc(50vw - 104px), min(420px, calc(100vw - 48px))')}
+            alt={product.alt} width={product.imageWidth} height={product.imageHeight}
+            fetchpriority="high"
+          />
         </div>
         <div className="selected-style-detail-copy selected-product-copy">
           <p className="selected-style-label">{product.tag}</p>

@@ -5,6 +5,7 @@ import { products as catalogProducts, categoryMap } from '../data/productCatalog
 import { findSelectedProduct } from '../data/selectedProductStyles';
 import SelectedProductDetail from './SelectedProductDetail';
 import RelatedProducts from '../components/RelatedProducts';
+import OptimizedProductImage from '../components/OptimizedProductImage';
 
 const products = {
   'claw-acetate': {
@@ -443,12 +444,12 @@ export default function ProductDetail() {
 
         <div className="grid md:grid-cols-2 gap-16">
           <div className="aspect-square overflow-hidden border border-bronze/10">
-            <img
-              src={product.image}
+            <OptimizedProductImage
+              image={product.image}
               alt={product.name}
-              width="1024"
-              height="1024"
-              fetchpriority="high"
+              sizes="(min-width: 1440px) 608px, (min-width: 768px) calc(50vw - 112px), calc(100vw - 48px)"
+              eager
+              pictureClassName="block w-full h-full"
               className="w-full h-full object-cover"
             />
           </div>
