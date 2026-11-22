@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { responsivePhotoProps } from '../lib/responsivePhotos';
 import { Link } from 'react-router-dom';
 import { products as catalogProducts, productCategories } from '../data/productCatalog';
 import { selectedProducts } from '../data/selectedProductStyles';
@@ -108,7 +109,7 @@ export default function Products() {
               className="group bg-white overflow-hidden border border-bronze/10 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
             >
               <div className="aspect-square overflow-hidden">
-                <img src={product.image} alt={product.alt || product.name} width={product.imageWidth} height={product.imageHeight} loading="lazy" className={`w-full h-full ${product.selectedStyle ? 'object-contain' : 'object-cover'} transition-transform duration-700 group-hover:scale-105`} />
+                <img src={product.image} {...responsivePhotoProps(product.image)} alt={product.alt || product.name} width={product.imageWidth} height={product.imageHeight} loading="lazy" className={`w-full h-full ${product.selectedStyle ? 'object-contain' : 'object-cover'} transition-transform duration-700 group-hover:scale-105`} />
               </div>
               <div className="p-6">
                 <p className="text-[10px] tracking-wider uppercase text-tan mb-2">{product.category}</p>

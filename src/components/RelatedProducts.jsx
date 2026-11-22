@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { categoryMap } from '../data/productCatalog';
 import { getRelatedProducts } from '../data/relatedProducts';
+import { responsivePhotoProps } from '../lib/responsivePhotos';
 
 export default function RelatedProducts({ productId, category }) {
   const related = getRelatedProducts(productId);
@@ -15,7 +16,7 @@ export default function RelatedProducts({ productId, category }) {
       <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {related.map(product => (
           <Link to={`/products/${product.id}`} key={product.id} className="group block border border-bronze/10 bg-white p-5 hover:border-bronze/25">
-            <img src={product.image} alt={product.alt} width={product.imageWidth} height={product.imageHeight} loading="lazy" decoding="async" className="w-full h-48 object-contain mb-4" />
+            <img src={product.image} {...responsivePhotoProps(product.image)} alt={product.alt} width={product.imageWidth} height={product.imageHeight} loading="lazy" decoding="async" className="w-full h-48 object-contain mb-4" />
             <h3 className="text-lg font-display text-navy group-hover:text-gold">{product.name}</h3>
             <span className="inline-block mt-3 text-sm text-gold">View product details →</span>
           </Link>

@@ -1,27 +1,7 @@
 import { Link } from 'react-router-dom';
 import { articles } from 'virtual:article-summaries';
 import { commercialLandingPages } from '../data/commercialLandingPages';
-
-function OptimizedProductImage({ image, alt, sizes, className, pictureClassName = '' }) {
-  const base = image.replace(/\.webp$/, '');
-  return (
-    <picture className={pictureClassName}>
-      <source type="image/avif" srcSet={`${base}-320.avif 320w, ${base}-640.avif 640w, ${base}.avif 1024w`} sizes={sizes} />
-      <source type="image/webp" srcSet={`${base}-320.webp 320w, ${base}-640.webp 640w, ${image} 1024w`} sizes={sizes} />
-      <img
-        src={image}
-        srcSet={`${base}-320.webp 320w, ${base}-640.webp 640w, ${image} 1024w`}
-        alt={alt}
-        sizes={sizes}
-        loading="lazy"
-        decoding="async"
-        width="1024"
-        height="1024"
-        className={className}
-      />
-    </picture>
-  );
-}
+import OptimizedProductImage from '../components/OptimizedProductImage';
 
 const productCategories = [
   { name: 'Hair Claw Clips', slug: 'hair-claw-clips', image: '/assets/images/product-claw-butterfly.webp', desc: 'Acetate, metal, butterfly & more' },
