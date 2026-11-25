@@ -174,7 +174,8 @@ export const selectedProductStyles = {
   }
 };
 
-const selectedClawOrderTerms = 'Stock MOQ: 500 pieces per style per color. Logo and packaging customization are quoted separately. New tooling requires a higher minimum order quantity, to be agreed for the design. Share your selected colors, quantity per color and destination to confirm pricing, availability and delivery timing.';
+export const selectedClawStockTerms = '500 pieces per style per color. Logo and packaging customization are quoted separately.';
+const selectedClawOrderTerms = `Stock MOQ: ${selectedClawStockTerms} New tooling requires a higher minimum order quantity, to be agreed for the design. Share your selected colors, quantity per color and destination to confirm pricing, availability and delivery timing.`;
 
 selectedProductStyles['hair-claw-clips'] = {
   title: 'Compare Three Claw Clip Styles',

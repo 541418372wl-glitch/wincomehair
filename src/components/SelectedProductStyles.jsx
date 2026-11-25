@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
-import { selectedProductStyles, selectedProductPath } from '../data/selectedProductStyles';
+import { selectedProductStyles, selectedProducts, selectedProductPath, selectedProductInquiryPath } from '../data/selectedProductStyles';
 import ScrunchieBuyingComparison from './ScrunchieBuyingComparison';
 import { responsivePhotoProps } from '../lib/responsivePhotos';
+import { trackProductInquiry } from '../lib/analytics';
 
 function StyleFacts({ rows }) {
   return (
@@ -13,7 +14,7 @@ function StyleFacts({ rows }) {
   );
 }
 
-function SelectedStyleCard({ product, number }) {
+function SelectedStyleCard({ product, number, showQuote }) {
   return (
     <article id={`selection-${product.id}`} className="selected-style-card">
       <Link to={selectedProductPath(product)} className="selected-style-photo" aria-label={`View ${product.title}`}>
@@ -28,6 +29,16 @@ function SelectedStyleCard({ product, number }) {
         <Link to={selectedProductPath(product)} className="selected-style-open" aria-label={`View product details for ${product.title}`}>
           View product details <span aria-hidden="true">→</span>
         </Link>
+        {showQuote && (
+          <Link
+            to={`${selectedProductInquiryPath(product)}#stock-inquiry`}
+            className="btn-outline mt-3 justify-center"
+            aria-label={`Request a quote for ${product.title}`}
+            onClick={() => void trackProductInquiry({ productId: product.slug, productName: product.title, method: 'quote_form' })}
+          >
+            Request a quote <span aria-hidden="true">→</span>
+          </Link>
+        )}
       </div>
     </article>
   );
@@ -36,6 +47,7 @@ function SelectedStyleCard({ product, number }) {
 export default function SelectedProductStyles({ category }) {
   const selection = selectedProductStyles[category];
   if (!selection) return null;
+  const clawComparison = category === 'hair-claw-clips';
 
   return (
     <section id="selected-styles" className={`container-site selected-styles${selection.comparison ? ' selected-styles-comparison' : ''}`} aria-labelledby="selected-styles-title">
@@ -44,7 +56,9 @@ export default function SelectedProductStyles({ category }) {
         <p>{selection.intro}</p>
       </div>
       <div className={`selected-styles-grid ${category === 'headbands' ? 'selected-styles-headbands' : ''}`}>
-        {selection.items.map((product, index) => <SelectedStyleCard key={product.id} product={product} number={index + 1} />)}
+        {selectedProducts.filter(product => product.category === category).map((product, index) => (
+          <SelectedStyleCard key={product.id} product={product} number={index + 1} showQuote={clawComparison} />
+        ))}
       </div>
       {selection.comparison ? (
         <aside className="selected-styles-comparison-note" aria-labelledby="selected-styles-comparison-note-title">
@@ -58,7 +72,7 @@ export default function SelectedProductStyles({ category }) {
           <p>{selection.comparison?.quoteBrief || 'Share the style name, preferred colors, size option, quantity and destination. Availability, order quantities, customization and lead times are confirmed for the selected style.'}</p>
           {selection.comparison ? <p>{selection.comparison.timing}</p> : null}
         </div>
-        <Link to="/contact" className="btn-primary">{selection.comparison ? 'Prepare an Inquiry' : 'Discuss Your Selection'} <span aria-hidden="true">→</span></Link>
+        <Link to={clawComparison ? '/contact?category=hair-claw-clips#stock-inquiry' : '/contact'} className="btn-primary">{selection.comparison ? 'Prepare an Inquiry' : 'Discuss Your Selection'} <span aria-hidden="true">→</span></Link>
       </div>}
     </section>
   );

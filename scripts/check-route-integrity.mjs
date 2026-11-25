@@ -63,7 +63,13 @@ for (const route of routes) {
       const link = card?.querySelector(selector);
       if (link?.tagName !== 'A' || link.getAttribute('href') !== target) failures.push(route + ': product detail entry mismatch ' + product.id + ' ' + selector);
     }
+    if (product.category === 'hair-claw-clips' && !card?.querySelector(`a[href="/contact?product=${product.slug}#stock-inquiry"]`)) {
+      failures.push(route + ': missing style-specific quote link for ' + product.slug);
+    }
     if (card?.querySelector('dialog')) failures.push(route + ': selected style must open a detail page, not a dialog: ' + product.id);
+  }
+  if (route === '/products/category/hair-claw-clips' && !doc.querySelector('.selected-styles-brief a[href="/contact?category=hair-claw-clips#stock-inquiry"]')) {
+    failures.push(route + ': comparison inquiry must retain the claw category');
   }
   for (const link of doc.querySelectorAll('a[href]')) {
     const url = new URL(link.href);
