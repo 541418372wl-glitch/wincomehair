@@ -3,6 +3,7 @@ import InquiryChallenge from '../components/InquiryChallenge';
 import { waLink } from '../lib/whatsapp';
 import { trackGenerateLead, readAnalyticsConsentSnapshot } from '../lib/analytics';
 import { inquiryProductCategory } from '../data/productInquiry';
+import { selectedClawStockTerms, selectedProductStyles } from '../data/selectedProductStyles';
 
 const SAMPLE_STOCK_OPTION = {
   value: 'sample-stock-below-moq',
@@ -19,6 +20,14 @@ const VOLUME_OPTIONS = {
 const DEFAULT_QUANTITY_OPTIONS = [
   SAMPLE_STOCK_OPTION,
   { value: '200-999', label: '200–999 pcs' },
+  VOLUME_OPTIONS['1000-1999'],
+  VOLUME_OPTIONS['2000-4999'],
+  VOLUME_OPTIONS['5000+'],
+];
+
+const STOCK_CLAW_QUANTITY_OPTIONS = [
+  { value: SAMPLE_STOCK_OPTION.value, label: 'Sample inquiry' },
+  { value: '500-999', label: '500–999 pcs' },
   VOLUME_OPTIONS['1000-1999'],
   VOLUME_OPTIONS['2000-4999'],
   VOLUME_OPTIONS['5000+'],
@@ -47,7 +56,7 @@ const CUSTOM_MOQ_BY_PRODUCT_TYPE = {
   },
 };
 
-export default function Contact({ selectedProduct = null }) {
+export default function Contact({ selectedProduct = null, fromClawComparison = false }) {
   const [inquiryProduct, setInquiryProduct] = useState(selectedProduct);
   const [step, setStep] = useState(1);
   const [submitting, setSubmitting] = useState(false);
@@ -61,7 +70,8 @@ export default function Contact({ selectedProduct = null }) {
   const [formStartedAt] = useState(() => Date.now());
   const [form, setForm] = useState({
     name: '', company: '', email: '', phone: '',
-    productType: inquiryProductCategory(selectedProduct), quantity: '', material: '', logoPlacement: '',
+    productType: inquiryProductCategory(selectedProduct) || (fromClawComparison ? 'claw-clips' : ''),
+    quantity: '', material: '', logoPlacement: '',
     dimensions: '', message: '', targetMarket: '', timeline: '', website: '',
   });
 
@@ -76,7 +86,10 @@ export default function Contact({ selectedProduct = null }) {
   const activeMoqPolicy = inquiryProduct && !inquiryProduct.customProduction
     ? null
     : CUSTOM_MOQ_BY_PRODUCT_TYPE[form.productType];
-  const quantityOptions = activeMoqPolicy?.options || DEFAULT_QUANTITY_OPTIONS;
+  const stockClawInquiry = form.productType === 'claw-clips' && (
+    fromClawComparison || selectedProductStyles['hair-claw-clips'].items.some(style => style.id === inquiryProduct?.id)
+  );
+  const quantityOptions = stockClawInquiry ? STOCK_CLAW_QUANTITY_OPTIONS : activeMoqPolicy?.options || DEFAULT_QUANTITY_OPTIONS;
   const validQuantity = quantityOptions.some(option => option.value === form.quantity);
   const updateVerificationToken = useCallback((token) => {
     verificationToken.current = token;
@@ -233,7 +246,11 @@ export default function Contact({ selectedProduct = null }) {
               </a>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="bg-white p-5 sm:p-8 md:p-16 border border-bronze/10">
+            <form
+              id={stockClawInquiry ? 'stock-inquiry' : undefined}
+              onSubmit={handleSubmit}
+              className={`bg-white p-5 sm:p-8 md:p-16 border border-bronze/10${stockClawInquiry ? ' scroll-mt-28' : ''}`}
+            >
               {inquiryProduct ? <div className="selected-inquiry-summary">
                 <p>Product inquiry</p>
                 <strong>{inquiryProduct.title}</strong>
@@ -265,17 +282,22 @@ export default function Contact({ selectedProduct = null }) {
                       <option value="pins">Hair Clips & Barrettes</option>
                       <option value="other">Multiple Types / Other</option>
                     </select>
-                    {activeMoqPolicy && (
+                    {stockClawInquiry ? (
+                      <p id="claw-stock-terms" className="mt-2 text-sm leading-relaxed text-bronze" role="status">
+                        {fromClawComparison ? 'For the three styles in the comparison, stock orders start at ' : 'Stock orders start at '}{selectedClawStockTerms}
+                      </p>
+                    ) : activeMoqPolicy && (
                       <p className="mt-2 text-sm leading-relaxed text-bronze/80" role="status">
                         {activeMoqPolicy.message} Samples and in-stock items may be available below this minimum.
                       </p>
                     )}
                   </div>
                   <div>
-                    <label htmlFor="quantity" className="block text-xs tracking-wider uppercase text-tan mb-1">Estimated Quantity *</label>
+                    <label htmlFor="quantity" className="block text-xs tracking-wider uppercase text-tan mb-1">{stockClawInquiry ? 'Total order quantity *' : 'Estimated Quantity *'}</label>
                     <select
                       id="quantity"
                       name="quantity"
+                      aria-describedby={stockClawInquiry ? 'claw-stock-terms claw-quantity-help' : undefined}
                       required
                       value={form.quantity}
                       onChange={e => update('quantity', e.target.value)}
@@ -286,6 +308,11 @@ export default function Contact({ selectedProduct = null }) {
                         <option key={option.value} value={option.value}>{option.label}</option>
                       ))}
                     </select>
+                    {stockClawInquiry && (
+                      <p id="claw-quantity-help" className="mt-2 text-sm leading-relaxed text-bronze">
+                        Include every style and color. For one style, 1 color × 500 = 500 pieces and 3 colors × 500 = 1,500 pieces.
+                      </p>
+                    )}
                   </div>
                   <div className="flex flex-col sm:items-end">
                     <button
@@ -355,7 +382,7 @@ export default function Contact({ selectedProduct = null }) {
                   </div>
                   <div>
                     <label htmlFor="message" className="block text-xs tracking-wider uppercase text-tan mb-1">Additional Message</label>
-                    <textarea id="message" name="message" rows="3" value={form.message} onChange={e => update('message', e.target.value)} placeholder="Tell us about your project, reference images, or specific requirements..." className="input-field" />
+                    <textarea id="message" name="message" rows="3" value={form.message} onChange={e => update('message', e.target.value)} placeholder={stockClawInquiry ? 'List your chosen styles, colors and pieces per color. Add any logo or packaging requests.' : 'Tell us about your project, reference images, or specific requirements...'} className="input-field" />
                   </div>
                   <div className="flex flex-col gap-4 sm:flex-row sm:justify-between">
                     <button type="button" onClick={() => setStep(1)} className="btn-outline w-full sm:w-auto justify-center">← Back</button>

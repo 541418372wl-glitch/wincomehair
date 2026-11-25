@@ -348,6 +348,8 @@ for (const product of [...selectedProducts, ...catalogProducts.map(item => findI
     } else {
       assert.equal(expectedCategory, 'claw-clips', 'Only selected claw styles retain separately confirmed minimums');
       assert.ok(!document.querySelector('form').textContent.includes('Custom production MOQ:'));
+      assert.match(document.getElementById('claw-stock-terms').textContent, /500 pieces per style per color/);
+      assert.ok(document.querySelector('#quantity option[value="500-999"]'));
     }
     assert.match(document.querySelector('.selected-inquiry-summary').textContent, new RegExp(product.title));
     const whatsapp = new URL(document.querySelector('[data-analytics-location="contact_primary"]').href);
@@ -374,12 +376,40 @@ for (const product of [...selectedProducts, ...catalogProducts.map(item => findI
   } finally { test.cleanup(); }
 }
 
+for (const order of [
+  { range: '500-999', details: 'Transparent blue, 500 pieces.' },
+  { range: '1000-1999', details: 'Transparent blue, white and grey, 500 each. Total 1,500 pieces.' },
+]) {
+  const test = await harness();
+  try {
+    test.app.mountRoute('/contact?category=hair-claw-clips'); await flush(); await flush(); await flush();
+    assert.equal(document.getElementById('productType').value, 'claw-clips');
+    assert.equal(document.querySelector('.selected-inquiry-summary'), null);
+    assert.match(document.querySelector('label[for="quantity"]').textContent, /Total order quantity/);
+    assert.match(document.getElementById('claw-stock-terms').textContent, /Logo and packaging customization are quoted separately/);
+    assert.match(document.getElementById('claw-quantity-help').textContent, /1,500/);
+    await test.input('quantity', order.range);
+    test.submit(); await flush();
+    await test.input('message', order.details);
+    test.submit(); await flush();
+    await test.input('name', 'Offline QA');
+    await test.input('email', 'offline@example.invalid');
+    await test.loadScript(); await test.verify();
+    test.submit(); await flush();
+    const { record } = JSON.parse(test.requests[0].options.body);
+    assert.equal(record.product_type, 'claw-clips');
+    assert.equal(record.quantity, order.range);
+    assert.equal(record.message, order.details);
+    await test.respond(accepted('44444444-4444-4444-8444-444444444444'));
+  } finally { test.cleanup(); }
+}
+
 // URL selection is hydrated from the same allowlist; extra parameters cannot
 // override business terms or inject a product name/link/message.
 {
   const test = await harness();
   try {
-    test.app.mountRoute('/contact?product=claw-acetate&customProduction=false&title=Injected&message=Injected');
+    test.app.mountRoute('/contact?product=claw-acetate&category=hair-claw-clips&customProduction=false&title=Injected&message=Injected');
     await flush(); await flush(); await flush();
     assert.match(document.querySelector('.selected-inquiry-summary').textContent, /Acetate Hair Claw Clips/);
     assert.doesNotMatch(document.body.textContent, /Injected/);
@@ -389,7 +419,7 @@ for (const product of [...selectedProducts, ...catalogProducts.map(item => findI
     assert.equal(document.getElementById('productType').value, 'pins');
     assert.equal(document.getElementById('quantity').value, '');
     assert.match(document.querySelector('form').textContent, /Custom production MOQ: 2,000 pcs/);
-    test.app.navigate('/contact?product=unknown-product'); await flush(); await flush(); await flush();
+    test.app.navigate('/contact?product=unknown-product&category=unknown'); await flush(); await flush(); await flush();
     assert.equal(document.querySelector('.selected-inquiry-summary'), null);
     assert.equal(document.getElementById('productType').value, '');
     assert.equal(test.requests.length, 0);
@@ -410,12 +440,12 @@ for (const removalStep of [1, 2, 3]) {
   const test = await harness();
   try {
     test.app.mount({ selectedProduct: selectedProducts.find(product => product.category === 'hair-claw-clips') }); await flush();
-    await test.input('quantity', '200-999');
+    await test.input('quantity', '500-999');
     for (let step = 1; step < removalStep; step++) { test.submit(); await flush(); }
     await test.clickText('Remove product selection');
     assert.ok(document.getElementById('productType'), 'Removing a product returns to the first step so revised MOQ and quantity are reviewed');
     assert.equal(document.getElementById('quantity').value, '', 'Removing a selected style resets a quantity that may no longer satisfy the custom program');
-    assert.equal(document.querySelector('#quantity option[value="200-999"]'), null);
+    assert.equal(document.querySelector('#quantity option[value="500-999"]'), null);
     assert.match(document.querySelector('form').textContent, /Custom production MOQ: 1,000 pcs/);
     test.submit(); await flush();
     assert.ok(document.getElementById('productType'), 'A cleared quantity cannot advance or submit');
