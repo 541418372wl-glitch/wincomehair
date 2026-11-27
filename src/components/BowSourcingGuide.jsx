@@ -37,7 +37,7 @@ export default function BowSourcingGuide() {
           </div>
           <div className="flex flex-col gap-3 sm:flex-row lg:flex-col">
             <a href="#bow-product-directions" className="btn-outline justify-center">Compare Product Directions</a>
-            <Link to="/contact" className="btn-primary justify-center">Prepare a Bow Inquiry</Link>
+            <Link to="/contact?category=hair-bows#stock-inquiry" className="btn-primary justify-center">Prepare a Bow Inquiry</Link>
           </div>
         </div>
       </div>

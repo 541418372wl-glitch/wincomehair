@@ -3,7 +3,8 @@ import { selectedProductInquiryPath } from '../data/selectedProductStyles';
 import { trackProductInquiry } from '../lib/analytics';
 import { selectedProductBuyingGuide } from '../data/selectedProductBuyingGuide';
 import RelatedProducts from '../components/RelatedProducts';
-import { responsivePhotoProps } from '../lib/responsivePhotos';
+import OptimizedProductImage from '../components/OptimizedProductImage';
+import { productQuoteWhatsAppUrl } from '../lib/whatsapp';
 
 export default function SelectedProductDetail({ product }) {
   const guide = selectedProductBuyingGuide[product.id];
@@ -13,12 +14,8 @@ export default function SelectedProductDetail({ product }) {
       <a className="selected-product-back" href={`/products/category/${product.category}#selected-styles`}>← Back to {categoryLabel}</a>
       <div className="selected-product-layout">
         <div className="selected-product-image">
-          <img
-            src={product.image}
-            {...responsivePhotoProps(product.image, '(min-width: 1440px) 616px, (min-width: 768px) calc(50vw - 104px), min(420px, calc(100vw - 48px))')}
-            alt={product.alt} width={product.imageWidth} height={product.imageHeight}
-            fetchpriority="high"
-          />
+          <OptimizedProductImage image={product.image} alt={product.alt}
+            width={product.imageWidth} height={product.imageHeight} priority />
         </div>
         <div className="selected-style-detail-copy selected-product-copy">
           <p className="selected-style-label">{product.tag}</p>
@@ -39,7 +36,18 @@ export default function SelectedProductDetail({ product }) {
           <div className="selected-product-inquiry">
             <h2>Ask about this product</h2>
             <p>{product.inquiryNote || (product.moq ? `Production MOQ: ${product.moq}. Samples and in-stock items can be discussed separately. Tell us your preferred colors, size option, quantity and destination so availability and delivery timing can be confirmed.` : 'Tell us your preferred colors, size option, quantity and destination. Availability, minimum order and delivery timing are confirmed for your request.')}</p>
-            <Link to={selectedProductInquiryPath(product)} className="btn-primary" onClick={() => void trackProductInquiry({ productId: product.slug, productName: product.title, method: 'quote_form' })}>Request a quote for this product →</Link>
+            <ul className="mt-3 mb-5 list-disc pl-5 space-y-1 text-sm text-bronze">
+              <li>Tiered EXW/FOB unit prices and minimums for your color breakdown.</li>
+              <li>Physical sampling takes about 15 days. We quote logos and packaging against your brief.</li>
+              <li>We confirm carton packing and the bulk schedule in writing before you order.</li>
+            </ul>
+            <div className="flex flex-wrap gap-3">
+              <Link to={`${selectedProductInquiryPath(product)}#stock-inquiry`} className="btn-primary" onClick={() => void trackProductInquiry({ productId: product.slug, productName: product.title, method: 'quote_form' })}>Request a quote for this product →</Link>
+              <a href={productQuoteWhatsAppUrl(product.title, product.slug)} target="_blank" rel="noopener noreferrer"
+                data-analytics-location="selected_pdp_inquiry" data-product-name={product.title} className="btn-outline">
+                Chat on WhatsApp
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -63,7 +71,7 @@ export default function SelectedProductDetail({ product }) {
         <p className="section-label">Discuss This Product</p>
         <h2 id="product-inquiry-title">Interested in the {product.title}?</h2>
         <p>Share your preferred options, quantity and destination. We will review availability and order details for this product with you.</p>
-        <Link to={selectedProductInquiryPath(product)} className="btn-gold" onClick={() => void trackProductInquiry({ productId: product.slug, productName: product.title, method: 'quote_form' })}>Discuss this product <span aria-hidden="true">→</span></Link>
+        <Link to={`${selectedProductInquiryPath(product)}#stock-inquiry`} className="btn-gold" onClick={() => void trackProductInquiry({ productId: product.slug, productName: product.title, method: 'quote_form' })}>Discuss this product <span aria-hidden="true">→</span></Link>
       </section>
     </div>
   );

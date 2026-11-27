@@ -5,11 +5,11 @@ function submissionMetadata(input) {
   // Browser-reported snapshot, not proof of consent or Google ingestion.
   // Never forward arbitrary diagnostic fields or client-supplied versions.
   const valid = input && typeof input === 'object' && !Array.isArray(input)
-    && input.version === '1' && CONSENT_SNAPSHOTS.has(input.consentAtSubmit);
+    && ['1', '2'].includes(input.version) && CONSENT_SNAPSHOTS.has(input.consentAtSubmit);
   return {
     analytics_consent_at_submit: valid ? input.consentAtSubmit : 'unknown',
-    diagnostic_version: '1',
-    measurement_version: '3',
+    diagnostic_version: valid ? input.version : '1',
+    measurement_version: valid && input.version === '2' ? '4' : '3',
   };
 }
 
@@ -262,6 +262,9 @@ export default async function handler(req, res) {
     company: clean(raw.company, 150),
     phone: clean(raw.phone, 60),
     product_type: clean(raw.product_type || raw.productType, 60),
+    product_slug: clean(typeof raw.product_slug === 'string' ? raw.product_slug : '', 200),
+    ai_platform: clean(typeof raw.ai_platform === 'string' ? raw.ai_platform : '', 200),
+    landing_path: clean(typeof raw.landing_path === 'string' ? raw.landing_path : '', 200),
     quantity: clean(raw.quantity, 60),
     material: clean(raw.material, 60),
     logo_placement: clean(raw.logo_placement || raw.logoPlacement, 60),

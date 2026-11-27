@@ -72,7 +72,7 @@ export default function ScrunchieBuyingComparison({ products }) {
           <p>For custom scrunchies with a logo, include your artwork and preferred placement. Suitable branding methods, costs and availability must be confirmed for the selected construction. No completed logo-production example is shown here.</p>
           <p className="scrunchie-guide-links"><Link to="/blog/silk-vs-satin-scrunchies">Compare silk and satin fabrics</Link><Link to="/blog/hair-accessory-packaging-guide">Plan retail packaging</Link></p>
         </div>
-        <Link to="/contact" className="btn-primary">Request a Scrunchie Quote <span aria-hidden="true">→</span></Link>
+        <Link to="/contact?category=scrunchies#stock-inquiry" className="btn-primary">Request a Scrunchie Quote <span aria-hidden="true">→</span></Link>
       </div>
     </div>
   );

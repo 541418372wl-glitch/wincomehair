@@ -1,5 +1,5 @@
 import { useParams, Link } from 'react-router-dom';
-import { waLink } from '../lib/whatsapp';
+import { productQuoteWhatsAppUrl } from '../lib/whatsapp';
 import { trackProductInquiry } from '../lib/analytics';
 import { products as catalogProducts, categoryMap } from '../data/productCatalog';
 import { findSelectedProduct } from '../data/selectedProductStyles';
@@ -447,8 +447,7 @@ export default function ProductDetail() {
             <OptimizedProductImage
               image={product.image}
               alt={product.name}
-              sizes="(min-width: 1440px) 608px, (min-width: 768px) calc(50vw - 112px), calc(100vw - 48px)"
-              eager
+              priority
               pictureClassName="block w-full h-full"
               className="w-full h-full object-cover"
             />
@@ -469,7 +468,7 @@ export default function ProductDetail() {
 
             <div className="flex flex-col sm:flex-row items-start gap-3">
               <a
-                href={waLink(`Hello WINCOME, I just viewed your ${product.name} and would like to discuss a project. Can we chat?`)}
+                href={productQuoteWhatsAppUrl(product.name, id)}
                 target="_blank"
                 rel="noopener noreferrer"
                 data-analytics-location="product_primary"
@@ -480,7 +479,7 @@ export default function ProductDetail() {
                 Discuss on WhatsApp <span className="ml-1">→</span>
               </a>
               <Link
-                to={`/contact?product=${encodeURIComponent(id)}`}
+                to={`/contact?product=${encodeURIComponent(id)}#stock-inquiry`}
                 onClick={() => void trackProductInquiry({ productId: id, productName: product.name, method: 'quote_form' })}
                 className="btn-outline text-base px-10 py-5"
               >
@@ -502,6 +501,14 @@ export default function ProductDetail() {
                   <p className="text-sm text-navy">{value}</p>
                 </div>
               ))}
+            </div>
+            <div className="mt-6 p-6 border border-sand bg-white/70">
+              <h2 className="text-xs tracking-wider uppercase text-tan mb-2">What Your Quote Includes</h2>
+              <ul className="list-disc pl-5 space-y-1 text-sm text-navy/80">
+                <li>Tiered EXW/FOB unit pricing for your quantities and color breakdown.</li>
+                <li>Physical sampling takes about 15 days. We confirm bulk timing and carton packing per order.</li>
+                <li>Custom logos, backing cards and gift boxes are quoted against your brief.</li>
+              </ul>
             </div>
           </div>
         </div>
@@ -580,7 +587,7 @@ export default function ProductDetail() {
             Free design mockup and factory-direct quote within 24 hours. Production MOQs vary by category; samples and in-stock items may be available below the custom minimum.
           </p>
           <Link
-            to={`/contact?product=${encodeURIComponent(id)}`}
+            to={`/contact?product=${encodeURIComponent(id)}#stock-inquiry`}
             onClick={() => void trackProductInquiry({ productId: id, productName: product.name, method: 'quote_form' })}
             className="btn-gold"
           >

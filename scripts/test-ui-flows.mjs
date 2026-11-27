@@ -61,6 +61,8 @@ async function harness({ siteKey = 'offline-unit-test-sitekey', hostname = 'winc
   const bundle = await build({
     stdin: {
       contents: 'import { h, render } from "preact"; import Contact from "./src/pages/Contact.jsx"; import InquiryChallenge from "./src/components/InquiryChallenge.jsx";'
+        + 'import AnalyticsTracker from "./src/components/AnalyticsTracker.jsx";'
+        + 'export const mountTracker = () => render(h(MemoryRouter, null, h(AnalyticsTracker)), document.getElementById("root"));'
         + 'import { MemoryRouter, useNavigate } from "react-router-dom"; import SelectedContactRoute from "./src/pages/SelectedContactRoute.jsx";'
         + 'export let navigate; function Route() { navigate = useNavigate(); return h(SelectedContactRoute); }'
         + 'export const mountRoute = url => render(h(MemoryRouter, { initialEntries: [url] }, h(Route)), document.getElementById("root"));'
@@ -98,11 +100,9 @@ async function harness({ siteKey = 'offline-unit-test-sitekey', hostname = 'winc
     widgets.at(-1).options.callback('offline-token-' + widgets.length);
     await flush();
   };
-  const contactStep = async () => {
+  const fillRequired = async () => {
     await input('productType', 'pins');
     await input('quantity', 'sample-stock-below-moq');
-    submit(); await flush();
-    submit(); await flush();
     await input('name', 'Offline QA');
     await input('email', 'offline@example.invalid');
   };
@@ -117,7 +117,7 @@ async function harness({ siteKey = 'offline-unit-test-sitekey', hostname = 'winc
     globalThis.fetch = originalFetch;
     dom.window.close();
   };
-  return { app, input, submit, clickText, loadScript, verify, contactStep, respond, cleanup, requests, widgets, pendingScripts, timeouts,
+  return { app, input, submit, clickText, loadScript, verify, fillRequired, respond, cleanup, requests, widgets, pendingScripts, timeouts,
     get readyCalls() { return readyCalls; },
   };
 }
@@ -131,15 +131,22 @@ const rejected = { ok: false, accepted: false, submissionStatus: 'rejected' };
     test.app.mount(); await flush();
     assert.equal(test.pendingScripts.length, 0);
     test.submit(); await flush();
-    assert.ok(document.getElementById('productType'), 'Blank step cannot advance');
+    assert.ok(document.getElementById('email'), 'Required contact fields are on the first screen');
+    assert.equal(test.requests.length, 0, 'Enter cannot send a blank inquiry');
+    assert.equal(document.getElementById('optional-specs').hidden, true);
+    document.getElementById('name').focus(); await flush();
+    assert.equal(test.pendingScripts.length, 1, 'First contact with a field starts verification');
+    await test.clickText('Add optional specs');
+    assert.equal(document.getElementById('optional-specs').hidden, false);
+    await test.input('material', 'pc');
+    await test.clickText('Add optional specs');
+    assert.equal(document.getElementById('optional-specs').hidden, true);
+    assert.equal(document.getElementById('material').value, 'pc');
     await test.input('productType', 'pins');
     assert.equal(document.querySelector('#quantity option[value="1000-1999"]'), null);
     await test.input('quantity', 'sample-stock-below-moq');
     test.submit(); await flush();
-    assert.ok(document.getElementById('material'), 'Enter advances without submitting');
-    assert.equal(test.pendingScripts.length, 0, 'Details step loads no third party');
-    test.submit(); await flush();
-    assert.ok(document.getElementById('email'));
+    assert.equal(test.requests.length, 0, 'A partial request never leaves the form');
     assert.equal(test.pendingScripts.length, 1);
     assert.equal(test.pendingScripts[0].element.src, 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit');
     await test.input('name', 'Offline QA');
@@ -166,7 +173,7 @@ const rejected = { ok: false, accepted: false, submissionStatus: 'rejected' };
     assert.match(payload.turnstileToken, /^offline-token-/);
     assert.equal(Object.hasOwn(payload.record, 'turnstileToken'), false);
     assert.equal(payload.record.email, 'offline@example.invalid');
-    assert.deepEqual(payload.diagnostics, { version: '1', consentAtSubmit: 'unset' });
+    assert.deepEqual(payload.diagnostics, { version: '2', consentAtSubmit: 'unset' });
     assert.equal(document.querySelector('button[type="submit"]').disabled, true);
     assert.equal(document.querySelector('button[type="button"]').disabled, true);
     await test.respond(rejected, 422);
@@ -208,7 +215,7 @@ const rejected = { ok: false, accepted: false, submissionStatus: 'rejected' };
   try {
     window.localStorage.setItem('wincome_analytics_consent_v1', 'granted');
     test.app.mount(); await flush();
-    await test.contactStep(); await test.loadScript(); await test.verify();
+    await test.fillRequired(); await test.loadScript(); await test.verify();
     test.submit();
     await test.respond({ ok: true, saved: true, requestId: '22222222-2222-4222-8222-222222222222' });
     assert.doesNotMatch(document.body.textContent, /Thank You for Your Request/);
@@ -220,12 +227,36 @@ const rejected = { ok: false, accepted: false, submissionStatus: 'rejected' };
     assert.equal(leads.length, 1);
     assert.equal(leads[0][2].product_type, 'pins');
     assert.equal(leads[0][2].lead_status, 'accepted');
-    assert.equal(leads[0][2].measurement_version, '3');
+    assert.equal(leads[0][2].measurement_version, '4');
     assert.doesNotMatch(JSON.stringify(leads), /example\.invalid|offline-token|33333333/);
-    assert.deepEqual(JSON.parse(test.requests.at(-1).options.body).diagnostics, { version: '1', consentAtSubmit: 'granted' });
+    assert.deepEqual(JSON.parse(test.requests.at(-1).options.body).diagnostics, { version: '2', consentAtSubmit: 'granted' });
     assert.deepEqual(Object.keys(leads[0][2]).sort(),
       ['lead_source', 'lead_status', 'measurement_version', 'product_type', 'quantity_range'],
       'no private metadata or callbacks are added to Google events');
+  } finally { test.cleanup(); }
+}
+
+// Outbound email and WhatsApp clicks carry only public context and never create leads.
+{
+  const test = await harness();
+  try {
+    window.localStorage.setItem('wincome_analytics_consent_v1', 'granted');
+    window.history.replaceState(null, '', '/products/claw-acetate?campaign=excluded');
+    test.app.mountTracker(); await flush();
+    for (const [href, type] of [['mailto:local@example.invalid', 'email_click'], ['https://api.whatsapp.com/send/', 'whatsapp_click']]) {
+      const link = document.createElement('a');
+      link.href = href;
+      link.dataset.analyticsLocation = 'product_primary';
+      link.addEventListener('click', event => event.preventDefault());
+      document.body.appendChild(link);
+      link.click(); await flush();
+      const matched = window.dataLayer.filter(call => call[0] === 'event' && call[1] === type);
+      assert.equal(matched.length, 1);
+      assert.equal(matched[0][2].page_path, '/products/claw-acetate');
+      assert.equal(matched[0][2].product_id, 'claw-acetate');
+      assert.doesNotMatch(JSON.stringify(matched), /example\.invalid|campaign/);
+    }
+    assert.equal(window.dataLayer.filter(call => call[1] === 'generate_lead').length, 0);
   } finally { test.cleanup(); }
 }
 
@@ -239,11 +270,15 @@ for (const [choice, expected] of [
     if (choice === 'storage-error') {
       Object.defineProperty(window, 'localStorage', { configurable: true, get() { throw new Error('Storage blocked'); } });
     } else if (choice !== null) window.localStorage.setItem('wincome_analytics_consent_v1', choice);
+    window.history.replaceState(null, '', '/contact?utm_source=chatgpt.com');
     test.app.mount(); await flush();
-    await test.contactStep(); await test.loadScript(); await test.verify();
+    await test.fillRequired(); await test.loadScript(); await test.verify();
     test.submit(); test.submit();
     assert.equal(test.requests.length, 1);
-    assert.deepEqual(JSON.parse(test.requests[0].options.body).diagnostics, { version: '1', consentAtSubmit: expected });
+    const payload = JSON.parse(test.requests[0].options.body);
+    assert.deepEqual(payload.diagnostics, { version: '2', consentAtSubmit: expected });
+    assert.equal(payload.record.ai_platform, null);
+    assert.equal(payload.record.landing_path, null);
     await test.respond(accepted('44444444-4444-4444-8444-444444444444'));
     assert.match(document.body.textContent, /Thank You for Your Request/);
     assert.equal(test.requests.length, 1, 'no follow-up report or duplicate inquiry');
@@ -256,7 +291,7 @@ for (const [choice, expected] of [
   try {
     window.localStorage.setItem('wincome_analytics_consent_v1', 'granted');
     test.app.mount(); await flush();
-    await test.contactStep(); await test.loadScript(); await test.verify();
+    await test.fillRequired(); await test.loadScript(); await test.verify();
     test.submit();
     window.localStorage.setItem('wincome_analytics_consent_v1', 'denied');
     await test.respond(accepted('55555555-5555-4555-8555-555555555555'));
@@ -319,7 +354,7 @@ for (const [choice, expected] of [
 for (const options of [{ siteKey: '' }, { siteKey: '1x00000000000000000000AA' }, { hostname: 'wincomehair-preview.vercel.app' }, { hostname: 'localhost' }]) {
   const test = await harness(options);
   try {
-    test.app.mount(); await flush(); await test.contactStep();
+    test.app.mount(); await flush(); await test.fillRequired();
     assert.match(document.body.textContent, /form is temporarily unavailable/);
     assert.equal(test.pendingScripts.length, 0);
     test.submit(); await flush();
@@ -336,6 +371,8 @@ for (const product of [...selectedProducts, ...catalogProducts.map(item => findI
   const test = await harness();
   try {
     window.localStorage.setItem('wincome_analytics_consent_v1', 'granted');
+    const aiEntry = product.slug === 'medium-rounded-pc-claw-clip';
+    if (aiEntry) window.history.replaceState(null, '', '/products/medium-rounded-pc-claw-clip?utm_source=chatgpt.com');
     test.app.mount({ selectedProduct: product }); await flush();
     const expectedCategory = { 'hair-claw-clips': 'claw-clips', 'hair-bows': 'bows', 'hair-clips-barrettes': 'pins' }[product.category] || product.category;
     assert.equal(document.getElementById('productType').value, expectedCategory);
@@ -366,12 +403,21 @@ for (const product of [...selectedProducts, ...catalogProducts.map(item => findI
     await flush();
     assert.equal([...document.querySelectorAll('button')].find(button => button.textContent.includes('Remove product selection')).disabled, true, 'Product selection cannot change during an active submission');
     const { record } = JSON.parse(test.requests[0].options.body);
+    assert.equal(record.product_slug, product.slug);
+    assert.equal(record.ai_platform, aiEntry ? 'chatgpt' : null);
+    assert.equal(record.landing_path, aiEntry ? '/products/medium-rounded-pc-claw-clip' : null);
     assert.equal(record.product_type, expectedCategory);
     assert.equal(record.message, `Product: ${product.title}\nProduct page: https://wincomehair.com/products/${product.slug}\n\nPlease confirm colors and delivery timing.`);
     await test.respond(accepted('44444444-4444-4444-8444-444444444444'));
     const leads = window.dataLayer.filter(call => call[0] === 'event' && call[1] === 'generate_lead');
     assert.equal(leads.length, 1);
-    assert.deepEqual(Object.keys(leads[0][2]).sort(), ['lead_source', 'lead_status', 'measurement_version', 'product_type', 'quantity_range']);
+    assert.equal(leads[0][2].product_id, product.slug);
+    const leadKeys = ['lead_source', 'lead_status', 'measurement_version', 'product_id', 'product_type', 'quantity_range'];
+    if (aiEntry) {
+      leadKeys.unshift('ai_platform');
+      assert.equal(leads[0][2].ai_platform, 'chatgpt');
+    }
+    assert.deepEqual(Object.keys(leads[0][2]).sort(), leadKeys);
     assert.doesNotMatch(JSON.stringify(leads), /Product page:|Please confirm|offline@example/);
   } finally { test.cleanup(); }
 }
@@ -436,20 +482,44 @@ for (const clearBy of ['remove', 'category']) {
   } finally { test.cleanup(); }
 }
 
-for (const removalStep of [1, 2, 3]) {
+{
   const test = await harness();
   try {
     test.app.mount({ selectedProduct: selectedProducts.find(product => product.category === 'hair-claw-clips') }); await flush();
     await test.input('quantity', '500-999');
-    for (let step = 1; step < removalStep; step++) { test.submit(); await flush(); }
+    await test.input('name', 'Name to retain');
+    await test.clickText('Add optional specs');
     await test.clickText('Remove product selection');
-    assert.ok(document.getElementById('productType'), 'Removing a product returns to the first step so revised MOQ and quantity are reviewed');
+    assert.equal(document.getElementById('name').value, 'Name to retain');
     assert.equal(document.getElementById('quantity').value, '', 'Removing a selected style resets a quantity that may no longer satisfy the custom program');
     assert.equal(document.querySelector('#quantity option[value="500-999"]'), null);
     assert.match(document.querySelector('form').textContent, /Custom production MOQ: 1,000 pcs/);
     test.submit(); await flush();
     assert.ok(document.getElementById('productType'), 'A cleared quantity cannot advance or submit');
     assert.equal(test.requests.length, 0);
+  } finally { test.cleanup(); }
+}
+
+// A delayed preset must preserve typed fields and explicit material overrides.
+{
+  const test = await harness();
+  try {
+    test.app.mountRoute('/contact'); await flush();
+    await test.input('name', 'Name to retain');
+    test.app.navigate('/contact?product=medium-rounded-pc-claw-clip');
+    await flush(); await flush();
+    assert.equal(document.getElementById('name').value, 'Name to retain');
+    assert.equal(document.getElementById('productType').value, 'claw-clips');
+    assert.equal(document.getElementById('material').value, 'pc');
+    await test.clickText('Add optional specs');
+    await test.input('material', 'abs');
+    for (const [slug, value] of [['scrunchies', 'scrunchies'], ['hair-bows', 'bows'],
+      ['headbands', 'headbands'], ['hair-clips-barrettes', 'pins'], ['constructor', '']]) {
+      test.app.navigate('/contact?category=' + slug); await flush();
+      assert.equal(document.getElementById('productType').value, value);
+      assert.equal(document.getElementById('material').value, 'abs');
+      assert.equal(document.getElementById('name').value, 'Name to retain');
+    }
   } finally { test.cleanup(); }
 }
 
@@ -472,7 +542,7 @@ for (const category of ['headbands', 'scrunchies', 'bows']) {
     assert.equal(test.requests.length, 0);
     await test.input('quantity', firstRange);
     test.submit(); await flush();
-    assert.ok(document.getElementById('material'), 'Approved production range advances');
+    assert.equal(document.getElementById('quantity').value, firstRange, 'Approved production range can be selected');
   } finally { test.cleanup(); }
 }
 {
@@ -490,4 +560,4 @@ for (const category of ['headbands', 'scrunchies', 'bows']) {
 }
 
 for (const name of ['window', 'document', 'CustomEvent', 'HTMLElement', 'Node', 'requestAnimationFrame', 'cancelAnimationFrame']) delete globalThis[name];
-console.log('Contact steps, MOQ, Turnstile lifecycle, accepted lead privacy, uncertain-result lock and preview isolation tests passed');
+console.log('Single-page inquiry, category presets, MOQ, Turnstile lifecycle, accepted lead privacy, uncertain-result lock and preview isolation tests passed');

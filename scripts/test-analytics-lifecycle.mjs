@@ -99,7 +99,7 @@ for (const hostname of ['localhost', '127.0.0.1', 'wincomehair-preview.vercel.ap
   const leads = window.dataLayer.filter(call => call[0] === 'event' && call[1] === 'generate_lead');
   assert.equal(leads.length, 1);
   assert.equal(leads[0][2].lead_status, 'accepted');
-  assert.equal(leads[0][2].measurement_version, '3');
+  assert.equal(leads[0][2].measurement_version, '4');
   assert.equal(JSON.stringify(leads).includes(acceptedSubmission.requestId), false);
 }
 

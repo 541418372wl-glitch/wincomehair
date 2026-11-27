@@ -191,7 +191,7 @@ export async function trackEvent(eventName, params = {}) {
   return true;
 }
 
-export function trackGenerateLead({ submission, productType, quantity, targetMarket }) {
+export function trackGenerateLead({ submission, productType, productId, quantity, targetMarket, aiPlatform }) {
   const requestId = submission?.requestId;
   if (submission?.ok !== true || submission?.accepted !== true || submission?.submissionStatus !== 'accepted'
     || typeof requestId !== 'string' || !/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(requestId)) {
@@ -203,8 +203,10 @@ export function trackGenerateLead({ submission, productType, quantity, targetMar
   const pending = trackEvent('generate_lead', {
     lead_source: 'quote_form',
     lead_status: 'accepted',
-    measurement_version: '3',
+    measurement_version: '4',
     product_type: productType,
+    product_id: productId,
+    ai_platform: aiPlatform,
     quantity_range: quantity,
     target_market: targetMarket,
   }).catch(() => false).then((tracked) => {

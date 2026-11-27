@@ -105,7 +105,7 @@ const pageMeta = {
   },
   '/contact': {
     title: 'Request a Quote — WINCOME Hair Accessories',
-    description: 'Get a free design mockup and factory-direct quote within 24 hours. Custom hair accessories manufacturing — no commitment, no spam.',
+    description: 'Request factory-direct wholesale pricing, MOQ confirmation and sample terms for custom hair clips, claw clips, scrunchies, headbands and bows from WINCOME.',
   },
   '/faq': {
     title: 'FAQ — Custom Hair Accessories Manufacturing — WINCOME',

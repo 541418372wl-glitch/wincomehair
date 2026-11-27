@@ -1,0 +1,394 @@
+{
+  "/assets/images/blog-acetate-vs-plastic.webp": {
+    "width": 1024,
+    "height": 1024,
+    "avifSrcSet": "/assets/images/blog-acetate-vs-plastic-320w.avif 320w, /assets/images/blog-acetate-vs-plastic-480w.avif 480w, /assets/images/blog-acetate-vs-plastic-640w.avif 640w, /assets/images/blog-acetate-vs-plastic-800w.avif 800w, /assets/images/blog-acetate-vs-plastic-1024w.avif 1024w",
+    "webpSrcSet": "/assets/images/blog-acetate-vs-plastic-320w.webp 320w, /assets/images/blog-acetate-vs-plastic-480w.webp 480w, /assets/images/blog-acetate-vs-plastic-640w.webp 640w, /assets/images/blog-acetate-vs-plastic-800w.webp 800w, /assets/images/blog-acetate-vs-plastic.webp 1024w",
+    "fingerprint": "04b8a963d305404b15b4ec85de8eb448c8d626e934c68e905a8d07b784c1f791"
+  },
+  "/assets/images/blog-claw-clip-size.webp": {
+    "width": 1024,
+    "height": 1024,
+    "avifSrcSet": "/assets/images/blog-claw-clip-size-320w.avif 320w, /assets/images/blog-claw-clip-size-480w.avif 480w, /assets/images/blog-claw-clip-size-640w.avif 640w, /assets/images/blog-claw-clip-size-800w.avif 800w, /assets/images/blog-claw-clip-size-1024w.avif 1024w",
+    "webpSrcSet": "/assets/images/blog-claw-clip-size-320w.webp 320w, /assets/images/blog-claw-clip-size-480w.webp 480w, /assets/images/blog-claw-clip-size-640w.webp 640w, /assets/images/blog-claw-clip-size-800w.webp 800w, /assets/images/blog-claw-clip-size.webp 1024w",
+    "fingerprint": "e43d008633d7826a5f1487d320054b480312196dbaf6aff7385e37e589a83bf4"
+  },
+  "/assets/images/blog-do-claw-clips-damage.webp": {
+    "width": 1024,
+    "height": 1024,
+    "avifSrcSet": "/assets/images/blog-do-claw-clips-damage-320w.avif 320w, /assets/images/blog-do-claw-clips-damage-480w.avif 480w, /assets/images/blog-do-claw-clips-damage-640w.avif 640w, /assets/images/blog-do-claw-clips-damage-800w.avif 800w, /assets/images/blog-do-claw-clips-damage-1024w.avif 1024w",
+    "webpSrcSet": "/assets/images/blog-do-claw-clips-damage-320w.webp 320w, /assets/images/blog-do-claw-clips-damage-480w.webp 480w, /assets/images/blog-do-claw-clips-damage-640w.webp 640w, /assets/images/blog-do-claw-clips-damage-800w.webp 800w, /assets/images/blog-do-claw-clips-damage.webp 1024w",
+    "fingerprint": "b552bb0426a644d250dbb908ad5ec6f0aaadffdd3bb5aae5b70ba63237454d61"
+  },
+  "/assets/images/blog-headband-material.webp": {
+    "width": 1024,
+    "height": 1024,
+    "avifSrcSet": "/assets/images/blog-headband-material-320w.avif 320w, /assets/images/blog-headband-material-480w.avif 480w, /assets/images/blog-headband-material-640w.avif 640w, /assets/images/blog-headband-material-800w.avif 800w, /assets/images/blog-headband-material-1024w.avif 1024w",
+    "webpSrcSet": "/assets/images/blog-headband-material-320w.webp 320w, /assets/images/blog-headband-material-480w.webp 480w, /assets/images/blog-headband-material-640w.webp 640w, /assets/images/blog-headband-material-800w.webp 800w, /assets/images/blog-headband-material.webp 1024w",
+    "fingerprint": "20a4d1803d265c0415a0cd8f8d134bb0b221e70cf8be43a0d5814281e2450a55"
+  },
+  "/assets/images/blog-how-to-source.webp": {
+    "width": 1024,
+    "height": 1024,
+    "avifSrcSet": "/assets/images/blog-how-to-source-320w.avif 320w, /assets/images/blog-how-to-source-480w.avif 480w, /assets/images/blog-how-to-source-640w.avif 640w, /assets/images/blog-how-to-source-800w.avif 800w, /assets/images/blog-how-to-source-1024w.avif 1024w",
+    "webpSrcSet": "/assets/images/blog-how-to-source-320w.webp 320w, /assets/images/blog-how-to-source-480w.webp 480w, /assets/images/blog-how-to-source-640w.webp 640w, /assets/images/blog-how-to-source-800w.webp 800w, /assets/images/blog-how-to-source.webp 1024w",
+    "fingerprint": "e43d008633d7826a5f1487d320054b480312196dbaf6aff7385e37e589a83bf4"
+  },
+  "/assets/images/blog-metal-hair-clip.webp": {
+    "width": 1024,
+    "height": 1024,
+    "avifSrcSet": "/assets/images/blog-metal-hair-clip-320w.avif 320w, /assets/images/blog-metal-hair-clip-480w.avif 480w, /assets/images/blog-metal-hair-clip-640w.avif 640w, /assets/images/blog-metal-hair-clip-800w.avif 800w, /assets/images/blog-metal-hair-clip-1024w.avif 1024w",
+    "webpSrcSet": "/assets/images/blog-metal-hair-clip-320w.webp 320w, /assets/images/blog-metal-hair-clip-480w.webp 480w, /assets/images/blog-metal-hair-clip-640w.webp 640w, /assets/images/blog-metal-hair-clip-800w.webp 800w, /assets/images/blog-metal-hair-clip.webp 1024w",
+    "fingerprint": "f31708c8860dadc2fb3c47f18ede6dfa13393adea18c2f193864972181910c1c"
+  },
+  "/assets/images/blog-moq-guide.webp": {
+    "width": 1024,
+    "height": 1024,
+    "avifSrcSet": "/assets/images/blog-moq-guide-320w.avif 320w, /assets/images/blog-moq-guide-480w.avif 480w, /assets/images/blog-moq-guide-640w.avif 640w, /assets/images/blog-moq-guide-800w.avif 800w, /assets/images/blog-moq-guide-1024w.avif 1024w",
+    "webpSrcSet": "/assets/images/blog-moq-guide-320w.webp 320w, /assets/images/blog-moq-guide-480w.webp 480w, /assets/images/blog-moq-guide-640w.webp 640w, /assets/images/blog-moq-guide-800w.webp 800w, /assets/images/blog-moq-guide.webp 1024w",
+    "fingerprint": "e232f545bf92c000ee7438ed7561af1bda18a4de78bbfc95b0db7f9e45e7095b"
+  },
+  "/assets/images/blog-private-label.webp": {
+    "width": 1024,
+    "height": 1024,
+    "avifSrcSet": "/assets/images/blog-private-label-320w.avif 320w, /assets/images/blog-private-label-480w.avif 480w, /assets/images/blog-private-label-640w.avif 640w, /assets/images/blog-private-label-800w.avif 800w, /assets/images/blog-private-label-1024w.avif 1024w",
+    "webpSrcSet": "/assets/images/blog-private-label-320w.webp 320w, /assets/images/blog-private-label-480w.webp 480w, /assets/images/blog-private-label-640w.webp 640w, /assets/images/blog-private-label-800w.webp 800w, /assets/images/blog-private-label.webp 1024w",
+    "fingerprint": "5aae94732ccf2b4abeec7a6fb68bafa1f016f90362578d087af8635f04dc978b"
+  },
+  "/assets/images/blog-silk-vs-satin.webp": {
+    "width": 1024,
+    "height": 1024,
+    "avifSrcSet": "/assets/images/blog-silk-vs-satin-320w.avif 320w, /assets/images/blog-silk-vs-satin-480w.avif 480w, /assets/images/blog-silk-vs-satin-640w.avif 640w, /assets/images/blog-silk-vs-satin-800w.avif 800w, /assets/images/blog-silk-vs-satin-1024w.avif 1024w",
+    "webpSrcSet": "/assets/images/blog-silk-vs-satin-320w.webp 320w, /assets/images/blog-silk-vs-satin-480w.webp 480w, /assets/images/blog-silk-vs-satin-640w.webp 640w, /assets/images/blog-silk-vs-satin-800w.webp 800w, /assets/images/blog-silk-vs-satin.webp 1024w",
+    "fingerprint": "d8fa9e83d9ae9ffe9e6007e63c21b2910042cfc64c9d8f246c178b34292b49be"
+  },
+  "/assets/images/product-bow-clip.webp": {
+    "width": 1024,
+    "height": 1024,
+    "avifSrcSet": "/assets/images/product-bow-clip-320w.avif 320w, /assets/images/product-bow-clip-480w.avif 480w, /assets/images/product-bow-clip-640w.avif 640w, /assets/images/product-bow-clip-800w.avif 800w, /assets/images/product-bow-clip-1024w.avif 1024w",
+    "webpSrcSet": "/assets/images/product-bow-clip-320w.webp 320w, /assets/images/product-bow-clip-480w.webp 480w, /assets/images/product-bow-clip-640w.webp 640w, /assets/images/product-bow-clip-800w.webp 800w, /assets/images/product-bow-clip.webp 1024w",
+    "fingerprint": "08f36fa919d32f2ec636a78c56884d57866c2219c9312a55124b7b23ad99a462"
+  },
+  "/assets/images/product-bow-grosgrain.webp": {
+    "width": 1024,
+    "height": 1024,
+    "avifSrcSet": "/assets/images/product-bow-grosgrain-320w.avif 320w, /assets/images/product-bow-grosgrain-480w.avif 480w, /assets/images/product-bow-grosgrain-640w.avif 640w, /assets/images/product-bow-grosgrain-800w.avif 800w, /assets/images/product-bow-grosgrain-1024w.avif 1024w",
+    "webpSrcSet": "/assets/images/product-bow-grosgrain-320w.webp 320w, /assets/images/product-bow-grosgrain-480w.webp 480w, /assets/images/product-bow-grosgrain-640w.webp 640w, /assets/images/product-bow-grosgrain-800w.webp 800w, /assets/images/product-bow-grosgrain.webp 1024w",
+    "fingerprint": "3ec69079cf7706425f2728734c900bb838d05cd0681865cbb28ae1980b95b473"
+  },
+  "/assets/images/product-bow-multilayer.webp": {
+    "width": 1024,
+    "height": 1024,
+    "avifSrcSet": "/assets/images/product-bow-multilayer-320w.avif 320w, /assets/images/product-bow-multilayer-480w.avif 480w, /assets/images/product-bow-multilayer-640w.avif 640w, /assets/images/product-bow-multilayer-800w.avif 800w, /assets/images/product-bow-multilayer-1024w.avif 1024w",
+    "webpSrcSet": "/assets/images/product-bow-multilayer-320w.webp 320w, /assets/images/product-bow-multilayer-480w.webp 480w, /assets/images/product-bow-multilayer-640w.webp 640w, /assets/images/product-bow-multilayer-800w.webp 800w, /assets/images/product-bow-multilayer.webp 1024w",
+    "fingerprint": "bf7f171827bac81d6f9d710eecbd75697fa5cd652967da5e2e99d7cf469da682"
+  },
+  "/assets/images/product-bow-oversized.webp": {
+    "width": 1024,
+    "height": 1024,
+    "avifSrcSet": "/assets/images/product-bow-oversized-320w.avif 320w, /assets/images/product-bow-oversized-480w.avif 480w, /assets/images/product-bow-oversized-640w.avif 640w, /assets/images/product-bow-oversized-800w.avif 800w, /assets/images/product-bow-oversized-1024w.avif 1024w",
+    "webpSrcSet": "/assets/images/product-bow-oversized-320w.webp 320w, /assets/images/product-bow-oversized-480w.webp 480w, /assets/images/product-bow-oversized-640w.webp 640w, /assets/images/product-bow-oversized-800w.webp 800w, /assets/images/product-bow-oversized.webp 1024w",
+    "fingerprint": "47d2b4aff779f1122a2d4e3c0db9bbb0195faf1588f19818c00670e0a80f2569"
+  },
+  "/assets/images/product-bow-satin-barrette.webp": {
+    "width": 1024,
+    "height": 1024,
+    "avifSrcSet": "/assets/images/product-bow-satin-barrette-320w.avif 320w, /assets/images/product-bow-satin-barrette-480w.avif 480w, /assets/images/product-bow-satin-barrette-640w.avif 640w, /assets/images/product-bow-satin-barrette-800w.avif 800w, /assets/images/product-bow-satin-barrette-1024w.avif 1024w",
+    "webpSrcSet": "/assets/images/product-bow-satin-barrette-320w.webp 320w, /assets/images/product-bow-satin-barrette-480w.webp 480w, /assets/images/product-bow-satin-barrette-640w.webp 640w, /assets/images/product-bow-satin-barrette-800w.webp 800w, /assets/images/product-bow-satin-barrette.webp 1024w",
+    "fingerprint": "cf84898e399339e9afe9d7e4cb27ee92d07a66f2f15903ca25f952e474a0dab6"
+  },
+  "/assets/images/product-bow-satin.webp": {
+    "width": 800,
+    "height": 800,
+    "avifSrcSet": "/assets/images/product-bow-satin-320w.avif 320w, /assets/images/product-bow-satin-480w.avif 480w, /assets/images/product-bow-satin-640w.avif 640w, /assets/images/product-bow-satin-800w.avif 800w",
+    "webpSrcSet": "/assets/images/product-bow-satin-320w.webp 320w, /assets/images/product-bow-satin-480w.webp 480w, /assets/images/product-bow-satin-640w.webp 640w, /assets/images/product-bow-satin.webp 800w",
+    "fingerprint": "26b555a07002977ebf73081927af9b09b80f3ac168369c99ef9b6cf640552879"
+  },
+  "/assets/images/product-claw-acetate.webp": {
+    "width": 1024,
+    "height": 1024,
+    "avifSrcSet": "/assets/images/product-claw-acetate-320w.avif 320w, /assets/images/product-claw-acetate-480w.avif 480w, /assets/images/product-claw-acetate-640w.avif 640w, /assets/images/product-claw-acetate-800w.avif 800w, /assets/images/product-claw-acetate-1024w.avif 1024w",
+    "webpSrcSet": "/assets/images/product-claw-acetate-320w.webp 320w, /assets/images/product-claw-acetate-480w.webp 480w, /assets/images/product-claw-acetate-640w.webp 640w, /assets/images/product-claw-acetate-800w.webp 800w, /assets/images/product-claw-acetate.webp 1024w",
+    "fingerprint": "f60002c2e0979025fe513670bfec3806708e49a091359b2ed55e72d40df9b23f"
+  },
+  "/assets/images/product-claw-butterfly-resin.webp": {
+    "width": 1024,
+    "height": 1024,
+    "avifSrcSet": "/assets/images/product-claw-butterfly-resin-320w.avif 320w, /assets/images/product-claw-butterfly-resin-480w.avif 480w, /assets/images/product-claw-butterfly-resin-640w.avif 640w, /assets/images/product-claw-butterfly-resin-800w.avif 800w, /assets/images/product-claw-butterfly-resin-1024w.avif 1024w",
+    "webpSrcSet": "/assets/images/product-claw-butterfly-resin-320w.webp 320w, /assets/images/product-claw-butterfly-resin-480w.webp 480w, /assets/images/product-claw-butterfly-resin-640w.webp 640w, /assets/images/product-claw-butterfly-resin-800w.webp 800w, /assets/images/product-claw-butterfly-resin.webp 1024w",
+    "fingerprint": "42f96c8650c59e1a37a7a98b50a8fb618556f3a806e05fc496c2a8ce9619ae3e"
+  },
+  "/assets/images/product-claw-butterfly.webp": {
+    "width": 1024,
+    "height": 1024,
+    "avifSrcSet": "/assets/images/product-claw-butterfly-320w.avif 320w, /assets/images/product-claw-butterfly-480w.avif 480w, /assets/images/product-claw-butterfly-640w.avif 640w, /assets/images/product-claw-butterfly-800w.avif 800w, /assets/images/product-claw-butterfly-1024w.avif 1024w",
+    "webpSrcSet": "/assets/images/product-claw-butterfly-320w.webp 320w, /assets/images/product-claw-butterfly-480w.webp 480w, /assets/images/product-claw-butterfly-640w.webp 640w, /assets/images/product-claw-butterfly-800w.webp 800w, /assets/images/product-claw-butterfly.webp 1024w",
+    "fingerprint": "4eb75b908f12fa098d780dcd471f0241aa40cd714706e9310627c61e194af8fe"
+  },
+  "/assets/images/product-claw-metal.webp": {
+    "width": 1024,
+    "height": 1024,
+    "avifSrcSet": "/assets/images/product-claw-metal-320w.avif 320w, /assets/images/product-claw-metal-480w.avif 480w, /assets/images/product-claw-metal-640w.avif 640w, /assets/images/product-claw-metal-800w.avif 800w, /assets/images/product-claw-metal-1024w.avif 1024w",
+    "webpSrcSet": "/assets/images/product-claw-metal-320w.webp 320w, /assets/images/product-claw-metal-480w.webp 480w, /assets/images/product-claw-metal-640w.webp 640w, /assets/images/product-claw-metal-800w.webp 800w, /assets/images/product-claw-metal.webp 1024w",
+    "fingerprint": "9aea79f5da9698c6038298b234c2329d93db9bd5366f66c7c841d66e211eae76"
+  },
+  "/assets/images/product-claw-plastic.webp": {
+    "width": 1024,
+    "height": 1024,
+    "avifSrcSet": "/assets/images/product-claw-plastic-320w.avif 320w, /assets/images/product-claw-plastic-480w.avif 480w, /assets/images/product-claw-plastic-640w.avif 640w, /assets/images/product-claw-plastic-800w.avif 800w, /assets/images/product-claw-plastic-1024w.avif 1024w",
+    "webpSrcSet": "/assets/images/product-claw-plastic-320w.webp 320w, /assets/images/product-claw-plastic-480w.webp 480w, /assets/images/product-claw-plastic-640w.webp 640w, /assets/images/product-claw-plastic-800w.webp 800w, /assets/images/product-claw-plastic.webp 1024w",
+    "fingerprint": "42592a9f3ee446ebb11dd5d8b13349c8ff6005a6c13c040c8da2c76cfc147b01"
+  },
+  "/assets/images/product-claw-rectangular.webp": {
+    "width": 1024,
+    "height": 1024,
+    "avifSrcSet": "/assets/images/product-claw-rectangular-320w.avif 320w, /assets/images/product-claw-rectangular-480w.avif 480w, /assets/images/product-claw-rectangular-640w.avif 640w, /assets/images/product-claw-rectangular-800w.avif 800w, /assets/images/product-claw-rectangular-1024w.avif 1024w",
+    "webpSrcSet": "/assets/images/product-claw-rectangular-320w.webp 320w, /assets/images/product-claw-rectangular-480w.webp 480w, /assets/images/product-claw-rectangular-640w.webp 640w, /assets/images/product-claw-rectangular-800w.webp 800w, /assets/images/product-claw-rectangular.webp 1024w",
+    "fingerprint": "38d6dcb6809b63f5759a5c31fb6c9ff1f0575acb3f1245b668067bc6e0a249d0"
+  },
+  "/assets/images/product-clip-acetate-snap.webp": {
+    "width": 1024,
+    "height": 1024,
+    "avifSrcSet": "/assets/images/product-clip-acetate-snap-320w.avif 320w, /assets/images/product-clip-acetate-snap-480w.avif 480w, /assets/images/product-clip-acetate-snap-640w.avif 640w, /assets/images/product-clip-acetate-snap-800w.avif 800w, /assets/images/product-clip-acetate-snap-1024w.avif 1024w",
+    "webpSrcSet": "/assets/images/product-clip-acetate-snap-320w.webp 320w, /assets/images/product-clip-acetate-snap-480w.webp 480w, /assets/images/product-clip-acetate-snap-640w.webp 640w, /assets/images/product-clip-acetate-snap-800w.webp 800w, /assets/images/product-clip-acetate-snap.webp 1024w",
+    "fingerprint": "90086228eadf9e2887d4266024edf4fd453337778d90fa76d4344caf24fe2ef9"
+  },
+  "/assets/images/product-clip-acetate.webp": {
+    "width": 1024,
+    "height": 1024,
+    "avifSrcSet": "/assets/images/product-clip-acetate-320w.avif 320w, /assets/images/product-clip-acetate-480w.avif 480w, /assets/images/product-clip-acetate-640w.avif 640w, /assets/images/product-clip-acetate-800w.avif 800w, /assets/images/product-clip-acetate-1024w.avif 1024w",
+    "webpSrcSet": "/assets/images/product-clip-acetate-320w.webp 320w, /assets/images/product-clip-acetate-480w.webp 480w, /assets/images/product-clip-acetate-640w.webp 640w, /assets/images/product-clip-acetate-800w.webp 800w, /assets/images/product-clip-acetate.webp 1024w",
+    "fingerprint": "7e5bc094ecf5270cd722be190a9315854bab9cd116c499194c9b5f5708be7063"
+  },
+  "/assets/images/product-clip-crystal.webp": {
+    "width": 1024,
+    "height": 1024,
+    "avifSrcSet": "/assets/images/product-clip-crystal-320w.avif 320w, /assets/images/product-clip-crystal-480w.avif 480w, /assets/images/product-clip-crystal-640w.avif 640w, /assets/images/product-clip-crystal-800w.avif 800w, /assets/images/product-clip-crystal-1024w.avif 1024w",
+    "webpSrcSet": "/assets/images/product-clip-crystal-320w.webp 320w, /assets/images/product-clip-crystal-480w.webp 480w, /assets/images/product-clip-crystal-640w.webp 640w, /assets/images/product-clip-crystal-800w.webp 800w, /assets/images/product-clip-crystal.webp 1024w",
+    "fingerprint": "8232ff40c6c4f48586de3869d404229b7cf8173a647c21a5628042a39cef7d3b"
+  },
+  "/assets/images/product-clip-flower.webp": {
+    "width": 1024,
+    "height": 1024,
+    "avifSrcSet": "/assets/images/product-clip-flower-320w.avif 320w, /assets/images/product-clip-flower-480w.avif 480w, /assets/images/product-clip-flower-640w.avif 640w, /assets/images/product-clip-flower-800w.avif 800w, /assets/images/product-clip-flower-1024w.avif 1024w",
+    "webpSrcSet": "/assets/images/product-clip-flower-320w.webp 320w, /assets/images/product-clip-flower-480w.webp 480w, /assets/images/product-clip-flower-640w.webp 640w, /assets/images/product-clip-flower-800w.webp 800w, /assets/images/product-clip-flower.webp 1024w",
+    "fingerprint": "8130e367661e1ff3d2cc45efaec8eaf1b4f4cb8425bb8c2e2c81374bbc0cb620"
+  },
+  "/assets/images/product-clip-matte.webp": {
+    "width": 1024,
+    "height": 1024,
+    "avifSrcSet": "/assets/images/product-clip-matte-320w.avif 320w, /assets/images/product-clip-matte-480w.avif 480w, /assets/images/product-clip-matte-640w.avif 640w, /assets/images/product-clip-matte-800w.avif 800w, /assets/images/product-clip-matte-1024w.avif 1024w",
+    "webpSrcSet": "/assets/images/product-clip-matte-320w.webp 320w, /assets/images/product-clip-matte-480w.webp 480w, /assets/images/product-clip-matte-640w.webp 640w, /assets/images/product-clip-matte-800w.webp 800w, /assets/images/product-clip-matte.webp 1024w",
+    "fingerprint": "a6b6de5ab940f4569e7da72a828bdaee215d7a41f6c64bb2ae8540531bcef09b"
+  },
+  "/assets/images/product-clip-pearl-barrette.webp": {
+    "width": 1024,
+    "height": 1024,
+    "avifSrcSet": "/assets/images/product-clip-pearl-barrette-320w.avif 320w, /assets/images/product-clip-pearl-barrette-480w.avif 480w, /assets/images/product-clip-pearl-barrette-640w.avif 640w, /assets/images/product-clip-pearl-barrette-800w.avif 800w, /assets/images/product-clip-pearl-barrette-1024w.avif 1024w",
+    "webpSrcSet": "/assets/images/product-clip-pearl-barrette-320w.webp 320w, /assets/images/product-clip-pearl-barrette-480w.webp 480w, /assets/images/product-clip-pearl-barrette-640w.webp 640w, /assets/images/product-clip-pearl-barrette-800w.webp 800w, /assets/images/product-clip-pearl-barrette.webp 1024w",
+    "fingerprint": "28d086df38a38b4a872908e667205b7fa1a4cb3d443e4ac969d5354c1eeb18bc"
+  },
+  "/assets/images/product-clip-pearl.webp": {
+    "width": 1024,
+    "height": 1024,
+    "avifSrcSet": "/assets/images/product-clip-pearl-320w.avif 320w, /assets/images/product-clip-pearl-480w.avif 480w, /assets/images/product-clip-pearl-640w.avif 640w, /assets/images/product-clip-pearl-800w.avif 800w, /assets/images/product-clip-pearl-1024w.avif 1024w",
+    "webpSrcSet": "/assets/images/product-clip-pearl-320w.webp 320w, /assets/images/product-clip-pearl-480w.webp 480w, /assets/images/product-clip-pearl-640w.webp 640w, /assets/images/product-clip-pearl-800w.webp 800w, /assets/images/product-clip-pearl.webp 1024w",
+    "fingerprint": "270579ee926df632a48b0b0f72416cc898e6002532a3f1ffa56cc864bd3e93eb"
+  },
+  "/assets/images/product-headband-braided.webp": {
+    "width": 1024,
+    "height": 1024,
+    "avifSrcSet": "/assets/images/product-headband-braided-320w.avif 320w, /assets/images/product-headband-braided-480w.avif 480w, /assets/images/product-headband-braided-640w.avif 640w, /assets/images/product-headband-braided-800w.avif 800w, /assets/images/product-headband-braided-1024w.avif 1024w",
+    "webpSrcSet": "/assets/images/product-headband-braided-320w.webp 320w, /assets/images/product-headband-braided-480w.webp 480w, /assets/images/product-headband-braided-640w.webp 640w, /assets/images/product-headband-braided-800w.webp 800w, /assets/images/product-headband-braided.webp 1024w",
+    "fingerprint": "8ee8c99ef4261a1d94ebc0020a90369a4b2915b15ceb468c5f639b4404aef3ec"
+  },
+  "/assets/images/product-headband-knotted.webp": {
+    "width": 1024,
+    "height": 1024,
+    "avifSrcSet": "/assets/images/product-headband-knotted-320w.avif 320w, /assets/images/product-headband-knotted-480w.avif 480w, /assets/images/product-headband-knotted-640w.avif 640w, /assets/images/product-headband-knotted-800w.avif 800w, /assets/images/product-headband-knotted-1024w.avif 1024w",
+    "webpSrcSet": "/assets/images/product-headband-knotted-320w.webp 320w, /assets/images/product-headband-knotted-480w.webp 480w, /assets/images/product-headband-knotted-640w.webp 640w, /assets/images/product-headband-knotted-800w.webp 800w, /assets/images/product-headband-knotted.webp 1024w",
+    "fingerprint": "ee2e59173e56e28ca9977a3794d2ea3718c9f4416c3cd144ac6e93fcf22f90df"
+  },
+  "/assets/images/product-headband-padded.webp": {
+    "width": 1024,
+    "height": 1024,
+    "avifSrcSet": "/assets/images/product-headband-padded-320w.avif 320w, /assets/images/product-headband-padded-480w.avif 480w, /assets/images/product-headband-padded-640w.avif 640w, /assets/images/product-headband-padded-800w.avif 800w, /assets/images/product-headband-padded-1024w.avif 1024w",
+    "webpSrcSet": "/assets/images/product-headband-padded-320w.webp 320w, /assets/images/product-headband-padded-480w.webp 480w, /assets/images/product-headband-padded-640w.webp 640w, /assets/images/product-headband-padded-800w.webp 800w, /assets/images/product-headband-padded.webp 1024w",
+    "fingerprint": "0436bdf493c13cad43cb16f3830bc8461191384b162dd9ac5a74d4c83d7eaff5"
+  },
+  "/assets/images/product-headband-pearl.webp": {
+    "width": 800,
+    "height": 800,
+    "avifSrcSet": "/assets/images/product-headband-pearl-320w.avif 320w, /assets/images/product-headband-pearl-480w.avif 480w, /assets/images/product-headband-pearl-640w.avif 640w, /assets/images/product-headband-pearl-800w.avif 800w",
+    "webpSrcSet": "/assets/images/product-headband-pearl-320w.webp 320w, /assets/images/product-headband-pearl-480w.webp 480w, /assets/images/product-headband-pearl-640w.webp 640w, /assets/images/product-headband-pearl.webp 800w",
+    "fingerprint": "f26adc38de1d701933e631494c42cce584029e0b2d6754af375d835e3ce9b42d"
+  },
+  "/assets/images/product-headband-satin.webp": {
+    "width": 1024,
+    "height": 1024,
+    "avifSrcSet": "/assets/images/product-headband-satin-320w.avif 320w, /assets/images/product-headband-satin-480w.avif 480w, /assets/images/product-headband-satin-640w.avif 640w, /assets/images/product-headband-satin-800w.avif 800w, /assets/images/product-headband-satin-1024w.avif 1024w",
+    "webpSrcSet": "/assets/images/product-headband-satin-320w.webp 320w, /assets/images/product-headband-satin-480w.webp 480w, /assets/images/product-headband-satin-640w.webp 640w, /assets/images/product-headband-satin-800w.webp 800w, /assets/images/product-headband-satin.webp 1024w",
+    "fingerprint": "903431d8b0229ca4c8862f583c05260a25ab847f86826400b77605027c687c84"
+  },
+  "/assets/images/product-scrunchie-bow.webp": {
+    "width": 1024,
+    "height": 1024,
+    "avifSrcSet": "/assets/images/product-scrunchie-bow-320w.avif 320w, /assets/images/product-scrunchie-bow-480w.avif 480w, /assets/images/product-scrunchie-bow-640w.avif 640w, /assets/images/product-scrunchie-bow-800w.avif 800w, /assets/images/product-scrunchie-bow-1024w.avif 1024w",
+    "webpSrcSet": "/assets/images/product-scrunchie-bow-320w.webp 320w, /assets/images/product-scrunchie-bow-480w.webp 480w, /assets/images/product-scrunchie-bow-640w.webp 640w, /assets/images/product-scrunchie-bow-800w.webp 800w, /assets/images/product-scrunchie-bow.webp 1024w",
+    "fingerprint": "772cc6a9cfbdf23c5c72865806b5d3f6700f14d55dee88250a3a069f9ed5d97e"
+  },
+  "/assets/images/product-scrunchie-cotton.webp": {
+    "width": 1024,
+    "height": 1024,
+    "avifSrcSet": "/assets/images/product-scrunchie-cotton-320w.avif 320w, /assets/images/product-scrunchie-cotton-480w.avif 480w, /assets/images/product-scrunchie-cotton-640w.avif 640w, /assets/images/product-scrunchie-cotton-800w.avif 800w, /assets/images/product-scrunchie-cotton-1024w.avif 1024w",
+    "webpSrcSet": "/assets/images/product-scrunchie-cotton-320w.webp 320w, /assets/images/product-scrunchie-cotton-480w.webp 480w, /assets/images/product-scrunchie-cotton-640w.webp 640w, /assets/images/product-scrunchie-cotton-800w.webp 800w, /assets/images/product-scrunchie-cotton.webp 1024w",
+    "fingerprint": "7754d352d8f0539ee151b41b007abae601110ee3e229cfab69e5c1c45dc3005e"
+  },
+  "/assets/images/product-scrunchie-ruffled.webp": {
+    "width": 1024,
+    "height": 1024,
+    "avifSrcSet": "/assets/images/product-scrunchie-ruffled-320w.avif 320w, /assets/images/product-scrunchie-ruffled-480w.avif 480w, /assets/images/product-scrunchie-ruffled-640w.avif 640w, /assets/images/product-scrunchie-ruffled-800w.avif 800w, /assets/images/product-scrunchie-ruffled-1024w.avif 1024w",
+    "webpSrcSet": "/assets/images/product-scrunchie-ruffled-320w.webp 320w, /assets/images/product-scrunchie-ruffled-480w.webp 480w, /assets/images/product-scrunchie-ruffled-640w.webp 640w, /assets/images/product-scrunchie-ruffled-800w.webp 800w, /assets/images/product-scrunchie-ruffled.webp 1024w",
+    "fingerprint": "830ee0159325e597f383e398d86886305fc04ae0bdbf0f2af59ef56b9c199825"
+  },
+  "/assets/images/product-scrunchie-silk.webp": {
+    "width": 800,
+    "height": 800,
+    "avifSrcSet": "/assets/images/product-scrunchie-silk-320w.avif 320w, /assets/images/product-scrunchie-silk-480w.avif 480w, /assets/images/product-scrunchie-silk-640w.avif 640w, /assets/images/product-scrunchie-silk-800w.avif 800w",
+    "webpSrcSet": "/assets/images/product-scrunchie-silk-320w.webp 320w, /assets/images/product-scrunchie-silk-480w.webp 480w, /assets/images/product-scrunchie-silk-640w.webp 640w, /assets/images/product-scrunchie-silk.webp 800w",
+    "fingerprint": "fbec48a88c862e86fdd3f28114ba5203b68b3ea3d53d6c067be3c2c7df0fabd3"
+  },
+  "/assets/images/product-scrunchie-velvet.webp": {
+    "width": 1024,
+    "height": 1024,
+    "avifSrcSet": "/assets/images/product-scrunchie-velvet-320w.avif 320w, /assets/images/product-scrunchie-velvet-480w.avif 480w, /assets/images/product-scrunchie-velvet-640w.avif 640w, /assets/images/product-scrunchie-velvet-800w.avif 800w, /assets/images/product-scrunchie-velvet-1024w.avif 1024w",
+    "webpSrcSet": "/assets/images/product-scrunchie-velvet-320w.webp 320w, /assets/images/product-scrunchie-velvet-480w.webp 480w, /assets/images/product-scrunchie-velvet-640w.webp 640w, /assets/images/product-scrunchie-velvet-800w.webp 800w, /assets/images/product-scrunchie-velvet.webp 1024w",
+    "fingerprint": "0e68dde8cbde01267e57132c4a4ca23a3684709be2f344319780aaf849af8e11"
+  },
+  "/assets/images/selected-double-layer-short-tail-bow.webp": {
+    "width": 687,
+    "height": 687,
+    "avifSrcSet": "/assets/images/selected-double-layer-short-tail-bow-320w.avif 320w, /assets/images/selected-double-layer-short-tail-bow-480w.avif 480w, /assets/images/selected-double-layer-short-tail-bow-640w.avif 640w, /assets/images/selected-double-layer-short-tail-bow-687w.avif 687w",
+    "webpSrcSet": "/assets/images/selected-double-layer-short-tail-bow-320w.webp 320w, /assets/images/selected-double-layer-short-tail-bow-480w.webp 480w, /assets/images/selected-double-layer-short-tail-bow-640w.webp 640w, /assets/images/selected-double-layer-short-tail-bow.webp 687w",
+    "fingerprint": "7b2c0e0673ad801f500c85fe46da4132625e9c7973d9ea98ee839017c4bbfb71"
+  },
+  "/assets/images/selected-long-crossed-acrylic-claw.webp": {
+    "width": 800,
+    "height": 800,
+    "avifSrcSet": "/assets/images/selected-long-crossed-acrylic-claw-320w.avif 320w, /assets/images/selected-long-crossed-acrylic-claw-480w.avif 480w, /assets/images/selected-long-crossed-acrylic-claw-640w.avif 640w, /assets/images/selected-long-crossed-acrylic-claw-800w.avif 800w",
+    "webpSrcSet": "/assets/images/selected-long-crossed-acrylic-claw-320w.webp 320w, /assets/images/selected-long-crossed-acrylic-claw-480w.webp 480w, /assets/images/selected-long-crossed-acrylic-claw-640w.webp 640w, /assets/images/selected-long-crossed-acrylic-claw.webp 800w",
+    "fingerprint": "b6c6ebeee1d49bb84d031547d536f8a9c66606e01684ac09445f0f04711bea31"
+  },
+  "/assets/images/selected-long-tail-velvet-bow.webp": {
+    "width": 800,
+    "height": 800,
+    "avifSrcSet": "/assets/images/selected-long-tail-velvet-bow-320w.avif 320w, /assets/images/selected-long-tail-velvet-bow-480w.avif 480w, /assets/images/selected-long-tail-velvet-bow-640w.avif 640w, /assets/images/selected-long-tail-velvet-bow-800w.avif 800w",
+    "webpSrcSet": "/assets/images/selected-long-tail-velvet-bow-320w.webp 320w, /assets/images/selected-long-tail-velvet-bow-480w.webp 480w, /assets/images/selected-long-tail-velvet-bow-640w.webp 640w, /assets/images/selected-long-tail-velvet-bow.webp 800w",
+    "fingerprint": "b3915a87fcd666b684fce0e1f0409a480e9990ec2e5a804198ef8b5c387a2411"
+  },
+  "/assets/images/selected-medium-rounded-pc-claw.webp": {
+    "width": 800,
+    "height": 800,
+    "avifSrcSet": "/assets/images/selected-medium-rounded-pc-claw-320w.avif 320w, /assets/images/selected-medium-rounded-pc-claw-480w.avif 480w, /assets/images/selected-medium-rounded-pc-claw-640w.avif 640w, /assets/images/selected-medium-rounded-pc-claw-800w.avif 800w",
+    "webpSrcSet": "/assets/images/selected-medium-rounded-pc-claw-320w.webp 320w, /assets/images/selected-medium-rounded-pc-claw-480w.webp 480w, /assets/images/selected-medium-rounded-pc-claw-640w.webp 640w, /assets/images/selected-medium-rounded-pc-claw.webp 800w",
+    "fingerprint": "37dad5056bd93b9e9f98ad0d85c0633493e5f6fcc2e6b0711f7af89d8db152df"
+  },
+  "/assets/images/selected-mulberry-silk-scrunchie.webp": {
+    "width": 800,
+    "height": 800,
+    "avifSrcSet": "/assets/images/selected-mulberry-silk-scrunchie-320w.avif 320w, /assets/images/selected-mulberry-silk-scrunchie-480w.avif 480w, /assets/images/selected-mulberry-silk-scrunchie-640w.avif 640w, /assets/images/selected-mulberry-silk-scrunchie-800w.avif 800w",
+    "webpSrcSet": "/assets/images/selected-mulberry-silk-scrunchie-320w.webp 320w, /assets/images/selected-mulberry-silk-scrunchie-480w.webp 480w, /assets/images/selected-mulberry-silk-scrunchie-640w.webp 640w, /assets/images/selected-mulberry-silk-scrunchie.webp 800w",
+    "fingerprint": "c33b9aec5d248ef7ed90e547b603a4ea34370b5738a66f196047aef518d8c4c5"
+  },
+  "/assets/images/selected-openwork-abs-claw.webp": {
+    "width": 1000,
+    "height": 1000,
+    "avifSrcSet": "/assets/images/selected-openwork-abs-claw-320w.avif 320w, /assets/images/selected-openwork-abs-claw-480w.avif 480w, /assets/images/selected-openwork-abs-claw-640w.avif 640w, /assets/images/selected-openwork-abs-claw-800w.avif 800w, /assets/images/selected-openwork-abs-claw-1000w.avif 1000w",
+    "webpSrcSet": "/assets/images/selected-openwork-abs-claw-320w.webp 320w, /assets/images/selected-openwork-abs-claw-480w.webp 480w, /assets/images/selected-openwork-abs-claw-640w.webp 640w, /assets/images/selected-openwork-abs-claw-800w.webp 800w, /assets/images/selected-openwork-abs-claw.webp 1000w",
+    "fingerprint": "3e0c561976643f2586a1245289292987aa7734526f96d90800ad12817ad8646d"
+  },
+  "/assets/images/selected-oversized-polyester-scrunchie.webp": {
+    "width": 1200,
+    "height": 1200,
+    "avifSrcSet": "/assets/images/selected-oversized-polyester-scrunchie-320w.avif 320w, /assets/images/selected-oversized-polyester-scrunchie-480w.avif 480w, /assets/images/selected-oversized-polyester-scrunchie-640w.avif 640w, /assets/images/selected-oversized-polyester-scrunchie-800w.avif 800w, /assets/images/selected-oversized-polyester-scrunchie-1024w.avif 1024w",
+    "webpSrcSet": "/assets/images/selected-oversized-polyester-scrunchie-320w.webp 320w, /assets/images/selected-oversized-polyester-scrunchie-480w.webp 480w, /assets/images/selected-oversized-polyester-scrunchie-640w.webp 640w, /assets/images/selected-oversized-polyester-scrunchie-800w.webp 800w, /assets/images/selected-oversized-polyester-scrunchie-1024w.webp 1024w",
+    "fingerprint": "49c6d14bec4c17241c9716e165958d8a26b15114c2f083d04e22b2fefe87a6e1"
+  },
+  "/assets/images/selected-rhinestone-satin-scrunchie.webp": {
+    "width": 1254,
+    "height": 1254,
+    "avifSrcSet": "/assets/images/selected-rhinestone-satin-scrunchie-320w.avif 320w, /assets/images/selected-rhinestone-satin-scrunchie-480w.avif 480w, /assets/images/selected-rhinestone-satin-scrunchie-640w.avif 640w, /assets/images/selected-rhinestone-satin-scrunchie-800w.avif 800w, /assets/images/selected-rhinestone-satin-scrunchie-1024w.avif 1024w",
+    "webpSrcSet": "/assets/images/selected-rhinestone-satin-scrunchie-320w.webp 320w, /assets/images/selected-rhinestone-satin-scrunchie-480w.webp 480w, /assets/images/selected-rhinestone-satin-scrunchie-640w.webp 640w, /assets/images/selected-rhinestone-satin-scrunchie-800w.webp 800w, /assets/images/selected-rhinestone-satin-scrunchie-1024w.webp 1024w",
+    "fingerprint": "d032083850bbade7d59b693c921acc9c648f6b860b9e24f52af42169658a8554"
+  },
+  "/assets/images/selected-ruched-fabric-headband.webp": {
+    "width": 1500,
+    "height": 1500,
+    "avifSrcSet": "/assets/images/selected-ruched-fabric-headband-320w.avif 320w, /assets/images/selected-ruched-fabric-headband-480w.avif 480w, /assets/images/selected-ruched-fabric-headband-640w.avif 640w, /assets/images/selected-ruched-fabric-headband-800w.avif 800w, /assets/images/selected-ruched-fabric-headband-1024w.avif 1024w",
+    "webpSrcSet": "/assets/images/selected-ruched-fabric-headband-320w.webp 320w, /assets/images/selected-ruched-fabric-headband-480w.webp 480w, /assets/images/selected-ruched-fabric-headband-640w.webp 640w, /assets/images/selected-ruched-fabric-headband-800w.webp 800w, /assets/images/selected-ruched-fabric-headband-1024w.webp 1024w",
+    "fingerprint": "06d172344b6a0d8427710bc40407c575779b9e40e2fa872a1e11801d51a365ec"
+  },
+  "/assets/images/selected-stretch-fabric-headband.webp": {
+    "width": 900,
+    "height": 1200,
+    "avifSrcSet": "/assets/images/selected-stretch-fabric-headband-320w.avif 320w, /assets/images/selected-stretch-fabric-headband-480w.avif 480w, /assets/images/selected-stretch-fabric-headband-640w.avif 640w, /assets/images/selected-stretch-fabric-headband-800w.avif 800w, /assets/images/selected-stretch-fabric-headband-900w.avif 900w",
+    "webpSrcSet": "/assets/images/selected-stretch-fabric-headband-320w.webp 320w, /assets/images/selected-stretch-fabric-headband-480w.webp 480w, /assets/images/selected-stretch-fabric-headband-640w.webp 640w, /assets/images/selected-stretch-fabric-headband-800w.webp 800w, /assets/images/selected-stretch-fabric-headband.webp 900w",
+    "fingerprint": "9b951f55cf32cd27260005b9873d70869a3a037cb425f008386f83c8e8949392"
+  },
+  "/assets/images/selected-textured-bow-barrette-reverse.webp": {
+    "width": 1920,
+    "height": 1920,
+    "avifSrcSet": "/assets/images/selected-textured-bow-barrette-reverse-320w.avif 320w, /assets/images/selected-textured-bow-barrette-reverse-480w.avif 480w, /assets/images/selected-textured-bow-barrette-reverse-640w.avif 640w, /assets/images/selected-textured-bow-barrette-reverse-800w.avif 800w, /assets/images/selected-textured-bow-barrette-reverse-1024w.avif 1024w",
+    "webpSrcSet": "/assets/images/selected-textured-bow-barrette-reverse-320w.webp 320w, /assets/images/selected-textured-bow-barrette-reverse-480w.webp 480w, /assets/images/selected-textured-bow-barrette-reverse-640w.webp 640w, /assets/images/selected-textured-bow-barrette-reverse-800w.webp 800w, /assets/images/selected-textured-bow-barrette-reverse-1024w.webp 1024w",
+    "fingerprint": "d0a357b5b3424503e9818d83d2953cb9372c87e4c07c8ecc2c23fff276ef6e4c"
+  },
+  "/assets/images/selected-textured-long-tail-bow.webp": {
+    "width": 1886,
+    "height": 1886,
+    "avifSrcSet": "/assets/images/selected-textured-long-tail-bow-320w.avif 320w, /assets/images/selected-textured-long-tail-bow-480w.avif 480w, /assets/images/selected-textured-long-tail-bow-640w.avif 640w, /assets/images/selected-textured-long-tail-bow-800w.avif 800w, /assets/images/selected-textured-long-tail-bow-1024w.avif 1024w",
+    "webpSrcSet": "/assets/images/selected-textured-long-tail-bow-320w.webp 320w, /assets/images/selected-textured-long-tail-bow-480w.webp 480w, /assets/images/selected-textured-long-tail-bow-640w.webp 640w, /assets/images/selected-textured-long-tail-bow-800w.webp 800w, /assets/images/selected-textured-long-tail-bow-1024w.webp 1024w",
+    "fingerprint": "06e3e98d5f2ee29954d83b946b5f47b8ad53cb0d01f53fe7735c8f0999f2f2db"
+  },
+  "/images/blog/barrettes-fine-thin-hair.webp": {
+    "width": 1535,
+    "height": 864,
+    "avifSrcSet": "/images/blog/barrettes-fine-thin-hair-320w.avif 320w, /images/blog/barrettes-fine-thin-hair-480w.avif 480w, /images/blog/barrettes-fine-thin-hair-640w.avif 640w, /images/blog/barrettes-fine-thin-hair-800w.avif 800w, /images/blog/barrettes-fine-thin-hair-1024w.avif 1024w",
+    "webpSrcSet": "/images/blog/barrettes-fine-thin-hair-320w.webp 320w, /images/blog/barrettes-fine-thin-hair-480w.webp 480w, /images/blog/barrettes-fine-thin-hair-640w.webp 640w, /images/blog/barrettes-fine-thin-hair-800w.webp 800w, /images/blog/barrettes-fine-thin-hair-1024w.webp 1024w",
+    "fingerprint": "f66ce13180ec227410cf462b5877b28b6b30a63b7703553019fb12be18ee33d9"
+  },
+  "/images/blog/claw-clips-fine-thin-hair.webp": {
+    "width": 1536,
+    "height": 864,
+    "avifSrcSet": "/images/blog/claw-clips-fine-thin-hair-320w.avif 320w, /images/blog/claw-clips-fine-thin-hair-480w.avif 480w, /images/blog/claw-clips-fine-thin-hair-640w.avif 640w, /images/blog/claw-clips-fine-thin-hair-800w.avif 800w, /images/blog/claw-clips-fine-thin-hair-1024w.avif 1024w",
+    "webpSrcSet": "/images/blog/claw-clips-fine-thin-hair-320w.webp 320w, /images/blog/claw-clips-fine-thin-hair-480w.webp 480w, /images/blog/claw-clips-fine-thin-hair-640w.webp 640w, /images/blog/claw-clips-fine-thin-hair-800w.webp 800w, /images/blog/claw-clips-fine-thin-hair-1024w.webp 1024w",
+    "fingerprint": "16f901cad1a86baab24746161404f71c15c800c88c2af79b328d0f848a3420c1"
+  },
+  "/images/blog/claw-clips-thick-long-hair.webp": {
+    "width": 1536,
+    "height": 864,
+    "avifSrcSet": "/images/blog/claw-clips-thick-long-hair-320w.avif 320w, /images/blog/claw-clips-thick-long-hair-480w.avif 480w, /images/blog/claw-clips-thick-long-hair-640w.avif 640w, /images/blog/claw-clips-thick-long-hair-800w.avif 800w, /images/blog/claw-clips-thick-long-hair-1024w.avif 1024w",
+    "webpSrcSet": "/images/blog/claw-clips-thick-long-hair-320w.webp 320w, /images/blog/claw-clips-thick-long-hair-480w.webp 480w, /images/blog/claw-clips-thick-long-hair-640w.webp 640w, /images/blog/claw-clips-thick-long-hair-800w.webp 800w, /images/blog/claw-clips-thick-long-hair-1024w.webp 1024w",
+    "fingerprint": "404b0e2e52eff794559facfa0eb8a0e148aafebab634aa63007ea2516c18710b"
+  },
+  "/images/blog/flat-hair-clips-driving.webp": {
+    "width": 1535,
+    "height": 864,
+    "avifSrcSet": "/images/blog/flat-hair-clips-driving-320w.avif 320w, /images/blog/flat-hair-clips-driving-480w.avif 480w, /images/blog/flat-hair-clips-driving-640w.avif 640w, /images/blog/flat-hair-clips-driving-800w.avif 800w, /images/blog/flat-hair-clips-driving-1024w.avif 1024w",
+    "webpSrcSet": "/images/blog/flat-hair-clips-driving-320w.webp 320w, /images/blog/flat-hair-clips-driving-480w.webp 480w, /images/blog/flat-hair-clips-driving-640w.webp 640w, /images/blog/flat-hair-clips-driving-800w.webp 800w, /images/blog/flat-hair-clips-driving-1024w.webp 1024w",
+    "fingerprint": "e6ef71f0be9636253a8d914f4960979ad7757114d8d5eda89fabecff2d734a29"
+  },
+  "/images/blog/hair-bows-for-adults.webp": {
+    "width": 1535,
+    "height": 864,
+    "avifSrcSet": "/images/blog/hair-bows-for-adults-320w.avif 320w, /images/blog/hair-bows-for-adults-480w.avif 480w, /images/blog/hair-bows-for-adults-640w.avif 640w, /images/blog/hair-bows-for-adults-800w.avif 800w, /images/blog/hair-bows-for-adults-1024w.avif 1024w",
+    "webpSrcSet": "/images/blog/hair-bows-for-adults-320w.webp 320w, /images/blog/hair-bows-for-adults-480w.webp 480w, /images/blog/hair-bows-for-adults-640w.webp 640w, /images/blog/hair-bows-for-adults-800w.webp 800w, /images/blog/hair-bows-for-adults-1024w.webp 1024w",
+    "fingerprint": "002095083d2839e429926f56bf8c02bbad74a4e70c3d6e54263f34d6e4fe01ff"
+  },
+  "/images/blog/headband-comfort-fit.webp": {
+    "width": 1536,
+    "height": 864,
+    "avifSrcSet": "/images/blog/headband-comfort-fit-320w.avif 320w, /images/blog/headband-comfort-fit-480w.avif 480w, /images/blog/headband-comfort-fit-640w.avif 640w, /images/blog/headband-comfort-fit-800w.avif 800w, /images/blog/headband-comfort-fit-1024w.avif 1024w",
+    "webpSrcSet": "/images/blog/headband-comfort-fit-320w.webp 320w, /images/blog/headband-comfort-fit-480w.webp 480w, /images/blog/headband-comfort-fit-640w.webp 640w, /images/blog/headband-comfort-fit-800w.webp 800w, /images/blog/headband-comfort-fit-1024w.webp 1024w",
+    "fingerprint": "18cee64d3da815b6b3057e1f9d7224b47f11be126d30558a580777709961b6fd"
+  }
+}

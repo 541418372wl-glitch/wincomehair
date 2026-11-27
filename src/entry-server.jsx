@@ -2,6 +2,10 @@ import { renderStream } from './lib/render-stream.js';
 import { StaticRouter } from 'react-router-dom';
 import { AppContent } from './App';
 import { getSeoMeta, OG_IMAGE, ORGANIZATION_SCHEMA, SITE, SITE_NAME, WEBSITE_SCHEMA } from './components/SEO';
+import { products } from './data/productCatalog';
+import { findSelectedProduct } from './data/selectedProductStyles';
+import { articles } from 'virtual:article-summaries';
+import { articleImageSizes, productImageSizes } from './lib/responsivePhotos';
 import { canonicalPath } from './lib/canonicalPath';
 
 function escapeHtml(value) {
@@ -59,6 +63,31 @@ function buildHead(pathname) {
   return tags.join('\n    ');
 }
 
+const fixedModules = {
+  '/products': 'Products', '/customization': 'Customization', '/sourcing': 'Sourcing',
+  '/about': 'About', '/manufacturer-profile': 'ManufacturerProfile', '/contact': 'SelectedContactRoute',
+  '/faq': 'FAQ', '/quality': 'Quality', '/cases': 'Cases', '/blog': 'Blog', '/privacy': 'Privacy', '/terms': 'Terms',
+};
+
+function routeAssets(pathname) {
+  let module = fixedModules[pathname];
+  let lcpImage = null;
+  if (pathname.startsWith('/products/category/')) {
+    module = 'ProductCategory';
+  } else if (pathname.startsWith('/products/')) {
+    module = 'ProductDetail';
+    const slug = pathname.slice('/products/'.length);
+    const product = findSelectedProduct(slug) || products.find(item => item.id === slug);
+    lcpImage = { src: product.image, sizes: productImageSizes };
+  } else if (pathname.startsWith('/blog/')) {
+    module = 'BlogPost';
+    const article = articles.find(item => pathname === '/blog/' + item.slug);
+    if (article?.image) lcpImage = { src: article.image, sizes: articleImageSizes };
+  }
+  // Home is eager and already has a responsive hero preload in index.html.
+  return { routeEntryModule: module ? 'src/pages/' + module + '.jsx' : null, lcpImage };
+}
+
 export async function render(pathname) {
   const headHtml = buildHead(pathname);
   const appHtml = await renderStream(
@@ -66,5 +95,5 @@ export async function render(pathname) {
       <AppContent />
     </StaticRouter>,
   );
-  return { appHtml, headHtml };
+  return { appHtml, headHtml, ...routeAssets(pathname) };
 }

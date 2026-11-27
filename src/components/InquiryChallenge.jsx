@@ -55,7 +55,7 @@ function hasProductionConfiguration(siteKey) {
     && PRODUCTION_HOSTS.has(window.location?.hostname);
 }
 
-// Mounted only on the contact step. Security verification is independent of
+// Mounted when a buyer starts or opens a preselected inquiry. Verification is independent of
 // optional analytics consent; its token remains in memory until one submission.
 export default function InquiryChallenge({ onTokenChange, resetKey = 0 }) {
   const container = useRef(null);

@@ -5,3 +5,7 @@ export function waLink(text) {
 }
 
 export const WA_DEFAULT_TEXT = 'Hello WINCOME, I would like to inquire about your custom hair accessories. Can we chat?';
+
+export function productQuoteWhatsAppUrl(name, slug) {
+  return waLink(`Hi WINCOME team, I'm interested in wholesale pricing for ${name} (${slug}). Target qty: [ ] | Colors: [ ] | Destination: [ ]. Could you share unit pricing and sample terms?`);
+}

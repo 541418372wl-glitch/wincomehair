@@ -22,11 +22,19 @@ for (const redirect of redirects) {
   if (permanent !== true) failures.push('Article redirect must be permanent: ' + source);
   redirectSources.add(source);
 }
+const titles = new Set();
+const manifest = JSON.parse(fs.readFileSync(path.join(dist, '.vite/manifest.json'), 'utf8'));
 let links = 0;
 for (const route of routes) {
   const file = path.join(dist, route, 'index.html');
   const dom = new JSDOM(fs.readFileSync(file, 'utf8'), { url: origin + route });
   const doc = dom.window.document;
+  const title = doc.title.trim();
+  if (doc.head.querySelectorAll('title').length !== 1 || !title || titles.has(title)) failures.push(route + ': missing or duplicate title');
+  titles.add(title);
+  if (doc.head.querySelectorAll('meta[name="description"]').length !== 1 || doc.head.querySelectorAll('link[rel="canonical"]').length !== 1) failures.push(route + ': duplicate or missing metadata');
+  if (doc.querySelector('#product-jsonld')) failures.push(route + ': unexpected product JSON-LD');
+  if ([...doc.head.querySelectorAll('script[src]')].some(script => new URL(script.src).origin !== origin && !script.async && !script.defer && script.type !== 'module')) failures.push(route + ': blocking external script');
   if (doc.querySelectorAll('h1').length !== 1) failures.push(route + ': expected one H1');
   if (doc.querySelector('link[rel="canonical"]')?.href !== origin + route) failures.push(route + ': canonical mismatch');
   for (const node of doc.querySelectorAll('script[type="application/ld+json"]')) {
@@ -35,6 +43,20 @@ for (const route of routes) {
   for (const img of doc.querySelectorAll('img')) if (!img.hasAttribute('alt')) failures.push(route + ': image lacks alt');
   const inquiryProduct = [...selectedProducts.map(product => product.slug), ...catalogProducts.map(product => product.id)]
     .find(slug => route === `/products/${slug}`);
+  const article = route.startsWith('/blog/');
+  const routeModule = inquiryProduct ? 'ProductDetail' : article ? 'BlogPost' : route === '/contact' ? 'SelectedContactRoute' : null;
+  if (routeModule) {
+    const entry = manifest['src/pages/' + routeModule + '.jsx'];
+    if (!entry || !doc.head.querySelector(`link[rel="modulepreload"][href="/${entry.file}"]`)) failures.push(route + ': route chunk missing from head');
+  }
+  const preloads = [...doc.head.querySelectorAll('link[rel="preload"][as="image"]')];
+  if (inquiryProduct || article) {
+    const hero = doc.querySelector('main picture img[fetchpriority="high"]');
+    const source = hero?.parentElement.querySelector('source[type="image/avif"]');
+    if (!source || preloads.length !== 1 || preloads[0].type !== 'image/avif' || hero.getAttribute('loading') !== 'eager'
+      || preloads[0].getAttribute('imagesrcset') !== source.getAttribute('srcset')
+      || preloads[0].getAttribute('imagesizes') !== source.getAttribute('sizes')) failures.push(route + ': hero and responsive preload must match');
+  } else if (preloads.length !== (route === '/' ? 1 : 0)) failures.push(route + ': unexpected number of image preloads');
   if (inquiryProduct) {
     const allProducts = [...selectedProducts.map(product => ({ id: product.slug, category: product.category })), ...catalogProducts];
     const category = allProducts.find(product => product.id === inquiryProduct)?.category;
@@ -48,8 +70,10 @@ for (const route of routes) {
       if (!sibling || sibling.id === inquiryProduct || sibling.category !== category) failures.push(route + ': invalid same-category recommendation ' + href);
     }
     if (!recommendations?.querySelector(`a[href="/products/category/${category}"]`)) failures.push(route + ': missing related-products category link');
+    const wa = doc.querySelector('main a[data-analytics-location="selected_pdp_inquiry"], main a[data-analytics-location="product_primary"]');
+    if (!wa || !new URL(wa.href).searchParams.get('text')?.includes('(' + inquiryProduct + ')')) failures.push(route + ': missing product-specific WhatsApp quote');
     const formLinks = [...doc.querySelectorAll('main a[href^="/contact"]')];
-    if (formLinks.length !== 2 || formLinks.some(link => link.getAttribute('href') !== `/contact?product=${inquiryProduct}`)) {
+    if (formLinks.length !== 2 || formLinks.some(link => link.getAttribute('href') !== `/contact?product=${inquiryProduct}#stock-inquiry`)) {
       failures.push(route + ': product inquiry links must retain the product context');
     }
   }
