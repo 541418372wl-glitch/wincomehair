@@ -100,8 +100,8 @@ if (duplicates.length) {
 }
 
 const imageBudgets = [
-  [/product-.*-640\.avif$/, 50],
-  [/product-.*-640\.webp$/, 60],
+  [/product-.*-640w?\.avif$/, 50],
+  [/product-.*-640w?\.webp$/, 60],
   [/hero-clips(?:-mobile)?\.avif$/, 70],
 ];
 const imageDirectory = path.join(dist, 'assets', 'images');

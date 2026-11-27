@@ -1,3 +1,6 @@
+export const productImageSizes = '(max-width: 768px) calc(100vw - 32px), (max-width: 1280px) 46vw, 560px';
+export const articleImageSizes = '(max-width: 768px) calc(100vw - 32px), 768px';
+
 const largePhotos = {
   '/assets/images/selected-ruched-fabric-headband.webp': 1500,
   '/assets/images/selected-textured-bow-barrette-reverse.webp': 1920,

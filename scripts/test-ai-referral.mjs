@@ -79,10 +79,20 @@ for (const [landingQuery, referrer, platform, signal] of [
   assert.equal(await visit.trackAiReferral(), false);
   const tracked = window.dataLayer.filter(args => args[0] === 'event' && args[1] === 'ai_referral_visit');
   assert.equal(tracked.length, 1);
-  assert.deepEqual(tracked[0][2], { ai_platform: platform, discovery_signal: signal, landing_path: landing });
+  const context = { ai_platform: platform, discovery_signal: signal, landing_path: landing };
+  assert.deepEqual(tracked[0][2], context);
+  assert.deepEqual(visit.readSessionAiAttribution(), context);
+  const nextPage = await import('../src/lib/aiReferral.js?next=' + platform);
+  delete window.performance;
+  document.referrer = '';
+  assert.deepEqual(nextPage.readSessionAiAttribution(), context, 'Session attribution survives another document');
+  analytics.setAnalyticsConsent('denied');
+  assert.equal(nextPage.readSessionAiAttribution(), null);
 }
 // Reopening cookie settings must not count the same entry again, even when
 // session storage is blocked and the current document is the only fallback.
+document.referrer = 'https://claude.ai/';
+analytics.setAnalyticsConsent('granted');
 const blockedStore = await import('../src/lib/aiReferral.js?blocked-session-storage');
 Object.defineProperty(window, 'sessionStorage', { get() { throw new Error('Storage disabled'); } });
 window.dataLayer.length = 0;

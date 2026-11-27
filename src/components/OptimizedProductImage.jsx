@@ -1,27 +1,22 @@
-const responsiveImages = new Set([
-  '/assets/images/product-bow-clip.webp',
-  '/assets/images/product-claw-butterfly.webp',
-  '/assets/images/product-clip-pearl.webp',
-  '/assets/images/product-headband-braided.webp',
-  '/assets/images/product-scrunchie-velvet.webp',
-]);
+import imageManifest from '../generated/imageManifest.json';
+import { productImageSizes } from '../lib/responsivePhotos';
 
-export default function OptimizedProductImage({ image, alt, sizes, className, pictureClassName = '', eager = false }) {
-  const imageProps = {
-    src: image, alt, width: 1024, height: 1024, className,
-    loading: eager ? undefined : 'lazy',
-    fetchpriority: eager ? 'high' : undefined,
-    decoding: eager ? undefined : 'async',
-  };
-  if (!responsiveImages.has(image)) return <img {...imageProps} />;
-
-  const base = image.replace(/\.webp$/, '');
-  const webpSet = `${base}-320.webp 320w, ${base}-640.webp 640w, ${image} 1024w`;
+export default function OptimizedProductImage({
+  image, alt, sizes = productImageSizes, className, pictureClassName, width, height, eager = false, priority = eager,
+}) {
+  const entry = imageManifest[image];
+  const photo = (
+    <img src={image} alt={alt} className={className}
+      width={entry?.width || width || 1024} height={entry?.height || height || 1024}
+      loading={priority ? 'eager' : 'lazy'} fetchpriority={priority ? 'high' : undefined}
+      decoding={priority ? 'sync' : 'async'} srcSet={entry?.webpSrcSet} sizes={entry ? sizes : undefined} />
+  );
+  if (!entry) return photo;
   return (
     <picture className={pictureClassName}>
-      <source type="image/avif" srcSet={`${base}-320.avif 320w, ${base}-640.avif 640w, ${base}.avif 1024w`} sizes={sizes} />
-      <source type="image/webp" srcSet={webpSet} sizes={sizes} />
-      <img {...imageProps} srcSet={webpSet} sizes={sizes} />
+      <source type="image/avif" srcSet={entry.avifSrcSet} sizes={sizes} />
+      <source type="image/webp" srcSet={entry.webpSrcSet} sizes={sizes} />
+      {photo}
     </picture>
   );
 }

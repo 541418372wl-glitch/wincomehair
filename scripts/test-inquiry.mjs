@@ -164,6 +164,7 @@ try {
   const nested = await execute({
     record: {
       ...validPayload(),
+      product_slug: 'clip-pearl', ai_platform: 'chatgpt', landing_path: '/products/category/scrunchies',
       product_type: undefined, productType: 'pins',
       logo_placement: undefined, logoPlacement: 'center',
       target_market: undefined, targetMarket: 'North America',
@@ -179,6 +180,9 @@ try {
   assert.equal(nested.res.body.accepted, true);
   const nestedForwarded = JSON.parse(nested.calls[1].options.body);
   assert.equal(nestedForwarded.product_type, 'pins');
+  assert.equal(nestedForwarded.product_slug, 'clip-pearl');
+  assert.equal(nestedForwarded.ai_platform, 'chatgpt');
+  assert.equal(nestedForwarded.landing_path, '/products/category/scrunchies');
   assert.equal(nestedForwarded.logo_placement, 'center');
   assert.equal(nestedForwarded.target_market, 'North America');
   assert.equal(nestedForwarded.request_reference, nested.res.body.requestId);
@@ -193,7 +197,8 @@ try {
     [{ version: '1', consentAtSubmit: 'must-not-forward@example.invalid' }, 'unknown'],
     [{ version: '1', consentAtSubmit: {} }, 'unknown'],
     [{ version: '1', consentAtSubmit: true }, 'unknown'],
-    [{ version: '2', consentAtSubmit: 'granted' }, 'unknown'],
+    [{ version: '2', consentAtSubmit: 'granted' }, 'granted'],
+    [{ version: '999', consentAtSubmit: 'granted' }, 'unknown'],
     [{ version: 1, consentAtSubmit: 'granted' }, 'unknown'],
     [{ version: '1' }, 'unknown'],
     [null, 'unknown'], [[], 'unknown'], ['granted', 'unknown'], [false, 'unknown'],
@@ -209,8 +214,9 @@ try {
     assert.deepEqual(Object.keys(result.res.body).sort(), ['accepted', 'ok', 'requestId', 'submissionStatus']);
     const forwarded = JSON.parse(result.calls[1].options.body);
     assert.equal(forwarded.analytics_consent_at_submit, expected);
-    assert.equal(forwarded.diagnostic_version, '1');
-    assert.equal(forwarded.measurement_version, '3');
+    const current = diagnostics?.version === '2';
+    assert.equal(forwarded.diagnostic_version, current ? '2' : '1');
+    assert.equal(forwarded.measurement_version, current ? '4' : '3');
     assert.equal(forwarded.request_reference, result.res.body.requestId);
     assert.deepEqual(forwarded._email, { subject: 'New inquiry from wincomehair.com' });
     assert.equal(JSON.stringify(forwarded).includes('must-not-forward'), false);

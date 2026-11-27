@@ -38,6 +38,8 @@ npm run build
 npm test
 ```
 
+Run `npm run build:images` to refresh the AVIF/WebP candidates and their manifest after editing product photos or article covers. The same incremental generator runs before each build.
+
 The build performs client and SSR builds, prerenders every public route, and runs asset, metadata, GEO/AI discovery, article-trust, repository-governance, and internal-link checks. Rendering errors fail the build. Article listings and SEO use a virtual summary module generated from the original content; full article bodies load with the article page. A bundle gate prevents those bodies from returning to the initial client graph.
 
 Retired article URLs use exact permanent redirects in `vercel.json`. The route check requires each destination to be a current canonical route and rejects duplicate sources, chains, and loops. Vercel serves these as HTTP 308 redirects; the local Vite preview does not emulate them. Verify both HTTP status and destination on the approved deployment.
@@ -101,6 +103,6 @@ Direct scripts that write GitHub contents to `main` are prohibited. Production n
 
 ## Inquiry operations and measurement
 
-See [INQUIRY_OPERATIONS.md](INQUIRY_OPERATIONS.md) for the accepted/unknown response contract, Turnstile ownership, deployment order, recipient and archive/email acceptance checks, balance monitoring, rollback, and measurement definitions. GA4 `generate_lead` requires visitor consent and a confirmed provider acceptance, using `lead_status=accepted` and `measurement_version=3`. It does not confirm a stored or qualified inquiry. Keep older `saved` version 2 events separate; WhatsApp clicks continue to measure contact intent with version 2.
+See [INQUIRY_OPERATIONS.md](INQUIRY_OPERATIONS.md) for the accepted/unknown response contract, Turnstile ownership, deployment order, recipient and archive/email acceptance checks, balance monitoring, rollback, and measurement definitions. GA4 `generate_lead` requires visitor consent and a confirmed provider acceptance, using `lead_status=accepted` and `measurement_version=4` with optional product and consented AI attribution. Version 3 records the earlier accepted event. It does not confirm a stored or qualified inquiry. Keep older `saved` version 2 events separate; WhatsApp clicks continue to measure contact intent with version 2.
 
 See [INQUIRY_DIAGNOSTICS.md](INQUIRY_DIAGNOSTICS.md) for the browser-reported consent snapshot saved with the original Formspark submission. This uses the existing endpoint and credentials, with no additional submission, diagnostic endpoint, signing key, database, rate-limit rule, or paid log retention. The metadata follows inquiry retention, not a separate 30-day deletion policy. Tests use mocked providers only.

@@ -1,6 +1,7 @@
 import { Link, useParams, useLocation } from 'react-router-dom';
 import { articles } from '../data/articles';
-import { responsivePhotoProps } from '../lib/responsivePhotos';
+import OptimizedProductImage from '../components/OptimizedProductImage';
+import { articleImageSizes } from '../lib/responsivePhotos';
 import { buyerDecisionClusters } from '../data/buyerDecisionClusters';
 import { selectRelatedArticles } from '../data/relatedArticles';
 import { waLink } from '../lib/whatsapp';
@@ -244,12 +245,9 @@ export default function BlogPost() {
         </div>
 
         <div className={`${post.imageFit === 'contain' ? 'aspect-[4/3] sm:aspect-[16/6]' : 'aspect-[16/6]'} overflow-hidden mb-12 bg-sand`}>
-          <img
-            src={post.image}
-            {...responsivePhotoProps(post.image, '(min-width: 1440px) 480px, (min-width: 768px) calc(37.5vw - 60px), (min-width: 640px) calc(37.5vw - 18px), calc(75vw - 36px)')}
-            alt={post.imageAlt || post.title}
-            width={post.imageWidth || 1535} height={post.imageHeight || 864}
-            fetchpriority="high" decoding="async"
+          <OptimizedProductImage
+            image={post.image} alt={post.imageAlt || post.title} sizes={articleImageSizes} priority
+            pictureClassName="block w-full h-full"
             className={`w-full h-full ${post.imageFit === 'contain' ? 'object-contain' : 'object-cover'}`}
           />
         </div>

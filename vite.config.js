@@ -60,10 +60,30 @@ function inlineCss() {
   };
 }
 
+// Match the deployed directory indexes for canonical URLs without a trailing slash.
+// Vite's default SPA preview otherwise serves the home HTML before hydration.
+function previewPrerenderedRoutes() {
+  return {
+    name: 'preview-prerendered-routes',
+    configurePreviewServer(server) {
+      const output = join(server.config.root, server.config.build.outDir);
+      server.middlewares.use((req, _res, next) => {
+        const url = req.url || '/';
+        const pathname = url.split('?')[0];
+        if (['GET', 'HEAD'].includes(req.method) && /^\/[a-z0-9-]+(?:\/[a-z0-9-]+)*$/.test(pathname)
+          && existsSync(join(output, pathname, 'index.html'))) {
+          req.url = pathname + '/index.html' + url.slice(pathname.length);
+        }
+        next();
+      });
+    },
+  };
+}
+
 export default defineConfig(({ ssrBuild, isSsrBuild }) => {
   const buildingSsr = Boolean(ssrBuild || isSsrBuild);
   return {
-  plugins: [react(), articleSummaries(buildingSsr), ...(buildingSsr ? [] : [inlineCss()])],
+  plugins: [react(), previewPrerenderedRoutes(), articleSummaries(buildingSsr), ...(buildingSsr ? [] : [inlineCss()])],
   resolve: {
     alias: buildingSsr
       ? {}

@@ -33,19 +33,20 @@ export default function AnalyticsTracker() {
 
   useEffect(() => {
     const handleClick = (event) => {
-      const link = event.target.closest?.('a[href*="api.whatsapp.com"]');
+      const link = event.target.closest?.('a[href^="mailto:"], a[href*="api.whatsapp.com"]');
       if (!link) return;
 
       const productId = productIdFromPath(window.location.pathname);
-      void trackEvent('whatsapp_click', {
+      const email = link.protocol === 'mailto:';
+      void trackEvent(email ? 'email_click' : 'whatsapp_click', {
         interaction_type: 'outbound_click',
-        measurement_version: '2',
+        measurement_version: email ? '1' : '2',
         link_location: link.dataset.analyticsLocation || 'page_content',
-        page_path: `${window.location.pathname}${window.location.search}`,
+        page_path: window.location.pathname,
         product_id: productId,
       });
 
-      if (productId) {
+      if (productId && !email) {
         void trackProductInquiry({
           productId,
           productName: link.dataset.productName,

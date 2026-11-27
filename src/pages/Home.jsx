@@ -100,6 +100,47 @@ export default function Home() {
         </div>
       </section>
 
+      <section aria-labelledby="sourcing-snapshot-heading" className="border-y border-sand bg-sand/20 py-10">
+        <div className="mx-auto max-w-6xl px-6">
+          <h2 id="sourcing-snapshot-heading" className="text-xl font-semibold text-navy">
+            Wholesale Order Terms
+          </h2>
+          <div className="mt-5 grid gap-4 md:grid-cols-4 text-sm text-navy/85">
+            <div className="bg-white p-4 border border-sand">
+              <p className="text-xs uppercase tracking-wider text-tan">In-Stock Claw Clips</p>
+              <p className="mt-1 font-medium text-navy">500 pcs / style / color</p>
+              <p className="mt-1 text-xs text-bronze">Available in <Link to="/products/long-crossed-acrylic-claw-clip" className="underline">acrylic</Link>, <Link to="/products/medium-rounded-pc-claw-clip" className="underline">PC</Link> and <Link to="/products/openwork-abs-claw-clip" className="underline">ABS</Link>. Custom logos and packaging are quoted separately.</p>
+            </div>
+            <div className="bg-white p-4 border border-sand">
+              <p className="text-xs uppercase tracking-wider text-tan">Custom OEM / ODM MOQ</p>
+              <p className="mt-1 font-medium text-navy">1,000–2,000 pcs</p>
+              <p className="mt-1 text-xs text-bronze">Claws 1,000 and barrettes 2,000 per design per color. Headbands 1,000. Scrunchies and bows 1,500.</p>
+            </div>
+            <div className="bg-white p-4 border border-sand">
+              <p className="text-xs uppercase tracking-wider text-tan">Physical Sampling</p>
+              <p className="mt-1 font-medium text-navy">Approx. 15 Days</p>
+              <p className="mt-1 text-xs text-bronze">Sample availability, freight, and bulk production timing confirmed per request.</p>
+            </div>
+            <div className="bg-white p-4 border border-sand">
+              <p className="text-xs uppercase tracking-wider text-tan">Direct Export Quote</p>
+              <p className="mt-1 font-medium text-navy">EXW / FOB &amp; Packing</p>
+              <p className="mt-1 text-xs text-bronze">Tiered unit pricing, color-split MOQ confirmation, and carton estimate in writing.</p>
+            </div>
+          </div>
+          <div className="mt-5 flex flex-wrap gap-3 text-sm">
+            <Link to="/products/category/hair-claw-clips#selected-styles" className="btn-primary">
+              Compare 500-MOQ Stock Claw Clips →
+            </Link>
+            <Link to="/products/category/scrunchies" className="btn-outline">
+              Compare Wholesale Scrunchies
+            </Link>
+            <Link to="/contact" className="btn-outline">
+              Request Wholesale Price Sheet
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* Categories */}
       <section className="section-gap">
         <div className="container-site">

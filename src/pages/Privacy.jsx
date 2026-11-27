@@ -56,6 +56,11 @@ export default function Privacy() {
                     <td className="border border-bronze/10 p-3">Local browser storage that remembers your accept/reject choice.</td>
                     <td className="border border-bronze/10 p-3">Until you clear site data or change your choice.</td>
                   </tr>
+                  <tr>
+                    <td className="border border-bronze/10 p-3">AI referral session storage</td>
+                    <td className="border border-bronze/10 p-3">With analytics consent, remember a recognized AI source and its landing page. These can accompany your quote request.</td>
+                    <td className="border border-bronze/10 p-3">Current browser tab session.</td>
+                  </tr>
                 </tbody>
               </table>
             </div>
@@ -66,7 +71,7 @@ export default function Privacy() {
           <section>
             <h2 className="text-display-sm text-navy mb-3">5. Service Providers & International Processing</h2>
             <p>We use Formspark to receive, store, and send email notifications about new quote requests, Cloudflare Turnstile to verify form submissions, Vercel for site hosting and runtime logs, and—only after consent—Google Analytics for measurement. Earlier inquiry records and notifications may remain in Supabase and Resend under our retention policy. Site fonts are hosted on our own domain; loading them does not require a request to Google Fonts. Providers may process data in countries outside your own under their contractual and legal transfer mechanisms.</p>
-            <p className="mt-3">Turnstile loads at the final form step for security, independently of optional analytics consent. It processes technical signals to distinguish people from automated submissions. We do not send your quote details to Turnstile.</p>
+            <p className="mt-3">Turnstile loads when you interact with the quote form or open it with a product category preselected. This verification works independently of optional analytics consent. It processes technical signals to distinguish people from automated submissions. We do not send your quote details to Turnstile.</p>
           </section>
 
           <section>

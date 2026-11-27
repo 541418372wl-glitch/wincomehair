@@ -80,7 +80,7 @@ assert.equal(await analytics.trackGenerateLead({
 }), true);
 const leadCall = calls().find((call) => call[0] === 'event' && call[1] === 'generate_lead');
 assert.equal(leadCall[2].lead_status, 'accepted');
-assert.equal(leadCall[2].measurement_version, '3');
+assert.equal(leadCall[2].measurement_version, '4');
 assert.deepEqual(Object.keys(leadCall[2]).sort(), [
   'lead_source', 'lead_status', 'measurement_version', 'product_type', 'quantity_range', 'target_market',
 ]);

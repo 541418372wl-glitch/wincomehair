@@ -9,6 +9,8 @@ const inquiryProducts = new Map([
     slug: product.id,
     title: product.name,
     category: product.category,
+    material: product.material,
+    moq: product.moq,
     customProduction: true,
   }]),
 ]);

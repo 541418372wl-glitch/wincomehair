@@ -12,6 +12,8 @@ const AI_REFERRAL_SOURCES = [
   { platform: 'poe', domains: ['poe.com'], campaignSources: ['poe', 'poe.com'] },
 ];
 
+const SESSION_AI_CONTEXT_KEY = 'wincome_ai_attribution_v1';
+let documentAttribution;
 let referralPromise;
 let trackedInDocument = false;
 
@@ -67,9 +69,7 @@ function markAiReferralTracked() {
   }
 }
 
-export function trackAiReferral() {
-  if (!hasBrowser() || readAnalyticsConsent() !== 'granted' || hasTrackedAiReferral()) return Promise.resolve(false);
-
+function detectLandingContext() {
   // Consent may be granted after a client-side navigation. The document's
   // navigation entry still identifies the original landing URL in that case.
   let landing = new URL(window.location.href);
@@ -83,13 +83,47 @@ export function trackAiReferral() {
     // Navigation timing may be unavailable in privacy-restricted browsers.
   }
   const referral = detectAiReferral({ href: landing.href });
-  if (!referral) return Promise.resolve(false);
+  return referral ? { ...referral, landing_path: landing.pathname } : null;
+}
+
+function isValidContext(context) {
+  return AI_REFERRAL_SOURCES.some(source => source.platform === context?.ai_platform)
+    && ['referrer', 'utm_source'].includes(context.discovery_signal)
+    && typeof context.landing_path === 'string' && /^\/(?:[a-z0-9-]+(?:\/[a-z0-9-]+)*\/?)?$/.test(context.landing_path)
+    && context.landing_path.length <= 200;
+}
+
+export function readSessionAiAttribution() {
+  if (!hasBrowser() || readAnalyticsConsent() !== 'granted') return null;
+  if (documentAttribution) return documentAttribution;
+  try {
+    const stored = JSON.parse(window.sessionStorage?.getItem(SESSION_AI_CONTEXT_KEY) || 'null');
+    if (isValidContext(stored)) {
+      const { ai_platform, discovery_signal, landing_path } = stored;
+      return { ai_platform, discovery_signal, landing_path };
+    }
+  } catch { /* Storage is optional. */ }
+  const detected = detectLandingContext();
+  if (!isValidContext(detected)) return null;
+  documentAttribution = detected;
+  try {
+    window.sessionStorage?.setItem(SESSION_AI_CONTEXT_KEY, JSON.stringify(detected));
+  } catch { /* Keep first-touch context in this document. */ }
+  return detected;
+}
+
+export function trackAiReferral() {
+  if (!hasBrowser()) return Promise.resolve(false);
+  if (readAnalyticsConsent() === 'denied') {
+    documentAttribution = null;
+    try { window.sessionStorage?.removeItem(SESSION_AI_CONTEXT_KEY); } catch { /* Restricted storage. */ }
+    return Promise.resolve(false);
+  }
+  const context = readSessionAiAttribution();
+  if (!context || hasTrackedAiReferral()) return Promise.resolve(false);
   if (referralPromise) return referralPromise;
 
-  referralPromise = trackEvent('ai_referral_visit', {
-    ...referral,
-    landing_path: landing.pathname,
-  }).then((tracked) => {
+  referralPromise = trackEvent('ai_referral_visit', context).then((tracked) => {
     if (tracked) markAiReferralTracked();
     return tracked;
   }).finally(() => {

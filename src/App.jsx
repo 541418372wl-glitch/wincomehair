@@ -1,5 +1,6 @@
 import { lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import ChunkErrorBoundary from './components/ChunkErrorBoundary';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import WhatsAppButton from './components/WhatsAppButton';
@@ -44,27 +45,29 @@ export function AppContent() {
       <NavigationScroll />
       <AnalyticsTracker />
       <main id="main-content" className="flex-1">
-        <Suspense fallback={<div className="min-h-[60vh]" />}>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/products" element={<Products />} />
-            <Route path="/products/category/:category" element={<ProductCategory />} />
-            <Route path="/products/:id" element={<ProductDetail />} />
-            <Route path="/customization" element={<Customization />} />
-            <Route path="/sourcing" element={<Sourcing />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/manufacturer-profile" element={<ManufacturerProfile />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/faq" element={<FAQ />} />
-            <Route path="/quality" element={<Quality />} />
-            <Route path="/cases" element={<Cases />} />
-            <Route path="/blog" element={<Blog />} />
-            <Route path="/blog/:slug" element={<BlogPost />} />
-            <Route path="/privacy" element={<Privacy />} />
-            <Route path="/terms" element={<Terms />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </Suspense>
+        <ChunkErrorBoundary>
+          <Suspense fallback={<div className="min-h-[60vh]" />}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/products" element={<Products />} />
+              <Route path="/products/category/:category" element={<ProductCategory />} />
+              <Route path="/products/:id" element={<ProductDetail />} />
+              <Route path="/customization" element={<Customization />} />
+              <Route path="/sourcing" element={<Sourcing />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/manufacturer-profile" element={<ManufacturerProfile />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/faq" element={<FAQ />} />
+              <Route path="/quality" element={<Quality />} />
+              <Route path="/cases" element={<Cases />} />
+              <Route path="/blog" element={<Blog />} />
+              <Route path="/blog/:slug" element={<BlogPost />} />
+              <Route path="/privacy" element={<Privacy />} />
+              <Route path="/terms" element={<Terms />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </Suspense>
+        </ChunkErrorBoundary>
       </main>
       <Footer />
       <aside aria-label="WhatsApp support">

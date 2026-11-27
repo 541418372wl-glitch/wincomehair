@@ -1,5 +1,6 @@
 import { useCallback, useRef, useState } from 'react';
 import InquiryChallenge from '../components/InquiryChallenge';
+import { readSessionAiAttribution } from '../lib/aiReferral';
 import { waLink } from '../lib/whatsapp';
 import { trackGenerateLead, readAnalyticsConsentSnapshot } from '../lib/analytics';
 import { inquiryProductCategory } from '../data/productInquiry';
@@ -56,8 +57,34 @@ const CUSTOM_MOQ_BY_PRODUCT_TYPE = {
   },
 };
 
-export default function Contact({ selectedProduct = null, fromClawComparison = false }) {
-  const [inquiryProduct, setInquiryProduct] = useState(selectedProduct);
+const materialOptions = [
+  ['pc', 'PC (Polycarbonate)', /\bpc\b|polycarbonate/i],
+  ['abs', 'ABS Plastic', /\babs\b/i],
+  ['acrylic', 'Acrylic', /acrylic/i],
+  ['acetate', 'Cellulose Acetate', /acetate/i],
+  ['metal', 'Zinc Alloy / Metal', /zinc alloy|stainless|metal/i],
+  ['silk', '100% Mulberry Silk', /silk/i],
+  ['satin', 'Polyester Satin', /satin/i],
+  ['cotton', 'Organic Cotton', /cotton/i],
+  ['velvet', 'Velvet', /velvet/i],
+  ['polyester', 'Polyester / Stretch Fabric', /polyester|spandex|stretch/i],
+];
+
+function listedMaterial(product) {
+  return product?.material || product?.facts?.find(([label]) => /^(material|fabric)$/i.test(label))?.[1];
+}
+
+function productMaterial(product) {
+  const specification = listedMaterial(product);
+  if (!specification || specification.includes(' / ')) return '';
+  // A finish such as satin or velvet is more specific than its polyester base.
+  return materialOptions.find(([, , pattern]) => pattern.test(specification))?.[0] || '';
+}
+
+export default function Contact({ selectedProduct = null, presetCategory = '', fromClawComparison = false }) {
+  const [dismissedProduct, setDismissedProduct] = useState(null);
+  const [showOptionalSpecs, setShowOptionalSpecs] = useState(false);
+  const [shouldMountChallenge, setShouldMountChallenge] = useState(false);
   const [step, setStep] = useState(1);
   const [submitting, setSubmitting] = useState(false);
   const submissionInFlight = useRef(false);
@@ -68,15 +95,23 @@ export default function Contact({ selectedProduct = null, fromClawComparison = f
   const [verified, setVerified] = useState(false);
   const [challengeReset, setChallengeReset] = useState(0);
   const [formStartedAt] = useState(() => Date.now());
-  const [form, setForm] = useState({
+  const [draft, setForm] = useState({
     name: '', company: '', email: '', phone: '',
-    productType: inquiryProductCategory(selectedProduct) || (fromClawComparison ? 'claw-clips' : ''),
-    quantity: '', material: '', logoPlacement: '',
+    productType: null, quantity: '', material: null, logoPlacement: '',
     dimensions: '', message: '', targetMarket: '', timeline: '', website: '',
   });
 
+  const presetType = inquiryProductCategory(selectedProduct) || presetCategory || (fromClawComparison ? 'claw-clips' : '');
+  const productType = draft.productType ?? presetType;
+  const inquiryProduct = selectedProduct && selectedProduct.slug !== dismissedProduct
+    && productType === inquiryProductCategory(selectedProduct) ? selectedProduct : null;
+  const form = { ...draft, productType, material: draft.material ?? productMaterial(inquiryProduct) };
+  const stockMinimum = inquiryProduct?.facts?.find(([label]) => label === 'Stock MOQ')?.[1];
+  const selectedTerms = [listedMaterial(inquiryProduct), stockMinimum && `Stock MOQ: ${stockMinimum}`]
+    .filter(Boolean).join(' · ');
+
   const update = (field, value) => {
-    if (field === 'productType' && value !== inquiryProductCategory(inquiryProduct)) setInquiryProduct(null);
+    if (field === 'productType' && inquiryProduct && value !== productType) setDismissedProduct(inquiryProduct.slug);
     setForm(prev => ({
       ...prev,
       [field]: value,
@@ -91,6 +126,7 @@ export default function Contact({ selectedProduct = null, fromClawComparison = f
   );
   const quantityOptions = stockClawInquiry ? STOCK_CLAW_QUANTITY_OPTIONS : activeMoqPolicy?.options || DEFAULT_QUANTITY_OPTIONS;
   const validQuantity = quantityOptions.some(option => option.value === form.quantity);
+  const coreFieldsValid = Boolean(form.productType && validQuantity && form.name.trim() && /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(form.email.trim()));
   const updateVerificationToken = useCallback((token) => {
     verificationToken.current = token;
     setVerified(Boolean(token));
@@ -99,12 +135,7 @@ export default function Contact({ selectedProduct = null, fromClawComparison = f
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (submissionInFlight.current || submissionBlocked.current) return;
-    // Enter in earlier steps advances the form, never sends a partial request.
-    if (step < 3) {
-      if (form.productType && validQuantity) setStep(step + 1);
-      return;
-    }
-    if (step !== 3 || !form.productType || !validQuantity || !form.name.trim() || !form.email.trim()) return;
+    if (step === 4 || !coreFieldsValid) return;
     // Honeypot: silently drop bot submissions
     if (form.website) return;
     const turnstileToken = verificationToken.current;
@@ -114,12 +145,16 @@ export default function Contact({ selectedProduct = null, fromClawComparison = f
     setSubmitting(true);
     setSubmitError(null);
 
+    const attribution = readSessionAiAttribution();
     const record = {
       name: form.name,
       company: form.company || null,
       email: form.email,
       phone: form.phone || null,
-      product_type: form.productType || null,
+      product_type: form.productType,
+      product_slug: inquiryProduct?.slug || null,
+      ai_platform: attribution?.ai_platform || null,
+      landing_path: attribution?.landing_path || null,
       quantity: form.quantity || null,
       material: form.material || null,
       logo_placement: form.logoPlacement || null,
@@ -141,7 +176,7 @@ export default function Contact({ selectedProduct = null, fromClawComparison = f
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           record, turnstileToken,
-          diagnostics: { version: '1', consentAtSubmit: readAnalyticsConsentSnapshot() },
+          diagnostics: { version: '2', consentAtSubmit: readAnalyticsConsentSnapshot() },
         }),
       });
       const result = await res.json().catch(() => ({ submissionStatus: 'unknown' }));
@@ -155,6 +190,8 @@ export default function Contact({ selectedProduct = null, fromClawComparison = f
       void trackGenerateLead({
         submission: result,
         productType: form.productType,
+        productId: inquiryProduct?.slug,
+        aiPlatform: attribution?.ai_platform,
         quantity: form.quantity,
         targetMarket: form.targetMarket,
       });
@@ -179,26 +216,18 @@ export default function Contact({ selectedProduct = null, fromClawComparison = f
   };
 
   return (
-    <div className="pt-24">
-      <div className="container-site section-gap">
+    <div className="pb-16">
+      <div className="container-site pt-6">
         <div className="max-w-3xl mx-auto">
           <p className="section-label text-center">Get a Quote</p>
-                <h1 className="text-[38px] leading-[1.1] sm:text-display-lg text-navy text-center mb-4">
+          <h1 className="text-[38px] leading-[1.1] sm:text-display-lg text-navy text-center mb-4">
             Request Your <span className="text-gold">Free Quote</span>
           </h1>
-          <p className="text-tan text-lg text-center mb-16 max-w-xl mx-auto leading-relaxed">
-            Free design mockup and factory-direct pricing in 24 hours. No commitment required.
+          <p className="text-tan text-lg text-center mb-4 max-w-xl mx-auto leading-relaxed">
+            Request wholesale pricing, per-color minimums and sample terms for your order.
           </p>
 
-          {/* WhatsApp primary CTA */}
-          <div className="bg-[#25D366]/5 border border-[#25D366]/30 p-5 sm:p-8 md:p-10 mb-16 text-center">
-            <p className="text-[10px] tracking-wider uppercase text-[#128C7E] mb-3">Fastest Response — Chat Directly</p>
-            <h2 className="text-display-sm text-navy mb-4">
-              Prefer WhatsApp? <span className="text-[#25D366]">Talk to a Specialist Now</span>
-            </h2>
-            <p className="text-tan text-base max-w-xl mx-auto mb-6 leading-relaxed">
-              Average reply within 1–2 hours on WhatsApp — much faster than email. Send your product idea, quantity and reference photos and get an instant first response.
-            </p>
+          <div className="mb-6 text-center">
             <a
               href={waLink(inquiryProduct
                 ? `Hello WINCOME, I would like to ask about ${inquiryProduct.title}. https://wincomehair.com/products/${inquiryProduct.slug}`
@@ -206,30 +235,12 @@ export default function Contact({ selectedProduct = null, fromClawComparison = f
               target="_blank"
               rel="noopener noreferrer"
               data-analytics-location="contact_primary"
-              className="btn-whatsapp w-full sm:w-auto justify-center text-sm sm:text-base px-4 sm:px-12 py-5"
+              className="inline-flex items-center gap-2 text-sm text-navy underline"
             >
               <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
               Chat on WhatsApp <span className="ml-1">→</span>
             </a>
-            <p className="text-xs text-tan mt-4">
-              Or continue with the quote form below — we reply within 24 hours.
-            </p>
           </div>
-
-          {/* Step indicators */}
-          {step < 4 && (
-            <div className="flex items-center justify-center gap-2 sm:gap-4 mb-16">
-              {['Product', 'Details', 'Contact'].map((label, i) => (
-                <div key={label} className="flex items-center gap-1 sm:gap-2">
-                  <span className={`w-6 h-6 sm:w-8 sm:h-8 shrink-0 flex items-center justify-center text-xs font-medium border ${
-                    step > i + 1 ? 'bg-navy text-white border-navy' : step === i + 1 ? 'border-navy text-navy' : 'border-bronze/20 text-tan'
-                  }`}>{i + 1}</span>
-                  <span className={`text-[10px] sm:text-xs tracking-wide sm:tracking-wider uppercase ${step === i + 1 ? 'text-navy font-medium' : 'text-tan'}`}>{label}</span>
-                  {i < 2 && <span className="w-8 h-px bg-bronze/20 hidden sm:block" />}
-                </div>
-              ))}
-            </div>
-          )}
 
           {/* Form */}
           {step === 4 ? (
@@ -247,25 +258,26 @@ export default function Contact({ selectedProduct = null, fromClawComparison = f
             </div>
           ) : (
             <form
-              id={stockClawInquiry ? 'stock-inquiry' : undefined}
+              id="stock-inquiry"
               onSubmit={handleSubmit}
-              className={`bg-white p-5 sm:p-8 md:p-16 border border-bronze/10${stockClawInquiry ? ' scroll-mt-28' : ''}`}
+              onFocusCapture={() => setShouldMountChallenge(true)}
+              onPointerDownCapture={() => setShouldMountChallenge(true)}
+              className="bg-white p-5 sm:p-8 md:p-16 border border-bronze/10 scroll-mt-28 space-y-6"
             >
               {inquiryProduct ? <div className="selected-inquiry-summary">
                 <p>Product inquiry</p>
                 <strong>{inquiryProduct.title}</strong>
-                <p>This product name and page link will be included with your request.</p>
+                {selectedTerms && <p>{selectedTerms}</p>}
+                {inquiryProduct.moq && <p>{inquiryProduct.customProduction ? 'Custom production MOQ' : 'MOQ'}: {inquiryProduct.moq}</p>}
                 <button type="button" disabled={submitting} onClick={() => {
                   if (submissionInFlight.current) return;
-                  setInquiryProduct(null);
-                  setForm(prev => ({ ...prev, quantity: '' }));
-                  setStep(1);
+                  setDismissedProduct(inquiryProduct.slug);
+                  setForm(prev => ({ ...prev, productType, quantity: '' }));
                 }}>Remove product selection</button>
               </div> : null}
-              {step === 1 && (
-                <div className="space-y-8">
+              <div className="grid sm:grid-cols-2 gap-4">
                   <div>
-                    <label htmlFor="productType" className="block text-xs tracking-wider uppercase text-tan mb-1">Product Type *</label>
+                    <label htmlFor="productType" className="block text-xs tracking-wider uppercase text-tan mb-1">Product Category *</label>
                     <select
                       id="productType"
                       name="productType"
@@ -299,7 +311,7 @@ export default function Contact({ selectedProduct = null, fromClawComparison = f
                       name="quantity"
                       aria-describedby={stockClawInquiry ? 'claw-stock-terms claw-quantity-help' : undefined}
                       required
-                      value={form.quantity}
+                      value={validQuantity ? form.quantity : ''}
                       onChange={e => update('quantity', e.target.value)}
                       className="input-field"
                     >
@@ -314,31 +326,31 @@ export default function Contact({ selectedProduct = null, fromClawComparison = f
                       </p>
                     )}
                   </div>
-                  <div className="flex flex-col sm:items-end">
-                    <button
-                      type="button"
-                      onClick={() => setStep(2)}
-                      disabled={!form.productType || !validQuantity}
-                      className="btn-primary w-full sm:w-auto justify-center disabled:opacity-40 disabled:cursor-not-allowed"
-                    >
-                      Next: Details →
-                    </button>
+                  <div>
+                    <label htmlFor="name" className="block text-xs tracking-wider uppercase text-tan mb-1">Your Name *</label>
+                    <input id="name" name="name" required type="text" autoComplete="name" value={form.name} onChange={e => update('name', e.target.value)} placeholder="Full name" className="input-field" />
                   </div>
-                </div>
-              )}
+                  <div>
+                    <label htmlFor="email" className="block text-xs tracking-wider uppercase text-tan mb-1">Work Email *</label>
+                    <input id="email" name="email" required type="email" autoComplete="email" value={form.email} onChange={e => update('email', e.target.value)} placeholder="you@company.com" className="input-field" />
+                  </div>
+              </div>
+              <div>
+                <label htmlFor="message" className="block text-xs tracking-wider uppercase text-tan mb-1">Additional Message</label>
+                <textarea id="message" name="message" rows="3" value={form.message} onChange={e => update('message', e.target.value)} placeholder={stockClawInquiry ? 'List your chosen styles, colors and pieces per color. Add any logo or packaging requests.' : 'Tell us about your project, reference images, or specific requirements...'} className="input-field" />
+              </div>
 
-              {step === 2 && (
-                <div className="space-y-8">
+              <button type="button" disabled={submitting} aria-expanded={showOptionalSpecs} aria-controls="optional-specs"
+                onClick={() => setShowOptionalSpecs(open => !open)} className="btn-outline w-full sm:w-auto">
+                Add optional specs (Material, Logo, Dimensions, Target Market, Timeline)
+              </button>
+              <div id="optional-specs" hidden={!showOptionalSpecs}>
+                <div className="grid sm:grid-cols-2 gap-6">
                   <div>
                     <label htmlFor="material" className="block text-xs tracking-wider uppercase text-tan mb-1">Material Preference</label>
                     <select id="material" name="material" value={form.material} onChange={e => update('material', e.target.value)} className="input-field">
                       <option value="">Select material...</option>
-                      <option value="acetate">Cellulose Acetate</option>
-                      <option value="metal">Zinc Alloy / Metal</option>
-                      <option value="silk">Mulberry Silk</option>
-                      <option value="satin">Premium Satin</option>
-                      <option value="cotton">Organic Cotton</option>
-                      <option value="velvet">Velvet</option>
+                      {materialOptions.map(([value, label]) => <option key={value} value={value}>{label}</option>)}
                       <option value="not-sure">Not Sure — Need Recommendation</option>
                     </select>
                   </div>
@@ -380,39 +392,20 @@ export default function Contact({ selectedProduct = null, fromClawComparison = f
                     <label htmlFor="dimensions" className="block text-xs tracking-wider uppercase text-tan mb-1">Approx. Dimensions (L×W×H cm)</label>
                     <input id="dimensions" name="dimensions" type="text" value={form.dimensions} onChange={e => update('dimensions', e.target.value)} placeholder="e.g. 10×5×3 cm" className="input-field" />
                   </div>
+                </div>
+              </div>
+
+              <div className="space-y-6">
+                <div className="grid sm:grid-cols-2 gap-6">
                   <div>
-                    <label htmlFor="message" className="block text-xs tracking-wider uppercase text-tan mb-1">Additional Message</label>
-                    <textarea id="message" name="message" rows="3" value={form.message} onChange={e => update('message', e.target.value)} placeholder={stockClawInquiry ? 'List your chosen styles, colors and pieces per color. Add any logo or packaging requests.' : 'Tell us about your project, reference images, or specific requirements...'} className="input-field" />
+                    <label htmlFor="company" className="block text-xs tracking-wider uppercase text-tan mb-1">Company / Brand</label>
+                    <input id="company" name="company" type="text" autoComplete="organization" value={form.company} onChange={e => update('company', e.target.value)} placeholder="Your company" className="input-field" />
                   </div>
-                  <div className="flex flex-col gap-4 sm:flex-row sm:justify-between">
-                    <button type="button" onClick={() => setStep(1)} className="btn-outline w-full sm:w-auto justify-center">← Back</button>
-                    <button type="button" onClick={() => setStep(3)} className="btn-primary w-full sm:w-auto justify-center">Next: Contact →</button>
+                  <div>
+                    <label htmlFor="phone" className="block text-xs tracking-wider uppercase text-tan mb-1">Phone / WhatsApp</label>
+                    <input id="phone" name="phone" type="tel" autoComplete="tel" value={form.phone} onChange={e => update('phone', e.target.value)} placeholder="+1 234 567 8900" className="input-field" />
                   </div>
                 </div>
-              )}
-
-              {step === 3 && (
-                <div className="space-y-8">
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <div>
-                      <label htmlFor="name" className="block text-xs tracking-wider uppercase text-tan mb-1">Your Name *</label>
-                      <input id="name" name="name" required type="text" autoComplete="name" value={form.name} onChange={e => update('name', e.target.value)} placeholder="Full name" className="input-field" />
-                    </div>
-                    <div>
-                      <label htmlFor="company" className="block text-xs tracking-wider uppercase text-tan mb-1">Company Name</label>
-                      <input id="company" name="company" type="text" autoComplete="organization" value={form.company} onChange={e => update('company', e.target.value)} placeholder="Your company" className="input-field" />
-                    </div>
-                  </div>
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <div>
-                      <label htmlFor="email" className="block text-xs tracking-wider uppercase text-tan mb-1">Email Address *</label>
-                      <input id="email" name="email" required type="email" autoComplete="email" value={form.email} onChange={e => update('email', e.target.value)} placeholder="you@company.com" className="input-field" />
-                    </div>
-                    <div>
-                      <label htmlFor="phone" className="block text-xs tracking-wider uppercase text-tan mb-1">WhatsApp / Phone</label>
-                      <input id="phone" name="phone" type="tel" autoComplete="tel" value={form.phone} onChange={e => update('phone', e.target.value)} placeholder="+1 234 567 8900" className="input-field" />
-                    </div>
-                  </div>
                   {/* Honeypot — hidden from humans */}
                   <div className="hidden" aria-hidden="true">
                     <label htmlFor="website">Website</label>
@@ -421,7 +414,7 @@ export default function Contact({ selectedProduct = null, fromClawComparison = f
                   <p className="text-xs text-tan leading-relaxed">
                     We use your details to respond to your inquiry and verify this form against spam, with support from our form and security service providers. See our <a href="/privacy" className="text-gold underline">Privacy Policy</a> for details.
                   </p>
-                  {!submissionUnknown && <InquiryChallenge onTokenChange={updateVerificationToken} resetKey={challengeReset} />}
+                  {!submissionUnknown && Boolean(shouldMountChallenge || form.email || form.productType) && <InquiryChallenge onTokenChange={updateVerificationToken} resetKey={challengeReset} />}
                   <div className="space-y-4 pt-4">
                     {submitError && <p role="alert" className="text-red-500 text-xs">{submitError}</p>}
                     {submissionUnknown && (
@@ -439,26 +432,16 @@ export default function Contact({ selectedProduct = null, fromClawComparison = f
                       </div>
                     )}
                     <div className="flex flex-col gap-4 sm:flex-row sm:justify-between">
-                      <button type="button" disabled={submitting} onClick={() => setStep(2)} className="btn-outline w-full sm:w-auto justify-center">← Back</button>
-                      <button type="submit" disabled={submitting || !verified || submissionUnknown} className="btn-primary w-full sm:w-auto justify-center text-base px-6 sm:px-12 py-5 disabled:opacity-50">
+                      <button type="submit" disabled={submitting || !coreFieldsValid || !verified || submissionUnknown} className="btn-primary w-full sm:w-auto justify-center text-base px-6 sm:px-12 py-5 disabled:opacity-50">
                         {submitting ? 'Submitting...' : <>Send My Request <span className="ml-1">→</span></>}
                       </button>
                     </div>
+                    <p className="text-xs text-tan">We reply with tiered EXW/FOB unit pricing, color-split MOQ confirmation, and sample terms — no spam.</p>
                   </div>
-                </div>
-              )}
+              </div>
             </form>
           )}
 
-          {/* Trust badges */}
-          <div className="flex flex-wrap justify-center gap-6 mt-12 text-xs text-tan">
-            {['Free Design Mockup', 'No Hidden Fees', 'Sample Before Bulk', 'Reply in 24 Hours'].map(badge => (
-              <span key={badge} className="flex items-center gap-1.5">
-                <svg className="w-3.5 h-3.5 text-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 6L9 17l-5-5"/></svg>
-                {badge}
-              </span>
-            ))}
-          </div>
         </div>
       </div>
     </div>

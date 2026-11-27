@@ -21,7 +21,25 @@ const routes = [
   ...articles.map((article) => `/blog/${article.slug}`),
 ];
 
-function inject(template, appHtml, headHtml, route) {
+const viteManifest = JSON.parse(await fs.readFile(path.join(dist, '.vite/manifest.json'), 'utf8'));
+const imageManifest = JSON.parse(await fs.readFile(path.join(root, 'src/generated/imageManifest.json'), 'utf8'));
+
+function preloadTags(routeEntryModule, image) {
+  const tags = [];
+  if (routeEntryModule) {
+    const chunk = viteManifest[routeEntryModule]?.file;
+    if (!chunk) throw new Error('Missing route chunk: ' + routeEntryModule);
+    tags.push(`<link rel="modulepreload" crossorigin href="/${chunk}">`);
+  }
+  if (image) {
+    const entry = imageManifest[image.src];
+    if (!entry) throw new Error('Missing responsive route hero: ' + image.src);
+    tags.push(`<link rel="preload" as="image" type="image/avif" imagesrcset="${entry.avifSrcSet}" imagesizes="${image.sizes}" fetchpriority="high">`);
+  }
+  return tags.join('\n    ');
+}
+
+function inject(template, appHtml, headHtml, route, preloadHtml) {
   const routeTemplate = route === '/'
     ? template
     : template.replace(/\s*<link\s+rel=["']preload["']\s+as=["']image["'][^>]*>/gi, '');
@@ -31,20 +49,20 @@ function inject(template, appHtml, headHtml, route) {
     .replace(/\s*<meta\s+name=["']description["'][^>]*>/i, '');
 
   return withoutDefaultHead
-    .replace('</head>', `    ${headHtml}\n  </head>`)
-    .replace('<div id="root"></div>', `<div id="root">${appHtml}</div>`);
+    .replace('</head>', () => `    ${headHtml}\n    ${preloadHtml}\n  </head>`)
+    .replace('<div id="root"></div>', () => `<div id="root">${appHtml}</div>`);
 }
 
 const template = await fs.readFile(path.join(dist, 'index.html'), 'utf8');
 const { render } = await import(pathToFileURL(serverEntry).href);
 
 for (const route of routes) {
-  const { appHtml, headHtml } = await render(route);
+  const { appHtml, headHtml, routeEntryModule, lcpImage } = await render(route);
   if (!appHtml.includes('<h1')) {
     throw new Error(`Rendered route has no H1: ${route}`);
   }
 
-  const output = inject(template, appHtml, headHtml, route);
+  const output = inject(template, appHtml, headHtml, route, preloadTags(routeEntryModule, lcpImage));
   const outputPath = route === '/'
     ? path.join(dist, 'index.html')
     : path.join(dist, route.slice(1), 'index.html');
